@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.CommodityBean;
+import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
 /**
@@ -30,10 +31,10 @@ public class AdMall extends BaseQuickAdapter<CommodityBean, BaseViewHolder>
         SelectableRoundedImageView img = helper.getView(R.id.img);
         AppCompatTextView tv_price = helper.getView(R.id.tv_price);
         TextView tv_title = helper.getView(R.id.tv_title);
-        
-        GlideApp.with(img).load(item.getImg()).centerCrop().into(img);
+
+        GlideLoad.load(img, item.getImage(), true);
         VerificationUtil.setViewValue(tv_price, item.getPrice());
-        VerificationUtil.setViewValue(tv_title, item.getTitle());
+        VerificationUtil.setViewValue(tv_title, item.getName());
 
     }
 }

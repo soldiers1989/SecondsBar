@@ -12,27 +12,27 @@ public class ResponseBase
      */
     public static final int SUCCESS = 1;
 
-    private int state; // 状态值 state;//1:代表成功;0或其他值代表处理失败
-    private String message; // 描述信息
+    private int code; // 状态值 state;//1:代表成功;0或其他值代表处理失败
+    private String msg; // 描述信息
 
-    public int getState()
+    public int getCode()
     {
-        return state;
+        return code;
     }
 
-    public void setState(int state)
+    public void setCode(int code)
     {
-        this.state = state;
+        this.code = code;
     }
 
-    public String getMessage()
+    public String getMsg()
     {
-        return message;
+        return msg;
     }
 
-    public void setMessage(String message)
+    public void setMsg(String msg)
     {
-        this.message = message;
+        this.msg = msg;
     }
 
     /**
@@ -42,6 +42,6 @@ public class ResponseBase
      */
     public boolean checkSuccess()
     {
-        return SUCCESS == state;
+        return SUCCESS == code;
     }
 }

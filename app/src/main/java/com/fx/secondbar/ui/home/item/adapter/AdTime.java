@@ -16,6 +16,7 @@ import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.DynamicBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.bean.PersonBean;
+import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
 import java.util.List;
@@ -32,12 +33,10 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
-     *
-     * @param data A new list is created out of this one to avoid mutable list
      */
-    public AdTime(List<TimeEntity> data)
+    public AdTime()
     {
-        super(data);
+        super(null);
         addItemType(TimeEntity.TYPE_TITLE, R.layout.ad_time_title);
         addItemType(TimeEntity.TYPE_DYNAMIC, R.layout.ad_time_dynamic);
         addItemType(TimeEntity.TYPE_PURCHASE, R.layout.ad_time_purchase);
@@ -87,9 +86,10 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
         TextView tv_dynamic = helper.getView(R.id.tv_dynamic);
         if (item.getDynamicBean() != null)
         {
-            GlideApp.with(img).asBitmap().load(item.getDynamicBean().getAvatar()).centerCrop().into(img);
-            VerificationUtil.setViewValue(tv_time, item.getDynamicBean().getTime());
-            VerificationUtil.setViewValue(tv_dynamic, item.getDynamicBean().getContent());
+//            GlideApp.with(img).asBitmap().load(item.getDynamicBean().getAvatar()).centerCrop().into(img);
+            GlideLoad.load(img, item.getDynamicBean().getImg(), true);
+            VerificationUtil.setViewValue(tv_time, item.getDynamicBean().getOrderdate());
+            VerificationUtil.setViewValue(tv_dynamic, item.getDynamicBean().getGoodsname());
         } else
         {
             GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
@@ -137,8 +137,11 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
     {
         RecyclerView recyclerView = helper.getView(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.HORIZONTAL, false));
-        int dimen = recyclerView.getContext().getResources().getDimensionPixelSize(R.dimen.home_time_content_plr);
-        recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(dimen, false, false, true));
+        if (recyclerView.getItemDecorationCount() == 0)
+        {
+            int dimen = recyclerView.getContext().getResources().getDimensionPixelSize(R.dimen.home_time_content_plr);
+            recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(dimen, false, false, true));
+        }
         AdPersonItem adapter = new AdPersonItem();
         adapter.setNewData(item.getPersonBeans());
         adapter.bindToRecyclerView(recyclerView);
@@ -159,11 +162,12 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
         TextView tv_place = helper.getView(R.id.tv_place);
         if (item.getCommodityBean() != null)
         {
-            GlideApp.with(img).asBitmap().load(item.commodityBean.getImg()).centerCrop().into(img);
-            VerificationUtil.setViewValue(tv_title, item.commodityBean.getTitle());
+//            GlideApp.with(img).asBitmap().load(item.commodityBean.getImg()).centerCrop().into(img);
+            GlideLoad.load(img, item.commodityBean.getImage(), true);
+            VerificationUtil.setViewValue(tv_title, item.commodityBean.getName());
             VerificationUtil.setViewValue(tv_price, item.commodityBean.getPrice());
-            VerificationUtil.setViewValue(tv_time, item.commodityBean.getTime());
-            VerificationUtil.setViewValue(tv_place, item.commodityBean.getPlace());
+            VerificationUtil.setViewValue(tv_time, item.commodityBean.getTimelength());
+            VerificationUtil.setViewValue(tv_place, item.commodityBean.getAddress());
         } else
         {
             GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
@@ -189,17 +193,18 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
         TextView tv_count = helper.getView(R.id.tv_count);
         if (item.getInfomationBean() != null)
         {
-            List<Integer> list = item.getInfomationBean().getList();
-            if (VerificationUtil.noEmpty(list))
-            {
-                GlideApp.with(img).asBitmap().load(list.get(0)).centerCrop().into(img);
-            } else
-            {
-                GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
-            }
-            VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getFrom());
-            VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getContent());
-            VerificationUtil.setViewValue(tv_count, item.getInfomationBean().getCount());
+//            List<Integer> list = item.getInfomationBean().getList();
+//            if (VerificationUtil.noEmpty(list))
+//            {
+//                GlideApp.with(img).asBitmap().load(list.get(0)).centerCrop().into(img);
+//            } else
+//            {
+//                GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
+//            }
+            GlideLoad.load(img, item.getInfomationBean().getPicture(), true);
+            VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getShare_COPY());
+            VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getTitle());
+            VerificationUtil.setViewValue(tv_count, item.getInfomationBean().getShare_TOTAL());
         } else
         {
             GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
@@ -225,21 +230,27 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
         TextView tv_count = helper.getView(R.id.tv_count);
         if (item.getInfomationBean() != null)
         {
-            List<Integer> list = item.getInfomationBean().getList();
+            List<String> list = item.getInfomationBean().getPictures();
             if (list != null && list.size() >= 3)
             {
-                GlideApp.with(img1).asBitmap().load(list.get(0)).centerCrop().into(img1);
-                GlideApp.with(img2).asBitmap().load(list.get(1)).centerCrop().into(img2);
-                GlideApp.with(img3).asBitmap().load(list.get(2)).centerCrop().into(img3);
+//                GlideApp.with(img1).asBitmap().load(list.get(0)).centerCrop().into(img1);
+//                GlideApp.with(img2).asBitmap().load(list.get(1)).centerCrop().into(img2);
+//                GlideApp.with(img3).asBitmap().load(list.get(2)).centerCrop().into(img3);
+                GlideLoad.load(img1, list.get(0), true);
+                GlideLoad.load(img2, list.get(1), true);
+                GlideLoad.load(img3, list.get(2), true);
             } else
             {
-                GlideApp.with(img1).asBitmap().load(0).centerCrop().into(img1);
-                GlideApp.with(img2).asBitmap().load(0).centerCrop().into(img2);
-                GlideApp.with(img3).asBitmap().load(0).centerCrop().into(img3);
+//                GlideApp.with(img1).asBitmap().load(0).centerCrop().into(img1);
+//                GlideApp.with(img2).asBitmap().load(0).centerCrop().into(img2);
+//                GlideApp.with(img3).asBitmap().load(0).centerCrop().into(img3);
+                GlideLoad.load(img1, "", true);
+                GlideLoad.load(img2, "", true);
+                GlideLoad.load(img3, "", true);
             }
-            VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getFrom());
-            VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getContent());
-            VerificationUtil.setViewValue(tv_count, item.getInfomationBean().getCount());
+            VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getShare_COPY());
+            VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getTitle());
+            VerificationUtil.setViewValue(tv_count, item.getInfomationBean().getShare_TOTAL());
         } else
         {
             GlideApp.with(img1).asBitmap().load(0).centerCrop().into(img1);

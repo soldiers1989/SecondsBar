@@ -8,6 +8,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.PersonBean;
+import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
 /**
@@ -29,7 +30,7 @@ public class AdPersonItem extends BaseQuickAdapter<PersonBean, BaseViewHolder>
         TextView tv_price = helper.getView(R.id.tv_price);
         TextView tv_name = helper.getView(R.id.tv_name);
 
-        GlideApp.with(img).asBitmap().load(item.getAvatar()).centerCrop().into(img);
+        GlideLoad.load(img, item.getPicture(), true);
         VerificationUtil.setViewValue(tv_price, item.getPrice());
         VerificationUtil.setViewValue(tv_name, item.getName());
     }

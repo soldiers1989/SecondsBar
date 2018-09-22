@@ -44,7 +44,8 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * 功能：FragmentActivity的基类，实现了页面的跳转的方法和各种监听事件
  */
-public abstract class ActivitySupport extends AppCompatActivity implements OnClickListener, OnItemClickListener, OnPermissionCallback {
+public abstract class ActivitySupport extends AppCompatActivity implements OnClickListener, OnItemClickListener, OnPermissionCallback
+{
 
     /**
      * 界面传整形值中，key的值
@@ -118,7 +119,8 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
     private Bundle savedInstanceState;
 
     @Override
-    protected void onCreate(Bundle arg0) {
+    protected void onCreate(Bundle arg0)
+    {
         super.onCreate(arg0);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
@@ -138,16 +140,19 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
     /**
      * 优先初始化权限信息
      */
-    private void permissionInit() {
+    private void permissionInit()
+    {
         permissionArrays = getPermissionArrays();
         permissionInfoTips = getPermissionInfoTips();
 
         /*
             表示无需权限
          */
-        if (permissionArrays == null || permissionArrays.length == 0) {
+        if (permissionArrays == null || permissionArrays.length == 0)
+        {
             init();
-        } else {
+        } else
+        {
             doPermissionCheck();
         }
     }
@@ -155,7 +160,8 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
     /**
      * 初始化
      */
-    private void init() {
+    private void init()
+    {
         isInit = true;
         //初始化控件
         initView();
@@ -167,9 +173,12 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
     }
 
     @Override
-    public void setSupportActionBar(@Nullable Toolbar toolbar) {
-        if (isFitWindow() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (toolbar != null) {
+    public void setSupportActionBar(@Nullable Toolbar toolbar)
+    {
+        if (isFitWindow() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+        {
+            if (toolbar != null)
+            {
                 ViewGroup.LayoutParams params = toolbar.getLayoutParams();
                 params.height += DisplayUtil.getStatusBarHeight(this);
                 toolbar.setPadding(0, DisplayUtil.getStatusBarHeight(this), 0, 0);
@@ -183,7 +192,8 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      *
      * @return true表示设置沉浸式，false反之。
      */
-    protected boolean isFitWindow() {
+    protected boolean isFitWindow()
+    {
         return true;
     }
 
@@ -228,14 +238,16 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      *
      * @return
      */
-    protected Bundle getSavedInstanceState() {
+    protected Bundle getSavedInstanceState()
+    {
         return savedInstanceState;
     }
 
     /**
      * 权限检查
      */
-    private void doPermissionCheck() {
+    private void doPermissionCheck()
+    {
         mPermissionHelper = PermissionHelper.getInstance(this);
         mPermissionHelper
                 .setForceAccepting(true) // default is false. its here so you know that it exists.
@@ -247,14 +259,18 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      *
      * @param on
      */
-    protected void setTranslucentStatus(boolean on) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+    protected void setTranslucentStatus(boolean on)
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+        {
             Window win = getWindow();
             WindowManager.LayoutParams winParams = win.getAttributes();
             final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-            if (on) {
+            if (on)
+            {
                 winParams.flags |= bits;
-            } else {
+            } else
+            {
                 winParams.flags &= ~bits;
             }
             win.setAttributes(winParams);
@@ -268,7 +284,8 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param <T> 返回继承至View的对象
      * @return
      */
-    protected <T extends View> T findView(int id) {
+    protected <T extends View> T findView(int id)
+    {
         return (T) findViewById(id);
     }
 
@@ -278,8 +295,10 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param textView
      * @return
      */
-    protected String getTextView(TextView textView) {
-        if (textView == null) {
+    protected String getTextView(TextView textView)
+    {
+        if (textView == null)
+        {
             return "";
         }
         return textView.getText().toString().trim();
@@ -292,11 +311,14 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param defaultText 默认文本
      * @return
      */
-    protected String getEditText(EditText editText, String defaultText) {
-        if (editText == null) {
+    protected String getEditText(EditText editText, String defaultText)
+    {
+        if (editText == null)
+        {
             return defaultText;
         }
-        if (TextUtils.isEmpty(editText.getText().toString().trim())) {
+        if (TextUtils.isEmpty(editText.getText().toString().trim()))
+        {
             return defaultText;
         }
         return editText.getText().toString().trim();
@@ -309,12 +331,16 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param params 参数
      * @param value  参数值
      */
-    protected void setMapParams(Map<String, String> map, String params, String value) {
-        if (map == null) {
+    protected void setMapParams(Map<String, String> map, String params, String value)
+    {
+        if (map == null)
+        {
             return;
         }
-        if (params != null) {
-            if (!TextUtils.isEmpty(value)) {
+        if (params != null)
+        {
+            if (!TextUtils.isEmpty(value))
+            {
                 map.put(params, value);
             }
         }
@@ -327,20 +353,26 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param params 参数集合
      * @param values 参数值集合
      */
-    protected void setMapParams(Map<String, String> map, String[] params, String[] values) {
-        if (map == null) {
+    protected void setMapParams(Map<String, String> map, String[] params, String[] values)
+    {
+        if (map == null)
+        {
             return;
         }
-        if (params == null || values == null) {
+        if (params == null || values == null)
+        {
             return;
         }
         int length = 0;
-        if (params.length > values.length) {
+        if (params.length > values.length)
+        {
             length = values.length;
-        } else {
+        } else
+        {
             length = params.length;
         }
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < length; i++)
+        {
             setMapParams(map, params[i], values[i]);
         }
     }
@@ -351,16 +383,19 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param bundle   传输的参数
      * @author：Frj 功能:Activity跳转的方法 使用方法：
      */
-    protected void jump(Class<?> clazz, Bundle bundle, boolean isFinish) {
+    protected void jump(Class<?> clazz, Bundle bundle, boolean isFinish)
+    {
         Intent intent = new Intent(this, clazz);
-        if (bundle != null) {
+        if (bundle != null)
+        {
             intent.putExtras(bundle);
         }
         startActivity(intent);
         // 屏幕右边进，屏幕内从左边移出 动画
         overridePendingTransition(ResourceHelper.getInstance(getApplicationContext()).getAnimId("right_in_anim"),
                 ResourceHelper.getInstance(getApplicationContext()).getAnimId("left_out_anim"));
-        if (isFinish) {
+        if (isFinish)
+        {
             this.finish();
         }
     }
@@ -371,7 +406,8 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param isFinish 是否关闭当前Activity
      * @author：Frj 功能:传输一个String类型的参数，跳转到下一个Activity 使用方法：
      */
-    protected void jump(Class<?> clazz, String param, boolean isFinish) {
+    protected void jump(Class<?> clazz, String param, boolean isFinish)
+    {
         Bundle bundle = new Bundle();
         bundle.putString(KEY_STR, param);
         jump(clazz, bundle, isFinish);
@@ -383,7 +419,8 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param isFinish 是否关闭当前Activity
      * @author：Frj 功能:传输一个整形的参数跳转到下一个Activity 使用方法：
      */
-    protected void jump(Class<?> clazz, int param, boolean isFinish) {
+    protected void jump(Class<?> clazz, int param, boolean isFinish)
+    {
         Bundle bundle = new Bundle();
         bundle.putInt(KEY, param);
         jump(clazz, bundle, isFinish);
@@ -394,7 +431,8 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param isFinish 是否关闭当前Activity
      * @author：Frj 功能:跳转界面，无参数传输 使用方法：
      */
-    protected void jump(Class<?> clazz, boolean isFinish) {
+    protected void jump(Class<?> clazz, boolean isFinish)
+    {
         jump(clazz, "", isFinish);
     }
 
@@ -403,7 +441,8 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param param 参数
      * @author：Frj 功能:传输一个String类型的参数，跳转到下一个Activity(不关闭当前的Activity) 使用方法：
      */
-    protected void jump(Class<?> clazz, String param) {
+    protected void jump(Class<?> clazz, String param)
+    {
         jump(clazz, param, false);
     }
 
@@ -411,7 +450,8 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param paramClass 跳转到的页面
      * @author：Frj 功能:跳转Activity（不finish当前页） 使用方法：
      */
-    protected void jump(Class<?> paramClass) {
+    protected void jump(Class<?> paramClass)
+    {
         jump(paramClass, "", false);
     }
 
@@ -421,7 +461,8 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param paramClass  要跳转到的Activity
      * @param requestCode 请求码
      */
-    protected void jump(Class<?> paramClass, int requestCode) {
+    protected void jump(Class<?> paramClass, int requestCode)
+    {
         jump(paramClass, null, requestCode);
     }
 
@@ -432,9 +473,11 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param bundle      参数
      * @param requestCode 请求码
      */
-    protected void jump(Class<?> paramClass, Bundle bundle, int requestCode) {
+    protected void jump(Class<?> paramClass, Bundle bundle, int requestCode)
+    {
         Intent intent = new Intent(this, paramClass);
-        if (bundle != null) {
+        if (bundle != null)
+        {
             intent.putExtras(bundle);
         }
         startActivityForResult(intent, requestCode);
@@ -444,13 +487,16 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+    public boolean dispatchTouchEvent(MotionEvent ev)
+    {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN)
+        {
 
             // 获得当前得到焦点的View，一般情况下就是EditText（特殊情况就是轨迹求或者实体案件会移动焦点）
             View v = getCurrentFocus();
 
-            if (isShouldHideInput(v, ev)) {
+            if (isShouldHideInput(v, ev))
+            {
                 hideSoftInput(v.getWindowToken());
             }
         }
@@ -464,15 +510,19 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param event
      * @return
      */
-    protected boolean isShouldHideInput(View v, MotionEvent event) {
-        if (v != null && (v instanceof EditText)) {
+    protected boolean isShouldHideInput(View v, MotionEvent event)
+    {
+        if (v != null && (v instanceof EditText))
+        {
             int[] l = {0, 0};
             v.getLocationInWindow(l);
             int left = l[0], top = l[1], bottom = top + v.getHeight(), right = left + v.getWidth();
-            if (event.getX() > left && event.getX() < right && event.getY() > top && event.getY() < bottom) {
+            if (event.getX() > left && event.getX() < right && event.getY() > top && event.getY() < bottom)
+            {
                 // 点击EditText的事件，忽略它。
                 return false;
-            } else {
+            } else
+            {
                 return true;
             }
         }
@@ -485,8 +535,10 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      *
      * @param token
      */
-    public void hideSoftInput(IBinder token) {
-        if (token != null) {
+    public void hideSoftInput(IBinder token)
+    {
+        if (token != null)
+        {
             InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             im.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
         }
@@ -499,15 +551,19 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param className 服务类名（绝对路径的+类名）
      * @return true表示正在运行
      */
-    public boolean isServiceRunning(Context mContext, String className) {
+    public boolean isServiceRunning(Context mContext, String className)
+    {
         boolean isRunning = false;
         ActivityManager activityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningServiceInfo> serviceList = activityManager.getRunningServices(100);
-        if (!(serviceList.size() > 0)) {
+        if (!(serviceList.size() > 0))
+        {
             return false;
         }
-        for (int i = 0; i < serviceList.size(); i++) {
-            if (serviceList.get(i).service.getClassName().equals(className) == true) {
+        for (int i = 0; i < serviceList.size(); i++)
+        {
+            if (serviceList.get(i).service.getClassName().equals(className) == true)
+            {
                 isRunning = true;
                 break;
             }
@@ -520,13 +576,21 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      *
      * @return
      */
-    public boolean isDestroy() {
-        return isDestroy;
+    public boolean isDestroy()
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+        {
+            return isDestroy || isFinishing() || isDestroyed();
+        } else
+        {
+            return isDestroy || isFinishing();
+        }
     }
 
 
     @Override
-    public void onPermissionGranted(@NonNull String[] permissionName) {
+    public void onPermissionGranted(@NonNull String[] permissionName)
+    {
         //权限点击允许
 //        String lastPermission = permissionName[permissionName.length - 1];
 //        if (lastPermission.equals(permissionArrays[permissionArrays.length - 1]))
@@ -536,11 +600,14 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
 //        {
 //            doPermissionCheck();
 //        }
-        if (isInit) {
+        if (isInit)
+        {
             return;
         }
-        for (int i = 0; i < permissionArrays.length; i++) {
-            if (!mPermissionHelper.isPermissionGranted(permissionArrays[i])) {
+        for (int i = 0; i < permissionArrays.length; i++)
+        {
+            if (!mPermissionHelper.isPermissionGranted(permissionArrays[i]))
+            {
                 doPermissionCheck();
                 return;
             }
@@ -549,37 +616,47 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
     }
 
     @Override
-    public void onPermissionDeclined(@NonNull String[] permissionName) {
+    public void onPermissionDeclined(@NonNull String[] permissionName)
+    {
     }
 
     @Override
-    public void onPermissionPreGranted(@NonNull String permissionsName) {
+    public void onPermissionPreGranted(@NonNull String permissionsName)
+    {
 //        init();
     }
 
     @Override
-    public void onPermissionNeedExplanation(@NonNull String permissionName) {
+    public void onPermissionNeedExplanation(@NonNull String permissionName)
+    {
         mPermissionHelper.requestAfterExplanation(permissionName);
     }
 
     @Override
-    public void onPermissionReallyDeclined(@NonNull String permissionName) {
+    public void onPermissionReallyDeclined(@NonNull String permissionName)
+    {
 
         String permissionTips = "";
-        for (int i = 0, length = permissionArrays.length; i < length; i++) {
-            if (permissionArrays[i].equals(permissionName)) {
-                if (i < permissionInfoTips.length) {
+        for (int i = 0, length = permissionArrays.length; i < length; i++)
+        {
+            if (permissionArrays[i].equals(permissionName))
+            {
+                if (i < permissionInfoTips.length)
+                {
                     permissionTips = getString(permissionInfoTips[i]);
                     break;
                 }
             }
         }
-        if (TextUtils.isEmpty(permissionTips)) {
+        if (TextUtils.isEmpty(permissionTips))
+        {
             permissionTips = getString(R.string.should_permission_default_tips);
         }
-        new AlertDialog.Builder(this).setCancelable(false).setMessage(permissionTips).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(this).setCancelable(false).setMessage(permissionTips).setPositiveButton("确定", new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
                 //禁止权限
                 Intent intent = new Intent();
                 intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
@@ -587,9 +664,11 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
                 intent.setData(uri);
                 startActivityForResult(intent, REQUEST_SETTING);
             }
-        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
                 finish();
             }
         }).create().show();
@@ -597,7 +676,8 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
     }
 
     @Override
-    public void onNoPermissionNeeded() {
+    public void onNoPermissionNeeded()
+    {
         init();
     }
 
@@ -609,21 +689,26 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @param grantResults
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
         mPermissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
 
     @Override
-    public void onClick(View v) {
-        if (isFastDoubleClick(v)) {
+    public void onClick(View v)
+    {
+        if (isFastDoubleClick(v))
+        {
             return;
         }
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (isFastDoubleClick(view)) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+        if (isFastDoubleClick(view))
+        {
             return;
         }
     }
@@ -633,7 +718,8 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @return 如果小于设定的超时时间（MULTIPLE_CLICK_TIMEOUT值），那么返回true
      * @author：frj 功能:判断两次点击间隔是否小于设定的超时时间，如果小于设定的超时时间，那么返回true 使用方法：
      */
-    protected boolean isFastDoubleClick(View view) {
+    protected boolean isFastDoubleClick(View view)
+    {
         return isFastDoubleClick(MULTIPLE_CLICK_TIMEOUT, view);
     }
 
@@ -643,14 +729,17 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
      * @return 如果小于指定的间隔，那么返回true
      * @author：frj 功能:判断两次点击间隔是否小于指定的间隔，如果小于指定的间隔，那么返回true 使用方法：
      */
-    protected boolean isFastDoubleClick(long interval, View view) {
-        if (view != tempView) { // 如果两次点击的控件不一样，那么不验证
+    protected boolean isFastDoubleClick(long interval, View view)
+    {
+        if (view != tempView)
+        { // 如果两次点击的控件不一样，那么不验证
             tempView = view;
             return false;
         }
         long time = System.currentTimeMillis();
         long timeD = time - lastClickTime;
-        if (0 < timeD && timeD < interval) {
+        if (0 < timeD && timeD < interval)
+        {
             return true;
         }
         lastClickTime = time;
@@ -661,17 +750,21 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
     /**
      * 根据当前的焦点对象隐藏软键盘
      */
-    protected void hideSoftByFocus() {
+    protected void hideSoftByFocus()
+    {
         // 获得当前得到焦点的View，一般情况下就是EditText（特殊情况就是轨迹求或者实体案件会移动焦点）
         View v = getCurrentFocus();
-        if (v instanceof EditText) {
+        if (v instanceof EditText)
+        {
             hideSoftInput(v.getWindowToken());
         }
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
             finish();
             return true;
         }
@@ -679,31 +772,37 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause()
+    {
         super.onPause();
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         hideSoftByFocus();
         BtApplication.getApplication().removeActivity(this);
         isDestroy = true;
         //退订所有订阅以避免内存泄露
-        if (mCompositeSubscription != null) {
+        if (mCompositeSubscription != null)
+        {
             mCompositeSubscription.unsubscribe();
         }
         super.onDestroy();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
-        if (REQUEST_SETTING == requestCode && RESULT_OK == resultCode) {
+        if (REQUEST_SETTING == requestCode && RESULT_OK == resultCode)
+        {
             //重新执行权限检查
             doPermissionCheck();
         }

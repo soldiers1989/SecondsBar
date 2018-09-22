@@ -8,14 +8,21 @@ import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.base.FragmentSupport;
+import com.btten.bttenlibrary.util.LogUtil;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.UserInfoBean;
+import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.FragmentHome;
 import com.fx.secondbar.ui.home.FragmentMall;
 import com.fx.secondbar.ui.home.FragmentPerson;
 import com.fx.secondbar.ui.home.FragmentQuotes;
 import com.fx.secondbar.ui.home.FragmentTransaction;
 
-public class MainActivity extends ActivitySupport {
+import rx.Subscriber;
+
+public class MainActivity extends ActivitySupport
+{
 
     /**
      * 首页页索引
@@ -64,12 +71,14 @@ public class MainActivity extends ActivitySupport {
     private int currIndex = INVALID;
 
     @Override
-    protected int getLayoutResId() {
+    protected int getLayoutResId()
+    {
         return R.layout.activity_main;
     }
 
     @Override
-    protected void initView() {
+    protected void initView()
+    {
         tv_home = findView(R.id.tv_home);
         tv_mall = findView(R.id.tv_mall);
         tv_quotes = findView(R.id.tv_quotes);
@@ -78,7 +87,8 @@ public class MainActivity extends ActivitySupport {
     }
 
     @Override
-    protected void initListener() {
+    protected void initListener()
+    {
         tv_home.setOnClickListener(this);
         tv_mall.setOnClickListener(this);
         tv_quotes.setOnClickListener(this);
@@ -87,42 +97,52 @@ public class MainActivity extends ActivitySupport {
     }
 
     @Override
-    protected void initData() {
+    protected void initData()
+    {
         initFragments();
         initItems();
         switchItem(tv_home);
+        login(0);
     }
 
     /**
      * 初始化Fragment集合
      */
-    private void initFragments() {
+    private void initFragments()
+    {
         fragments = new FragmentSupport[SIZE];
 
         Bundle savedInstanceState = getSavedInstanceState();
         //判断是否是恢复的Activity，如果是，那么根据Tag取出对应Fragment，并判断Fragment是否为空，如果为空，那么重新创建
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null)
+        {
             fragments[INDEX_HOME] = (FragmentSupport) getSupportFragmentManager().findFragmentByTag(String.valueOf(INDEX_HOME));
             fragments[INDEX_MALL] = (FragmentSupport) getSupportFragmentManager().findFragmentByTag(String.valueOf(INDEX_MALL));
             fragments[INDEX_QUOTES] = (FragmentSupport) getSupportFragmentManager().findFragmentByTag(String.valueOf(INDEX_QUOTES));
             fragments[INDEX_TRANSACTION] = (FragmentSupport) getSupportFragmentManager().findFragmentByTag(String.valueOf(INDEX_TRANSACTION));
             fragments[INDEX_PERSON] = (FragmentSupport) getSupportFragmentManager().findFragmentByTag(String.valueOf(INDEX_PERSON));
-            if (fragments[INDEX_HOME] == null) {
+            if (fragments[INDEX_HOME] == null)
+            {
                 fragments[INDEX_HOME] = FragmentHome.newInstance();
             }
-            if (fragments[INDEX_MALL] == null) {
+            if (fragments[INDEX_MALL] == null)
+            {
                 fragments[INDEX_MALL] = FragmentMall.newInstance();
             }
-            if (fragments[INDEX_QUOTES] == null) {
+            if (fragments[INDEX_QUOTES] == null)
+            {
                 fragments[INDEX_QUOTES] = FragmentQuotes.newInstance();
             }
-            if (fragments[INDEX_TRANSACTION] == null) {
+            if (fragments[INDEX_TRANSACTION] == null)
+            {
                 fragments[INDEX_TRANSACTION] = FragmentTransaction.newInstance();
             }
-            if (fragments[INDEX_PERSON] == null) {
+            if (fragments[INDEX_PERSON] == null)
+            {
                 fragments[INDEX_PERSON] = FragmentPerson.newInstance();
             }
-        } else {
+        } else
+        {
             fragments[INDEX_HOME] = FragmentHome.newInstance();
             fragments[INDEX_MALL] = FragmentMall.newInstance();
             fragments[INDEX_QUOTES] = FragmentQuotes.newInstance();
@@ -134,7 +154,8 @@ public class MainActivity extends ActivitySupport {
     /**
      * 初始化切换项
      */
-    private void initItems() {
+    private void initItems()
+    {
         tv_home.setTag(INDEX_HOME);
         tv_mall.setTag(INDEX_MALL);
         tv_quotes.setTag(INDEX_QUOTES);
@@ -154,29 +175,38 @@ public class MainActivity extends ActivitySupport {
      *
      * @param view
      */
-    private void switchItem(View view) {
-        if (view == null) {
+    private void switchItem(View view)
+    {
+        if (view == null)
+        {
             return;
         }
-        try {
+        try
+        {
             int index = (int) view.getTag();
-            if (currIndex == index) {
+            if (currIndex == index)
+            {
                 return;
             }
-            if (textViews != null) {
-                if (INVALID != currIndex) {
+            if (textViews != null)
+            {
+                if (INVALID != currIndex)
+                {
                     textViews[currIndex].setSelected(false);
                 }
                 textViews[index].setSelected(true);
-                for (int i = 0; i < SIZE; i++) {
-                    if (i != index && i != currIndex) {
+                for (int i = 0; i < SIZE; i++)
+                {
+                    if (i != index && i != currIndex)
+                    {
                         textViews[i].setSelected(false);
                     }
                 }
             }
             switchFragment(index, currIndex);
             currIndex = index;
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
@@ -187,28 +217,69 @@ public class MainActivity extends ActivitySupport {
      * @param targetIndex 目标Fragment索引
      * @param currIndex   当前Fragment索引
      */
-    private void switchFragment(int targetIndex, int currIndex) {
-        try {
-            if (fragments != null) {
+    private void switchFragment(int targetIndex, int currIndex)
+    {
+        try
+        {
+            if (fragments != null)
+            {
                 android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                if (fragments[targetIndex].isAdded()) {
+                if (fragments[targetIndex].isAdded())
+                {
                     transaction.show(fragments[targetIndex]);
-                } else {
+                } else
+                {
                     transaction.add(R.id.fl_content, fragments[targetIndex], String.valueOf(targetIndex));
                 }
-                if (currIndex != INVALID) {
+                if (currIndex != INVALID)
+                {
                     transaction.hide(fragments[currIndex]);
                 }
                 transaction.commit();
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 登录
+     *
+     * @param retry 重试次数
+     */
+    private void login(final int retry)
+    {
+        HttpManager.login(new Subscriber<UserInfoBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                LogUtil.e("api_login", e.toString());
+                if (retry < 3)
+                {
+                    login(retry + 1);
+                }
+            }
+
+            @Override
+            public void onNext(UserInfoBean userInfoBean)
+            {
+                FxApplication.getInstance().setUserInfoBean(userInfoBean);
+            }
+        });
+    }
+
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
             case R.id.tv_home:
             case R.id.tv_mall:
             case R.id.tv_quotes:
@@ -220,8 +291,10 @@ public class MainActivity extends ActivitySupport {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
             moveTaskToBack(true);
             return true;
         }
@@ -229,12 +302,14 @@ public class MainActivity extends ActivitySupport {
     }
 
     @Override
-    protected String[] getPermissionArrays() {
+    protected String[] getPermissionArrays()
+    {
         return new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
     }
 
     @Override
-    protected int[] getPermissionInfoTips() {
+    protected int[] getPermissionInfoTips()
+    {
         return new int[]{R.string.permission_write_external_storage_tips};
     }
 }

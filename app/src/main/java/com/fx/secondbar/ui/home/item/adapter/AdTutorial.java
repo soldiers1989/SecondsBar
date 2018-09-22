@@ -9,13 +9,15 @@ import com.btten.bttenlibrary.util.DisplayUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.TurialBean;
+import com.fx.secondbar.util.GlideLoad;
 
 /**
  * function:首页-教程的适配器
  * author: frj
  * modify date: 2018/9/9
  */
-public class AdTutorial extends BaseQuickAdapter<Integer, BaseViewHolder>
+public class AdTutorial extends BaseQuickAdapter<TurialBean, BaseViewHolder>
 {
 
     public AdTutorial(int layoutResId)
@@ -24,11 +26,11 @@ public class AdTutorial extends BaseQuickAdapter<Integer, BaseViewHolder>
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Integer item)
+    protected void convert(BaseViewHolder helper, TurialBean item)
     {
         ImageView img = helper.getView(R.id.img);
         setImgSize(img);
-        GlideApp.with(img).load(item).centerCrop().into(img);
+        GlideLoad.load(img, item.getImg());
     }
 
     /**

@@ -42,7 +42,7 @@ public abstract class FragmentSupport extends Fragment implements
     /**
      * 起始页
      */
-    protected static final int PAGE_START = 1;
+    protected static final int PAGE_START = 0;
 
     /**
      * 多次点击超时时间
@@ -407,6 +407,16 @@ public abstract class FragmentSupport extends Fragment implements
     protected void showDialog(Context context)
     {
         showDialog(context, "");
+    }
+
+    /**
+     * 表示网络请求是否可返回结果，true表示不可返回
+     *
+     * @return
+     */
+    protected boolean isNetworkCanReturn()
+    {
+        return isRemoving() || isDetached();
     }
 
     /**

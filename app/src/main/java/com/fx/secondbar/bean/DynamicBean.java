@@ -7,44 +7,169 @@ package com.fx.secondbar.bean;
  */
 public class DynamicBean
 {
-    private int avatar;
-    private String content;
-    private String time;
+    private Integer minutes;//分钟
+    private String name;//名称
+    private String status;//状态
+    private String img;//商品图片地址
+    private String createtime;//创建时间
+    private String price;//价格
+    private String address;//地点
+    private String timelength;//时长
+    private String memberid;//用户id
+    private String order_ID;//订单id
+    private String amount;//数量
+    private String orderdate;//订单时间
+    private String nickname;//用户昵称
+    private String goodsname;//商品名称
+    private String merchandiseid;//商品id
 
-    public DynamicBean(int avatar, String content, String time)
+    public Integer getMinutes()
     {
-        this.avatar = avatar;
-        this.content = content;
-        this.time = time;
+        return minutes == null ? 0 : minutes;
     }
 
-    public int getAvatar()
+    public void setMinutes(Integer minutes)
     {
-        return avatar;
+        this.minutes = minutes;
     }
 
-    public void setAvatar(int avatar)
+    public String getName()
     {
-        this.avatar = avatar;
+        return name;
     }
 
-    public String getContent()
+    public void setName(String name)
     {
-        return content;
+        this.name = name;
     }
 
-    public void setContent(String content)
+    public String getStatus()
     {
-        this.content = content;
+        return status;
     }
 
-    public String getTime()
+    public void setStatus(String status)
     {
-        return time;
+        this.status = status;
     }
 
-    public void setTime(String time)
+    public String getImg()
     {
-        this.time = time;
+        return img;
+    }
+
+    public void setImg(String img)
+    {
+        this.img = img;
+    }
+
+    public String getCreatetime()
+    {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime)
+    {
+        this.createtime = createtime;
+    }
+
+    public String getPrice()
+    {
+        return price;
+    }
+
+    public void setPrice(String price)
+    {
+        this.price = price;
+    }
+
+    public String getAddress()
+    {
+        return address;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
+
+    public String getTimelength()
+    {
+        return timelength;
+    }
+
+    public void setTimelength(String timelength)
+    {
+        this.timelength = timelength;
+    }
+
+    public String getMemberid()
+    {
+        return memberid;
+    }
+
+    public void setMemberid(String memberid)
+    {
+        this.memberid = memberid;
+    }
+
+    public String getOrder_ID()
+    {
+        return order_ID;
+    }
+
+    public void setOrder_ID(String order_ID)
+    {
+        this.order_ID = order_ID;
+    }
+
+    public String getAmount()
+    {
+        return amount;
+    }
+
+    public void setAmount(String amount)
+    {
+        this.amount = amount;
+    }
+
+    public String getOrderdate()
+    {
+        return orderdate;
+    }
+
+    public void setOrderdate(String orderdate)
+    {
+        this.orderdate = orderdate;
+    }
+
+    public String getNickname()
+    {
+        return nickname;
+    }
+
+    public void setNickname(String nickname)
+    {
+        this.nickname = nickname;
+    }
+
+    public String getGoodsname()
+    {
+        return goodsname;
+    }
+
+    public void setGoodsname(String goodsname)
+    {
+        this.goodsname = goodsname;
+    }
+
+    public String getMerchandiseid()
+    {
+        return merchandiseid;
+    }
+
+    public void setMerchandiseid(String merchandiseid)
+    {
+        this.merchandiseid = merchandiseid;
     }
 }

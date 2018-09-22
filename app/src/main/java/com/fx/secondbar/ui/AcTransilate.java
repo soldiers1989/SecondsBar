@@ -5,8 +5,9 @@ import android.view.KeyEvent;
 import android.widget.ImageView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
-import com.btten.bttenlibrary.glide.GlideApp;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.util.DeviceUuidFactory;
 
 /**
  * function:过渡页
@@ -49,18 +50,20 @@ public class AcTransilate extends ActivitySupport
                 jump(MainActivity.class, true);
             }
         }, 2 * 1000);
+        //用于生成设备id
+        new DeviceUuidFactory(FxApplication.getInstance());
     }
 
     @Override
     protected String[] getPermissionArrays()
     {
-        return new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        return new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE};
     }
 
     @Override
     protected int[] getPermissionInfoTips()
     {
-        return new int[]{R.string.permission_write_external_storage_tips};
+        return new int[]{R.string.permission_write_external_storage_tips, R.string.permission_read_phone_state_tips};
     }
 
     @Override

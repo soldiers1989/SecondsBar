@@ -15,16 +15,20 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.btten.bttenlibrary.util.DisplayUtil;
+import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.CommodityBean;
+import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.InfomationBean;
-import com.fx.secondbar.bean.PersonBean;
+import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.item.adapter.AdInfomation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * function:资讯
@@ -71,13 +75,14 @@ public class FragmentInfomation extends FragmentViewPagerBase implements SwipeRe
     @Override
     protected void initData()
     {
-        swipeRefreshLayout.setEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(1, false, false, false));
-        adapter = new AdInfomation(getData());
+        adapter = new AdInfomation();
         adapter.addHeaderView(getHeaderView());
         adapter.addHeaderView(createHeadView());
         adapter.bindToRecyclerView(recyclerView);
+        swipeRefreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     /**
@@ -139,28 +144,28 @@ public class FragmentInfomation extends FragmentViewPagerBase implements SwipeRe
         return view;
     }
 
-    private List<AdInfomation.InfomationEntity> getData()
-    {
-        List<AdInfomation.InfomationEntity> data = new ArrayList<>();
-        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, new InfomationBean(getImgList(R.mipmap.test_infomation_single_1), "中非合作论坛峰会开幕式宣传片《同心共筑  命运与共》", "央视新闻移动网", "128评")));
-        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_MULTI_IMG, new InfomationBean(getImgList(R.mipmap.test_information_multi_1_1, R.mipmap.test_information_multi_1_2, R.mipmap.test_information_multi_1_3), "分别总是在九月，回忆是思念的愁。青春无悔！这是你见过的最美退伍写真", "新浪网", "66评")));
-        List<PersonBean> personBeans = new ArrayList<>();
-        personBeans.add(new PersonBean(R.mipmap.test_person_item1, "0.60STE/秒", "雷晓军"));
-        personBeans.add(new PersonBean(R.mipmap.test_person_item2, "1.26STE/秒", "于大宝"));
-        personBeans.add(new PersonBean(R.mipmap.test_person_item3, "0.86STE/秒", "劳伦斯"));
-        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_PERSON, personBeans));
-        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, new InfomationBean(getImgList(R.mipmap.test_infomation_single_2), "文在寅首场会谈结束 金正恩称朝美对话会有进展 双方有望达成一致", "央视新闻移动网", "128评")));
-        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_MULTI_IMG, new InfomationBean(getImgList(R.mipmap.test_information_multi_2_1, R.mipmap.test_information_multi_2_2, R.mipmap.test_information_multi_2_3), "分别总是在九月，回忆是思念的愁。青春无悔！这是你见过的最美退伍写真", "新浪网", "66评")));
-        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_COMMODITY, new CommodityBean(R.mipmap.test_time_commodity_2, "黄晓明 区块链的投资和投机", "980.00STE", "时长：90分钟", "地点：等待客服通知")));
-        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, new InfomationBean(getImgList(R.mipmap.test_infomation_single_3), "文在寅会前称赞金正恩：大胆又决断开启新时代即将来临", "央视新闻移动网", "128评")));
-        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_MULTI_IMG, new InfomationBean(getImgList(R.mipmap.test_information_multi_3_1, R.mipmap.test_information_multi_3_2, R.mipmap.test_information_multi_3_3), "金正恩带文在寅看宾馆 朝鲜条件不好但会诚意接待 朝韩关系开始缓和", "新浪网", "66评")));
-        return data;
-    }
+//    private List<AdInfomation.InfomationEntity> getData()
+//    {
+//        List<AdInfomation.InfomationEntity> data = new ArrayList<>();
+//        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, new InfomationBean(getImgList(R.mipmap.test_infomation_single_1), "中非合作论坛峰会开幕式宣传片《同心共筑  命运与共》", "央视新闻移动网", "128评")));
+//        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_MULTI_IMG, new InfomationBean(getImgList(R.mipmap.test_information_multi_1_1, R.mipmap.test_information_multi_1_2, R.mipmap.test_information_multi_1_3), "分别总是在九月，回忆是思念的愁。青春无悔！这是你见过的最美退伍写真", "新浪网", "66评")));
+//        List<PersonBean> personBeans = new ArrayList<>();
+//        personBeans.add(new PersonBean(R.mipmap.test_person_item1, "0.60STE/秒", "雷晓军"));
+//        personBeans.add(new PersonBean(R.mipmap.test_person_item2, "1.26STE/秒", "于大宝"));
+//        personBeans.add(new PersonBean(R.mipmap.test_person_item3, "0.86STE/秒", "劳伦斯"));
+//        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_PERSON, personBeans));
+//        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, new InfomationBean(getImgList(R.mipmap.test_infomation_single_2), "文在寅首场会谈结束 金正恩称朝美对话会有进展 双方有望达成一致", "央视新闻移动网", "128评")));
+//        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_MULTI_IMG, new InfomationBean(getImgList(R.mipmap.test_information_multi_2_1, R.mipmap.test_information_multi_2_2, R.mipmap.test_information_multi_2_3), "分别总是在九月，回忆是思念的愁。青春无悔！这是你见过的最美退伍写真", "新浪网", "66评")));
+//        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_COMMODITY, new CommodityBean(R.mipmap.test_time_commodity_2, "黄晓明 区块链的投资和投机", "980.00STE", "时长：90分钟", "地点：等待客服通知")));
+//        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, new InfomationBean(getImgList(R.mipmap.test_infomation_single_3), "文在寅会前称赞金正恩：大胆又决断开启新时代即将来临", "央视新闻移动网", "128评")));
+//        data.add(new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_MULTI_IMG, new InfomationBean(getImgList(R.mipmap.test_information_multi_3_1, R.mipmap.test_information_multi_3_2, R.mipmap.test_information_multi_3_3), "金正恩带文在寅看宾馆 朝鲜条件不好但会诚意接待 朝韩关系开始缓和", "新浪网", "66评")));
+//        return data;
+//    }
 
-    private List<Integer> getImgList(Integer... imgs)
-    {
-        return Arrays.asList(imgs);
-    }
+//    private List<Integer> getImgList(Integer... imgs)
+//    {
+//        return Arrays.asList(imgs);
+//    }
 
     /**
      * 获取图片链接
@@ -177,10 +182,124 @@ public class FragmentInfomation extends FragmentViewPagerBase implements SwipeRe
         return list;
     }
 
+    /**
+     * 获取数据
+     *
+     * @param type
+     */
+    private void getData(String type)
+    {
+        HttpManager.getIndexInformation(type, new Subscriber<IndexInformationBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(IndexInformationBean indexInformationBean)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                adapter.setNewData(handleData(indexInformationBean));
+            }
+        });
+    }
+
+    /**
+     * 处理数据，使其可以支撑列表适配器使用
+     *
+     * @param indexInformationBean
+     * @return
+     */
+    private List<AdInfomation.InfomationEntity> handleData(IndexInformationBean indexInformationBean)
+    {
+        List<AdInfomation.InfomationEntity> list = new ArrayList<>();
+        if (indexInformationBean != null)
+        {
+            AdInfomation.InfomationEntity personEntity = new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_PERSON, indexInformationBean.getListPeople());
+            AdInfomation.InfomationEntity commodityEntity = null;
+            List<CommodityBean> commodityBeans = indexInformationBean.getListMerchandise();
+            if (VerificationUtil.noEmpty(commodityBeans))
+            {
+                commodityEntity = new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_COMMODITY, commodityBeans.get(0));
+            }
+            List<InfomationBean> infomationBeans = indexInformationBean.getListNews();
+            if (VerificationUtil.noEmpty(infomationBeans))
+            {
+                if (infomationBeans.size() >= 4)
+                {
+                    for (int i = 0; i < infomationBeans.size(); i++)
+                    {
+                        if (i == 2)
+                        {
+                            list.add(personEntity);
+                        }
+                        if (i == 4)
+                        {
+                            if (commodityEntity != null)
+                            {
+                                list.add(commodityEntity);
+                            }
+                        }
+                        List<String> pictures = infomationBeans.get(i).getPictures();
+                        AdInfomation.InfomationEntity infomationEntity = new AdInfomation.InfomationEntity(VerificationUtil.noEmpty(pictures) ? AdInfomation.InfomationEntity.TYPE_MULTI_IMG : AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, infomationBeans.get(i));
+                        list.add(infomationEntity);
+                    }
+                } else if (infomationBeans.size() >= 2)
+                {
+                    for (int i = 0; i < infomationBeans.size(); i++)
+                    {
+                        if (i == 2)
+                        {
+                            list.add(personEntity);
+                            if (commodityEntity != null)
+                            {
+                                list.add(commodityEntity);
+                            }
+                        }
+                        List<String> pictures = infomationBeans.get(i).getPictures();
+                        AdInfomation.InfomationEntity infomationEntity = new AdInfomation.InfomationEntity(VerificationUtil.noEmpty(pictures) ? AdInfomation.InfomationEntity.TYPE_MULTI_IMG : AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, infomationBeans.get(i));
+                        list.add(infomationEntity);
+                    }
+                } else
+                {
+                    List<String> pictures = infomationBeans.get(0).getPictures();
+                    AdInfomation.InfomationEntity infomationEntity = new AdInfomation.InfomationEntity(VerificationUtil.noEmpty(pictures) ? AdInfomation.InfomationEntity.TYPE_MULTI_IMG : AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, infomationBeans.get(0));
+                    list.add(infomationEntity);
+                    list.add(personEntity);
+                    if (commodityEntity != null)
+                    {
+                        list.add(commodityEntity);
+                    }
+                }
+
+            }
+        }
+        return list;
+    }
+
     @Override
     public void onRefresh()
     {
-
+        getData("");
     }
 
     /**

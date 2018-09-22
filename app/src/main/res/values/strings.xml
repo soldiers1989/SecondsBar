@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">秒吧</string>
 
+    <string name="progress_tips">请稍候...</string>
+    <string name="network_timeout_tips">o(╯□╰)o您的网络状况不佳，请稍后再试...</string>
+    <string name="network_data_error_tips">(⊙o⊙)…数据出现异常啦...</string>
+    <string name="network_default_error_tips">网络请求失败</string>
+
     <string name="main_item_home_text">首页</string>
     <string name="main_item_mall_text">商城</string>
     <string name="main_item_transaction_text">交易</string>

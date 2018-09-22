@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.person;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.btten.bttenlibrary.application.BtApplication;
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.ui.img.ConstantValue;
 import com.btten.bttenlibrary.ui.img.MultiImageSelectorActivity;
@@ -16,9 +18,13 @@ import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.bumptech.glide.Glide;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.UserInfoBean;
+import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.person.aboutus.AcAboutUs;
 import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideCacheUtil;
+import com.fx.secondbar.util.ProgressDialogUtil;
 import com.joooonho.SelectableRoundedImageView;
 
 import java.io.File;
@@ -52,6 +58,7 @@ public class AcAccountSet extends ActivitySupport
 
     private Subscription subscriptionCacheSize;
     private Subscription subscriptionClear;
+    private ProgressDialog dialog;
 
     @Override
     protected int getLayoutResId()
@@ -91,7 +98,7 @@ public class AcAccountSet extends ActivitySupport
     @Override
     protected void initData()
     {
-
+        dialog = ProgressDialogUtil.getProgressDialog(this, getString(R.string.progress_tips), true);
     }
 
     @Override
@@ -174,6 +181,93 @@ public class AcAccountSet extends ActivitySupport
         });
     }
 
+    /**
+     * 退出登录
+     */
+    private void logout()
+    {
+        if (dialog != null)
+        {
+            dialog.show();
+        }
+        HttpManager.logout(new Subscriber<ResponseBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(ResponseBean responseBean)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                //重新生成账号信息
+                login();
+            }
+        });
+    }
+
+    /**
+     * 登录-退出登录后，重新生成账号信息
+     */
+    private void login()
+    {
+        HttpManager.login(new Subscriber<UserInfoBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(UserInfoBean userInfoBean)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                FxApplication.getInstance().setUserInfoBean(userInfoBean);
+            }
+        });
+    }
+
     @Override
     public void onClick(View v)
     {
@@ -202,6 +296,7 @@ public class AcAccountSet extends ActivitySupport
                 jump(AcAboutUs.class);
                 break;
             case R.id.btn_logout:
+                logout();
                 break;
             case R.id.ib_back:
                 finish();

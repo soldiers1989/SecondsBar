@@ -9,12 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.TurialBean;
+import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.item.adapter.AdTutorial;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * function:教程
@@ -26,11 +31,16 @@ public class FragmentTutorial extends FragmentViewPagerBase
 
     private RecyclerView recyclerView;
     private AdTutorial adapter;
+    //当前页码
+    private int currPage = -1;
 
     @Override
     public void onStarShow()
     {
-
+        if (currPage == -1)
+        {
+            getData(PAGE_START);
+        }
     }
 
     @Nullable
@@ -59,22 +69,81 @@ public class FragmentTutorial extends FragmentViewPagerBase
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(getResources().getDimensionPixelSize(R.dimen.home_tutorial_item_space), false, true, true));
         adapter.bindToRecyclerView(recyclerView);
-        adapter.setNewData(getDatas());
+//        adapter.setNewData(getDatas());
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
+        {
+            @Override
+            public void onLoadMoreRequested()
+            {
+                getData(currPage + 1);
+            }
+        }, recyclerView);
     }
 
     /**
-     * 获取图片链接
+     * 获取数据
      *
-     * @return
+     * @param page 页码，从0开始
      */
-    private List<Integer> getDatas()
+    private void getData(final int page)
     {
-        List<Integer> list = new ArrayList<>();
-        list.add(R.mipmap.test_turial_1);
-        list.add(R.mipmap.test_turial_2);
-        list.add(R.mipmap.test_turial_3);
-        list.add(R.mipmap.test_turial_4);
-        return list;
+        HttpManager.getTurials(page, PAGE_NUM, new Subscriber<List<TurialBean>>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(List<TurialBean> turialBeans)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                currPage = page;
+                if (PAGE_START == page)
+                {
+                    adapter.setNewData(turialBeans);
+                } else
+                {
+                    adapter.addData(turialBeans);
+                    if (turialBeans.size() == PAGE_NUM)
+                    {
+                        adapter.loadMoreComplete();
+                    } else
+                    {
+                        adapter.loadMoreEnd();
+                    }
+                }
+            }
+        });
     }
+
+//    /**
+//     * 获取图片链接
+//     *
+//     * @return
+//     */
+//    private List<Integer> getDatas()
+//    {
+//        List<Integer> list = new ArrayList<>();
+//        list.add(R.mipmap.test_turial_1);
+//        list.add(R.mipmap.test_turial_2);
+//        list.add(R.mipmap.test_turial_3);
+//        list.add(R.mipmap.test_turial_4);
+//        return list;
+//    }
 
 }

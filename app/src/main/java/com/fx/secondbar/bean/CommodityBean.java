@@ -1,7 +1,5 @@
 package com.fx.secondbar.bean;
 
-import android.support.annotation.DrawableRes;
-
 /**
  * function:商品实体信息
  * author: frj
@@ -9,52 +7,77 @@ import android.support.annotation.DrawableRes;
  */
 public class CommodityBean
 {
-    @DrawableRes
-    private int img;
-    /**
-     * 标题
-     */
-    private String title;
-    /**
-     * 价格
-     */
-    private String price;
-    /**
-     * 时间
-     */
-    private String time;
-    /**
-     * 地点
-     */
-    private String place;
+    private String name;//商品名称
+    private String status;//状态
+    private String content;//商品介绍
+    private String sorts;//排序
+    private String type;//类型
+    private String createtime;//创建时间
+    private String price;//价格
+    private String address;//地点
+    private String categoryid;//栏目id
+    private String timelength;//时长
+    private String image;//图片地址
+    private String merchandise_ID;//商品id
 
-    public CommodityBean(int img, String title, String price, String time, String place)
+    public String getName()
     {
-        this.img = img;
-        this.title = title;
-        this.price = price;
-        this.time = time;
-        this.place = place;
+        return name;
     }
 
-    public int getImg()
+    public void setName(String name)
     {
-        return img;
+        this.name = name;
     }
 
-    public void setImg(int img)
+    public String getStatus()
     {
-        this.img = img;
+        return status;
     }
 
-    public String getTitle()
+    public void setStatus(String status)
     {
-        return title;
+        this.status = status;
     }
 
-    public void setTitle(String title)
+    public String getContent()
     {
-        this.title = title;
+        return content;
+    }
+
+    public void setContent(String content)
+    {
+        this.content = content;
+    }
+
+    public String getSorts()
+    {
+        return sorts;
+    }
+
+    public void setSorts(String sorts)
+    {
+        this.sorts = sorts;
+    }
+
+    public String getType()
+    {
+        return type;
+    }
+
+    public void setType(String type)
+    {
+        this.type = type;
+    }
+
+    public String getCreatetime()
+    {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime)
+    {
+        this.createtime = createtime;
     }
 
     public String getPrice()
@@ -67,23 +90,53 @@ public class CommodityBean
         this.price = price;
     }
 
-    public String getTime()
+    public String getAddress()
     {
-        return time;
+        return address;
     }
 
-    public void setTime(String time)
+    public void setAddress(String address)
     {
-        this.time = time;
+        this.address = address;
     }
 
-    public String getPlace()
+    public String getCategoryid()
     {
-        return place;
+        return categoryid;
     }
 
-    public void setPlace(String place)
+    public void setCategoryid(String categoryid)
     {
-        this.place = place;
+        this.categoryid = categoryid;
+    }
+
+    public String getTimelength()
+    {
+        return timelength;
+    }
+
+    public void setTimelength(String timelength)
+    {
+        this.timelength = timelength;
+    }
+
+    public String getImage()
+    {
+        return image;
+    }
+
+    public void setImage(String image)
+    {
+        this.image = image;
+    }
+
+    public String getMerchandise_ID()
+    {
+        return merchandise_ID;
+    }
+
+    public void setMerchandise_ID(String merchandise_ID)
+    {
+        this.merchandise_ID = merchandise_ID;
     }
 }

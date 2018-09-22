@@ -12,11 +12,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.util.ShowToast;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.WBBean;
+import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.item.adapter.AdWb;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * function:微博页
@@ -32,10 +36,16 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
     private RecyclerView recyclerView;
     private AdWb adapter;
 
+    private int currPage = -1;
+
     @Override
     public void onStarShow()
     {
-
+        if (currPage == -1)
+        {
+            swipeRefreshLayout.setRefreshing(true);
+            onRefresh();
+        }
     }
 
     @Nullable
@@ -66,27 +76,82 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
     @Override
     protected void initData()
     {
-        swipeRefreshLayout.setEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new AdWb();
         adapter.bindToRecyclerView(recyclerView);
-        adapter.setNewData(getDatas());
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
+        {
+            @Override
+            public void onLoadMoreRequested()
+            {
+                getData(currPage + 1);
+            }
+        }, recyclerView);
     }
 
-    private List<String> getDatas()
+    /**
+     * 获取数据
+     *
+     * @param page
+     */
+    private void getData(final int page)
     {
-        List<String> datas = new ArrayList<>();
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        return datas;
+        HttpManager.getWbs(page, PAGE_NUM, new Subscriber<List<WBBean>>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(List<WBBean> wbBeans)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                currPage = page;
+                if (PAGE_START == page)
+                {
+                    adapter.setNewData(wbBeans);
+                } else
+                {
+                    adapter.addData(wbBeans);
+                    if (wbBeans.size() == 10)
+                    {
+                        adapter.loadMoreComplete();
+                    } else
+                    {
+                        adapter.loadMoreEnd();
+                    }
+                }
+            }
+        });
     }
 
     @Override
     public void onRefresh()
     {
-
+        getData(PAGE_START);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.btten.bttenlibrary.base.config;
 
 import com.btten.bttenlibrary.application.BtApplication;
-import com.btten.bttenlibrary.http.interceptor.CurrencyInterceptor;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -95,7 +94,6 @@ public abstract class ABaseConfig
     public List<Interceptor> getInterceptors()
     {
         List<Interceptor> interceptors = new ArrayList<>();
-//        interceptors.add(new CurrencyInterceptor(BtApplication.getApplication().getApplicationContext()));
         if (BtApplication.getApplication().isDebug())
         {
             interceptors.add(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));

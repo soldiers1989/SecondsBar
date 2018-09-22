@@ -4,10 +4,10 @@ import android.support.annotation.Nullable;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.btten.bttenlibrary.glide.GlideApp;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
+import com.fx.secondbar.util.GlideLoad;
 
 import java.util.List;
 
@@ -16,23 +16,23 @@ import java.util.List;
  * author: frj
  * modify date: 2018/9/9
  */
-public class AdWbImg extends BaseQuickAdapter<Integer, BaseViewHolder>
+public class AdWbImg extends BaseQuickAdapter<String, BaseViewHolder>
 {
 
     private int width = 0;
 
-    public AdWbImg(int width, @Nullable List<Integer> data)
+    public AdWbImg(int width, @Nullable List<String> data)
     {
         super(R.layout.ad_wb_img_item, data);
         this.width = width;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Integer item)
+    protected void convert(BaseViewHolder helper, String item)
     {
         ImageView img = helper.getView(R.id.img);
         setImgSize(img);
-        GlideApp.with(img).load(item).centerCrop().into(img);
+        GlideLoad.load(img, item);
     }
 
     /**

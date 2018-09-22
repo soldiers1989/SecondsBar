@@ -15,6 +15,7 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.bean.PersonBean;
+import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
 import java.util.List;
@@ -29,12 +30,10 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
-     *
-     * @param data A new list is created out of this one to avoid mutable list
      */
-    public AdInfomation(List<AdInfomation.InfomationEntity> data)
+    public AdInfomation()
     {
-        super(data);
+        super(null);
         addItemType(InfomationEntity.TYPE_SINGLE_IMG, R.layout.ad_infomation_single_img);
         addItemType(InfomationEntity.TYPE_MULTI_IMG, R.layout.ad_infomation_multi_img);
         addItemType(InfomationEntity.TYPE_COMMODITY, R.layout.ad_infomation_commodity);
@@ -75,11 +74,11 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
         TextView tv_place = helper.getView(R.id.tv_place);
         if (item.commodityBean != null)
         {
-            GlideApp.with(img).asBitmap().load(item.commodityBean.getImg()).centerCrop().into(img);
-            VerificationUtil.setViewValue(tv_title, item.commodityBean.getTitle());
+            GlideLoad.load(img, item.commodityBean.getImage(), true);
+            VerificationUtil.setViewValue(tv_title, item.commodityBean.getName());
             VerificationUtil.setViewValue(tv_price, item.commodityBean.getPrice());
-            VerificationUtil.setViewValue(tv_time, item.commodityBean.getTime());
-            VerificationUtil.setViewValue(tv_place, item.commodityBean.getPlace());
+            VerificationUtil.setViewValue(tv_time, item.commodityBean.getTimelength());
+            VerificationUtil.setViewValue(tv_place, item.commodityBean.getAddress());
         } else
         {
             GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
@@ -105,20 +104,13 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
         TextView tv_count = helper.getView(R.id.tv_count);
         if (item.getInfomationBean() != null)
         {
-            List<Integer> list = item.getInfomationBean().getList();
-            if (VerificationUtil.noEmpty(list))
-            {
-                GlideApp.with(img).asBitmap().load(list.get(0)).centerCrop().into(img);
-            } else
-            {
-                GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
-            }
-            VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getFrom());
-            VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getContent());
-            VerificationUtil.setViewValue(tv_count, item.getInfomationBean().getCount());
+            GlideLoad.load(img, item.getInfomationBean().getPicture(), true);
+            VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getShare_COPY());
+            VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getTitle());
+            VerificationUtil.setViewValue(tv_count, item.getInfomationBean().getShare_TOTAL());
         } else
         {
-            GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
+            GlideLoad.load(img, "", true);
             VerificationUtil.setViewValue(tv_from, "");
             VerificationUtil.setViewValue(tv_title, "");
             VerificationUtil.setViewValue(tv_count, "");
@@ -141,26 +133,26 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
         TextView tv_count = helper.getView(R.id.tv_count);
         if (item.getInfomationBean() != null)
         {
-            List<Integer> list = item.getInfomationBean().getList();
+            List<String> list = item.getInfomationBean().getPictures();
             if (list != null && list.size() >= 3)
             {
-                GlideApp.with(img1).asBitmap().load(list.get(0)).centerCrop().into(img1);
-                GlideApp.with(img2).asBitmap().load(list.get(1)).centerCrop().into(img2);
-                GlideApp.with(img3).asBitmap().load(list.get(2)).centerCrop().into(img3);
+                GlideLoad.load(img1, list.get(0), true);
+                GlideLoad.load(img2, list.get(1), true);
+                GlideLoad.load(img3, list.get(2), true);
             } else
             {
-                GlideApp.with(img1).asBitmap().load(0).centerCrop().into(img1);
-                GlideApp.with(img2).asBitmap().load(0).centerCrop().into(img2);
-                GlideApp.with(img3).asBitmap().load(0).centerCrop().into(img3);
+                GlideLoad.load(img1, "", true);
+                GlideLoad.load(img2, "", true);
+                GlideLoad.load(img3, "", true);
             }
-            VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getFrom());
-            VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getContent());
-            VerificationUtil.setViewValue(tv_count, item.getInfomationBean().getCount());
+            VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getShare_COPY());
+            VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getTitle());
+            VerificationUtil.setViewValue(tv_count, item.getInfomationBean().getShare_TOTAL());
         } else
         {
-            GlideApp.with(img1).asBitmap().load(0).centerCrop().into(img1);
-            GlideApp.with(img2).asBitmap().load(0).centerCrop().into(img2);
-            GlideApp.with(img3).asBitmap().load(0).centerCrop().into(img3);
+            GlideLoad.load(img1, "", true);
+            GlideLoad.load(img2, "", true);
+            GlideLoad.load(img3, "", true);
             VerificationUtil.setViewValue(tv_from, "");
             VerificationUtil.setViewValue(tv_title, "");
             VerificationUtil.setViewValue(tv_count, "");
@@ -177,7 +169,10 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
     {
         RecyclerView recyclerView = helper.getView(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.HORIZONTAL, false));
-        recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(recyclerView.getContext().getResources().getDimensionPixelSize(R.dimen.home_infomation_item_sing_plr), false, false, true));
+        if (recyclerView.getItemDecorationCount() == 0)
+        {
+            recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(recyclerView.getContext().getResources().getDimensionPixelSize(R.dimen.home_infomation_item_sing_plr), false, false, true));
+        }
         AdPersonItem adapter = new AdPersonItem();
         adapter.setNewData(item.getPersonBeans());
         adapter.bindToRecyclerView(recyclerView);

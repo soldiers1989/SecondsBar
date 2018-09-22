@@ -3,24 +3,25 @@ package com.fx.secondbar.bean;
 import java.util.List;
 
 /**
- * function ;//资讯信息实体
- * author ;// frj
- * modify date ;// 2018/9/19
+ * function:微博信息实体
+ * author: frj
+ * modify date: 2018/9/23
  */
-public class InfomationBean
+public class WBBean
 {
+
     private String username;//用户名
-    private List<String> pictures;// 图片集合
-    private String content;// 内容
-    private String share_COPY;//来源
-    private String picture;//图片
-    private String title;//标题
-    private String avatar;//头像
-    private String news_ID;//新闻id
-    private String scan_NUM;//阅读量
+    private List<String> pictures;// 图片集
+    private String content;// 内容，html文本
+    private String share_COPY;// 来源
+    private String picture;// 单图片
+    private String title;// 标题
+    private String avatar;// 头像
+    private String news_ID;// 新闻id
+    private String scan_NUM;// 浏览数
     private String sorts;// 排序
-    private String type;// 类型
-    private String share_TOTAL;//分享量
+    private String type;// 类别
+    private String share_TOTAL;// 分享数
 
     public String getUsername()
     {

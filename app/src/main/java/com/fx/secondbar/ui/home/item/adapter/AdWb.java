@@ -7,13 +7,15 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.WBBean;
 import com.fx.secondbar.ui.home.DialogShare;
+import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ import java.util.List;
  * author: frj
  * modify date: 2018/9/9
  */
-public class AdWb extends BaseQuickAdapter<String, BaseViewHolder>
+public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
 {
 
     public AdWb()
@@ -33,7 +35,7 @@ public class AdWb extends BaseQuickAdapter<String, BaseViewHolder>
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item)
+    protected void convert(BaseViewHolder helper, WBBean item)
     {
         SelectableRoundedImageView img = helper.getView(R.id.img);
         ImageButton img_share = helper.getView(R.id.img_share);
@@ -43,24 +45,27 @@ public class AdWb extends BaseQuickAdapter<String, BaseViewHolder>
         RecyclerView img_recycler = helper.getView(R.id.img_recycler);
         img_recycler.setFocusableInTouchMode(false);
         img_recycler.requestFocus();
-        List<Integer> imgs = getDatas();
+        List<String> imgs = getImgs(item);
         int size = imgs.size();
         img_recycler.setLayoutManager(new GridLayoutManager(img_recycler.getContext(), getRow(size)));
-        AdWbImg adapter = new AdWbImg(getWidth(img_recycler.getContext(), size), getDatas());
+        AdWbImg adapter = new AdWbImg(getWidth(img_recycler.getContext(), size), imgs);
         adapter.bindToRecyclerView(img_recycler);
         img_recycler.addItemDecoration(SpaceDecorationUtil.getDecoration(img.getContext().getResources().getDimensionPixelSize(R.dimen.home_wb_img_space), false, false, false));
         img_recycler.setVisibility(size == 0 ? View.GONE : View.VISIBLE);
 
-        if (helper.getLayoutPosition() == 0)
-        {
-            GlideApp.with(img).asBitmap().load(R.mipmap.test_dynamic_1).centerCrop().into(img);
-        } else if (helper.getLayoutPosition() == 1)
-        {
-            GlideApp.with(img).asBitmap().load(R.mipmap.test_dynamic_2).centerCrop().into(img);
-        } else
-        {
-            GlideApp.with(img).asBitmap().load(R.mipmap.test_dynamic_3).centerCrop().into(img);
-        }
+//        if (helper.getLayoutPosition() == 0)
+//        {
+//            GlideApp.with(img).asBitmap().load(R.mipmap.test_dynamic_1).centerCrop().into(img);
+//        } else if (helper.getLayoutPosition() == 1)
+//        {
+//            GlideApp.with(img).asBitmap().load(R.mipmap.test_dynamic_2).centerCrop().into(img);
+//        } else
+//        {
+//            GlideApp.with(img).asBitmap().load(R.mipmap.test_dynamic_3).centerCrop().into(img);
+//        }
+        GlideLoad.load(img, item.getAvatar(), true);
+        VerificationUtil.setViewValue(tv_name, item.getUsername());
+        VerificationUtil.setViewValue(tv_content, item.getContent());
         img_share.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -89,24 +94,48 @@ public class AdWb extends BaseQuickAdapter<String, BaseViewHolder>
     }
 
     /**
-     * 获取图片链接
+     * 获取图片集合
      *
+     * @param bean
      * @return
      */
-    private List<Integer> getDatas()
+    private List<String> getImgs(WBBean bean)
     {
-        List<Integer> list = new ArrayList<>();
-        list.add(R.mipmap.test_wb1);
-        list.add(R.mipmap.test_wb2);
-        list.add(R.mipmap.test_wb3);
-        list.add(R.mipmap.test_wb4);
-        list.add(R.mipmap.test_wb5);
-        list.add(R.mipmap.test_wb6);
-        list.add(R.mipmap.test_wb7);
-        list.add(R.mipmap.test_wb8);
-        list.add(R.mipmap.test_wb9);
-        return list;
+
+        if (bean != null)
+        {
+            if (VerificationUtil.noEmpty(bean.getPictures()))
+            {
+                return bean.getPictures();
+            } else
+            {
+                List<String> list = new ArrayList<>();
+                list.add(bean.getPicture());
+                return list;
+            }
+        }
+        return null;
     }
+
+//    /**
+//     * 获取图片链接
+//     *
+//     * @return
+//     */
+//    private List<Integer> getDatas()
+//    {
+//        List<Integer> list = new ArrayList<>();
+//        list.add(R.mipmap.test_wb1);
+//        list.add(R.mipmap.test_wb2);
+//        list.add(R.mipmap.test_wb3);
+//        list.add(R.mipmap.test_wb4);
+//        list.add(R.mipmap.test_wb5);
+//        list.add(R.mipmap.test_wb6);
+//        list.add(R.mipmap.test_wb7);
+//        list.add(R.mipmap.test_wb8);
+//        list.add(R.mipmap.test_wb9);
+//        return list;
+//    }
 
     /**
      * 获取图片列数

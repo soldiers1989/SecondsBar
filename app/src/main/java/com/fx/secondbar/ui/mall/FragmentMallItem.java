@@ -13,11 +13,7 @@ import android.view.ViewGroup;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
-import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * function:商城页各分类的子页
@@ -65,7 +61,7 @@ public class FragmentMallItem extends FragmentViewPagerBase implements SwipeRefr
         recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(getContext().getResources().getDimensionPixelSize(R.dimen.mall_item_space), false, false, false));
         adapter = new AdMall();
         adapter.bindToRecyclerView(recyclerView);
-        adapter.setNewData(getDatas());
+//        adapter.setNewData(getDatas());
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener()
         {
             @Override
@@ -76,15 +72,15 @@ public class FragmentMallItem extends FragmentViewPagerBase implements SwipeRefr
         });
     }
 
-    private List<CommodityBean> getDatas()
-    {
-        List<CommodityBean> list = new ArrayList<>();
-        list.add(new CommodityBean(R.mipmap.test_mall_1, "周杰伦粉丝见面演唱会", "26000.00STE", "", ""));
-        list.add(new CommodityBean(R.mipmap.test_mall_2, "张勇新零售讲座", "8800.00STE", "", ""));
-        list.add(new CommodityBean(R.mipmap.test_mall_3, "网红陈一发儿歌友会", "1820.00STE", "", ""));
-        list.add(new CommodityBean(R.mipmap.test_mall_4, "郭德纲专场演出", "360.00STE", "", ""));
-        return list;
-    }
+//    private List<CommodityBean> getDatas()
+//    {
+//        List<CommodityBean> list = new ArrayList<>();
+//        list.add(new CommodityBean(R.mipmap.test_mall_1, "周杰伦粉丝见面演唱会", "26000.00STE", "", ""));
+//        list.add(new CommodityBean(R.mipmap.test_mall_2, "张勇新零售讲座", "8800.00STE", "", ""));
+//        list.add(new CommodityBean(R.mipmap.test_mall_3, "网红陈一发儿歌友会", "1820.00STE", "", ""));
+//        list.add(new CommodityBean(R.mipmap.test_mall_4, "郭德纲专场演出", "360.00STE", "", ""));
+//        return list;
+//    }
 
     @Override
     public void onRefresh()
