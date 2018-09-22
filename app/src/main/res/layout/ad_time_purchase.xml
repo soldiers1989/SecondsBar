@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/home_time_purchase_h"
+    android:background="@android:color/white"
+    android:minHeight="@dimen/home_time_purchase_h"
+    android:paddingLeft="@dimen/home_time_content_plr"
+    android:paddingRight="@dimen/home_time_content_plr">
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/home_time_purchase_img_w"
+        android:layout_height="@dimen/home_time_purchase_img_h"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sriv_left_bottom_corner_radius="@dimen/home_time_purchase_img_r"
+        app:sriv_left_top_corner_radius="@dimen/home_time_purchase_img_r"
+        app:sriv_right_bottom_corner_radius="@dimen/home_time_purchase_img_r"
+        app:sriv_right_top_corner_radius="@dimen/home_time_purchase_img_r"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/home_time_purchase_name_ml"
+        android:layout_marginTop="@dimen/home_time_purchase_name_mt"
+        android:singleLine="true"
+        android:text="马云"
+        android:textColor="@color/home_time_purchase_name_text"
+        android:textSize="@dimen/home_time_purchase_name_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img"
+        app:layout_constraintTop_toTopOf="@id/img"
+        tools:text="马云"/>
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/home_time_purchase_name_mt"
+        android:singleLine="true"
+        android:text="0.60STE/秒"
+        android:textColor="@color/home_tabs_mark_color"
+        android:textSize="@dimen/home_time_purchase_name_text"
+        app:layout_constraintBottom_toBottomOf="@id/img"
+        app:layout_constraintStart_toStartOf="@id/tv_name"
+        tools:text="0.60STE/秒"/>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:lines="2"
+        android:text="马云先生教你怎样做电商，他是如何成为一个成功的商人,互联网公司该如何走向成功..."
+        android:textColor="@color/home_time_purchase_content_text"
+        android:textSize="@dimen/home_time_purchase_content_text"
+        app:layout_constraintBottom_toTopOf="@id/tv_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:text="马云先生教你怎样做电商，他是如何成为一个成功的商人,互联网公司该如何走向成功..."/>
+</android.support.constraint.ConstraintLayout>

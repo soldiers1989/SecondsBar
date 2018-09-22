@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/v_top"
+        android:layout_width="match_parent"
+        android:layout_height="180dip"
+        android:background="#333a44"/>
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/img_avatar"
+        android:layout_width="45dip"
+        android:layout_height="45dip"
+        android:layout_marginLeft="15dip"
+        android:layout_marginTop="32dip"
+        app:layout_constraintStart_toStartOf="@+id/v_top"
+        app:layout_constraintTop_toTopOf="@+id/v_top"
+        app:sriv_oval="true"/>
+
+    <ImageButton
+        android:id="@+id/ib_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dip"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@mipmap/ic_set"
+        app:layout_constraintEnd_toEndOf="@+id/v_top"
+        app:layout_constraintTop_toTopOf="@+id/img_avatar"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dip"
+        android:singleLine="true"
+        android:text="了不起的盖茨比"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/ib_set"
+        app:layout_constraintStart_toEndOf="@+id/img_avatar"
+        app:layout_constraintTop_toTopOf="@+id/img_avatar"/>
+
+    <TextView
+        android:id="@+id/tv_account"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:text="秒吧号：12345678"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_avatar"
+        app:layout_constraintEnd_toStartOf="@+id/ib_set"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"/>
+
+    <View
+        android:id="@+id/v_assets"
+        android:layout_width="0dip"
+        android:layout_height="62dip"
+        android:layout_marginBottom="18dip"
+        android:background="@drawable/person_asset_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/v_top"
+        app:layout_constraintEnd_toStartOf="@+id/v_asset_q"
+        app:layout_constraintStart_toStartOf="@+id/img_avatar"/>
+
+    <View
+        android:id="@+id/v_asset_q"
+        android:layout_width="15dip"
+        android:layout_height="62dip"
+        app:layout_constraintEnd_toEndOf="@+id/v_top"
+        app:layout_constraintStart_toStartOf="@+id/v_top"
+        app:layout_constraintTop_toTopOf="@+id/v_assets"/>
+
+    <View
+        android:id="@+id/v_get_q"
+        android:layout_width="0dip"
+        android:layout_height="62dip"
+        android:layout_marginBottom="18dip"
+        android:background="@drawable/person_asset_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/v_top"
+        app:layout_constraintEnd_toEndOf="@+id/ib_set"
+        app:layout_constraintStart_toEndOf="@+id/v_asset_q"/>
+
+    <TextView
+        android:id="@+id/tv_assets_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="6dip"
+        android:text="资产中心"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/v_assets"
+        app:layout_constraintTop_toTopOf="@+id/v_assets"
+        />
+
+    <TextView
+        android:id="@+id/tv_assets_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="6dip"
+        android:drawablePadding="4dip"
+        android:drawableRight="@mipmap/ic_arrow_right"
+        android:gravity="center_vertical"
+        android:text="全部"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/v_assets"
+        app:layout_constraintTop_toTopOf="@+id/v_assets"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_assets"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dip"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingLeft="5dip"
+        android:paddingRight="3dip"
+        app:layout_constraintBottom_toBottomOf="@+id/v_assets"
+        app:layout_constraintEnd_toStartOf="@+id/ll_q"
+        app:layout_constraintStart_toStartOf="@+id/v_assets">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STE："
+            android:textColor="@android:color/white"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_ste_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="0.00"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_q"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dip"
+        android:gravity="bottom|right"
+        android:orientation="horizontal"
+        android:paddingLeft="3dip"
+        android:paddingRight="5dip"
+        app:layout_constraintBottom_toBottomOf="@+id/v_assets"
+        app:layout_constraintEnd_toEndOf="@+id/v_assets"
+        app:layout_constraintStart_toEndOf="@+id/ll_assets">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Q："
+            android:textColor="@android:color/white"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_q_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="0.00"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_q_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="6dip"
+        android:text="今日获得Q"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/v_get_q"
+        app:layout_constraintTop_toTopOf="@+id/v_get_q"
+        />
+
+    <TextView
+        android:id="@+id/tv_q_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="6dip"
+        android:drawablePadding="4dip"
+        android:drawableRight="@mipmap/ic_arrow_right"
+        android:gravity="center_vertical"
+        android:text="明细"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/v_get_q"
+        app:layout_constraintTop_toTopOf="@+id/v_get_q"
+        />
+
+    <TextView
+        android:id="@+id/tv_today_q_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dip"
+        android:text="0.00"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/v_assets"
+        app:layout_constraintEnd_toEndOf="@+id/v_get_q"
+        app:layout_constraintStart_toStartOf="@+id/v_get_q"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/v_top">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="15dip">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="130dip"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="10dip">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tv_tips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="12dip"
+                        android:text="管理中心"
+                        android:textColor="#3d3d3d"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="10dip"
+                        android:drawableTop="@mipmap/ic_order"
+                        android:gravity="center_horizontal"
+                        android:text="订单管理"
+                        android:textColor="#3d3d3d"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_buy"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_tips"/>
+
+                    <TextView
+                        android:id="@+id/tv_buy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="10dip"
+                        android:drawableTop="@mipmap/ic_buy"
+                        android:gravity="center_horizontal"
+                        android:text="我的申购"
+                        android:textColor="#3d3d3d"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tv_order"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_tips"/>
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+            <com.joooonho.SelectableRoundedImageView
+                android:id="@+id/img_get_q"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dip"
+                app:sriv_left_bottom_corner_radius="10dip"
+                app:sriv_left_top_corner_radius="10dip"
+                app:sriv_right_bottom_corner_radius="10dip"
+                app:sriv_right_top_corner_radius="10dip"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dip"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="10dip">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_get_q_tips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="47dip"
+                        android:layout_marginLeft="15dip"
+                        android:gravity="center_vertical"
+                        android:text="如何获得Q"
+                        android:textColor="#3d3d3d"
+                        android:textSize="18sp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"></android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dip"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.constraint.ConstraintLayout>

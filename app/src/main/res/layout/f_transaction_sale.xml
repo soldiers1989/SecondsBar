@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#292d32"
+    android:paddingLeft="15dip">
+
+    <TextView
+        android:id="@+id/tv_buy_submit"
+        android:layout_width="160dip"
+        android:layout_height="36dip"
+        android:background="@drawable/transaction_sale_btn"
+        android:gravity="center"
+        android:text="卖出"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/ll_input"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:layout_marginTop="15dip"
+        android:background="@drawable/transaction_input_bg"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/v_input_seconds"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/ed_input"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="输入价格"
+            android:inputType="numberDecimal"
+            android:paddingLeft="10dip"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textColorHint="#a5a6aa"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dip"
+            android:text="STE"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_input_seconds"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        app:layout_constraintBottom_toTopOf="@+id/ll_seconds"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toBottomOf="@+id/ll_input"/>
+
+    <LinearLayout
+        android:id="@+id/ll_seconds"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:background="@drawable/transaction_input_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="10dip"
+        app:layout_constraintBottom_toTopOf="@+id/v_seconds_prices"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toBottomOf="@+id/v_input_seconds">
+
+        <EditText
+            android:id="@+id/ed_seconds"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="购买秒数"
+            android:inputType="numberDecimal"
+            android:paddingLeft="10dip"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textColorHint="#a5a6aa"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_seconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="秒"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_seconds_prices"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        app:layout_constraintBottom_toTopOf="@+id/ll_price"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toBottomOf="@+id/ll_seconds"/>
+
+    <LinearLayout
+        android:id="@+id/ll_price"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:background="@drawable/transaction_input_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        app:layout_constraintBottom_toTopOf="@+id/v_prices_new"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toBottomOf="@id/v_seconds_prices">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="购买总价"
+            android:textColor="#a5a6aa"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="@string/transaction_head_price_value"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_prices_new"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        app:layout_constraintBottom_toTopOf="@+id/tv_buy_submit"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toBottomOf="@+id/ll_price"/>
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        app:layout_constraintBottom_toTopOf="@id/ll_price"
+        app:layout_constraintEnd_toEndOf="@id/ll_input"
+        app:layout_constraintStart_toStartOf="@id/ll_input"
+        app:layout_constraintTop_toBottomOf="@id/ll_seconds">
+
+        <TextView
+            android:id="@+id/tv_avaliadble_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="可卖秒数"
+            android:textColor="#e94961"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_can_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/tv_avaliadble_tips"
+            android:gravity="right"
+            android:singleLine="true"
+            android:text="0.00"
+            android:textColor="#e94961"
+            android:textSize="15sp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        app:layout_constraintBottom_toTopOf="@id/ll_seconds"
+        app:layout_constraintEnd_toEndOf="@id/ll_input"
+        app:layout_constraintStart_toStartOf="@id/ll_input"
+        app:layout_constraintTop_toBottomOf="@id/ll_input">
+
+        <TextView
+            android:id="@+id/tv_price_down"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/transaction_head_price_down"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_price_up"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="@string/transaction_head_price_up"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_new_token"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        app:layout_constraintBottom_toTopOf="@+id/ll_lxe"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toBottomOf="@+id/tv_buy_submit"/>
+
+    <LinearLayout
+        android:id="@+id/ll_lxe"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:layout_marginTop="0dip"
+        android:background="@drawable/transaction_input_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        app:layout_constraintBottom_toTopOf="@+id/v_token_ste"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toBottomOf="@id/v_new_token">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="可用YDB"
+            android:textColor="#e94961"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_price_token"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="0.00"
+            android:textColor="#e94961"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_token_ste"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        app:layout_constraintBottom_toTopOf="@+id/ll_ste"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toBottomOf="@+id/ll_lxe"/>
+
+    <LinearLayout
+        android:id="@+id/ll_ste"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:background="@drawable/transaction_input_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        app:layout_constraintBottom_toTopOf="@+id/v_ste_time"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toBottomOf="@id/v_token_ste">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="可用STE"
+            android:textColor="#e94961"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_price_ste"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="0.00"
+            android:textColor="#e94961"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_ste_time"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        app:layout_constraintBottom_toTopOf="@+id/ll_time"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toBottomOf="@+id/ll_ste"/>
+
+    <LinearLayout
+        android:id="@+id/ll_time"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:layout_marginTop="0dip"
+        android:background="@drawable/transaction_input_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        app:layout_constraintBottom_toBottomOf="@+id/v_time_bottom"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toBottomOf="@id/v_ste_time">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="可买秒数"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="0.00"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_time_bottom"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:layout_marginBottom="15dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_buy_submit"
+        app:layout_constraintStart_toStartOf="@+id/tv_buy_submit"
+        app:layout_constraintTop_toBottomOf="@+id/ll_time"/>
+
+    <View
+        android:id="@+id/v_left_right"
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dip"
+        android:background="#212428"
+        app:layout_constraintStart_toEndOf="@+id/ll_input"/>
+
+
+    <TextView
+        android:id="@+id/tv_new_price"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:background="#36373b"
+        android:gravity="center"
+        android:text="@string/transaction_head_new_price"
+        android:textColor="#e94961"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_buy_submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/v_left_right"
+        app:layout_constraintTop_toTopOf="@id/tv_buy_submit"/>
+
+    <com.fx.secondbar.view.CopyListView
+        android:id="@+id/list_top"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/tv_new_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/v_left_right"
+        app:layout_constraintTop_toTopOf="@+id/ll_input"></com.fx.secondbar.view.CopyListView>
+
+    <com.fx.secondbar.view.CopyListView
+        android:id="@+id/list_bottom"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/v_time_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/v_left_right"
+        app:layout_constraintTop_toTopOf="@+id/ll_lxe"></com.fx.secondbar.view.CopyListView>
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ebebeb">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/mall_tool_pl"
+                android:text="设置支付密码"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tv_send_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dip"
+        android:text="我们将发送验证码至您的手机"
+        android:textColor="#353535"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dip"
+        android:text="12345678901"
+        android:textColor="#353535"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_send_tips"/>
+
+    <View
+        android:id="@+id/v_code_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="36dip"
+        android:layout_marginRight="36dip"
+        android:layout_marginTop="221dip"
+        android:background="#bfbfbf"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+
+    <TextView
+        android:id="@+id/tv_get_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取短信验证码"
+        android:textColor="@color/font_yellow_color"
+        android:textSize="15sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ed_code"
+        app:layout_constraintEnd_toEndOf="@+id/v_code_line"/>
+
+    <EditText
+        android:id="@+id/ed_code"
+        android:layout_width="0dip"
+        android:layout_height="37dip"
+        android:background="@null"
+        android:hint="请输入短信验证码"
+        android:inputType="number"
+        android:maxLength="6"
+        android:singleLine="true"
+        android:textColor="#353535"
+        android:textColorHint="#777777"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/v_code_line"
+        app:layout_constraintEnd_toStartOf="@+id/tv_get_code"
+        app:layout_constraintStart_toStartOf="@+id/v_code_line"/>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="0dip"
+        android:layout_height="@dimen/mall_detail_buy_h"
+        android:layout_marginTop="50dip"
+        android:background="@drawable/bind_phone_btn"
+        android:text="下一步"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/mall_detail_buy_text"
+        app:layout_constraintEnd_toEndOf="@+id/v_code_line"
+        app:layout_constraintStart_toStartOf="@+id/v_code_line"
+        app:layout_constraintTop_toBottomOf="@+id/v_code_line"/>
+</android.support.constraint.ConstraintLayout>

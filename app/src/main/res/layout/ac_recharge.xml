@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ebebeb">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/mall_tool_pl"
+                android:text="STE充值"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        android:id="@+id/v_input"
+        android:layout_width="match_parent"
+        android:layout_height="117dip"
+        android:layout_marginTop="20dip"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+
+    <TextView
+        android:id="@+id/tv_recharge_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dip"
+        android:layout_marginTop="21dip"
+        android:text="充值金额"
+        android:textColor="#787878"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/v_input"
+        app:layout_constraintTop_toTopOf="@+id/v_input"/>
+
+    <TextView
+        android:id="@+id/tv_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="￥"
+        android:textColor="#262626"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ed_input"
+        app:layout_constraintStart_toStartOf="@+id/tv_recharge_tips"/>
+
+    <EditText
+        android:id="@+id/ed_input"
+        android:layout_width="0dip"
+        android:layout_height="60dip"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:hint="请输入充值金额"
+        android:inputType="number"
+        android:paddingLeft="6dip"
+        android:paddingRight="18dip"
+        android:singleLine="true"
+        android:textColor="#262626"
+        android:textColorHint="#bebebe"
+        app:layout_constraintBottom_toBottomOf="@+id/v_input"
+        app:layout_constraintEnd_toEndOf="@+id/v_input"
+        app:layout_constraintStart_toEndOf="@+id/tv_symbol"/>
+
+    <TextView
+        android:id="@+id/tv_conversion_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dip"
+        android:text="1STE=1人民币"
+        android:textColor="#787878"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_recharge_tips"
+        app:layout_constraintTop_toBottomOf="@+id/v_input"/>
+
+    <View
+        android:id="@+id/v_pay_method"
+        android:layout_width="match_parent"
+        android:layout_height="142dip"
+        android:layout_marginTop="48dip"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/v_input"/>
+
+    <TextView
+        android:id="@+id/tv_pay_method_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dip"
+        android:text="请选择支付方式"
+        android:textColor="#2e2e2e"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_recharge_tips"
+        app:layout_constraintTop_toTopOf="@+id/v_pay_method"/>
+
+    <View
+        android:id="@+id/v_wechat_line"
+        android:layout_width="0dip"
+        android:layout_height="1dip"
+        android:layout_marginRight="16dip"
+        android:background="#ebebeb"
+        app:layout_constraintBottom_toBottomOf="@+id/v_pay_method"
+        app:layout_constraintEnd_toEndOf="@+id/v_pay_method"
+        app:layout_constraintStart_toStartOf="@+id/tv_recharge_tips"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pay_method_tips"/>
+
+    <TextView
+        android:id="@+id/tv_wechat"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:drawableLeft="@mipmap/ic_pay_wechat"
+        android:drawablePadding="11dip"
+        android:drawableRight="@drawable/recharge_pay_method_mark"
+        android:gravity="center_vertical"
+        android:text="微信支付"
+        android:textColor="#2e2e2e"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/v_wechat_line"
+        app:layout_constraintEnd_toEndOf="@+id/v_wechat_line"
+        app:layout_constraintStart_toStartOf="@+id/v_wechat_line"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pay_method_tips"/>
+
+    <TextView
+        android:id="@+id/tv_alipay"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:drawableLeft="@mipmap/ic_alipay"
+        android:drawablePadding="11dip"
+        android:drawableRight="@drawable/recharge_pay_method_mark"
+        android:gravity="center_vertical"
+        android:text="支付宝支付"
+        android:textColor="#2e2e2e"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/v_pay_method"
+        app:layout_constraintEnd_toEndOf="@+id/v_wechat_line"
+        app:layout_constraintStart_toStartOf="@+id/v_wechat_line"
+        app:layout_constraintTop_toBottomOf="@+id/v_wechat_line"/>
+
+    <Button
+        android:id="@+id/btn_pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mall_detail_buy_h"
+        android:background="@color/home_tabs_mark_color"
+        android:text="去支付"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/mall_detail_buy_text"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</android.support.constraint.ConstraintLayout>

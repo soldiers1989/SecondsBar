@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dialog_mall_buy_h"
+    android:background="@android:color/white"
+    android:minHeight="@dimen/dialog_mall_buy_h">
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dialog_mall_buy_tips_mt"
+        android:text="@string/dialog_mall_buy_tips"
+        android:textColor="@color/dialog_mall_buy_tips"
+        android:textSize="@dimen/dialog_mall_buy_tips"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3000.00STE"
+        android:textColor="@color/home_tabs_mark_color"
+        android:textSize="@dimen/dialog_mall_buy_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tips"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dialog_mall_buy_des_item_mlr"
+        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
+        android:layout_marginTop="@dimen/dialog_mall_buy_des_item_mt"
+        android:paddingBottom="@dimen/dialog_mall_buy_des_item_ptb"
+        android:paddingTop="@dimen/dialog_mall_buy_des_item_ptb"
+        app:layout_constraintTop_toBottomOf="@id/tv_price">
+
+        <TextView
+            android:id="@+id/tv_name_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/dialog_mall_buy_item_name"
+            android:textColor="@color/dialog_mall_buy_tips"
+            android:textSize="@dimen/dialog_mall_buy_des_item_text"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/tv_name_tips"
+            android:gravity="right"
+            android:singleLine="true"
+            android:text="秒吧 金莎粉丝见面会"
+            android:textColor="@color/dialog_mall_buy_item_value"
+            android:textSize="@dimen/dialog_mall_buy_des_item_text"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/v_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_line"
+        android:layout_marginLeft="@dimen/dialog_mall_buy_des_item_mlr"
+        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
+        android:background="@color/dialog_mall_buy_line"
+        app:layout_constraintTop_toBottomOf="@id/rl_name"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dialog_mall_buy_des_item_mlr"
+        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
+        android:layout_marginTop="@dimen/dialog_mall_buy_des_item_space"
+        android:paddingBottom="@dimen/dialog_mall_buy_des_item_ptb"
+        android:paddingTop="@dimen/dialog_mall_buy_des_item_ptb"
+        app:layout_constraintTop_toBottomOf="@id/v_name">
+
+        <TextView
+            android:id="@+id/tv_time_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/dialog_mall_buy_item_time"
+            android:textColor="@color/dialog_mall_buy_tips"
+            android:textSize="@dimen/dialog_mall_buy_des_item_text"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/tv_time_tips"
+            android:gravity="right"
+            android:singleLine="true"
+            android:text="100分钟"
+            android:textColor="@color/dialog_mall_buy_item_value"
+            android:textSize="@dimen/dialog_mall_buy_des_item_text"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/v_time"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_line"
+        android:layout_marginLeft="@dimen/dialog_mall_buy_des_item_mlr"
+        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
+        android:background="@color/dialog_mall_buy_line"
+        app:layout_constraintTop_toBottomOf="@id/rl_time"/>
+
+    <TextView
+        android:id="@+id/tv_protocol"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dialog_mall_buy_des_item_mlr"
+        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
+        android:layout_marginTop="@dimen/dialog_mall_buy_des_item_space"
+        android:drawableLeft="@drawable/dialog_mall_buy_protocol"
+        android:drawablePadding="@dimen/dialog_mall_buy_protocol_dp"
+        android:gravity="center_vertical"
+        android:text="@string/dialog_mall_buy_protocol_tips"
+        android:textColor="@color/dialog_mall_buy_protocol"
+        android:textSize="@dimen/dialog_mall_buy_protocol"
+        app:layout_constraintTop_toBottomOf="@id/v_time"/>
+
+    <Button
+        android:id="@+id/btn_buy"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mall_detail_buy_h"
+        android:background="@color/home_tabs_mark_color"
+        android:text="@string/dialog_mall_buy_btn"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/mall_detail_buy_text"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</android.support.constraint.ConstraintLayout>

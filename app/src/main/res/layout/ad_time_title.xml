@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:id="@+id/tv_title"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/home_time_title_h"
+          android:background="@android:color/white"
+          android:drawableLeft="@mipmap/ic_infomation_title_mark"
+          android:drawablePadding="@dimen/home_infomation_item_multi_commodity_title_dp"
+          android:gravity="center_vertical"
+          android:minHeight="@dimen/home_time_title_h"
+          android:paddingLeft="@dimen/home_time_content_plr"
+          android:paddingRight="@dimen/home_time_content_plr"
+          android:text="交易动态"
+          android:textColor="@android:color/black"
+          android:textSize="@dimen/home_infomation_item_sing_title_text"
+          tools:text="交易动态">
+
+</TextView>

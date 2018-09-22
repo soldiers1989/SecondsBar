@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:paddingBottom="@dimen/home_infomation_item_multi_pb"
+    android:paddingLeft="@dimen/home_infomation_item_sing_plr"
+    android:paddingRight="@dimen/home_infomation_item_sing_plr"
+    android:paddingTop="@dimen/home_infomation_item_multi_pt">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:text="分别总是在九月，回忆是思念的愁。青春无悔！这是你见过的最美退伍写真"
+        android:textColor="@color/home_infomation_item_title_text"
+        android:textSize="@dimen/home_infomation_item_sing_title_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/img1"
+        android:layout_width="0dip"
+        android:layout_height="@dimen/home_infomation_item_multi_img_h"
+        android:layout_marginTop="8dip"
+        app:layout_constraintEnd_toStartOf="@+id/img2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:sriv_left_bottom_corner_radius="@dimen/home_infomation_item_sing_img_r"
+        app:sriv_left_top_corner_radius="@dimen/home_infomation_item_sing_img_r"
+        app:sriv_right_bottom_corner_radius="@dimen/home_infomation_item_sing_img_r"
+        app:sriv_right_top_corner_radius="@dimen/home_infomation_item_sing_img_r"/>
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/img2"
+        android:layout_width="0dip"
+        android:layout_height="@dimen/home_infomation_item_multi_img_h"
+        android:layout_marginLeft="@dimen/home_infomation_item_multi_img_mlr"
+        android:layout_marginRight="@dimen/home_infomation_item_multi_img_mlr"
+        app:layout_constraintEnd_toStartOf="@+id/img3"
+        app:layout_constraintStart_toEndOf="@+id/img1"
+        app:layout_constraintTop_toTopOf="@+id/img1"
+        app:sriv_left_bottom_corner_radius="@dimen/home_infomation_item_sing_img_r"
+        app:sriv_left_top_corner_radius="@dimen/home_infomation_item_sing_img_r"
+        app:sriv_right_bottom_corner_radius="@dimen/home_infomation_item_sing_img_r"
+        app:sriv_right_top_corner_radius="@dimen/home_infomation_item_sing_img_r"/>
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/img3"
+        android:layout_width="0dip"
+        android:layout_height="@dimen/home_infomation_item_multi_img_h"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img2"
+        app:layout_constraintTop_toTopOf="@+id/img1"
+        app:sriv_left_bottom_corner_radius="@dimen/home_infomation_item_sing_img_r"
+        app:sriv_left_top_corner_radius="@dimen/home_infomation_item_sing_img_r"
+        app:sriv_right_bottom_corner_radius="@dimen/home_infomation_item_sing_img_r"
+        app:sriv_right_top_corner_radius="@dimen/home_infomation_item_sing_img_r"/>
+
+    <TextView
+        android:id="@+id/tv_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dip"
+        android:maxLength="10"
+        android:singleLine="true"
+        android:text="新浪网"
+        android:textColor="@color/home_infomation_item_from_text"
+        android:textSize="@dimen/home_infomation_item_sing_from_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img1"/>
+
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dip"
+        android:text="128评"
+        android:textColor="@color/home_infomation_item_from_text"
+        android:textSize="@dimen/home_infomation_item_sing_from_text"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_from"
+        app:layout_constraintStart_toEndOf="@+id/tv_from"/>
+
+</android.support.constraint.ConstraintLayout>

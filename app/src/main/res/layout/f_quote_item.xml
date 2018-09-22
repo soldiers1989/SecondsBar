@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#292d32">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/quote_item_title_h"
+            android:layout_marginTop="@dimen/quote_item_title_mt"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/quote_item_title_plr"
+            android:paddingRight="@dimen/quote_item_title_plr">
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="left"
+                android:paddingLeft="36dip"
+                android:text="@string/quote_item_title_name"
+                android:textColor="@color/quote_item_title_item_title"
+                android:textSize="@dimen/quote_item_title_item_text"/>
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="@string/quote_item_title_curr_price"
+                android:textColor="@color/quote_item_title_item_title"
+                android:textSize="@dimen/quote_item_title_item_text"/>
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="@string/quote_item_title_up"
+                android:textColor="@color/quote_item_title_item_title"
+                android:textSize="@dimen/quote_item_title_item_text"/>
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/quote_item_title_percent"
+                android:textColor="@color/quote_item_title_item_title"
+                android:textSize="@dimen/quote_item_title_item_text"/>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/quote_item_title_plr"
+            android:paddingRight="@dimen/quote_item_title_plr"></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

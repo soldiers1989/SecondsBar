@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/home_time_dynamic_h"
+    android:background="@android:color/white"
+    android:minHeight="@dimen/home_time_dynamic_h"
+    android:paddingLeft="@dimen/home_time_content_plr"
+    android:paddingRight="@dimen/home_time_content_plr">
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/home_time_dynamic_img_size"
+        android:layout_height="@dimen/home_time_dynamic_img_size"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sriv_oval="true"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="45分钟前"
+        android:textColor="@color/home_tabs_mark_color"
+        android:textSize="@dimen/home_time_dynamic_time_text"
+        app:layout_constraintBottom_toBottomOf="@+id/img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img"
+        tools:text="45分钟前"/>
+
+    <TextView
+        android:id="@+id/tv_dynamic"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/home_time_dynamic_content_mlr"
+        android:layout_marginRight="@dimen/home_time_dynamic_content_mlr"
+        android:maxLines="2"
+        android:text="了不起的盖茨比购买了下午茶"
+        android:textColor="@color/home_tabs_item_text_unsel"
+        android:textSize="@dimen/home_time_dynamic_time_text"
+        app:layout_constraintBottom_toBottomOf="@+id/img"
+        app:layout_constraintEnd_toStartOf="@id/tv_time"
+        app:layout_constraintStart_toEndOf="@id/img"
+        app:layout_constraintTop_toTopOf="@+id/img"
+        tools:text="了不起的盖茨比购买了下午茶"
+        />
+</android.support.constraint.ConstraintLayout>

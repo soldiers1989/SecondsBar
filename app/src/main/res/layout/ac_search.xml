@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_toolbar_left"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+
+            <EditText
+                android:id="@+id/ed_search"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/search_input_h"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/search_input_ml"
+                android:layout_marginRight="@dimen/search_input_ml"
+                android:layout_toLeftOf="@id/img_toolbar_right"
+                android:layout_toRightOf="@id/img_toolbar_left"
+                android:background="@drawable/home_title_search"
+                android:hint="请输入关键字搜索"
+                android:imeOptions="actionSearch"
+                android:paddingLeft="@dimen/search_input_plr"
+                android:paddingRight="@dimen/search_input_plr"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="@dimen/search_input_text">
+
+            </EditText>
+
+            <ImageView
+                android:id="@+id/img_toolbar_right"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentRight="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_tool_search"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/quote_item_title_h"
+        android:layout_marginTop="@dimen/quote_item_title_mt"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/quote_item_title_plr"
+        android:paddingRight="@dimen/quote_item_title_plr"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.4"
+            android:gravity="left"
+            android:text="@string/quote_item_title_name"
+            android:textColor="@color/quote_item_title_item_title"
+            android:textSize="@dimen/quote_item_title_item_text"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/quote_item_title_curr_price"
+            android:textColor="@color/quote_item_title_item_title"
+            android:textSize="@dimen/quote_item_title_item_text"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/quote_item_title_up"
+            android:textColor="@color/quote_item_title_item_title"
+            android:textSize="@dimen/quote_item_title_item_text"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/quote_item_title_percent"
+            android:textColor="@color/quote_item_title_item_title"
+            android:textSize="@dimen/quote_item_title_item_text"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dip"
+        app:layout_constraintTop_toBottomOf="@id/ll_title"></android.support.v7.widget.RecyclerView>
+</android.support.constraint.ConstraintLayout>

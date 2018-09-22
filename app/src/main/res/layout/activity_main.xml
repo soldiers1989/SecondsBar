@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".ui.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_h"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tv_home"
+            style="@style/main_bottom_item"
+            android:drawableTop="@drawable/main_item_home"
+            android:text="@string/main_item_home_text"
+            />
+
+        <TextView
+            android:id="@+id/tv_mall"
+            style="@style/main_bottom_item"
+            android:drawableTop="@drawable/main_item_mall"
+            android:text="@string/main_item_mall_text"
+            />
+
+        <TextView
+            android:id="@+id/tv_quotes"
+            style="@style/main_bottom_item"
+            android:drawableTop="@drawable/main_item_quotes"
+            android:text="@string/main_item_quotes_text"
+            />
+
+        <TextView
+            android:id="@+id/tv_transaction"
+            style="@style/main_bottom_item"
+            android:drawableTop="@drawable/main_item_transaction"
+            android:text="@string/main_item_transaction_text"
+            />
+
+        <TextView
+            android:id="@+id/tv_person"
+            style="@style/main_bottom_item"
+            android:drawableTop="@drawable/main_item_person"
+            android:text="@string/main_item_person_text"
+            />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_split"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_line"
+        android:background="@color/main_bottom_line"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/ll_bottom"/>
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        app:layout_constraintBottom_toTopOf="@id/v_split"
+        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
+
+</android.support.constraint.ConstraintLayout>

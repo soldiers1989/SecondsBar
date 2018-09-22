@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/mall_item_h"
+    android:background="@android:color/white"
+    android:minHeight="@dimen/mall_item_h"
+    android:padding="@dimen/mall_item_p">
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mall_item_img_h"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sriv_left_bottom_corner_radius="@dimen/mall_item_img_r"
+        app:sriv_left_top_corner_radius="@dimen/mall_item_img_r"
+        app:sriv_right_bottom_corner_radius="@dimen/mall_item_img_r"
+        app:sriv_right_top_corner_radius="@dimen/mall_item_img_r"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="360.00STE"
+        android:textColor="@color/home_tabs_mark_color"
+        android:textSize="@dimen/mall_item_price"
+        app:autoSizeMaxTextSize="@dimen/mall_item_price"
+        app:autoSizeMinTextSize="10sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="周杰伦粉丝见面演唱会"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/mall_item_title"
+        app:layout_constraintBottom_toTopOf="@id/tv_price"
+        app:layout_constraintTop_toBottomOf="@id/img"
+        tools:text="周杰伦粉丝见面演唱会"/>
+</android.support.constraint.ConstraintLayout>

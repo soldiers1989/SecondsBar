@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/mall_detail_buy_h"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--此处图片的宽高比是30：17-->
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="100dip"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/mall_detail_info_ptb"
+                android:paddingLeft="@dimen/mall_detail_info_plr"
+                android:paddingRight="@dimen/mall_detail_info_plr"
+                android:paddingTop="@dimen/mall_detail_info_ptb">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="周杰伦粉丝见面演唱会"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/mall_detail_info_title"
+                    tools:text="周杰伦粉丝见面演唱会"/>
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mall_detail_info_time_mt"
+                    android:text="@string/mall_detail_info_time"
+                    android:textColor="@color/mall_detail_info_time"
+                    android:textSize="@dimen/mall_detail_info_time"/>
+
+                <TextView
+                    android:id="@+id/tv_place"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mall_detail_info_place_mt"
+                    android:text="@string/mall_detail_info_place"
+                    android:textColor="@color/mall_detail_info_time"
+                    android:textSize="@dimen/mall_detail_info_time"/>
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mall_detail_info_time_mt"
+                    android:text="3600.00TCT"
+                    android:textColor="@color/home_tabs_mark_color"
+                    android:textSize="@dimen/mall_detail_info_title"
+                    tools:text="3600.00TCT"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_intro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mall_detail_intro_mt"
+                android:background="@android:color/white"/>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/img_back"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_mall_back"/>
+
+            <ImageButton
+                android:id="@+id/img_forward"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_mall_forword"/>
+        </FrameLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <Button
+        android:id="@+id/btn_buy"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mall_detail_buy_h"
+        android:background="@color/home_tabs_mark_color"
+        android:text="@string/mall_detail_buy_text"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/mall_detail_buy_text"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</android.support.constraint.ConstraintLayout>
+

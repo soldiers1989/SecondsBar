@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/img_toolbar_left"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_sign"
+                />
+
+            <ImageView
+                android:id="@+id/img_toolbar_right"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentRight="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_msg"/>
+
+            <FrameLayout
+                android:id="@+id/fl_search"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/home_search_h"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/img_toolbar_right"
+                android:layout_toRightOf="@id/img_toolbar_left"
+                android:background="@drawable/home_title_search">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@mipmap/ic_search_s"
+                    android:drawablePadding="@dimen/home_search_text_dp"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="BAT入区块链百强企业"
+                    android:textColor="@color/home_search_text"
+                    android:textSize="@dimen/home_search_text"/>
+            </FrameLayout>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_tabs_h"
+        android:background="@android:color/white"
+        app:tl_indicator_anim_enable="true"
+        app:tl_indicator_bounce_enable="true"
+        app:tl_indicator_color="@color/home_tabs_mark_color"
+        app:tl_indicator_width_equal_title="true"
+        app:tl_tab_space_equal="true"
+        app:tl_textBold="BOTH"
+        app:tl_textSelectColor="@color/home_tabs_mark_color"
+        app:tl_textUnselectColor="@color/home_tabs_item_text_unsel"
+        app:tl_textsize="@dimen/home_tabs_item_text"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/home_tabs_mt"/>
+</LinearLayout>

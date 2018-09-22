@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ebebeb"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/mall_tool_pl"
+                android:text="设置"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/v_person_info"
+                android:layout_width="match_parent"
+                android:layout_height="204dip"
+                android:layout_marginTop="5dip"
+                android:background="@android:color/white"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_person_info_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="21dip"
+                android:text="用户资料"
+                android:textColor="#2c2c2c"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/v_person_info"
+                app:layout_constraintTop_toTopOf="@+id/v_person_info"/>
+
+            <View
+                android:id="@+id/v_avatar_line"
+                android:layout_width="0dip"
+                android:layout_height="1dip"
+                android:layout_marginRight="15dip"
+                android:background="#ebebeb"
+                app:layout_constraintBottom_toTopOf="@+id/v_nickname_line"
+                app:layout_constraintEnd_toEndOf="@+id/v_person_info"
+                app:layout_constraintStart_toStartOf="@+id/tv_person_info_tips"
+                app:layout_constraintTop_toBottomOf="@+id/tv_person_info_tips"/>
+
+            <View
+                android:id="@+id/v_nickname_line"
+                android:layout_width="0dip"
+                android:layout_height="1dip"
+                android:layout_marginRight="15dip"
+                android:background="#ebebeb"
+                app:layout_constraintBottom_toBottomOf="@+id/v_person_info"
+                app:layout_constraintEnd_toEndOf="@+id/v_person_info"
+                app:layout_constraintStart_toStartOf="@+id/tv_person_info_tips"
+                app:layout_constraintTop_toBottomOf="@+id/v_avatar_line"/>
+
+            <com.joooonho.SelectableRoundedImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="45dip"
+                android:layout_height="45dip"
+                app:layout_constraintBottom_toTopOf="@+id/v_avatar_line"
+                app:layout_constraintEnd_toEndOf="@+id/v_avatar_line"
+                app:layout_constraintTop_toBottomOf="@+id/tv_person_info_tips"
+                app:sriv_oval="true"/>
+
+            <TextView
+                android:id="@+id/tv_avatar_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="头像"
+                android:textColor="#2c2c2c"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/img_avatar"
+                app:layout_constraintStart_toStartOf="@+id/tv_person_info_tips"
+                app:layout_constraintTop_toTopOf="@+id/img_avatar"/>
+
+            <TextView
+                android:id="@+id/tv_nickname_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="昵称"
+                android:textColor="#2c2c2c"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/v_nickname_line"
+                app:layout_constraintStart_toStartOf="@+id/tv_person_info_tips"
+                app:layout_constraintTop_toBottomOf="@+id/v_avatar_line"/>
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:drawablePadding="15dip"
+                android:drawableRight="@mipmap/ic_arrow_right_gray"
+                android:gravity="right|center_vertical"
+                android:text="秒吧用户123456"
+                android:textColor="#a9a9a9"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/v_nickname_line"
+                app:layout_constraintEnd_toEndOf="@+id/v_nickname_line"
+                app:layout_constraintStart_toEndOf="@+id/tv_nickname_tips"
+                app:layout_constraintTop_toBottomOf="@+id/v_avatar_line"/>
+
+            <TextView
+                android:id="@+id/tv_level_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="等级"
+                android:textColor="#2c2c2c"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/v_person_info"
+                app:layout_constraintStart_toStartOf="@+id/tv_person_info_tips"
+                app:layout_constraintTop_toBottomOf="@+id/v_nickname_line"/>
+
+            <TextView
+                android:id="@+id/tv_level"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:drawablePadding="15dip"
+                android:drawableRight="@mipmap/ic_arrow_right_gray"
+                android:gravity="right|center_vertical"
+                android:singleLine="true"
+                android:text="LV1"
+                android:textColor="#a9a9a9"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/v_person_info"
+                app:layout_constraintEnd_toEndOf="@+id/v_nickname_line"
+                app:layout_constraintStart_toEndOf="@+id/tv_level_tips"
+                app:layout_constraintTop_toBottomOf="@+id/v_nickname_line"/>
+
+            <View
+                android:id="@+id/v_account_info"
+                android:layout_width="match_parent"
+                android:layout_height="204dip"
+                android:layout_marginTop="5dip"
+                android:background="@android:color/white"
+                app:layout_constraintTop_toBottomOf="@+id/v_person_info"/>
+
+            <TextView
+                android:id="@+id/tv_account_info_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="21dip"
+                android:text="账户安全"
+                android:textColor="#2c2c2c"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/v_account_info"
+                app:layout_constraintTop_toTopOf="@+id/v_account_info"/>
+
+            <View
+                android:id="@+id/v_bind_tips_line"
+                android:layout_width="0dip"
+                android:layout_height="1dip"
+                android:layout_marginRight="15dip"
+                android:background="#ebebeb"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/v_phone_line"
+                app:layout_constraintEnd_toEndOf="@+id/v_account_info"
+                app:layout_constraintStart_toStartOf="@+id/tv_account_info_tips"
+                app:layout_constraintTop_toBottomOf="@+id/tv_account_info_tips"/>
+
+            <View
+                android:id="@+id/v_phone_line"
+                android:layout_width="0dip"
+                android:layout_height="1dip"
+                android:layout_marginRight="15dip"
+                android:background="#ebebeb"
+                app:layout_constraintBottom_toBottomOf="@+id/v_account_info"
+                app:layout_constraintEnd_toEndOf="@+id/v_account_info"
+                app:layout_constraintStart_toStartOf="@+id/tv_account_info_tips"
+                app:layout_constraintTop_toBottomOf="@+id/v_bind_tips_line"/>
+
+            <TextView
+                android:id="@+id/tv_bind_tips"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="绑定手机号后，可使账号处于保护状态。您的Q将保存至您的手机账户中"
+                android:textColor="#9f9f9f"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/v_bind_tips_line"
+                app:layout_constraintEnd_toEndOf="@+id/v_bind_tips_line"
+                app:layout_constraintStart_toStartOf="@+id/v_bind_tips_line"
+                app:layout_constraintTop_toBottomOf="@+id/tv_account_info_tips"/>
+
+            <TextView
+                android:id="@+id/tv_phone_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手机号"
+                android:textColor="#2c2c2c"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/v_phone_line"
+                app:layout_constraintStart_toStartOf="@+id/tv_account_info_tips"
+                app:layout_constraintTop_toBottomOf="@+id/v_bind_tips_line"/>
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:drawablePadding="15dip"
+                android:drawableRight="@mipmap/ic_arrow_right_gray"
+                android:gravity="right|center_vertical"
+                android:singleLine="true"
+                android:text="去绑定"
+                android:textColor="#a9a9a9"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/v_phone_line"
+                app:layout_constraintEnd_toEndOf="@+id/v_bind_tips_line"
+                app:layout_constraintStart_toEndOf="@+id/tv_phone_tips"
+                app:layout_constraintTop_toBottomOf="@+id/v_bind_tips_line"/>
+
+            <TextView
+                android:id="@+id/tv_pay_pwd_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="支付密码"
+                android:textColor="#2c2c2c"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/v_account_info"
+                app:layout_constraintStart_toStartOf="@+id/tv_account_info_tips"
+                app:layout_constraintTop_toBottomOf="@+id/v_phone_line"/>
+
+            <TextView
+                android:id="@+id/tv_pay_pwd"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:drawablePadding="15dip"
+                android:drawableRight="@mipmap/ic_arrow_right_gray"
+                android:gravity="right|center_vertical"
+                android:singleLine="true"
+                android:text="去设置"
+                android:textColor="#a9a9a9"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/v_account_info"
+                app:layout_constraintEnd_toEndOf="@+id/v_bind_tips_line"
+                app:layout_constraintStart_toEndOf="@+id/tv_pay_pwd_tips"
+                app:layout_constraintTop_toBottomOf="@+id/v_phone_line"/>
+
+            <View
+                android:id="@+id/v_set_info"
+                android:layout_width="match_parent"
+                android:layout_height="188dip"
+                android:layout_marginTop="5dip"
+                android:background="@android:color/white"
+                app:layout_constraintTop_toBottomOf="@+id/v_account_info"/>
+
+            <TextView
+                android:id="@+id/tv_set_info_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="21dip"
+                android:text="账户安全"
+                android:textColor="#2c2c2c"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/v_set_info"
+                app:layout_constraintTop_toTopOf="@+id/v_set_info"/>
+
+            <View
+                android:id="@+id/v_clear_cache_line"
+                android:layout_width="0dip"
+                android:layout_height="1dip"
+                android:layout_marginRight="15dip"
+                android:background="#ebebeb"
+                app:layout_constraintBottom_toBottomOf="@+id/v_set_info"
+                app:layout_constraintEnd_toEndOf="@+id/v_set_info"
+                app:layout_constraintStart_toStartOf="@+id/tv_set_info_tips"
+                app:layout_constraintTop_toBottomOf="@+id/tv_set_info_tips"/>
+
+            <TextView
+                android:id="@+id/tv_clear_cache_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清理缓存"
+                android:textColor="#2c2c2c"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/v_clear_cache_line"
+                app:layout_constraintStart_toStartOf="@+id/v_clear_cache_line"
+                app:layout_constraintTop_toBottomOf="@+id/tv_set_info_tips"/>
+
+            <TextView
+                android:id="@+id/tv_cache_size"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:drawablePadding="15dip"
+                android:drawableRight="@mipmap/ic_arrow_right_gray"
+                android:gravity="right|center_vertical"
+                android:singleLine="true"
+                android:text="12.58M"
+                android:textColor="#a9a9a9"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/v_clear_cache_line"
+                app:layout_constraintEnd_toEndOf="@+id/v_clear_cache_line"
+                app:layout_constraintStart_toEndOf="@+id/tv_clear_cache_tips"
+                app:layout_constraintTop_toBottomOf="@+id/tv_set_info_tips"/>
+
+            <TextView
+                android:id="@+id/tv_aboutus_tips"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:drawablePadding="15dip"
+                android:drawableRight="@mipmap/ic_arrow_right_gray"
+                android:gravity="center_vertical"
+                android:text="关于秒吧"
+                android:textColor="#2c2c2c"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/v_set_info"
+                app:layout_constraintEnd_toEndOf="@+id/v_clear_cache_line"
+                app:layout_constraintStart_toStartOf="@+id/v_clear_cache_line"
+                app:layout_constraintTop_toBottomOf="@+id/v_clear_cache_line"/>
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/mall_detail_buy_h"
+                android:layout_marginTop="92dip"
+                android:background="@color/home_tabs_mark_color"
+                android:text="退出登录"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/mall_detail_buy_text"
+                app:layout_constraintTop_toBottomOf="@+id/v_set_info"/>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

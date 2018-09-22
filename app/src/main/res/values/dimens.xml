@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="login_line">0.5dp</dimen>
+    <dimen name="login_et_size">15sp</dimen>
+    <dimen name="login_rigister_font">15sp</dimen>
+    <dimen name="login_forget_pwd_font">14sp</dimen>
+    <dimen name="login_tv_idcard_size">13sp</dimen>
+    <dimen name="login_forget_password_font">14sp</dimen>
+    <dimen name="login_et_pl">2dp</dimen>
+    <dimen name="login_btn_font">20sp</dimen>
+    <dimen name="login_tv_forgetpwd_mb">11dp</dimen>
+    <dimen name="login_tv_register_mr">39dp</dimen>
+    <dimen name="login_tv_register_mt">7dp</dimen>
+    <dimen name="login_btn_login_mlr">39dp</dimen>
+    <dimen name="login_btn_login_mt">78dp</dimen>
+    <dimen name="login_tv_idcard_ml">13dp</dimen>
+    <dimen name="login_view_idcard_mr">11dp</dimen>
+    <dimen name="login_view_idcard_mb">5dp</dimen>
+    <dimen name="login_et_ml">9dp</dimen>
+    <dimen name="login_rl_mlr">33dp</dimen>
+    <dimen name="login_rl_pb">10dp</dimen>
+    <dimen name="login_rl_height">43dp</dimen>
+    <dimen name="forget_pwd_rl_height">49dp</dimen>
+    <dimen name="register_et_phone_mt">35dp</dimen>
+    <dimen name="register_et_mlr">46dp</dimen>
+    <dimen name="register_et_height">40dp</dimen>
+    <dimen name="register_et_mt">9dp</dimen>
+    <dimen name="register_tv_send_code_font">13sp</dimen>
+    <dimen name="register_tv_send_code_plr">10dp</dimen>
+    <dimen name="register_view_line_send_code_mtb">8dp</dimen>
+    <dimen name="register_tv_notice_mr">54dp</dimen>
+    <dimen name="register_tv_notice_font">10sp</dimen>
+    <dimen name="register_tv_notice_mt">12dp</dimen>
+    <dimen name="register_btn_font">20sp</dimen>
+    <dimen name="register_btn_mlr">58dp</dimen>
+    <dimen name="register_btn_mt">32dp</dimen>
+    <dimen name="register_tv_login_mt">11dp</dimen>
+    <dimen name="register_img_logo_mt">40dp</dimen>
+
+    <dimen name="main_bottom_h">49dip</dimen>
+    <dimen name="main_bottom_line">1dip</dimen>
+    <dimen name="main_bottom_item_dp">6dip</dimen>
+    <dimen name="main_bottom_item_text">12sp</dimen>
+
+    <dimen name="home_top_h">182dip</dimen>
+    <dimen name="home_item_h">100dip</dimen>
+    <dimen name="home_item_mt">6dip</dimen>
+    <dimen name="home_item_tips_text">20sp</dimen>
+    <dimen name="home_item_value_text">26sp</dimen>
+    <dimen name="home_item_value_mt">3sp</dimen>
+
+    <dimen name="toolbar_title_font">18sp</dimen>
+    <dimen name="toolbar_option_font">15sp</dimen>
+    <dimen name="toolbar_option_plr">12dip</dimen>
+    <dimen name="line_height">1px</dimen>
+    <dimen name="line_width">1px</dimen>
+    <dimen name="toolbar_height">45dip</dimen>
+    <dimen name="toolbar_dp">6dip</dimen>
+
+    <dimen name="forgetpwd_tv_login_font">14sp</dimen>
+
+    <dimen name="home_search_h">21dip</dimen>
+    <dimen name="home_search_r">21dip</dimen>
+    <dimen name="home_search_text">12sp</dimen>
+    <dimen name="home_search_text_dp">8dip</dimen>
+
+    <dimen name="home_tabs_h">50dip</dimen>
+    <dimen name="home_tabs_mt">1dip</dimen>
+    <dimen name="home_tabs_item_text">16sp</dimen>
+
+    <dimen name="home_infomation_head_h">50dip</dimen>
+    <dimen name="home_infomation_head_item_w">41dip</dimen>
+    <dimen name="home_infomation_head_item_h">22dip</dimen>
+    <dimen name="home_infomation_head_item_c">11dip</dimen>
+    <dimen name="home_infomation_head_item_text">14sp</dimen>
+
+    <dimen name="home_infomation_item_sing_h">127dip</dimen>
+    <dimen name="home_infomation_item_sing_plr">12dip</dimen>
+    <dimen name="home_infomation_item_sing_ptb">20dip</dimen>
+    <dimen name="home_infomation_item_sing_img_w">140dip</dimen>
+    <dimen name="home_infomation_item_sing_img_r">5dip</dimen>
+    <dimen name="home_infomation_item_sing_from_mb">10dip</dimen>
+    <dimen name="home_infomation_item_sing_from_text">11sp</dimen>
+    <dimen name="home_infomation_item_sing_title_text">16sp</dimen>
+    <dimen name="home_infomation_item_sing_title_mr">12dip</dimen>
+
+    <dimen name="home_infomation_item_multi_h">190dip</dimen>
+    <dimen name="home_infomation_item_multi_pt">16dip</dimen>
+    <dimen name="home_infomation_item_multi_pb">18dip</dimen>
+    <dimen name="home_infomation_item_multi_img_h">71dip</dimen>
+    <dimen name="home_infomation_item_multi_img_mlr">4dip</dimen>
+
+    <dimen name="home_infomation_item_multi_commodity_h">174dip</dimen>
+    <dimen name="home_infomation_item_multi_commodity_pt">18dip</dimen>
+    <dimen name="home_infomation_item_multi_commodity_pb">25dip</dimen>
+    <dimen name="home_infomation_item_multi_commodity_title_dp">9dip</dimen>
+    <dimen name="home_infomation_item_multi_commodity_img_size">90dip</dimen>
+    <dimen name="home_infomation_item_multi_commodity_content_ml">15dip</dimen>
+    <dimen name="home_infomation_item_multi_commodity_content_time_place_h">40dip</dimen>
+    <dimen name="home_infomation_item_multi_commodity_content_time_place_text">13sp</dimen>
+
+    <dimen name="home_infomation_item_multi_person_h">235dip</dimen>
+    <dimen name="home_infomation_item_multi_person_item_c">3dip</dimen>
+    <dimen name="home_infomation_item_multi_person_item_h">163dip</dimen>
+    <dimen name="home_infomation_item_multi_person_item_mlr">15dip</dimen>
+    <dimen name="home_infomation_item_multi_person_item_pt">17dip</dimen>
+    <dimen name="home_infomation_item_multi_person_item_plr">15dip</dimen>
+    <dimen name="home_infomation_item_multi_person_item_price">12sp</dimen>
+    <dimen name="home_infomation_item_multi_person_item_price_mt">14dip</dimen>
+    <dimen name="home_infomation_item_multi_person_item_name">14sp</dimen>
+    <dimen name="home_infomation_item_multi_person_item_name_mt">12dip</dimen>
+
+    <dimen name="home_time_head_h">180dip</dimen>
+    <dimen name="home_time_title_h">58dip</dimen>
+    <dimen name="home_time_content_plr">15dip</dimen>
+    <dimen name="home_time_dynamic_h">55dip</dimen>
+    <dimen name="home_time_dynamic_img_size">40dip</dimen>
+    <dimen name="home_time_dynamic_time_text">15sp</dimen>
+    <dimen name="home_time_dynamic_content_mlr">16dip</dimen>
+    <dimen name="home_time_purchase_h">90dip</dimen>
+    <dimen name="home_time_purchase_img_w">75dip</dimen>
+    <dimen name="home_time_purchase_img_h">66dip</dimen>
+    <dimen name="home_time_purchase_img_r">5dip</dimen>
+    <dimen name="home_time_purchase_name_text">14sp</dimen>
+    <dimen name="home_time_purchase_name_ml">20dip</dimen>
+    <dimen name="home_time_purchase_content_text">12sp</dimen>
+    <dimen name="home_time_purchase_name_mt">-3dip</dimen>
+
+    <dimen name="home_tutorial_plr">15dip</dimen>
+    <dimen name="home_tutorial_item_space">8dip</dimen>
+
+    <dimen name="home_wb_plr">15dip</dimen>
+    <dimen name="home_wb_ptb">10dip</dimen>
+    <dimen name="home_wb_avatar">40dip</dimen>
+    <dimen name="home_wb_share_size">16dip</dimen>
+    <dimen name="home_wb_person_name">15sp</dimen>
+    <dimen name="home_wb_person_name_mlr">12dip</dimen>
+    <dimen name="home_wb_person_time">12sp</dimen>
+    <dimen name="home_wb_content">14sp</dimen>
+    <dimen name="home_wb_content_ptb">10dip</dimen>
+    <dimen name="home_wb_img_space">6dip</dimen>
+
+    <dimen name="home_share_h">160dip</dimen>
+    <dimen name="home_share_title_mt">35dip</dimen>
+    <dimen name="home_share_title">14sp</dimen>
+    <dimen name="home_share_line_w">75dip</dimen>
+    <dimen name="home_share_line_h">0.5dip</dimen>
+    <dimen name="home_share_line_mlr">21dip</dimen>
+    <dimen name="home_share_item_h">28dip</dimen>
+    <dimen name="home_share_item_p">5dip</dimen>
+
+    <dimen name="mall_tool_pl">16dip</dimen>
+    <dimen name="mall_tab_w">62dip</dimen>
+    <dimen name="mall_item_h">240dip</dimen>
+    <dimen name="mall_item_p">15dip</dimen>
+    <dimen name="mall_item_img_h">156dip</dimen>
+    <dimen name="mall_item_img_r">5dip</dimen>
+    <dimen name="mall_item_price">16sp</dimen>
+    <dimen name="mall_item_title">14sp</dimen>
+    <dimen name="mall_item_space">1dip</dimen>
+
+    <dimen name="mall_detail_buy_h">50dip</dimen>
+    <dimen name="mall_detail_buy_text">16sp</dimen>
+    <dimen name="mall_detail_info_plr">15dip</dimen>
+    <dimen name="mall_detail_info_ptb">12dip</dimen>
+    <dimen name="mall_detail_info_title">16sp</dimen>
+    <dimen name="mall_detail_info_time">13sp</dimen>
+    <dimen name="mall_detail_info_time_mt">6dip</dimen>
+    <dimen name="mall_detail_info_place_mt">4dip</dimen>
+    <dimen name="mall_detail_intro_mt">14dip</dimen>
+
+    <dimen name="dialog_mall_buy_h">342dip</dimen>
+    <dimen name="dialog_mall_buy_tips_mt">18dip</dimen>
+    <dimen name="dialog_mall_buy_tips">18sp</dimen>
+    <dimen name="dialog_mall_buy_price_mt">20dip</dimen>
+    <dimen name="dialog_mall_buy_price">24sp</dimen>
+    <dimen name="dialog_mall_buy_des_item_ptb">6dip</dimen>
+    <dimen name="dialog_mall_buy_des_item_mt">30dip</dimen>
+    <dimen name="dialog_mall_buy_des_item_mlr">15dip</dimen>
+    <dimen name="dialog_mall_buy_des_item_text">15sp</dimen>
+    <dimen name="dialog_mall_buy_des_item_space">15dip</dimen>
+    <dimen name="dialog_mall_buy_protocol">12sp</dimen>
+    <dimen name="dialog_mall_buy_protocol_dp">6dip</dimen>
+
+    <dimen name="quote_item_title_h">30dip</dimen>
+    <dimen name="quote_item_title_mt">10dip</dimen>
+    <dimen name="quote_item_title_plr">15dip</dimen>
+    <dimen name="quote_item_title_item_text">14sp</dimen>
+    <dimen name="quote_item_item_h">62dip</dimen>
+    <dimen name="quote_item_item_img_size">42dip</dimen>
+    <dimen name="quote_item_item_name">14sp</dimen>
+    <dimen name="quote_item_item_up">14sp</dimen>
+    <dimen name="quote_item_item_name_ml">12dip</dimen>
+
+    <dimen name="search_input_ml">12dip</dimen>
+    <dimen name="search_input_h">30dip</dimen>
+    <dimen name="search_input_plr">10dip</dimen>
+    <dimen name="search_input_text">13sp</dimen>
+    <dimen name="search_content_plr">15dip</dimen>
+
+    <dimen name="transaction_head_h">468dip</dimen>
+    <dimen name="transaction_head_pt">25dip</dimen>
+    <dimen name="transaction_head_plr">21dip</dimen>
+    <dimen name="transaction_buy_w">57dip</dimen>
+    <dimen name="transaction_buy_h">22dip</dimen>
+    <dimen name="transaction_buy_text">14sp</dimen>
+    <dimen name="transaction_buy_pr">9dip</dimen>
+    <dimen name="transaction_head_input_h">21dip</dimen>
+
+    <!-- 控件之间的距离 -->
+    <dimen name="spacing_large">20dp</dimen>
+    <dimen name="spacing_normal">15dp</dimen>
+    <dimen name="spacing_small">10dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="divider_height">1px</dimen>
+    <dimen name="spacing_layout_padding">10dp</dimen>
+    <dimen name="spacing_layout_margin">10dp</dimen>
+    <!-- 描述性文字item项的高 -->
+    <dimen name="text_item_height">43dp</dimen>
+    <dimen name="input_method_spacing">1px</dimen>
+
+</resources>

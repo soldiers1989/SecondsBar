@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="124dip"
+    android:layout_height="@dimen/home_infomation_item_multi_person_item_h"
+    android:background="@drawable/home_infomation_person"
+    android:minHeight="@dimen/home_infomation_item_multi_person_item_h"
+    android:minWidth="124dip"
+    android:orientation="vertical"
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip"
+    android:paddingTop="@dimen/home_infomation_item_multi_person_item_pt">
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/img"
+        android:layout_width="75dip"
+        android:layout_height="75dip"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
+        app:sriv_oval="true"/>
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/home_infomation_item_multi_person_item_price_mt"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="0.60TCT/秒"
+        android:textColor="@color/home_tabs_mark_color"
+        android:textSize="@dimen/home_infomation_item_multi_person_item_price"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/home_infomation_item_multi_person_item_name_mt"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="雷晓军"
+        android:textColor="@color/home_infomation_item_multi_person_item_name"
+        android:textSize="@dimen/home_infomation_item_multi_person_item_name"/>
+
+</LinearLayout>

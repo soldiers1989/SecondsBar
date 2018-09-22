@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.btten.bttenlibrary.view.LoadRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                android:id="@+id/layout_load"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/btten_load_bg"
+                                                android:visibility="gone">
+
+    <LinearLayout
+        android:id="@+id/ll_load_fail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/btten_load_fail_mlr"
+        android:layout_marginRight="@dimen/btten_load_fail_mlr"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_network_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@mipmap/btten_load_error_net"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_server_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btten_load_server_error_mark"
+            android:textColor="@color/btten_load_tips_text_color"
+            android:textSize="@dimen/btten_load_server_error_mark_font_size"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_load_fail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/btten_load_fail_tips_mt"
+            android:text="@string/btten_load_fail_tips"
+            android:textColor="@color/btten_load_tips_text_color"
+            android:textSize="@dimen/btten_loading_tips_font_size"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btn_reload"
+            android:layout_width="@dimen/btten_load_fail_retry_w"
+            android:layout_height="@dimen/btten_load_fail_retry_h"
+            android:layout_marginTop="@dimen/btten_load_fail_retry_mt"
+            android:background="@drawable/btten_drawable_reload_btn_selector"
+            android:gravity="center"
+            android:text="@string/btten_reload_tips"
+            android:textColor="@color/btten_load_tips_text_color"
+            android:textSize="@dimen/btten_reload_tips_font_size"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/btten_load_loading_mark"/>
+
+
+        <LinearLayout
+            android:id="@+id/lin_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/btten_load_loadding_mt"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_loadding"
+                android:layout_width="@dimen/btten_load_loadding_progress_size"
+                android:layout_height="@dimen/btten_load_loadding_progress_size"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/btten_load_loading"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/btten_load_loadding_tips_mt"
+                android:text="@string/btten_loading_tips"
+                android:textColor="@color/btten_load_tips_text_color"
+                android:textSize="@dimen/btten_loading_tips_font_size"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_load_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/btten_load_no_data"/>
+
+        <TextView
+            android:id="@+id/tv_load_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/btten_load_empty_tips_mt"
+            android:text="@string/btten_result_empty_tips"
+            android:textColor="@color/btten_load_tips_text_color"
+            android:textSize="@dimen/btten_load_tips_font_size"
+            android:textStyle="bold"/>
+    </LinearLayout>
+</com.btten.bttenlibrary.view.LoadRelativeLayout>

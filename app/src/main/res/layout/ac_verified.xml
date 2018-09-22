@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ebebeb">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/mall_tool_pl"
+                android:text="实名认证"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        android:id="@+id/v_input"
+        android:layout_width="match_parent"
+        android:layout_height="100dip"
+        android:layout_marginTop="15dip"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#ebebeb"
+        app:layout_constraintBottom_toBottomOf="@+id/v_input"
+        app:layout_constraintTop_toTopOf="@+id/v_input"/>
+
+    <TextView
+        android:id="@+id/tv_name_tips"
+        android:layout_width="72dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dip"
+        android:text="姓名"
+        android:textColor="#202020"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/v_line"
+        app:layout_constraintStart_toStartOf="@+id/v_input"
+        app:layout_constraintTop_toTopOf="@+id/v_input"/>
+
+    <EditText
+        android:id="@+id/ed_name"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:background="@null"
+        android:hint="请输入您的真实姓名"
+        android:paddingLeft="10dip"
+        android:paddingRight="16dip"
+        android:singleLine="true"
+        android:textColor="#202020"
+        android:textColorHint="#808080"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/v_line"
+        app:layout_constraintEnd_toEndOf="@+id/v_input"
+        app:layout_constraintStart_toEndOf="@+id/tv_name_tips"
+        app:layout_constraintTop_toTopOf="@+id/v_input"
+        />
+
+    <TextView
+        android:id="@+id/tv_card_tips"
+        android:layout_width="72dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dip"
+        android:text="身份证号"
+        android:textColor="#202020"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/v_input"
+        app:layout_constraintStart_toStartOf="@+id/v_input"
+        app:layout_constraintTop_toBottomOf="@+id/v_line"/>
+
+    <EditText
+        android:id="@+id/ed_card_num"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:background="@null"
+        android:digits="0123456789Xx"
+        android:hint="请输入您的身份证号"
+        android:paddingLeft="10dip"
+        android:paddingRight="16dip"
+        android:singleLine="true"
+        android:textColor="#202020"
+        android:textColorHint="#808080"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/v_input"
+        app:layout_constraintEnd_toEndOf="@+id/v_input"
+        app:layout_constraintStart_toEndOf="@+id/tv_card_tips"
+        app:layout_constraintTop_toBottomOf="@+id/v_line"/>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mall_detail_buy_h"
+        android:background="@color/home_tabs_mark_color"
+        android:text="下一步"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/mall_detail_buy_text"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</android.support.constraint.ConstraintLayout>

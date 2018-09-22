@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/btten_lib_title_height"
+    android:background="@color/btten_lib_title_bg_color"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="@dimen/btten_lib_title_height"
+        android:layout_height="@dimen/btten_lib_title_height"
+        android:layout_centerVertical="true"
+        android:background="@drawable/drawable_img_title_back_bg_selector"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/drawable_img_title_back_selector" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="图片"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/btten_lib_title_font_size" />
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/action_btn"
+        android:minHeight="1dp"
+        android:minWidth="1dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:text="完成"
+        android:textColor="@color/default_text_color"
+        android:textSize="@dimen/btten_lib_title_finish_font_size" />
+
+</RelativeLayout>

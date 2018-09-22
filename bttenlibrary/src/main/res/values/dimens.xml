@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_size">120dp</dimen>
+    <dimen name="space_size">2dp</dimen>
+    <dimen name="folder_cover_size">72dp</dimen>
+
+    <dimen name="dialog_tips_font_size">16sp</dimen>
+    <dimen name="btten_lib_title_font_size">20sp</dimen>
+    <dimen name="btten_lib_title_height">48dip</dimen>
+    <dimen name="btten_lib_title_finish_font_size">14sp</dimen>
+
+    <!--加载图层  start-->
+    <!-- 加载提示文字大小 -->
+    <dimen name="btten_load_tips_font_size">17sp</dimen>
+    <!-- 服务端错误指示文本字体大小 -->
+    <dimen name="btten_load_server_error_mark_font_size">32sp</dimen>
+    <!-- 重新加载提示文字大小 -->
+    <dimen name="btten_reload_tips_font_size">17sp</dimen>
+    <!-- 加载中提示文字大小 -->
+    <dimen name="btten_loading_tips_font_size">17sp</dimen>
+    <!--加载失败图层左右间距-->
+    <dimen name="btten_load_fail_mlr">16dip</dimen>
+    <!--加载失败提示文本上间距-->
+    <dimen name="btten_load_fail_tips_mt">15dip</dimen>
+    <!--加载失败重试按钮宽-->
+    <dimen name="btten_load_fail_retry_w">112dip</dimen>
+    <!--加载失败重试按钮高-->
+    <dimen name="btten_load_fail_retry_h">32dip</dimen>
+    <!--加载失败重试按钮上间距-->
+    <dimen name="btten_load_fail_retry_mt">30dip</dimen>
+    <!--加载为空提示文本上间距-->
+    <dimen name="btten_load_empty_tips_mt">10dip</dimen>
+    <!--加载中，加载部分与标识部分的上间距-->
+    <dimen name="btten_load_loadding_mt">20dip</dimen>
+    <!--加载中，加载部分进度提示部分控件尺寸大小-->
+    <dimen name="btten_load_loadding_progress_size">25dip</dimen>
+    <!--加载中，加载部分进度提示上间距-->
+    <dimen name="btten_load_loadding_tips_mt">16dip</dimen>
+    <!--加载图层  end-->
+</resources>

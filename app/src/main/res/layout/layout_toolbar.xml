@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <FrameLayout
+                android:id="@+id/fl_toolbar_left"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:minWidth="@dimen/toolbar_height"
+                android:paddingRight="5dp"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:id="@+id/img_toolbar_left"
+                    android:layout_width="@dimen/toolbar_height"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:scaleType="center"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_toolbar_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:drawablePadding="@dimen/toolbar_dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/toolbar_option_plr"
+                    android:paddingRight="@dimen/toolbar_option_plr"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/toolbar_option_font"/>
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/fl_toolbar_right"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:minWidth="@dimen/toolbar_height"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:id="@+id/img_toolbar_right"
+                    android:layout_width="@dimen/toolbar_height"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:scaleType="center"/>
+
+                <TextView
+                    android:id="@+id/tv_toolbar_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/toolbar_option_plr"
+                    android:paddingRight="@dimen/toolbar_option_plr"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/toolbar_option_font"/>
+            </FrameLayout>
+
+
+            <TextView
+                android:id="@+id/tv_toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/toolbar_height"
+                android:paddingRight="@dimen/toolbar_height"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+            <!--android:layout_toLeftOf="@id/fl_toolbar_right"-->
+            <!--android:layout_toRightOf="@id/fl_toolbar_left"-->
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+</LinearLayout>

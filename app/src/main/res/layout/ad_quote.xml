@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/quote_item_item_h"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <com.joooonho.SelectableRoundedImageView
+                android:id="@+id/img"
+                android:layout_width="@dimen/quote_item_item_img_size"
+                android:layout_height="@dimen/quote_item_item_img_size"
+                android:scaleType="centerCrop"
+                app:sriv_oval="true"/>
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/quote_item_item_name_ml"
+                android:gravity="center_horizontal"
+                android:text="李小二 \n LXE"
+                android:textColor="@color/quote_item_title_item_text"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="2.363"
+            android:textColor="@color/quote_item_title_item_text"
+            android:textSize="@dimen/quote_item_item_up"/>
+
+        <TextView
+            android:id="@+id/tv_up_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="+0.08"
+            android:textColor="@color/quote_item_title_item_up"
+            android:textSize="@dimen/quote_item_item_up"/>
+
+        <TextView
+            android:id="@+id/tv_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="2.53%"
+            android:textColor="@color/quote_item_title_item_text"
+            android:textSize="@dimen/quote_item_item_up"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#1b1f22"/>
+</LinearLayout>

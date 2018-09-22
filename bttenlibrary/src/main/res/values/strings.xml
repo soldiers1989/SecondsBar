@@ -1,0 +1,34 @@
+<resources>
+    <string name="folder_all">All Images</string>
+    <string name="preview">Preview</string>
+    <string name="msg_no_camera">No system camera found</string>
+    <string name="msg_amount_limit">Select images amount is limit</string>
+    <string name="app_name">bttenlibrary</string>
+    <string name="library_preview_title">图片预览</string>
+    <string name="library_selector_title">图片选择</string>
+    <string name="expand">展开</string>
+    <string name="shrink">收起</string>
+    <string name="should_permission_tips">我们需要一些权限，以便应用程序能够正常工作，可在设置界面授予权限，点击前往设置界面...</string>
+    <string name="should_permission_default_tips">我们需要一些权限，以便应用程序能够正常工作，可在设置界面授予权限...</string>
+    <string name="permission_write_external_storage_tips">应用需要SD卡的写入与读取权限，以便能保存和读取一些数据...</string>
+
+
+    <!-- xlistview提示 start -->
+    <string name="xlistview_header_hint_normal">下拉即可刷新</string>
+    <string name="xlistview_header_hint_ready">释放立即刷新</string>
+    <string name="xlistview_header_hint_loading">努力加载中.....</string>
+    <string name="xlistview_header_last_time">上次更新：</string>
+    <string name="xlistview_footer_hint_normal">上拉加载更多</string>
+    <string name="xlistview_footer_hint_nomore">没有更多</string>
+    <string name="xlistview_footer_hint_ready">释放立即加载</string>
+    <string name="xlistview_footer_hint_loading">努力加载中.....</string>
+    <!-- xlistview提示 end -->
+
+    <!-- 加载图层 start -->
+    <string name="btten_load_fail_tips">加载失败...</string>
+    <string name="btten_load_server_error_mark">o(╯□╰)o</string>
+    <string name="btten_reload_tips">重试</string>
+    <string name="btten_loading_tips">努力加载中...</string>
+    <string name="btten_result_empty_tips">没有新数据哦...</string>
+    <!-- 加载图层 end -->
+</resources>

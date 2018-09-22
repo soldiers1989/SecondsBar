@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/tv_bank"
+          android:layout_width="match_parent"
+          android:layout_height="50dip"
+          android:background="@android:color/white"
+          android:drawablePadding="12dip"
+          android:gravity="center_vertical"
+          android:paddingLeft="15dip"
+          android:paddingRight="15dip"
+          android:textColor="#202020"
+          android:textSize="15sp">
+
+</TextView>

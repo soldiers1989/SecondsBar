@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="@dimen/home_infomation_item_multi_person_h"
+                                             android:background="@android:color/white"
+                                             android:minHeight="@dimen/home_infomation_item_multi_person_h"
+                                             android:paddingBottom="@dimen/home_infomation_item_multi_commodity_pt"
+                                             android:paddingTop="@dimen/home_infomation_item_multi_commodity_pt">
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/home_infomation_item_sing_plr"
+        android:drawableLeft="@mipmap/ic_infomation_title_mark"
+        android:drawablePadding="@dimen/home_infomation_item_multi_commodity_title_dp"
+        android:gravity="center_vertical"
+        android:text="你可能感兴趣的名人"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/home_infomation_item_sing_title_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_infomation_item_multi_person_item_h"
+        app:layout_constraintBottom_toBottomOf="parent"></android.support.v7.widget.RecyclerView>
+</android.support.constraint.ConstraintLayout>

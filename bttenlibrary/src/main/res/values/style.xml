@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AnimationActivity" mce_bogus="1" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/base_slide_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/base_slide_right_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/base_slide_right_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/base_slide_right_out</item>
+    </style>
+    <!--设置继承appcompat的activity透明主题-->
+    <style name="CustomTransparent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!--<item name="android:windowAnimationStyle">@android:style/Animation</item>-->
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
+    </style>
+    <!--XlistView 加载控件样式-->
+    <style name="progressbar_style1">
+        <item name="android:maxWidth">20.0dip</item>
+        <item name="android:maxHeight">20.0dip</item>
+        <item name="android:indeterminateDrawable">@anim/progressbar_anim</item>
+        <item name="android:minWidth">20.0dip</item>
+        <item name="android:minHeight">20.0dip</item>
+    </style>
+</resources>

@@ -1,0 +1,100 @@
+<resources>
+    <string name="app_name">秒吧</string>
+
+    <string name="main_item_home_text">首页</string>
+    <string name="main_item_mall_text">商城</string>
+    <string name="main_item_transaction_text">交易</string>
+    <string name="main_item_quotes_text">行情</string>
+    <string name="main_item_person_text">我的</string>
+
+    <string-array name="home_tabs_arrays">
+        <item>价值媒体</item>
+        <item>时间广场</item>
+        <item>互动平台</item>
+        <item>教程中心</item>
+    </string-array>
+    <!--<string-array name="home_infoation_types">-->
+    <!--<item>头条</item>-->
+    <!--<item>娱乐</item>-->
+    <!--<item>科技</item>-->
+    <!--<item>要闻</item>-->
+    <!--<item>金融</item>-->
+    <!--<item>名人</item>-->
+    <!--</string-array>-->
+    <string-array name="home_infoation_types">
+        <item>推荐</item>
+        <item>娱乐</item>
+        <item>科技</item>
+        <item>要闻</item>
+        <item>名人</item>
+    </string-array>
+    <string-array name="mall_tabs">
+        <item>全部</item>
+        <item>投资人</item>
+        <item>企业家</item>
+        <item>明星</item>
+        <item>网红</item>
+        <item>名师</item>
+        <item>名医</item>
+    </string-array>
+    <string-array name="quote_tabs">
+        <item>自选</item>
+        <item>投资人</item>
+        <item>企业家</item>
+        <item>明星</item>
+        <item>网红</item>
+        <item>名师</item>
+        <item>名医</item>
+    </string-array>
+    <string-array name="transaction_tabs">
+        <item>买入</item>
+        <item>卖出</item>
+        <item>当前委托</item>
+        <item>历史委托</item>
+    </string-array>
+    <string name="home_share_title">分享给好友</string>
+
+    <string name="mall_detail_buy_text">立即购买</string>
+    <string name="mall_detail_info_time">时长：%s</string>
+    <string name="mall_detail_info_place">地点：%s</string>
+
+    <string name="dialog_mall_buy_tips">确认支付</string>
+    <string name="dialog_mall_buy_btn">立即支付</string>
+    <string name="dialog_mall_buy_item_name">商品名称</string>
+    <string name="dialog_mall_buy_item_time">商品时间</string>
+    <string name="dialog_mall_buy_protocol_tips">本人已同意%s</string>
+    <string name="dialog_mall_buy_protocol_content">《秒吧支付说明协议》</string>
+
+    <string name="quote_item_title_name">名人</string>
+    <string name="quote_item_title_curr_price">现价</string>
+    <string name="quote_item_title_up">涨跌</string>
+    <string name="quote_item_title_percent">涨跌幅</string>
+
+    <string name="transaction_head_buy">买入</string>
+    <string name="transaction_head_sale">卖出</string>
+    <string name="transaction_head_seconds_value">%s秒</string>
+    <string name="transaction_head_price_value">STE</string>
+    <string name="transaction_head_price_up">涨停:%s</string>
+    <string name="transaction_head_price_down">跌停:%s</string>
+    <string name="transaction_head_price_down_tips">跌停:</string>
+    <string name="transaction_head_price_up_tips">涨停:</string>
+    <string name="transaction_head_new_price">最新价：%s</string>
+
+    <string name="order_detail_person_name">申购名人：%s</string>
+    <string name="order_detail_order_money">申购价格：%sSTE/秒</string>
+    <string name="order_detail_order_seconds">申购秒数：%s秒</string>
+    <string name="order_detail_order_pay_price">支付金额：%sSTE</string>
+    <string name="order_detail_order_num">订单编号：%s</string>
+    <string name="order_detail_order_time">创建时间：%s</string>
+
+    <string name="aboutus_copyright">Copyrigh©2018-2019 \n 秒吧（湖北）科技有限公司 版权所有</string>
+
+    <string-array name="order_manage_tabs">
+        <item>全部</item>
+        <item>待支付</item>
+        <item>待履约</item>
+        <item>履约中</item>
+        <item>退款中</item>
+    </string-array>
+    <string name="code_countdown_hint">秒后重新获取</string>
+</resources>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:paddingLeft="38dip"
+    android:paddingRight="38dip">
+
+    <TextView
+        android:id="@+id/tv_bind_phone_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dip"
+        android:text="绑定手机号"
+        android:textColor="#353535"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_bind_phone_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dip"
+        android:text="绑定手机号，为您的账户保驾护航"
+        android:textColor="#acacac"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bind_phone_tips"/>
+
+    <View
+        android:id="@+id/v_phone_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="55dip"
+        android:background="#bfbfbf"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bind_phone_intro"/>
+
+    <TextView
+        android:id="@+id/tv_area"
+        android:layout_width="wrap_content"
+        android:layout_height="37dip"
+        android:gravity="center_vertical"
+        android:text="+86"
+        android:textColor="#353535"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/v_phone_line"
+        app:layout_constraintStart_toStartOf="@+id/v_phone_line"/>
+
+    <View
+        android:id="@+id/v_area_split"
+        android:layout_width="1px"
+        android:layout_height="16dip"
+        android:layout_marginLeft="6dip"
+        android:background="#353535"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_area"
+        app:layout_constraintStart_toEndOf="@+id/tv_area"
+        app:layout_constraintTop_toTopOf="@+id/tv_area"/>
+
+    <TextView
+        android:id="@+id/tv_get_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取短信验证码"
+        android:textColor="@color/font_yellow_color"
+        android:textSize="15sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_area"
+        app:layout_constraintEnd_toEndOf="@+id/v_phone_line"/>
+
+    <EditText
+        android:id="@+id/ed_phone"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:background="@null"
+        android:hint="请输入手机号"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip"
+        android:textColor="#353535"
+        android:textColorHint="#999999"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_area"
+        app:layout_constraintEnd_toStartOf="@+id/tv_get_code"
+        app:layout_constraintStart_toEndOf="@+id/v_area_split"
+        app:layout_constraintTop_toTopOf="@+id/tv_area"/>
+
+    <View
+        android:id="@+id/v_code_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="66dip"
+        android:background="#bfbfbf"
+        app:layout_constraintTop_toBottomOf="@+id/v_phone_line"/>
+
+    <EditText
+        android:id="@+id/ed_code"
+        android:layout_width="0dip"
+        android:layout_height="37dip"
+        android:background="@null"
+        android:hint="请输入短信验证码"
+        android:inputType="phone"
+        android:maxLength="6"
+        android:textColor="#353535"
+        android:textColorHint="#999999"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/v_code_line"
+        app:layout_constraintEnd_toEndOf="@+id/v_code_line"
+        app:layout_constraintStart_toStartOf="@+id/v_code_line"/>
+
+    <Button
+        android:id="@+id/btn_bind"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mall_detail_buy_h"
+        android:layout_marginTop="50dip"
+        android:background="@drawable/bind_phone_btn"
+        android:text="绑定"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/mall_detail_buy_text"
+        app:layout_constraintTop_toBottomOf="@+id/v_code_line"/>
+</android.support.constraint.ConstraintLayout>

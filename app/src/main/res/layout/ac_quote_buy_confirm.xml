@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/mall_tool_pl"
+                android:text="确认申购"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/img_avatar"
+        android:layout_width="71dip"
+        android:layout_height="71dip"
+        android:layout_marginTop="30dip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:sriv_oval="true"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dip"
+        android:gravity="center_horizontal"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:singleLine="true"
+        android:text="吴冰"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_avatar"/>
+
+    <TextView
+        android:id="@+id/tv_price_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="52dip"
+        android:layout_marginTop="27dip"
+        android:text="预售价格"
+        android:textColor="#777777"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"/>
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="52dip"
+        android:text="0.08STE/秒"
+        android:textColor="@color/font_yellow_color"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_price_tips"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_available_tips"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dip"
+        android:text="可预购（每人可申购10000秒）"
+        android:textColor="#777777"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_price"
+        app:layout_constraintStart_toStartOf="@+id/tv_price_tips"
+        app:layout_constraintTop_toBottomOf="@+id/tv_price_tips"/>
+
+    <LinearLayout
+        android:id="@+id/ll_input"
+        android:layout_width="0dip"
+        android:layout_height="40dip"
+        android:layout_marginTop="12dip"
+        android:background="@drawable/quote_buy_confirm_input"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/tv_price"
+        app:layout_constraintStart_toStartOf="@+id/tv_price_tips"
+        app:layout_constraintTop_toBottomOf="@+id/tv_available_tips">
+
+        <EditText
+            android:id="@+id/ed_input"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入购买秒数"
+            android:inputType="number"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip"
+            android:text="1000"
+            android:textColor="#777777"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="12dip"
+            android:text="秒"
+            android:textColor="#777777"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_pay_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="52dip"
+        android:layout_marginTop="32dip"
+        android:text="需支付金额"
+        android:textColor="#777777"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_input"/>
+
+    <TextView
+        android:id="@+id/tv_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="52dip"
+        android:text="800STE"
+        android:textColor="@color/font_yellow_color"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_pay_tips"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_buy"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mall_detail_buy_h"
+        android:background="@color/home_tabs_mark_color"
+        android:text="@string/mall_detail_buy_text"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/mall_detail_buy_text"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</android.support.constraint.ConstraintLayout>

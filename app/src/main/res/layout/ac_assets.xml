@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <View
+        android:id="@+id/v_top"
+        android:layout_width="match_parent"
+        android:layout_height="163dip"
+        android:background="@color/font_yellow_color"/>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/mall_tool_pl"
+                android:text="资产中心"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+
+            <TextView
+                android:id="@+id/tv_detail"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="明细"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"/>
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/ll_ste"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/v_top"
+        app:layout_constraintEnd_toStartOf="@+id/ll_q"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STE"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_q"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/v_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ll_ste"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Q"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_recharge"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:layout_marginTop="32dip"
+        android:drawableLeft="@mipmap/ic_recharge"
+        android:drawablePadding="12dip"
+        android:drawableRight="@mipmap/ic_arrow_right_gray"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:text="充值"
+        android:textColor="#414141"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/v_top"/>
+
+    <View
+        android:id="@+id/v_recharge_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:background="#ebebeb"
+        app:layout_constraintTop_toBottomOf="@+id/tv_recharge"/>
+
+    <TextView
+        android:id="@+id/tv_withdraw"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:drawableLeft="@mipmap/ic_withdraw"
+        android:drawablePadding="12dip"
+        android:drawableRight="@mipmap/ic_arrow_right_gray"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:text="提现"
+        android:textColor="#414141"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/v_recharge_line"/>
+
+    <View
+        android:id="@+id/v_withdraw_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:background="#ebebeb"
+        app:layout_constraintTop_toBottomOf="@+id/tv_withdraw"/>
+
+    <LinearLayout
+        android:id="@+id/ll_conversion"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        app:layout_constraintTop_toBottomOf="@+id/v_withdraw_line">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_conversion"
+            android:drawablePadding="12dip"
+            android:gravity="center_vertical"
+            android:text="Q兑换STE"
+            android:textColor="#414141"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/ic_arrow_right_gray"
+            android:gravity="right"
+            android:text="暂未开放"
+            android:textColor="#8d8d8d"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

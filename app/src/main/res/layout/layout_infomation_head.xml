@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tool="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/home_infomation_head_h"
+              android:background="@android:color/white"
+              android:minHeight="@dimen/home_infomation_head_h"
+              android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_head_item1"
+            android:layout_width="@dimen/home_infomation_head_item_w"
+            android:layout_height="@dimen/home_infomation_head_item_h"
+            android:layout_gravity="center"
+            android:background="@drawable/home_infomation_item"
+            android:gravity="center"
+            android:textColor="@color/home_infomation_head_item"
+            android:textSize="@dimen/home_infomation_head_item_text"
+            tool:text="头条"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_head_item2"
+            android:layout_width="@dimen/home_infomation_head_item_w"
+            android:layout_height="@dimen/home_infomation_head_item_h"
+            android:layout_gravity="center"
+            android:background="@drawable/home_infomation_item"
+            android:gravity="center"
+            android:textColor="@color/home_infomation_head_item"
+            android:textSize="@dimen/home_infomation_head_item_text"
+            tool:text="头条"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_head_item3"
+            android:layout_width="@dimen/home_infomation_head_item_w"
+            android:layout_height="@dimen/home_infomation_head_item_h"
+            android:layout_gravity="center"
+            android:background="@drawable/home_infomation_item"
+            android:gravity="center"
+            android:textColor="@color/home_infomation_head_item"
+            android:textSize="@dimen/home_infomation_head_item_text"
+            tool:text="头条"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_head_item4"
+            android:layout_width="@dimen/home_infomation_head_item_w"
+            android:layout_height="@dimen/home_infomation_head_item_h"
+            android:layout_gravity="center"
+            android:background="@drawable/home_infomation_item"
+            android:gravity="center"
+            android:textColor="@color/home_infomation_head_item"
+            android:textSize="@dimen/home_infomation_head_item_text"
+            tool:text="头条"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_head_item5"
+            android:layout_width="@dimen/home_infomation_head_item_w"
+            android:layout_height="@dimen/home_infomation_head_item_h"
+            android:layout_gravity="center"
+            android:background="@drawable/home_infomation_item"
+            android:gravity="center"
+            android:textColor="@color/home_infomation_head_item"
+            android:textSize="@dimen/home_infomation_head_item_text"
+            tool:text="头条"/>
+    </FrameLayout>
+</LinearLayout>

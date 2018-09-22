@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/home_infomation_item_multi_commodity_h"
+    android:background="@android:color/white"
+    android:minHeight="@dimen/home_infomation_item_multi_commodity_h"
+    android:paddingLeft="@dimen/home_infomation_item_sing_plr"
+    android:paddingRight="@dimen/home_infomation_item_sing_plr"
+    android:paddingTop="@dimen/home_infomation_item_multi_commodity_pt">
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/ic_infomation_title_mark"
+        android:drawablePadding="@dimen/home_infomation_item_multi_commodity_title_dp"
+        android:gravity="center_vertical"
+        android:text="你可能喜欢的商品"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/home_infomation_item_sing_title_text"
+        tools:text="你可能喜欢的商品"/>
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/home_infomation_item_multi_commodity_img_size"
+        android:layout_height="@dimen/home_infomation_item_multi_commodity_img_size"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tips"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/home_infomation_item_multi_commodity_content_ml"
+        android:singleLine="true"
+        android:text="黄晓明 区块链的投资和投机"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/home_infomation_item_sing_title_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img"
+        app:layout_constraintTop_toTopOf="@id/img"
+        tools:text="黄晓明 区块链的投资和投机"/>
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:text="980.00STE"
+        android:textColor="@color/home_tabs_mark_color"
+        android:textSize="@dimen/home_infomation_item_sing_title_text"
+        app:layout_constraintBottom_toBottomOf="@id/img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_title"/>
+
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="@dimen/home_infomation_item_multi_commodity_content_time_place_h"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toTopOf="@id/img">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="时长：90分钟"
+            android:textColor="@color/home_infomation_item_time_place_text"
+            android:textSize="@dimen/home_infomation_item_multi_commodity_content_time_place_text"
+            tools:text="时长：90分钟"/>
+
+        <TextView
+            android:id="@+id/tv_place"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="地点：等待客服通知"
+            android:textColor="@color/home_infomation_item_time_place_text"
+            android:textSize="@dimen/home_infomation_item_multi_commodity_content_time_place_text"
+            tools:text="地点：等待客服通知"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--CopyList 分割线样式属性定义-->
+    <declare-styleable name="copylistview">
+        <attr name="cdivider" format="reference|color"/>
+        <attr name="cdividerHeight" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="PayPwdView">
+        <attr name="count" format="integer"/>
+        <attr name="border_color_" format="color"/>
+        <attr name="dot_color" format="color"/>
+    </declare-styleable>
+
+</resources>

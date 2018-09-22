@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- RoundImageView：自定义的将图片显示为圆形的ImageView，这里可以设置圆形图片的边框大小 外边框颜色 和内边框颜色 -->
+    <declare-styleable name="roundedimageview">
+        <attr name="border_thickness" format="dimension"/>
+        <attr name="border_inside_color" format="color"/>
+        <attr name="border_outside_color" format="color"/>
+    </declare-styleable>
+
+    <!-- CircularBeadView： 自定义的将图片显示为圆角图片的ImageView，这里约定设置统一圆角的大小的方法 -->
+    <declare-styleable name="circularview">
+        <attr name="radius" format="dimension"/>
+    </declare-styleable>
+
+    <!-- ToggleButton：自定义的开关按钮，开关时有动画 -->
+    <declare-styleable name="ToggleButton">
+        <attr name="borderWidth" format="dimension"></attr>
+        <attr name="offBorderColor" format="reference|color"></attr>
+        <attr name="offColor" format="reference|color"></attr>
+        <attr name="onColor" format="reference|color"></attr>
+        <attr name="spotColor" format="reference|color"></attr>
+        <attr name="animate" format="reference|boolean"></attr>
+    </declare-styleable>
+
+    <!-- LetterSpacingTextView： 自定义的可设置字间距的TextView，这里规定设置字间距的名称以及值的类型 -->
+    <declare-styleable name="letterspacing_textview">
+        <attr name="word_space" format="float"/>
+    </declare-styleable>
+    <!--可收缩的TextView-->
+    <declare-styleable name="TextViewExpandableAnimation">
+        <attr name="tvea_expandLines" format="integer"/>
+        <attr name="tvea_shrinkBitmap" format="reference"/>
+        <attr name="tvea_expandBitmap" format="reference"/>
+        <attr name="tvea_textStateColor" format="color"/>
+        <attr name="tvea_textContentColor" format="color"/>
+        <attr name="tvea_textContentSize" format="dimension"/>
+        <attr name="tvea_textShrink" format="string"/>
+        <attr name="tvea_textExpand" format="string"/>
+    </declare-styleable>
+    <!--圆角ImageView 这里可以分别设置上下圆角的半径大小，也可以统一一次设置-->
+    <declare-styleable name="FilleIMageView">
+        <attr name="allRadius" format="dimension"/>
+        <attr name="topRadius" format="dimension"/>
+        <attr name="bottomRadius" format="dimension"/>
+    </declare-styleable>
+</resources>
