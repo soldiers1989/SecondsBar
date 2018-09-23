@@ -1,16 +1,17 @@
 package com.fx.secondbar.ui.home.adapter;
 
+import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.application.BtApplication;
-import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.QuoteBean;
+import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
 /**
@@ -38,13 +39,19 @@ public class AdQuote extends BaseQuickAdapter<QuoteBean, BaseViewHolder>
         SelectableRoundedImageView img = helper.getView(R.id.img);
         TextView tv_name = helper.getView(R.id.tv_name);
 
-        GlideApp.with(img).load(item.getAvatar()).centerCrop().into(img);
-        VerificationUtil.setViewValue(tv_name, item.getName());
-        VerificationUtil.setViewValue(tv_price, item.getPrice());
-        VerificationUtil.setViewValue(tv_up, item.getUpsAndDowns());
-        VerificationUtil.setViewValue(tv_percent, item.getPercent());
+        GlideLoad.load(img, item.getImg(), true);
+        if (TextUtils.isEmpty(item.getZjm()))
+        {
+            VerificationUtil.setViewValue(tv_name, item.getName());
+        } else
+        {
+            VerificationUtil.setViewValue(tv_name, item.getName() + "(" + item.getZjm() + ")");
+        }
+        VerificationUtil.setViewValue(tv_price, item.getTodayprice().toString());
+        VerificationUtil.setViewValue(tv_up, item.getDecline().toString());
+        VerificationUtil.setViewValue(tv_percent, item.getGain().toString());
 
-        if (item.isUp())
+        if (item.getDecline() >= 0)
         {
             tv_up.setTextColor(tv_up.getContext().getResources().getColor(R.color.quote_item_title_item_up));
             tv_percent.setTextColor(tv_up.getContext().getResources().getColor(R.color.quote_item_title_item_up));

@@ -10,7 +10,7 @@ import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
-import com.fx.secondbar.bean.PurchaseBean;
+import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.http.HttpManager;
 
 import java.util.List;
@@ -116,7 +116,7 @@ public class AcMyPurchase extends ActivitySupport implements SwipeRefreshLayout.
      */
     private void getData(final int page)
     {
-        HttpManager.getMyPurchase(page, PAGE_NUM, new Subscriber<List<PurchaseBean>>()
+        HttpManager.getMyPurchase(page, PAGE_NUM, new Subscriber<List<MyPurchaseBean>>()
         {
             @Override
             public void onCompleted()
@@ -139,7 +139,7 @@ public class AcMyPurchase extends ActivitySupport implements SwipeRefreshLayout.
             }
 
             @Override
-            public void onNext(List<PurchaseBean> purchaseBeans)
+            public void onNext(List<MyPurchaseBean> myPurchaseBeans)
             {
                 if (isDestroy())
                 {
@@ -152,12 +152,12 @@ public class AcMyPurchase extends ActivitySupport implements SwipeRefreshLayout.
                 currPage = page;
                 if (page == PAGE_START)
                 {
-                    adapter.setNewData(purchaseBeans);
+                    adapter.setNewData(myPurchaseBeans);
                 } else
                 {
-                    adapter.addData(purchaseBeans);
+                    adapter.addData(myPurchaseBeans);
                 }
-                if (VerificationUtil.getSize(purchaseBeans) >= PAGE_NUM)
+                if (VerificationUtil.getSize(myPurchaseBeans) >= PAGE_NUM)
                 {
                     adapter.loadMoreComplete();
                 } else

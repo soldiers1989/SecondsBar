@@ -41,7 +41,7 @@ public class AcPurchaseDetail extends ActivitySupport
     @Override
     protected int getLayoutResId()
     {
-        return R.layout.ac_quote_detail;
+        return R.layout.ac_purchase_detail;
     }
 
     @Override

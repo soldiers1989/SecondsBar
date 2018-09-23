@@ -18,6 +18,11 @@ public class Constants
     public static final String ROOT_DIR = "FxSecondsBar";
 
     /**
+     * 资讯详情访问地址
+     */
+    public static final String URL_INFORMATION = ROOT_URL + "/static/mb-front/news.html?id=";
+
+    /**
      * 登录接口
      */
     public static final String API_LOGIN = "login";
@@ -94,4 +99,23 @@ public class Constants
      * 完成Q币活动接口
      */
     public static final String API_FINISH_ACTIVITY = "activity/finish";
+
+    /**
+     * 签到接口
+     */
+    public static final String API_SIGNIN = "signin";
+
+    /**
+     * 申购列表接口
+     */
+    public static final String API_PURCHASE_LIST = "purchase/list";
+    /**
+     * 申购详情接口
+     */
+    public static final String API_PURCHASE_DETAIL = "purchase/info";
+
+    /**
+     * 获取栏目接口（配置）
+     */
+    public static final String API_GET_CATEGORY = "category/all";
 }

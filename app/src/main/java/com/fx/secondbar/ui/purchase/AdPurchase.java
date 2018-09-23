@@ -9,14 +9,14 @@ import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
-import com.fx.secondbar.bean.PurchaseBean;
+import com.fx.secondbar.bean.MyPurchaseBean;
 
 /**
  * function:我的申购列表
  * author: frj
  * modify date: 2018/9/21
  */
-public class AdPurchase extends BaseQuickAdapter<PurchaseBean, BaseViewHolder>
+public class AdPurchase extends BaseQuickAdapter<MyPurchaseBean, BaseViewHolder>
 {
 
     public AdPurchase()
@@ -25,7 +25,7 @@ public class AdPurchase extends BaseQuickAdapter<PurchaseBean, BaseViewHolder>
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, PurchaseBean item)
+    protected void convert(BaseViewHolder helper, MyPurchaseBean item)
     {
         TextView tv_name = helper.getView(R.id.tv_name);
         TextView tv_price = helper.getView(R.id.tv_price);

@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
-import com.fx.secondbar.bean.PurchaseBean;
+import com.fx.secondbar.bean.MyPurchaseBean;
 
 /**
  * function:订单详情
@@ -58,25 +58,25 @@ public class AcPurchaseOrderDetail extends ActivitySupport
     @Override
     protected void initData()
     {
-        bindData((PurchaseBean) getIntent().getParcelableExtra(KEY));
+        bindData((MyPurchaseBean) getIntent().getParcelableExtra(KEY));
     }
 
     /**
      * 绑定数据
      *
-     * @param purchaseBean
+     * @param myPurchaseBean
      */
-    private void bindData(PurchaseBean purchaseBean)
+    private void bindData(MyPurchaseBean myPurchaseBean)
     {
-        if (purchaseBean != null)
+        if (myPurchaseBean != null)
         {
-            VerificationUtil.setViewValue(tv_status, purchaseBean.getStatusname());
-            String price = purchaseBean.getStartprice();
+            VerificationUtil.setViewValue(tv_status, myPurchaseBean.getStatusname());
+            String price = myPurchaseBean.getStartprice();
             VerificationUtil.setViewValue(tv_mondy, String.format(getString(R.string.order_detail_order_money), VerificationUtil.verifyDefault(price, "0")));
-            VerificationUtil.setViewValue(tv_seconds, String.format(getString(R.string.order_detail_order_seconds), VerificationUtil.verifyDefault(purchaseBean.getSecond(), "0")));
-            VerificationUtil.setViewValue(tv_pay_price, String.format(getString(R.string.order_detail_order_pay_price), VerificationUtil.verifyDefault(purchaseBean.getAmount(), "0")));
-            VerificationUtil.setViewValue(tv_order_num, String.format(getString(R.string.order_detail_order_num), VerificationUtil.verifyDefault(purchaseBean.getTransaction_ID(), "0")));
-            VerificationUtil.setViewValue(tv_order_time, String.format(getString(R.string.order_detail_order_time), VerificationUtil.verifyDefault(purchaseBean.getCreatetime(), "0")));
+            VerificationUtil.setViewValue(tv_seconds, String.format(getString(R.string.order_detail_order_seconds), VerificationUtil.verifyDefault(myPurchaseBean.getSecond(), "0")));
+            VerificationUtil.setViewValue(tv_pay_price, String.format(getString(R.string.order_detail_order_pay_price), VerificationUtil.verifyDefault(myPurchaseBean.getAmount(), "0")));
+            VerificationUtil.setViewValue(tv_order_num, String.format(getString(R.string.order_detail_order_num), VerificationUtil.verifyDefault(myPurchaseBean.getTransaction_ID(), "0")));
+            VerificationUtil.setViewValue(tv_order_time, String.format(getString(R.string.order_detail_order_time), VerificationUtil.verifyDefault(myPurchaseBean.getCreatetime(), "0")));
 
         }
     }

@@ -6,6 +6,7 @@ import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.QIntroBean;
 
 /**
@@ -13,7 +14,7 @@ import com.fx.secondbar.bean.QIntroBean;
  * author: frj
  * modify date: 2018/9/20
  */
-public class AdPerson extends BaseQuickAdapter<QIntroBean, BaseViewHolder>
+public class AdPerson extends BaseQuickAdapter<ActiveBean, BaseViewHolder>
 {
     public AdPerson()
     {
@@ -21,14 +22,14 @@ public class AdPerson extends BaseQuickAdapter<QIntroBean, BaseViewHolder>
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, QIntroBean item)
+    protected void convert(BaseViewHolder helper, ActiveBean item)
     {
         TextView tv_title = helper.getView(R.id.tv_title);
         TextView tv_intro = helper.getView(R.id.tv_intro);
         TextView tv_option = helper.getView(R.id.tv_option);
 
         VerificationUtil.setViewValue(tv_title, item.getName());
-        VerificationUtil.setViewValue(tv_intro, item.getIntro());
-        VerificationUtil.setViewValue(tv_option, item.getOption());
+        VerificationUtil.setViewValue(tv_intro, item.getContent());
+        VerificationUtil.setViewValue(tv_option, item.getDescription());
     }
 }

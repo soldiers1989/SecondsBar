@@ -2,13 +2,16 @@ package com.fx.secondbar.http.service;
 
 
 import com.btten.bttenlibrary.base.bean.ResponseBean;
+import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
-import com.fx.secondbar.bean.PurchaseBean;
+import com.fx.secondbar.bean.MyPurchaseBean;
+import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
+import com.fx.secondbar.bean.ResQuote;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBBean;
@@ -121,6 +124,17 @@ public interface IService
     Observable<ResponseBean> commodityBuy(@Query("goodsid") String id);
 
     /**
+     * 获取行情列表
+     *
+     * @param page
+     * @param pageSize
+     * @param categoryId 栏目id
+     * @return
+     */
+    @GET(Constants.API_QUOTE_LIST)
+    Observable<ResponseBean<ResQuote>> getQuoteList(@Query("page") int page, @Query("count") int pageSize, @Query("categoryid") String categoryId);
+
+    /**
      * 获取订单列表
      *
      * @param page
@@ -139,6 +153,49 @@ public interface IService
      * @return
      */
     @GET(Constants.API_MY_PURCHASE)
-    Observable<ResponseBean<List<PurchaseBean>>> getMyPurchase(@Query("page") int page, @Query("count") int pageSize);
+    Observable<ResponseBean<List<MyPurchaseBean>>> getMyPurchase(@Query("page") int page, @Query("count") int pageSize);
+
+    /**
+     * 获取Q币活动列表
+     *
+     * @return
+     */
+    @GET(Constants.API_GET_ACTIVITY_Q)
+    Observable<ResponseBean<List<ActiveBean>>> getActives();
+
+    /**
+     * 完成活动
+     *
+     * @param type @{ActiveBean.TYPE_}
+     * @return
+     */
+    @GET(Constants.API_FINISH_ACTIVITY)
+    Observable<ResponseBean> finishActive(@Query("type") String type);
+
+    /**
+     * 添加自选
+     *
+     * @param peopleId 名人id
+     * @return
+     */
+    @GET(Constants.API_QUOTE_ADD_CUSTOM)
+    Observable<ResponseBean> addCustomPerson(@Query("peopleid") String peopleId);
+
+    /**
+     * 删除自选
+     *
+     * @param peopleId 名人id
+     * @return
+     */
+    @GET(Constants.API_QUOTE_REMOVE_CUSTOME)
+    Observable<ResponseBean> removeCustomPerson(@Query("peopleid") String peopleId);
+
+    /**
+     * 获取配置信息
+     *
+     * @return
+     */
+    @GET(Constants.API_GET_CATEGORY)
+    Observable<ResponseBean<ResConfigInfo>> getConfigInfo();
 
 }

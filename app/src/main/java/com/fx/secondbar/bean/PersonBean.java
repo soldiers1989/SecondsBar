@@ -15,7 +15,7 @@ public class PersonBean
     private Integer type;// 类型
     private String img;//图片地址
     private String createtime;//创建时间
-    private String zjm;//代币名称
+    private String zjm;//助记码
     private String cid;//
     private String nation;//民族
     private String sex;// 性别

@@ -14,6 +14,8 @@ import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.base.FragmentSupport;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.CategoryBean;
 import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
 import com.fx.secondbar.ui.mall.FragmentMallItem;
@@ -69,11 +71,24 @@ public class FragmentMall extends FragmentSupport
     @Override
     protected void initData()
     {
-        String[] tabTitles = getResources().getStringArray(R.array.mall_tabs);
+//        String[] tabTitles = getResources().getStringArray(R.array.mall_tabs);
+        List<CategoryBean> categoryBeans = FxApplication.getInstance().getConfigInfo().getListCategoryStar();
+        //第一项默认为全部，未在栏目集合中返回，此处单独处理
+        int size = categoryBeans.size() + 1;
+        String[] tabTitles = new String[size];
         final List<FragmentViewPagerBase> fragmengs = new ArrayList<>();
-        for (int i = 0; i < tabTitles.length; i++)
+        for (int i = 0; i < size; i++)
         {
-            fragmengs.add(FragmentMallItem.newInstance(""));
+            String id = "";
+            if (i == 0)
+            {
+                tabTitles[i] = "全部";
+            } else
+            {
+                tabTitles[i] = categoryBeans.get(i - 1).getName();
+                id = categoryBeans.get(i - 1).getCategory_ID();
+            }
+            fragmengs.add(FragmentMallItem.newInstance(id));
         }
         adapter = new AdHomeItem(getChildFragmentManager(), fragmengs, tabTitles);
         viewPager.setAdapter(adapter);

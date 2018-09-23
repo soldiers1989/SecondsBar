@@ -8,7 +8,7 @@ import android.os.Parcelable;
  * author: frj
  * modify date: 2018/9/23
  */
-public class PurchaseBean implements Parcelable
+public class MyPurchaseBean implements Parcelable
 {
     private String memberid;//会员id
     private String peopleid;//名人id
@@ -190,11 +190,11 @@ public class PurchaseBean implements Parcelable
         dest.writeString(this.transaction_ID);
     }
 
-    public PurchaseBean()
+    public MyPurchaseBean()
     {
     }
 
-    protected PurchaseBean(Parcel in)
+    protected MyPurchaseBean(Parcel in)
     {
         this.memberid = in.readString();
         this.peopleid = in.readString();
@@ -212,18 +212,18 @@ public class PurchaseBean implements Parcelable
         this.transaction_ID = in.readString();
     }
 
-    public static final Parcelable.Creator<PurchaseBean> CREATOR = new Parcelable.Creator<PurchaseBean>()
+    public static final Parcelable.Creator<MyPurchaseBean> CREATOR = new Parcelable.Creator<MyPurchaseBean>()
     {
         @Override
-        public PurchaseBean createFromParcel(Parcel source)
+        public MyPurchaseBean createFromParcel(Parcel source)
         {
-            return new PurchaseBean(source);
+            return new MyPurchaseBean(source);
         }
 
         @Override
-        public PurchaseBean[] newArray(int size)
+        public MyPurchaseBean[] newArray(int size)
         {
-            return new PurchaseBean[size];
+            return new MyPurchaseBean[size];
         }
     };
 }

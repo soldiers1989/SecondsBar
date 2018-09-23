@@ -18,6 +18,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -26,16 +27,6 @@
                 android:text="申购详情"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/toolbar_title_font"/>
-
-
-            <ImageButton
-                android:id="@+id/ib_share"
-                android:layout_width="@dimen/toolbar_height"
-                android:layout_height="@dimen/toolbar_height"
-                android:layout_alignParentRight="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="centerInside"
-                android:src="@mipmap/ic_share_white"/>
 
             <ImageButton
                 android:id="@+id/ib_back"
@@ -49,201 +40,51 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
-
-    <Button
-        android:id="@+id/btn_buy"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/mall_detail_buy_h"
-        android:background="@color/home_tabs_mark_color"
-        android:text="@string/mall_detail_buy_text"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/mall_detail_buy_text"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <android.support.v4.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        app:layout_constraintBottom_toTopOf="@+id/btn_buy"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btn_transaction"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
+         
 
-        <android.support.constraint.ConstraintLayout
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="50dip">
+            android:layout_height="3dip"
+            android:progressDrawable="@drawable/webview_progress"
+            android:visibility="gone"/>  
 
-            <ImageView
-                android:id="@+id/img_top"
-                android:layout_width="match_parent"
-                android:layout_height="200dip"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/test_infomation_banner_1"
-                app:layout_constraintTop_toTopOf="parent"/>
+        <com.tencent.smtt.sdk.WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>  
 
-            <TextView
-                android:id="@+id/tv_person_info_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dip"
-                android:layout_marginTop="32dip"
-                android:drawableLeft="@mipmap/ic_infomation_title_mark"
-                android:drawablePadding="@dimen/home_infomation_item_multi_commodity_title_dp"
-                android:gravity="center_vertical"
-                android:text="个人信息"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/home_infomation_item_sing_title_text"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_top"/>
+    </LinearLayout>
 
-            <com.joooonho.SelectableRoundedImageView
-                android:id="@+id/img_avatar"
-                android:layout_width="71dip"
-                android:layout_height="71dip"
-                android:layout_marginLeft="33dip"
-                android:layout_marginTop="24dip"
-                android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_person_info_title"
-                app:sriv_oval="true"/>
+    <Button
+        android:id="@+id/btn_transaction"
+        android:layout_width="0dip"
+        android:layout_height="@dimen/mall_detail_buy_h"
+        android:background="@color/home_tabs_mark_color"
+        android:text="交易中心"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/mall_detail_buy_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_add_custom"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-            <TextView
-                android:id="@+id/tv_person_name"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
-                android:layout_marginTop="10dip"
-                android:singleLine="true"
-                android:text="吴冰（WUB）"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/img_avatar"
-                app:layout_constraintTop_toTopOf="@+id/img_avatar"/>
+    <Button
+        android:id="@+id/btn_add_custom"
+        android:layout_width="0dip"
+        android:layout_height="@dimen/mall_detail_buy_h"
+        android:background="@color/colorPrimary"
+        android:text="添加自选"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/mall_detail_buy_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_transaction"/>
 
-            <TextView
-                android:id="@+id/tv_person_price"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
-                android:text="0.08STE/秒"
-                android:textColor="@color/font_yellow_color"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/img_avatar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/img_avatar"/>
-
-            <TextView
-                android:id="@+id/tv_person_position"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dip"
-                android:layout_marginTop="24dip"
-                android:singleLine="true"
-                android:text="职业：著名投资人"
-                android:textColor="#5B5B5B"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/img_avatar"
-                app:layout_constraintTop_toBottomOf="@+id/img_avatar"
-                />
-
-            <TextView
-                android:id="@+id/tv_person_school"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dip"
-                android:layout_marginTop="8dip"
-                android:singleLine="true"
-                android:text="毕业院校：北京大学金融系"
-                android:textColor="#5B5B5B"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/img_avatar"
-                app:layout_constraintTop_toBottomOf="@+id/tv_person_position"/>
-
-            <TextView
-                android:id="@+id/tv_time_use_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dip"
-                android:layout_marginTop="32dip"
-                android:drawableLeft="@mipmap/ic_infomation_title_mark"
-                android:drawablePadding="@dimen/home_infomation_item_multi_commodity_title_dp"
-                android:gravity="center_vertical"
-                android:text="时间作用"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/home_infomation_item_sing_title_text"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_person_school"/>
-
-            <TextView
-                android:id="@+id/tv_use"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dip"
-                android:layout_marginTop="16dip"
-                android:text="吴冰时间仅限于以下几种情况（常住地：北京）"
-                android:textColor="#5B5B5B"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/img_avatar"
-                app:layout_constraintTop_toBottomOf="@+id/tv_time_use_title"/>
-
-            <me.next.tagview.TagCloudView
-                android:id="@+id/tagCloudView"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dip"
-                android:layout_marginTop="12dip"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/img_avatar"
-                app:layout_constraintTop_toBottomOf="@+id/tv_use"
-                app:tcvBackground="@drawable/quote_detail_tag"
-                app:tcvItemBorderHorizontal="15dip"
-                app:tcvItemBorderVertical="15dip"
-                app:tcvSingleLine="false"
-                app:tcvTextColor="#5B5B5B"
-                app:tcvTextSize="14sp">
-
-            </me.next.tagview.TagCloudView>
-
-            <TextView
-                android:id="@+id/tv_experience_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dip"
-                android:layout_marginTop="32dip"
-                android:drawableLeft="@mipmap/ic_infomation_title_mark"
-                android:drawablePadding="@dimen/home_infomation_item_multi_commodity_title_dp"
-                android:gravity="center_vertical"
-                android:text="个人经历"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/home_infomation_item_sing_title_text"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tagCloudView"/>
-
-            <TextView
-                android:id="@+id/tv_experience"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dip"
-                android:layout_marginTop="24dip"
-                android:text="今天，阿里巴巴集团创始人马云发出题为“教师节快乐”的公开信宣布：一年后的阿里巴巴20周年之际，即2019年9月10日，他将不再担任集团董事局主席，届时由现任集团CEO张勇接任。
-
-马云对张勇和他的团队“充满信心”，源于张勇自加入阿里巴巴以来所一直展现的创业者和创造者格局，与他给阿里巴巴所带来的关键性变革。
-
-马云在公开信中高度评价张勇：在担任CEO的3年多中，张勇以卓越的商业才华、坚定沉着的领导力、超级计算机一般的逻辑和思考能力，带领阿里取得了长远发展，连续13个季度实现阿里巴巴业绩健康持续增长，已经证明自己是中国最出色的CEO；更因为他的战略格局和组织文化传承上的担当，阿里巴巴的接力火炬交给他和他领导的团队，是马云与阿里巴巴合伙人群体现在最正确的决定。
-"
-                android:textColor="#353535"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/img_avatar"
-                app:layout_constraintTop_toBottomOf="@+id/tv_experience_title"/>
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v4.widget.NestedScrollView>
 </android.support.constraint.ConstraintLayout>

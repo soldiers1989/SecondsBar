@@ -3,13 +3,16 @@ package com.fx.secondbar.http;
 import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.http.HttpGetData;
 import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
-import com.fx.secondbar.bean.PurchaseBean;
+import com.fx.secondbar.bean.MyPurchaseBean;
+import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
+import com.fx.secondbar.bean.ResQuote;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBBean;
@@ -191,6 +194,20 @@ public class HttpManager
     }
 
     /**
+     * 获取行情列表
+     *
+     * @param page
+     * @param pageSize
+     * @param categoryId 栏目id
+     * @param subscriber
+     */
+    public static void getQuoteLis(int page, int pageSize, String categoryId, Subscriber<ResQuote> subscriber)
+    {
+        Observable<ResQuote> observable = getInstance().mService.getQuoteList(page, pageSize, categoryId).map(new HttpResultFun<ResQuote>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
      * 获取订单列表
      *
      * @param page
@@ -211,9 +228,67 @@ public class HttpManager
      * @param pageSize
      * @param subscriber
      */
-    public static void getMyPurchase(int page, int pageSize, Subscriber<List<PurchaseBean>> subscriber)
+    public static void getMyPurchase(int page, int pageSize, Subscriber<List<MyPurchaseBean>> subscriber)
     {
-        Observable<List<PurchaseBean>> observable = getInstance().mService.getMyPurchase(page, pageSize).map(new HttpResultFun<List<PurchaseBean>>());
+        Observable<List<MyPurchaseBean>> observable = getInstance().mService.getMyPurchase(page, pageSize).map(new HttpResultFun<List<MyPurchaseBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取活动列表
+     *
+     * @param subscriber
+     */
+    public static void getActives(Subscriber<List<ActiveBean>> subscriber)
+    {
+        Observable<List<ActiveBean>> observable = getInstance().mService.getActives().map(new HttpResultFun<List<ActiveBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 完成活动
+     *
+     * @param type
+     * @param subscriber
+     */
+    public static void finishActive(String type, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.finishActive(type).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 添加自选
+     *
+     * @param peopleId   名人id
+     * @param subscriber
+     */
+    public static void addCustomPerson(String peopleId, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.addCustomPerson(peopleId).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 删除自选
+     *
+     * @param peopleId   名人id
+     * @param subscriber
+     */
+    public static void removeCustomPerson(String peopleId, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.removeCustomPerson(peopleId).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取配置信息
+     *
+     * @param subscriber
+     */
+    public static void getConfigInfo(Subscriber<ResConfigInfo> subscriber)
+    {
+        Observable<ResConfigInfo> observable = getInstance().mService.getConfigInfo().map(new HttpResultFun<ResConfigInfo>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

@@ -1,13 +1,16 @@
 package com.fx.secondbar.application;
 
 import android.support.annotation.StringRes;
+import android.util.Log;
 
 import com.btten.bttenlibrary.application.BtApplication;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.BuildConfig;
+import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.config.BaseConfig;
 import com.fx.secondbar.util.DataCacheUtils;
+import com.tencent.smtt.sdk.QbSdk;
 
 import java.util.ArrayList;
 
@@ -23,11 +26,30 @@ public class FxApplication extends BtApplication
 
     private UserInfoBean mUserInfoBean;
 
+    private ResConfigInfo mConfigInfo;
+
     @Override
     public void onCreate()
     {
         mApplication = this;
         super.onCreate();
+
+        QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback()
+        {
+            @Override
+            public void onViewInitFinished(boolean arg0)
+            {
+                // TODO Auto-generated method stub
+                Log.d("app", " onViewInitFinished is " + arg0);
+            }
+
+            @Override
+            public void onCoreInitFinished()
+            {
+                // TODO Auto-generated method stub
+            }
+        };    //x5内核初始化接口
+        QbSdk.initX5Environment(getApplicationContext(), cb);
     }
 
     @Override
@@ -97,5 +119,41 @@ public class FxApplication extends BtApplication
         }
         this.mUserInfoBean = mUserInfoBean;
         DataCacheUtils.saveListCache(this, mUserInfoBean, DataCacheUtils.FILE_USERINFO);
+    }
+
+    /**
+     * 获取配置信息
+     *
+     * @return
+     */
+    public ResConfigInfo getConfigInfo()
+    {
+        if (mConfigInfo == null)
+        {
+            ArrayList<ResConfigInfo> list = DataCacheUtils.loadListCache(this, DataCacheUtils.FILE_CONFIG_INFO);
+            if (VerificationUtil.noEmpty(list))
+            {
+                mConfigInfo = list.get(0);
+            } else
+            {
+                mConfigInfo = new ResConfigInfo();
+            }
+        }
+        return mConfigInfo;
+    }
+
+    /**
+     * 设置配置信息
+     *
+     * @param mConfigInfo
+     */
+    public void setConfigInfo(ResConfigInfo mConfigInfo)
+    {
+        if (mConfigInfo == null)
+        {
+            mConfigInfo = new ResConfigInfo();
+        }
+        this.mConfigInfo = mConfigInfo;
+        DataCacheUtils.saveListCache(this, mConfigInfo, DataCacheUtils.FILE_CONFIG_INFO);
     }
 }

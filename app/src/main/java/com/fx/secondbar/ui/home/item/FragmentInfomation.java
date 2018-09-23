@@ -18,12 +18,15 @@ import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.AcWebBrowse;
 import com.fx.secondbar.ui.home.item.adapter.AdInfomation;
+import com.fx.secondbar.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +88,24 @@ public class FragmentInfomation extends FragmentViewPagerBase implements SwipeRe
         adapter.addHeaderView(getHeaderView());
         adapter.addHeaderView(createHeadView());
         adapter.bindToRecyclerView(recyclerView);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position)
+            {
+                AdInfomation.InfomationEntity entity = FragmentInfomation.this.adapter.getItem(position);
+                if (AdInfomation.InfomationEntity.TYPE_MULTI_IMG == entity.getItemType() || AdInfomation.InfomationEntity.TYPE_SINGLE_IMG == entity.getItemType())
+                {
+                    Bundle bundle = new Bundle();
+                    if (entity.getInfomationBean() != null)
+                    {
+                        bundle.putString(KEY, Constants.URL_INFORMATION + entity.getInfomationBean().getNews_ID());
+                    }
+                    bundle.putString(KEY_STR, "秒吧头条");
+                    jump(AcWebBrowse.class, bundle, false);
+                }
+            }
+        });
         swipeRefreshLayout.setRefreshing(true);
         onRefresh();
     }

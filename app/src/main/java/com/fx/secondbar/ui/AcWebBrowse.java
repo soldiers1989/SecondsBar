@@ -1,23 +1,16 @@
-package com.fx.secondbar.ui.quote;
+package com.fx.secondbar.ui;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
-import com.btten.bttenlibrary.base.bean.ResponseBean;
-import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
-import com.fx.secondbar.http.HttpManager;
-import com.fx.secondbar.util.Constants;
-import com.fx.secondbar.util.ProgressDialogUtil;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
@@ -26,29 +19,21 @@ import com.tencent.smtt.sdk.WebViewClient;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import rx.Subscriber;
-
 /**
- * function:名人详情
+ * function:
  * author: frj
- * modify date: 2018/9/21
+ * modify date: 2018/9/24
  */
-public class AcQuoteDetail extends ActivitySupport
+public class AcWebBrowse extends ActivitySupport
 {
-
-    private static final String URL = Constants.ROOT_URL + "/static/mb-front/market.html";
-
     private TextView tv_title;
     private ProgressBar progressBar1;
     private WebView webView;
-    private Button btn_add_custom;
-
-    private ProgressDialog progressDialog;
 
     @Override
     protected int getLayoutResId()
     {
-        return R.layout.ac_quote_detail;
+        return R.layout.ac_web_browse;
     }
 
     @Override
@@ -58,8 +43,6 @@ public class AcQuoteDetail extends ActivitySupport
         progressBar1 = findView(R.id.progressBar1);
         webView = findView(R.id.webView);
         findView(R.id.ib_back).setOnClickListener(this);
-        findView(R.id.btn_transaction).setOnClickListener(this);
-        btn_add_custom = findView(R.id.btn_add_custom);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -67,16 +50,15 @@ public class AcQuoteDetail extends ActivitySupport
     @Override
     protected void initListener()
     {
-        btn_add_custom.setOnClickListener(this);
+
     }
 
     @Override
     protected void initData()
     {
         initWebView();
-        progressDialog = ProgressDialogUtil.getProgressDialog(this, getString(R.string.progress_tips), true);
         VerificationUtil.setViewValue(tv_title, getIntent().getStringExtra(KEY_STR));
-        webView.loadUrl(URL);
+        webView.loadUrl(getIntent().getStringExtra(KEY));
     }
 
     /**
@@ -160,97 +142,6 @@ public class AcQuoteDetail extends ActivitySupport
         }
     }
 
-    /**
-     * 添加自选
-     *
-     * @param peopleId
-     */
-    private void addCustom(String peopleId)
-    {
-        HttpManager.addCustomPerson(peopleId, new Subscriber<ResponseBean>()
-        {
-            @Override
-            public void onCompleted()
-            {
-
-            }
-
-            @Override
-            public void onError(Throwable e)
-            {
-                if (isDestroy())
-                {
-                    return;
-                }
-                e.printStackTrace();
-                if (progressDialog != null)
-                {
-                    progressDialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onNext(ResponseBean responseBean)
-            {
-                if (isDestroy())
-                {
-                    return;
-                }
-                if (progressDialog != null)
-                {
-                    progressDialog.dismiss();
-                }
-                ShowToast.showToast("添加成功");
-                btn_add_custom.setText("删除自选");
-            }
-        });
-    }
-
-    /**
-     * 删除自选
-     *
-     * @param peopleId
-     */
-    private void removeCustom(String peopleId)
-    {
-        HttpManager.addCustomPerson(peopleId, new Subscriber<ResponseBean>()
-        {
-            @Override
-            public void onCompleted()
-            {
-
-            }
-
-            @Override
-            public void onError(Throwable e)
-            {
-                if (isDestroy())
-                {
-                    return;
-                }
-                e.printStackTrace();
-                if (progressDialog != null)
-                {
-                    progressDialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onNext(ResponseBean responseBean)
-            {
-                if (isDestroy())
-                {
-                    return;
-                }
-                if (progressDialog != null)
-                {
-                    progressDialog.dismiss();
-                }
-                ShowToast.showToast("删除成功");
-                btn_add_custom.setText("添加自选");
-            }
-        });
-    }
 
     @Override
     public void onClick(View v)
@@ -260,12 +151,6 @@ public class AcQuoteDetail extends ActivitySupport
         {
             case R.id.ib_back:
                 finish();
-                break;
-
-            case R.id.btn_transaction://交易中心
-                jump(AcQuoteBuyConfirm.class);
-                break;
-            case R.id.btn_add_custom://添加自选
                 break;
         }
     }

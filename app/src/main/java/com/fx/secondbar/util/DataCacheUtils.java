@@ -37,6 +37,11 @@ public class DataCacheUtils
     public static final String FILE_USERINFO = "userinfo";
 
     /**
+     * 文件名，配置信息保存的文件的文件名
+     */
+    public static final String FILE_CONFIG_INFO = "configinfo";
+
+    /**
      * 保存 一组 数据
      *
      * @param ctx       上下文
