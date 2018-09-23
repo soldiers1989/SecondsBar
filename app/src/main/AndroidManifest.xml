@@ -37,7 +37,7 @@
             android:name=".ui.quote.AcQuoteBuyConfirm"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.order.AcOrderDetail"
+            android:name=".ui.purchase.AcPurchaseOrderDetail"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.person.AcAccountSet"
@@ -86,6 +86,9 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.person.AcInputPayPwd"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.purchase.AcPurchaseDetail"
             android:screenOrientation="portrait"/>
     </application>
 

@@ -119,13 +119,13 @@ public class FragmentTutorial extends FragmentViewPagerBase
                 } else
                 {
                     adapter.addData(turialBeans);
-                    if (turialBeans.size() == PAGE_NUM)
-                    {
-                        adapter.loadMoreComplete();
-                    } else
-                    {
-                        adapter.loadMoreEnd();
-                    }
+                }
+                if (turialBeans.size() >= PAGE_NUM)
+                {
+                    adapter.loadMoreComplete();
+                } else
+                {
+                    adapter.loadMoreEnd();
                 }
             }
         });

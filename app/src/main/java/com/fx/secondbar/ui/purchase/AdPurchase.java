@@ -5,16 +5,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.util.DisplayUtil;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.PurchaseBean;
 
 /**
  * function:我的申购列表
  * author: frj
  * modify date: 2018/9/21
  */
-public class AdPurchase extends BaseQuickAdapter<String, BaseViewHolder>
+public class AdPurchase extends BaseQuickAdapter<PurchaseBean, BaseViewHolder>
 {
 
     public AdPurchase()
@@ -23,7 +25,7 @@ public class AdPurchase extends BaseQuickAdapter<String, BaseViewHolder>
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item)
+    protected void convert(BaseViewHolder helper, PurchaseBean item)
     {
         TextView tv_name = helper.getView(R.id.tv_name);
         TextView tv_price = helper.getView(R.id.tv_price);
@@ -36,6 +38,25 @@ public class AdPurchase extends BaseQuickAdapter<String, BaseViewHolder>
         } else
         {
             tv_status.setTextColor(Color.parseColor("#e76e43"));
+        }
+
+        VerificationUtil.setViewValue(tv_seconds, item.getSecond());
+        VerificationUtil.setViewValue(tv_status, item.getStatusname());
+        setCommodityMoney(tv_price, item.getPrice());
+    }
+
+    /**
+     * 设置商品价格
+     *
+     * @param tv
+     * @param price
+     */
+    private void setCommodityMoney(TextView tv, String price)
+    {
+        if (tv != null)
+        {
+            String money = tv.getContext().getString(R.string.mall_detail_info_price);
+            tv.setText(String.format(money, VerificationUtil.verifyDefault(price, "0")));
         }
     }
 

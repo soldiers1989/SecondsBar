@@ -2,7 +2,6 @@ package com.fx.secondbar.ui.home.item.adapter;
 
 import android.widget.TextView;
 
-import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -31,7 +30,22 @@ public class AdPersonItem extends BaseQuickAdapter<PersonBean, BaseViewHolder>
         TextView tv_name = helper.getView(R.id.tv_name);
 
         GlideLoad.load(img, item.getPicture(), true);
-        VerificationUtil.setViewValue(tv_price, item.getPrice());
+        setPrice(tv_price, item.getPrice());
         VerificationUtil.setViewValue(tv_name, item.getName());
+    }
+
+    /**
+     * 设置价格
+     *
+     * @param tv
+     * @param price
+     */
+    private void setPrice(TextView tv, String price)
+    {
+        if (tv != null)
+        {
+            String text = tv.getContext().getResources().getString(R.string.purchase_money_text);
+            tv.setText(String.format(text, VerificationUtil.verifyDefault(price, "0")));
+        }
     }
 }

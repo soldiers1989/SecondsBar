@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.fx.secondbar.R;
-import com.fx.secondbar.ui.order.AcOrderDetail;
+import com.fx.secondbar.ui.purchase.AcPurchaseOrderDetail;
 import com.joooonho.SelectableRoundedImageView;
 
 /**
@@ -67,7 +67,7 @@ public class AcQuoteBuyConfirm extends ActivitySupport
                 finish();
                 break;
             case R.id.btn_buy:
-                jump(AcOrderDetail.class);
+                jump(AcPurchaseOrderDetail.class);
                 break;
         }
     }

@@ -1,7 +1,9 @@
 package com.fx.secondbar.ui.home.item.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,12 +11,14 @@ import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.bean.PersonBean;
+import com.fx.secondbar.ui.purchase.AcPurchaseDetail;
 import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
@@ -76,18 +80,62 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
         {
             GlideLoad.load(img, item.commodityBean.getImage(), true);
             VerificationUtil.setViewValue(tv_title, item.commodityBean.getName());
-            VerificationUtil.setViewValue(tv_price, item.commodityBean.getPrice());
-            VerificationUtil.setViewValue(tv_time, item.commodityBean.getTimelength());
-            VerificationUtil.setViewValue(tv_place, item.commodityBean.getAddress());
+            setCommodityMoney(tv_price, item.commodityBean.getPrice());
+            setCommodityPlace(tv_place, item.commodityBean.getAddress());
+            setCommodityTime(tv_time, item.commodityBean.getTimelength());
         } else
         {
             GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
             VerificationUtil.setViewValue(tv_title, "");
-            VerificationUtil.setViewValue(tv_price, "");
-            VerificationUtil.setViewValue(tv_time, "");
-            VerificationUtil.setViewValue(tv_place, "");
+            setCommodityMoney(tv_price, "");
+            setCommodityPlace(tv_place, "");
+            setCommodityTime(tv_time, "");
         }
+    }
 
+    /**
+     * 设置商品价格
+     *
+     * @param tv
+     * @param price
+     */
+    private void setCommodityMoney(TextView tv, String price)
+    {
+        if (tv != null)
+        {
+            String money = tv.getContext().getString(R.string.mall_detail_info_price);
+            tv.setText(String.format(money, VerificationUtil.verifyDefault(price, "0")));
+        }
+    }
+
+    /**
+     * 设置商品地点
+     *
+     * @param tv
+     * @param address
+     */
+    private void setCommodityPlace(TextView tv, String address)
+    {
+        if (tv != null)
+        {
+            String place = tv.getContext().getString(R.string.mall_detail_info_place);
+            tv.setText(String.format(place, VerificationUtil.verifyDefault(address, "等待客服通知")));
+        }
+    }
+
+    /**
+     * 设置商品时长
+     *
+     * @param tv
+     * @param timelength
+     */
+    private void setCommodityTime(TextView tv, String timelength)
+    {
+        if (tv != null)
+        {
+            String time = tv.getContext().getString(R.string.mall_detail_info_time);
+            tv.setText(String.format(time, VerificationUtil.verifyDefault(timelength, "0")));
+        }
     }
 
     /**
@@ -176,6 +224,15 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
         AdPersonItem adapter = new AdPersonItem();
         adapter.setNewData(item.getPersonBeans());
         adapter.bindToRecyclerView(recyclerView);
+        adapter.setOnItemClickListener(new OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position)
+            {
+                Intent intent = new Intent(view.getContext(), AcPurchaseDetail.class);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
 

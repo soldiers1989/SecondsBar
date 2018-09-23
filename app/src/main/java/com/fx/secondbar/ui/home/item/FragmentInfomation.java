@@ -48,7 +48,11 @@ public class FragmentInfomation extends FragmentViewPagerBase implements SwipeRe
     @Override
     public void onStarShow()
     {
-
+        if (!VerificationUtil.noEmpty(adapter.getData()))
+        {
+            swipeRefreshLayout.setRefreshing(true);
+            onRefresh();
+        }
     }
 
     @Nullable
@@ -187,9 +191,9 @@ public class FragmentInfomation extends FragmentViewPagerBase implements SwipeRe
      *
      * @param type
      */
-    private void getData(String type)
+    private void getData(int page, String type)
     {
-        HttpManager.getIndexInformation(type, new Subscriber<IndexInformationBean>()
+        HttpManager.getIndexInformation(page, PAGE_NUM, type, new Subscriber<IndexInformationBean>()
         {
             @Override
             public void onCompleted()
@@ -203,6 +207,10 @@ public class FragmentInfomation extends FragmentViewPagerBase implements SwipeRe
                 if (isNetworkCanReturn())
                 {
                     return;
+                }
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
                 }
                 ShowToast.showToast(HttpManager.checkLoadError(e));
             }
@@ -299,7 +307,7 @@ public class FragmentInfomation extends FragmentViewPagerBase implements SwipeRe
     @Override
     public void onRefresh()
     {
-        getData("");
+        getData(PAGE_START, "1");
     }
 
     /**

@@ -16,11 +16,20 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.util.DisplayUtil;
+import com.btten.bttenlibrary.util.ShowToast;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.CommodityBean;
+import com.fx.secondbar.bean.DynamicBean;
+import com.fx.secondbar.bean.IndexTimeBean;
+import com.fx.secondbar.bean.InfomationBean;
+import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.item.adapter.AdTime;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * function:首页-时间场
@@ -44,6 +53,10 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
 //            if (!convenientBanner.isTurning()) {
 //                convenientBanner.startTurning();
 //            }
+        }
+        if (!VerificationUtil.noEmpty(adapter.getData()))
+        {
+            getDatas();
         }
     }
 
@@ -128,6 +141,103 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
     }
 
     /**
+     * 获取数据
+     */
+    private void getDatas()
+    {
+        HttpManager.getIndexTime(new Subscriber<IndexTimeBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(IndexTimeBean indexTimeBean)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                adapter.setNewData(handleData(indexTimeBean));
+            }
+        });
+    }
+
+    /**
+     * 处理数据
+     *
+     * @param bean
+     * @return
+     */
+    private List<AdTime.TimeEntity> handleData(IndexTimeBean bean)
+    {
+        List<AdTime.TimeEntity> list = new ArrayList<>();
+        if (bean != null)
+        {
+            //判断数据是否存在交易信息
+            if (VerificationUtil.noEmpty(bean.getListOrder()))
+            {
+                list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_TITLE, "交易动态"));
+                for (DynamicBean dynamicBean : bean.getListOrder())
+                {
+                    list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_DYNAMIC, dynamicBean));
+                }
+            }
+            //判断数据是否存在名人申购信息
+            if (VerificationUtil.noEmpty(bean.getListPeople()))
+            {
+                list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_TITLE, "名人申购"));
+                list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_PERSON, bean.getListPeople()));
+            }
+            //判断数据是否存在名人商品信息
+            if (VerificationUtil.noEmpty(bean.getListMerchandise()))
+            {
+                list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_TITLE, "名人商品"));
+                for (CommodityBean commodityBean : bean.getListMerchandise())
+                {
+                    list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_COMMODITY, commodityBean));
+                }
+            }
+            //判断数据是否存在名人资讯信息
+            if (VerificationUtil.noEmpty(bean.getListNews()))
+            {
+                list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_TITLE, "名人资讯"));
+                for (InfomationBean infomationBean : bean.getListNews())
+                {
+                    if (VerificationUtil.noEmpty(infomationBean.getPictures()))
+                    {
+                        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_MULTI_IMG, infomationBean));
+                    } else
+                    {
+                        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_SINGLE_IMG, infomationBean));
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
+    /**
      * 创建头部控件
      *
      * @return
@@ -181,7 +291,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
     @Override
     public void onRefresh()
     {
-
+        getDatas();
     }
 
     /**

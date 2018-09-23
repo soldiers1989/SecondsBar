@@ -136,13 +136,13 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
                 } else
                 {
                     adapter.addData(wbBeans);
-                    if (wbBeans.size() == 10)
-                    {
-                        adapter.loadMoreComplete();
-                    } else
-                    {
-                        adapter.loadMoreEnd();
-                    }
+                }
+                if (wbBeans.size() >= PAGE_NUM)
+                {
+                    adapter.loadMoreComplete();
+                } else
+                {
+                    adapter.loadMoreEnd();
                 }
             }
         });

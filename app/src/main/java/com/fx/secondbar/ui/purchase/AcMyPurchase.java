@@ -7,12 +7,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
-import com.fx.secondbar.ui.quote.AcQuoteDetail;
+import com.fx.secondbar.bean.PurchaseBean;
+import com.fx.secondbar.http.HttpManager;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * function:我的申购
@@ -25,6 +28,8 @@ public class AcMyPurchase extends ActivitySupport implements SwipeRefreshLayout.
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private AdPurchase adapter;
+
+    private int currPage = -1;
 
     @Override
     protected int getLayoutResId()
@@ -54,25 +59,24 @@ public class AcMyPurchase extends ActivitySupport implements SwipeRefreshLayout.
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AdPurchase();
         adapter.bindToRecyclerView(recyclerView);
-        adapter.setNewData(getDatas());
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener()
         {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
-                jump(AcQuoteDetail.class);
+                jump(AcPurchaseOrderDetail.class);
             }
         });
-    }
-
-    private List<String> getDatas()
-    {
-        List<String> data = new ArrayList<>();
-        data.add("");
-        data.add("");
-        data.add("");
-        data.add("");
-        return data;
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
+        {
+            @Override
+            public void onLoadMoreRequested()
+            {
+                getData(currPage + 1);
+            }
+        }, recyclerView);
+        swipeRefreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override
@@ -102,6 +106,65 @@ public class AcMyPurchase extends ActivitySupport implements SwipeRefreshLayout.
     @Override
     public void onRefresh()
     {
+        getData(PAGE_START);
+    }
 
+    /**
+     * 获取数据
+     *
+     * @param page
+     */
+    private void getData(final int page)
+    {
+        HttpManager.getMyPurchase(page, PAGE_NUM, new Subscriber<List<PurchaseBean>>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            }
+
+            @Override
+            public void onNext(List<PurchaseBean> purchaseBeans)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                currPage = page;
+                if (page == PAGE_START)
+                {
+                    adapter.setNewData(purchaseBeans);
+                } else
+                {
+                    adapter.addData(purchaseBeans);
+                }
+                if (VerificationUtil.getSize(purchaseBeans) >= PAGE_NUM)
+                {
+                    adapter.loadMoreComplete();
+                } else
+                {
+                    adapter.loadMoreEnd();
+                }
+            }
+        });
     }
 }

@@ -1,4 +1,4 @@
-package com.fx.secondbar.ui.quote;
+package com.fx.secondbar.ui.purchase;
 
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -14,6 +14,7 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.DialogShare;
+import com.fx.secondbar.ui.quote.AcQuoteBuyConfirm;
 import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
@@ -21,13 +22,12 @@ import me.next.tagview.TagCloudView;
 import rx.Subscriber;
 
 /**
- * function:名人详情
+ * function:申购详情
  * author: frj
- * modify date: 2018/9/21
+ * modify date: 2018/9/23
  */
-public class AcQuoteDetail extends ActivitySupport
+public class AcPurchaseDetail extends ActivitySupport
 {
-
     private ImageView img_top;
     private SelectableRoundedImageView img_avatar;
     private TextView tv_person_name;

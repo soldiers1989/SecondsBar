@@ -50,7 +50,7 @@ public class AcOrderManage extends ActivitySupport
     @Override
     protected void initData()
     {
-        List<FragmentViewPagerBase> list = new ArrayList<>();
+        final List<FragmentViewPagerBase> list = new ArrayList<>();
         list.add(FOrderItem.newInstance(FOrderItem.TYPE_ALL));
         list.add(FOrderItem.newInstance(FOrderItem.TYPE_WAIT_PAY));
         list.add(FOrderItem.newInstance(FOrderItem.TYPE_PERFORMANCE));
@@ -59,6 +59,26 @@ public class AcOrderManage extends ActivitySupport
         adapter = new AdHomeItem(getSupportFragmentManager(), list, getResources().getStringArray(R.array.order_manage_tabs));
         viewPager.setAdapter(adapter);
         tabs.setViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
+
+            }
+
+            @Override
+            public void onPageSelected(int position)
+            {
+                list.get(position).onStarShow();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state)
+            {
+
+            }
+        });
     }
 
     @Override

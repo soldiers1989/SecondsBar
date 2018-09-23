@@ -3,8 +3,13 @@ package com.fx.secondbar.http;
 import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.http.HttpGetData;
 import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
+import com.fx.secondbar.bean.OrderBean;
+import com.fx.secondbar.bean.PersonBean;
+import com.fx.secondbar.bean.PurchaseBean;
+import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBBean;
@@ -92,9 +97,9 @@ public class HttpManager
      * @param type       类型
      * @param subscriber
      */
-    public static void getIndexInformation(String type, Subscriber<IndexInformationBean> subscriber)
+    public static void getIndexInformation(int page, int pageSize, String type, Subscriber<IndexInformationBean> subscriber)
     {
-        Observable<IndexInformationBean> observable = getInstance().mService.getIndexInformation(type).map(new HttpResultFun<IndexInformationBean>());
+        Observable<IndexInformationBean> observable = getInstance().mService.getIndexInformation(page, pageSize, type).map(new HttpResultFun<IndexInformationBean>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
@@ -135,6 +140,82 @@ public class HttpManager
         getInstance().bindSubscriber(observable, subscriber);
     }
 
+    /**
+     * 获取行情详情
+     *
+     * @param peopleId
+     * @param subscriber
+     */
+    public static void getQuoteDetail(String peopleId, Subscriber<PersonBean> subscriber)
+    {
+        Observable<PersonBean> observable = getInstance().mService.getQuoteDetail(peopleId).map(new HttpResultFun<PersonBean>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取商品列表
+     *
+     * @param page
+     * @param pageSize
+     * @param categoryId 栏目id，值为空表示全部
+     * @param subscriber
+     */
+    public static void getMall(int page, int pageSize, String categoryId, Subscriber<ResMall> subscriber)
+    {
+        Observable<ResMall> observable = getInstance().mService.getMall(page, pageSize, categoryId).map(new HttpResultFun<ResMall>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取商品详情
+     *
+     * @param goodsId    商品id
+     * @param subscriber
+     */
+    public static void getMallDetail(String goodsId, Subscriber<CommodityBean> subscriber)
+    {
+        Observable<CommodityBean> observable = getInstance().mService.getMallDetail(goodsId).map(new HttpResultFun<CommodityBean>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 购买商品接口
+     *
+     * @param goodsId    商品id
+     * @param subscriber
+     */
+    public static void buyCommodity(String goodsId, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.commodityBuy(goodsId).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取订单列表
+     *
+     * @param page
+     * @param pageSize
+     * @param status     订单状态值
+     * @param subscriber
+     */
+    public static void getOrderList(int page, int pageSize, int status, Subscriber<List<OrderBean>> subscriber)
+    {
+        Observable<List<OrderBean>> observable = getInstance().mService.getOrderList(page, pageSize, status).map(new HttpResultFun<List<OrderBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取我的申购
+     *
+     * @param page
+     * @param pageSize
+     * @param subscriber
+     */
+    public static void getMyPurchase(int page, int pageSize, Subscriber<List<PurchaseBean>> subscriber)
+    {
+        Observable<List<PurchaseBean>> observable = getInstance().mService.getMyPurchase(page, pageSize).map(new HttpResultFun<List<PurchaseBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
 
     /**
      * 绑定订购者

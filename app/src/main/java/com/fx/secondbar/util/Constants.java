@@ -59,6 +59,10 @@ public class Constants
      */
     public static final String API_QUOTE_LIST = "people/list";
     /**
+     * 名人详情
+     */
+    public static final String API_QUOTE_DETAIL = "people/info";
+    /**
      * 交易中心购买接口
      */
     public static final String API_TRANSACTION_BUY = "people/buy";
@@ -82,4 +86,12 @@ public class Constants
      * 我的申购列表接口
      */
     public static final String API_MY_PURCHASE = "transaction/list";
+    /**
+     * 获取Q币活动接口
+     */
+    public static final String API_GET_ACTIVITY_Q = "activity/list";
+    /**
+     * 完成Q币活动接口
+     */
+    public static final String API_FINISH_ACTIVITY = "activity/finish";
 }

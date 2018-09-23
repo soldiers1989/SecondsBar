@@ -65,7 +65,7 @@ public abstract class ActivitySupport extends AppCompatActivity implements OnCli
     /**
      * 起始页
      */
-    protected static final int PAGE_START = 1;
+    protected static final int PAGE_START = 0;
 
     /**
      * 多次点击超时时间

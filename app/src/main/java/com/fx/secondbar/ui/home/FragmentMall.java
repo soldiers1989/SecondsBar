@@ -27,7 +27,8 @@ import java.util.List;
  * author: frj
  * modify date: 2018/9/6
  */
-public class FragmentMall extends FragmentSupport {
+public class FragmentMall extends FragmentSupport
+{
 
     private ImageView img_toolbar_right;
     private SlidingTabLayout tabs;
@@ -36,19 +37,22 @@ public class FragmentMall extends FragmentSupport {
     private AdHomeItem adapter;
 
 
-    public static FragmentMall newInstance() {
+    public static FragmentMall newInstance()
+    {
         return new FragmentMall();
     }
 
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         return inflater.inflate(R.layout.f_mall, container, false);
     }
 
     @Override
-    protected void initView() {
+    protected void initView()
+    {
         img_toolbar_right = findView(R.id.img_toolbar_right);
         tabs = findView(R.id.tabs);
         viewPager = findView(R.id.viewPager);
@@ -57,27 +61,52 @@ public class FragmentMall extends FragmentSupport {
     }
 
     @Override
-    protected void initListener() {
+    protected void initListener()
+    {
         img_toolbar_right.setOnClickListener(this);
     }
 
     @Override
-    protected void initData() {
+    protected void initData()
+    {
         String[] tabTitles = getResources().getStringArray(R.array.mall_tabs);
-        List<FragmentViewPagerBase> fragmengs = new ArrayList<>();
-        for (int i = 0; i < tabTitles.length; i++) {
-            fragmengs.add(FragmentMallItem.newInstance());
+        final List<FragmentViewPagerBase> fragmengs = new ArrayList<>();
+        for (int i = 0; i < tabTitles.length; i++)
+        {
+            fragmengs.add(FragmentMallItem.newInstance(""));
         }
         adapter = new AdHomeItem(getChildFragmentManager(), fragmengs, tabTitles);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(tabTitles.length);
         tabs.setViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
+
+            }
+
+            @Override
+            public void onPageSelected(int position)
+            {
+                fragmengs.get(position).onStarShow();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state)
+            {
+
+            }
+        });
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         super.onClick(v);
-        switch (v.getId()) {
+        switch (v.getId())
+        {
             case R.id.img_toolbar_right:
                 jump(AcSearch.class, AcSearch.TYPE_COMMODITY, false);
                 break;
