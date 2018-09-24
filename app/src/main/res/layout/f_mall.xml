@@ -49,7 +49,6 @@
         app:tl_indicator_color="@color/home_tabs_mark_color"
         app:tl_indicator_width_equal_title="true"
         app:tl_tab_space_equal="true"
-        app:tl_tab_width="@dimen/mall_tab_w"
         app:tl_textBold="BOTH"
         app:tl_textSelectColor="@color/home_tabs_mark_color"
         app:tl_textUnselectColor="@color/home_tabs_item_text_unsel"

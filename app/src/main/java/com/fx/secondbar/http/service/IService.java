@@ -12,6 +12,7 @@ import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
+import com.fx.secondbar.bean.SigninBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBBean;
@@ -19,7 +20,11 @@ import com.fx.secondbar.util.Constants;
 
 import java.util.List;
 
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -197,5 +202,21 @@ public interface IService
      */
     @GET(Constants.API_GET_CATEGORY)
     Observable<ResponseBean<ResConfigInfo>> getConfigInfo();
+
+    /**
+     * 上传头像
+     *
+     * @return
+     */
+    @POST(Constants.API_UPLOAD_AVATAR)
+    Observable<ResponseBean> uploadAvatar(@Body RequestBody body);
+
+    /**
+     * 签到
+     *
+     * @return
+     */
+    @GET(Constants.API_SIGNIN)
+    Observable<ResponseBean<SigninBean>> signin();
 
 }

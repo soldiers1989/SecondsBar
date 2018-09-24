@@ -113,6 +113,11 @@ public class AcTransilate extends ActivitySupport
             public void onError(Throwable e)
             {
                 e.printStackTrace();
+                count++;
+                if (count >= 2)
+                {
+                    jump(MainActivity.class, true);
+                }
             }
 
             @Override

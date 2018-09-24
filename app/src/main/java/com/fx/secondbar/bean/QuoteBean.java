@@ -18,6 +18,7 @@ public class QuoteBean
     private String zjm;       //名人助记码
     private String img;//头像
     private String peopleid;//名人id
+    private Double price;   //当前价格
 
     public Double getYesterdaysprice()
     {
@@ -117,5 +118,15 @@ public class QuoteBean
     public void setPeopleid(String peopleid)
     {
         this.peopleid = peopleid;
+    }
+
+    public Double getPrice()
+    {
+        return price == null ? 0 : price;
+    }
+
+    public void setPrice(Double price)
+    {
+        this.price = price;
     }
 }

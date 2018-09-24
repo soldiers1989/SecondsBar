@@ -47,7 +47,7 @@ public class AdQuote extends BaseQuickAdapter<QuoteBean, BaseViewHolder>
         {
             VerificationUtil.setViewValue(tv_name, item.getName() + "(" + item.getZjm() + ")");
         }
-        VerificationUtil.setViewValue(tv_price, item.getTodayprice().toString());
+        VerificationUtil.setViewValue(tv_price, item.getPrice().toString());
         VerificationUtil.setViewValue(tv_up, item.getDecline().toString());
         VerificationUtil.setViewValue(tv_percent, item.getGain().toString());
 

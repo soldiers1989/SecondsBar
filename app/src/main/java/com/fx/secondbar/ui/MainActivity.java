@@ -1,6 +1,10 @@
 package com.fx.secondbar.ui;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,6 +22,7 @@ import com.fx.secondbar.ui.home.FragmentMall;
 import com.fx.secondbar.ui.home.FragmentPerson;
 import com.fx.secondbar.ui.home.FragmentQuotes;
 import com.fx.secondbar.ui.home.FragmentTransaction;
+import com.fx.secondbar.util.Constants;
 
 import rx.Subscriber;
 
@@ -103,7 +108,28 @@ public class MainActivity extends ActivitySupport
         initItems();
         switchItem(tv_home);
         login(0);
+
+        IntentFilter filter = new IntentFilter();
+        //刷新用户信息
+        filter.addAction(Constants.ACTION_REFRESH_USERINFO);
+        registerReceiver(receiver, filter);
     }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver()
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            if (intent == null)
+            {
+                return;
+            }
+            if (Constants.ACTION_REFRESH_USERINFO.equals(intent.getAction()))
+            {
+                login(0);
+            }
+        }
+    };
 
     /**
      * 初始化Fragment集合
@@ -311,5 +337,12 @@ public class MainActivity extends ActivitySupport
     protected int[] getPermissionInfoTips()
     {
         return new int[]{R.string.permission_write_external_storage_tips};
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        unregisterReceiver(receiver);
+        super.onDestroy();
     }
 }

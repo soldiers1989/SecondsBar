@@ -31,19 +31,16 @@
         android:layout_marginBottom="@dimen/home_infomation_item_sing_from_mb"
         android:maxLength="10"
         android:singleLine="true"
-        android:text="央视新闻"
         android:textColor="@color/home_infomation_item_from_text"
         android:textSize="@dimen/home_infomation_item_sing_from_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="央视新闻"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/tv_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dip"
-        android:text="128评"
         android:textColor="@color/home_infomation_item_from_text"
         android:textSize="@dimen/home_infomation_item_sing_from_text"
         app:layout_constraintBottom_toBottomOf="@+id/tv_from"
@@ -54,7 +51,7 @@
         android:layout_width="0dip"
         android:layout_height="0dip"
         android:layout_marginRight="@dimen/home_infomation_item_sing_title_mr"
-        android:text="中非合作论坛北京峰会开幕式宣传片《同心共筑 命运与共》"
+        android:ellipsize="end"
         android:textColor="@color/home_infomation_item_title_text"
         android:textSize="@dimen/home_infomation_item_sing_title_text"
         app:layout_constraintBottom_toTopOf="@id/tv_from"

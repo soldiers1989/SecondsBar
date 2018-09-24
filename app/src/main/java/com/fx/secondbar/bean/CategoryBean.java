@@ -1,11 +1,13 @@
 package com.fx.secondbar.bean;
 
+import java.io.Serializable;
+
 /**
  * function:栏目实体信息
  * author: frj
  * modify date: 2018/9/24
  */
-public class CategoryBean
+public class CategoryBean implements Serializable
 {
     private String category_ID;//栏目id
     private String name;//栏目名称

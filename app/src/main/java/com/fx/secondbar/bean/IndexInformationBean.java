@@ -15,6 +15,8 @@ public class IndexInformationBean
     private List<InfomationBean> listNews;
     //推荐商品集合
     private List<CommodityBean> listMerchandise;
+    //轮播图集合
+    private List<BannerBean> listBanner;
 
     public List<PersonBean> getListPeople()
     {
@@ -44,5 +46,15 @@ public class IndexInformationBean
     public void setListMerchandise(List<CommodityBean> listMerchandise)
     {
         this.listMerchandise = listMerchandise;
+    }
+
+    public List<BannerBean> getListBanner()
+    {
+        return listBanner;
+    }
+
+    public void setListBanner(List<BannerBean> listBanner)
+    {
+        this.listBanner = listBanner;
     }
 }

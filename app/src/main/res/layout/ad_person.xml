@@ -3,6 +3,8 @@
               android:layout_width="match_parent"
               android:layout_height="90dip"
               android:background="@drawable/person_how_get_bg"
+              android:focusable="true"
+              android:focusableInTouchMode="true"
               android:minHeight="90dip"
               android:orientation="vertical"
               android:paddingLeft="15dip"
@@ -26,7 +28,7 @@
         android:textColor="#787878"
         android:textSize="12sp"/>
 
-    <TextView
+    <Button
         android:id="@+id/tv_option"
         android:layout_width="60dip"
         android:layout_height="20dip"

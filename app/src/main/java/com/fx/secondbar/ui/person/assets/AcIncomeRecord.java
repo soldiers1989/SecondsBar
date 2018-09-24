@@ -8,9 +8,11 @@ import android.view.View;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.UserInfoBean;
+import com.fx.secondbar.http.HttpManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import rx.Subscriber;
 
 /**
  * function:收益记录
@@ -50,18 +52,8 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
     {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AdIncomeRecord();
-        adapter.setNewData(getDatas());
         adapter.bindToRecyclerView(recyclerView);
-    }
-
-    private List<String> getDatas()
-    {
-        List<String> data = new ArrayList<>();
-        data.add("");
-        data.add("");
-        data.add("");
-        data.add("");
-        return data;
+        adapter.setNewData(FxApplication.getInstance().getUserInfoBean().getListQcoin());
     }
 
     @Override
@@ -74,6 +66,49 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
                 finish();
                 break;
         }
+    }
+
+    /**
+     * 登录(Q币收益记录在该接口中返回)
+     */
+    private void login()
+    {
+        HttpManager.login(new Subscriber<UserInfoBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            }
+
+            @Override
+            public void onNext(UserInfoBean userInfoBean)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                FxApplication.getInstance().setUserInfoBean(userInfoBean);
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                adapter.setNewData(FxApplication.getInstance().getUserInfoBean().getListQcoin());
+            }
+        });
     }
 
     @Override
@@ -91,6 +126,6 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
     @Override
     public void onRefresh()
     {
-
+        login();
     }
 }

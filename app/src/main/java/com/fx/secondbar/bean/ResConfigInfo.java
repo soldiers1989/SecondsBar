@@ -1,5 +1,6 @@
 package com.fx.secondbar.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * author: frj
  * modify date: 2018/9/24
  */
-public class ResConfigInfo
+public class ResConfigInfo implements Serializable
 {
     //资讯栏目
     private List<CategoryBean> listCategoryNews;

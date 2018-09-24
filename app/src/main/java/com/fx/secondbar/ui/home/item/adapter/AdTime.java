@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.DynamicBean;
 import com.fx.secondbar.bean.InfomationBean;
@@ -250,18 +251,10 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
         TextView tv_count = helper.getView(R.id.tv_count);
         if (item.getInfomationBean() != null)
         {
-//            List<Integer> list = item.getInfomationBean().getList();
-//            if (VerificationUtil.noEmpty(list))
-//            {
-//                GlideApp.with(img).asBitmap().load(list.get(0)).centerCrop().into(img);
-//            } else
-//            {
-//                GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
-//            }
             GlideLoad.load(img, item.getInfomationBean().getPicture(), true);
             VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getShare_COPY());
             VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getTitle());
-            VerificationUtil.setViewValue(tv_count, item.getInfomationBean().getShare_TOTAL());
+            VerificationUtil.setViewValue(tv_count, String.format(FxApplication.getStr(R.string.read_person_count), item.getInfomationBean().getScan_NUM()));
         } else
         {
             GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
@@ -290,24 +283,18 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
             List<String> list = item.getInfomationBean().getPictures();
             if (list != null && list.size() >= 3)
             {
-//                GlideApp.with(img1).asBitmap().load(list.get(0)).centerCrop().into(img1);
-//                GlideApp.with(img2).asBitmap().load(list.get(1)).centerCrop().into(img2);
-//                GlideApp.with(img3).asBitmap().load(list.get(2)).centerCrop().into(img3);
                 GlideLoad.load(img1, list.get(0), true);
                 GlideLoad.load(img2, list.get(1), true);
                 GlideLoad.load(img3, list.get(2), true);
             } else
             {
-//                GlideApp.with(img1).asBitmap().load(0).centerCrop().into(img1);
-//                GlideApp.with(img2).asBitmap().load(0).centerCrop().into(img2);
-//                GlideApp.with(img3).asBitmap().load(0).centerCrop().into(img3);
                 GlideLoad.load(img1, "", true);
                 GlideLoad.load(img2, "", true);
                 GlideLoad.load(img3, "", true);
             }
             VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getShare_COPY());
             VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getTitle());
-            VerificationUtil.setViewValue(tv_count, item.getInfomationBean().getShare_TOTAL());
+            VerificationUtil.setViewValue(tv_count, String.format(FxApplication.getStr(R.string.read_person_count), item.getInfomationBean().getScan_NUM()));
         } else
         {
             GlideApp.with(img1).asBitmap().load(0).centerCrop().into(img1);

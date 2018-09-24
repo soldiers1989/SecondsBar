@@ -15,12 +15,13 @@ import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.base.FragmentSupport;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.fx.secondbar.R;
-import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
+import com.fx.secondbar.ui.DialogSign;
 import com.fx.secondbar.ui.home.item.FragmentInfomation;
 import com.fx.secondbar.ui.home.item.FragmentTime;
 import com.fx.secondbar.ui.home.item.FragmentTutorial;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
 import com.fx.secondbar.ui.home.item.FragmentWb;
+import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,5 +107,21 @@ public class FragmentHome extends FragmentSupport
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        super.onClick(v);
+        switch (v.getId())
+        {
+            case R.id.img_toolbar_left:
+                new DialogSign(getContext()).show();
+                break;
+            case R.id.img_toolbar_right:
+                break;
+            case R.id.fl_search:
+                break;
+        }
     }
 }

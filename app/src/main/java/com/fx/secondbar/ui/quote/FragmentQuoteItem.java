@@ -41,9 +41,13 @@ public class FragmentQuoteItem extends FragmentViewPagerBase implements SwipeRef
     //栏目id
     private String categoryId = "";
 
-    public static FragmentQuoteItem newInstance()
+    public static FragmentQuoteItem newInstance(String type)
     {
-        return new FragmentQuoteItem();
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_STR, type);
+        FragmentQuoteItem fragment = new FragmentQuoteItem();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -79,7 +83,7 @@ public class FragmentQuoteItem extends FragmentViewPagerBase implements SwipeRef
     @Override
     protected void initData()
     {
-        swipeRefreshLayout.setEnabled(false);
+        categoryId = getArguments().getString(KEY_STR);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(getContext().getResources().getDimensionPixelSize(R.dimen.mall_item_space), false, false, false));
         adapter = new AdQuote();

@@ -1,14 +1,18 @@
 package com.fx.secondbar.application;
 
+import android.content.Intent;
 import android.support.annotation.StringRes;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.btten.bttenlibrary.application.BtApplication;
+import com.btten.bttenlibrary.base.load.LoadManager;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.BuildConfig;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.config.BaseConfig;
+import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.DataCacheUtils;
 import com.tencent.smtt.sdk.QbSdk;
 
@@ -155,5 +159,13 @@ public class FxApplication extends BtApplication
         }
         this.mConfigInfo = mConfigInfo;
         DataCacheUtils.saveListCache(this, mConfigInfo, DataCacheUtils.FILE_CONFIG_INFO);
+    }
+
+    /**
+     * 发送刷新用户信息广播
+     */
+    public static void refreshUserInfoBroadCast()
+    {
+        LocalBroadcastManager.getInstance(getInstance()).sendBroadcast(new Intent(Constants.ACTION_REFRESH_USERINFO));
     }
 }

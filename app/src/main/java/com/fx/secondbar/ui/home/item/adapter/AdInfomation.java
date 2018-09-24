@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.bean.PersonBean;
@@ -155,7 +156,7 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
             GlideLoad.load(img, item.getInfomationBean().getPicture(), true);
             VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getShare_COPY());
             VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getTitle());
-            VerificationUtil.setViewValue(tv_count, item.getInfomationBean().getShare_TOTAL());
+            VerificationUtil.setViewValue(tv_count, String.format(FxApplication.getStr(R.string.read_person_count), item.getInfomationBean().getScan_NUM()));
         } else
         {
             GlideLoad.load(img, "", true);
@@ -195,7 +196,7 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
             }
             VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getShare_COPY());
             VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getTitle());
-            VerificationUtil.setViewValue(tv_count, item.getInfomationBean().getShare_TOTAL());
+            VerificationUtil.setViewValue(tv_count, String.format(FxApplication.getStr(R.string.read_person_count), item.getInfomationBean().getScan_NUM()));
         } else
         {
             GlideLoad.load(img1, "", true);

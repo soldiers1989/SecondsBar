@@ -14,17 +14,18 @@ import android.widget.ImageView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
-import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.BannerBean;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.DynamicBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.item.adapter.AdTime;
+import com.fx.secondbar.util.GlideLoad;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private ConvenientBanner<Integer> convenientBanner;
+    private ConvenientBanner<BannerBean> convenientBanner;
 
     private AdTime adapter;
 
@@ -87,7 +88,6 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
         adapter = new AdTime();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         adapter.bindToRecyclerView(recyclerView);
-        adapter.addHeaderView(createHeadView());
     }
 
 //    /**
@@ -126,19 +126,19 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
 //        return Arrays.asList(imgs);
 //    }
 
-    /**
-     * 获取图片链接
-     *
-     * @return
-     */
-    private List<Integer> getBanners()
-    {
-        List<Integer> list = new ArrayList<>();
-        list.add(R.mipmap.test_banner_1);
-        list.add(R.mipmap.test_bannner_2);
-        list.add(R.mipmap.test_banner_3);
-        return list;
-    }
+//    /**
+//     * 获取图片链接
+//     *
+//     * @return
+//     */
+//    private List<Integer> getBanners()
+//    {
+//        List<Integer> list = new ArrayList<>();
+//        list.add(R.mipmap.test_banner_1);
+//        list.add(R.mipmap.test_bannner_2);
+//        list.add(R.mipmap.test_banner_3);
+//        return list;
+//    }
 
     /**
      * 获取数据
@@ -177,6 +177,11 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
                 if (swipeRefreshLayout.isRefreshing())
                 {
                     swipeRefreshLayout.setRefreshing(false);
+                }
+                adapter.removeAllHeaderView();
+                if (VerificationUtil.getSize(indexTimeBean.getListBanner()) > 0)
+                {
+                    adapter.addHeaderView(createHeadView(indexTimeBean.getListBanner()));
                 }
                 adapter.setNewData(handleData(indexTimeBean));
             }
@@ -242,7 +247,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
      *
      * @return
      */
-    private View createHeadView()
+    private View createHeadView(List<BannerBean> bannerBeans)
     {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_time_head, recyclerView, false);
         RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
@@ -263,7 +268,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
             {
                 return R.layout.layout_banner;
             }
-        }, getBanners()).setPageIndicator(new int[]{R.mipmap.ic_indicator, R.mipmap.ic_indicator_sel});
+        }, bannerBeans).setPageIndicator(new int[]{R.mipmap.ic_indicator, R.mipmap.ic_indicator_sel});
         return view;
     }
 
@@ -297,7 +302,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
     /**
      * 加载图片Holder
      */
-    static class LoadImageHolder extends Holder<Integer>
+    static class LoadImageHolder extends Holder<BannerBean>
     {
 
         private ImageView img;
@@ -314,11 +319,11 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
         }
 
         @Override
-        public void updateUI(Integer data)
+        public void updateUI(BannerBean data)
         {
             if (img != null)
             {
-                GlideApp.with(img).load(data).centerCrop().into(img);
+                GlideLoad.load(img, data.getImg());
             }
         }
     }

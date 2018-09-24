@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class UserInfoBean implements Serializable
 {
-    private String paymentpassword;//是否设置支付密码
+    private String paymentpassword;//是否设置支付密码 1表示已设置
     private String img;// 头像地址
     private String actualname;// 名字
     private Integer level;// 等级

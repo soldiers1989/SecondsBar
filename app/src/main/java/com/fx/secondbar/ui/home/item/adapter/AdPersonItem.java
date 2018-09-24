@@ -29,7 +29,7 @@ public class AdPersonItem extends BaseQuickAdapter<PersonBean, BaseViewHolder>
         TextView tv_price = helper.getView(R.id.tv_price);
         TextView tv_name = helper.getView(R.id.tv_name);
 
-        GlideLoad.load(img, item.getPicture(), true);
+        GlideLoad.load(img, item.getImg(), true);
         setPrice(tv_price, item.getPrice());
         VerificationUtil.setViewValue(tv_name, item.getName());
     }

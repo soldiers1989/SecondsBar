@@ -13,7 +13,7 @@ public class PersonBean
     private Integer status;// 状态
     private Integer sorts;// 排序
     private Integer type;// 类型
-    private String img;//图片地址
+    private String img;//头像
     private String createtime;//创建时间
     private String zjm;//助记码
     private String cid;//

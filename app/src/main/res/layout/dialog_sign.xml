@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="345dip"
+    android:layout_height="432dip"
+    android:background="@drawable/dialog_sign_bg"
+    android:minHeight="432dip"
+    android:minWidth="345dip">
+
+    <ImageView
+        android:id="@+id/img_mark"
+        android:layout_width="329dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:src="@mipmap/ic_sign_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/ll_gold"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dip"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/img_mark"
+        app:layout_constraintStart_toStartOf="@+id/img_mark"
+        app:layout_constraintTop_toBottomOf="@+id/img_mark">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_days"
+        android:layout_width="0dip"
+        android:layout_height="20dip"
+        android:layout_marginTop="12dip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/img_mark"
+        app:layout_constraintStart_toStartOf="@+id/img_mark"
+        app:layout_constraintTop_toBottomOf="@+id/ll_gold">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_reward"
+        android:layout_width="0dip"
+        android:layout_height="20dip"
+        android:layout_marginTop="8dip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/img_mark"
+        app:layout_constraintStart_toStartOf="@+id/img_mark"
+        app:layout_constraintTop_toBottomOf="@+id/ll_days">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_sign"
+        android:layout_width="235dip"
+        android:layout_height="39dip"
+        android:background="@drawable/dialog_sign_btn_bg"
+        android:text="立即签到"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_reward"/>
+
+    <LinearLayout
+        android:id="@+id/ll_success"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_reward">
+
+        <TextView
+            android:id="@+id/tv_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_cotinuous_day"
+            android:textColor="@color/font_yellow_color"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_rule_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dip"
+            android:gravity="center_horizontal"
+            android:text="@string/sign_rule_des"
+            android:textColor="#9d9d9d"
+            android:textSize="12sp"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

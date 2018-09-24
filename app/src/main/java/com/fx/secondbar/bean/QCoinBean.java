@@ -1,11 +1,13 @@
 package com.fx.secondbar.bean;
 
+import java.io.Serializable;
+
 /**
  * function:Q币实体信息
  * author: frj
  * modify date: 2018/9/22
  */
-public class QCoinBean
+public class QCoinBean implements Serializable
 {
     private Integer type;//类型
     private Integer price;//获得的金币数量

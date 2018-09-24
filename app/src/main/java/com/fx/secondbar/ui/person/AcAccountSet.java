@@ -14,6 +14,7 @@ import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.ui.img.ConstantValue;
 import com.btten.bttenlibrary.ui.img.MultiImageSelectorActivity;
+import com.btten.bttenlibrary.util.BitmapUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.bumptech.glide.Glide;
@@ -24,10 +25,12 @@ import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.person.aboutus.AcAboutUs;
 import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideCacheUtil;
+import com.fx.secondbar.util.GlideLoad;
 import com.fx.secondbar.util.ProgressDialogUtil;
 import com.joooonho.SelectableRoundedImageView;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import rx.Observable;
@@ -44,6 +47,7 @@ import rx.schedulers.Schedulers;
  */
 public class AcAccountSet extends ActivitySupport
 {
+
 
     private static final int REQUEST_CODE_HEAD_IMG = 10;
 
@@ -99,6 +103,11 @@ public class AcAccountSet extends ActivitySupport
     protected void initData()
     {
         dialog = ProgressDialogUtil.getProgressDialog(this, getString(R.string.progress_tips), true);
+        GlideLoad.load(img_avatar, FxApplication.getInstance().getUserInfoBean().getImg(), true);
+        VerificationUtil.setViewValue(tv_nickname, FxApplication.getInstance().getUserInfoBean().getNickname());
+        VerificationUtil.setViewValue(tv_level, "LV" + FxApplication.getInstance().getUserInfoBean().getLevel());
+        //判断是否设置支付密码，1表示已设置。
+        VerificationUtil.setViewValue(tv_pay_pwd, "1".equals(FxApplication.getInstance().getUserInfoBean().getPaymentpassword()) ? "已设置" : "去设置");
     }
 
     @Override
@@ -304,6 +313,121 @@ public class AcAccountSet extends ActivitySupport
         }
     }
 
+    /**
+     * 处理头像文件
+     */
+    private void handleAvatar(final String path)
+    {
+        if (dialog != null)
+        {
+            dialog.show();
+        }
+        Observable.create(new Observable.OnSubscribe<File>()
+        {
+            @Override
+            public void call(Subscriber<? super File> subscriber)
+            {
+                try
+                {
+                    byte[] bytes = BitmapUtil.decodeThumbBitmapByteForFile(path, BitmapUtil.DEFAULT_WIDTH, BitmapUtil.DEFAULT_HEIGHT, true);
+                    File cacheDir = FxApplication.getInstance().getCacheDir();
+                    File saveDir = new File(cacheDir, Constants.ROOT_DIR);
+                    if (!saveDir.exists())
+                    {
+                        saveDir.mkdirs();
+                    }
+                    String fileName = path.substring(path.lastIndexOf("/") + 1);
+                    File file = new File(saveDir, fileName);
+                    FileOutputStream fos = new FileOutputStream(file);
+                    fos.write(bytes);
+                    fos.flush();
+                    fos.close();
+                    subscriber.onNext(file);
+                } catch (Exception e)
+                {
+                    e.printStackTrace();
+                    subscriber.onError(e);
+                } finally
+                {
+
+                }
+
+            }
+        }).subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<File>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                e.printStackTrace();
+                ShowToast.showToast("图片上传失败");
+            }
+
+            @Override
+            public void onNext(File file)
+            {
+                uploadAvatar(file);
+            }
+        });
+    }
+
+    /**
+     * 上传头像
+     *
+     * @param file
+     */
+    private void uploadAvatar(File file)
+    {
+        HttpManager.getInstance().uploadAvatar(file, new Subscriber<ResponseBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                ShowToast.showToast("头像修改失败");
+            }
+
+            @Override
+            public void onNext(ResponseBean responseBean)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                ShowToast.showToast("头像修改成功");
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -320,6 +444,7 @@ public class AcAccountSet extends ActivitySupport
                 if (VerificationUtil.noEmpty(list))
                 {
                     GlideApp.with(this).asBitmap().load(new File(list.get(0))).centerCrop().into(img_avatar);
+                    handleAvatar(list.get(0));
                 }
             }
         }

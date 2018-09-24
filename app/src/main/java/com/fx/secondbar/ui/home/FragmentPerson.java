@@ -23,6 +23,7 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.DialogSign;
 import com.fx.secondbar.ui.home.adapter.AdPerson;
 import com.fx.secondbar.ui.order.AcOrderManage;
 import com.fx.secondbar.ui.person.AcAccountSet;
@@ -97,29 +98,30 @@ public class FragmentPerson extends FragmentSupport
         recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(DensityUtil.dip2px(getContext(), 15), true, false, false));
         adapter = new AdPerson();
         adapter.bindToRecyclerView(recyclerView);
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener()
+        
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener()
         {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position)
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position)
             {
                 ActiveBean bean = FragmentPerson.this.adapter.getItem(position);
                 //签到
-                if (String.valueOf(ActiveBean.TYPE_SIGN) == bean.getType())
+                if (String.valueOf(ActiveBean.TYPE_SIGN).equals(bean.getType()))
                 {
-
-                } else if (String.valueOf(ActiveBean.TYPE_INVITE) == bean.getType())
+                    new DialogSign(getContext()).show();
+                } else if (String.valueOf(ActiveBean.TYPE_INVITE).equals(bean.getType()))
                 {//邀请好友
 
-                } else if (String.valueOf(ActiveBean.TYPE_SHARE) == bean.getType())
+                } else if (String.valueOf(ActiveBean.TYPE_SHARE).equals(bean.getType()))
                 {//分享
 
-                } else if (String.valueOf(ActiveBean.TYPE_BROWE) == bean.getType())
+                } else if (String.valueOf(ActiveBean.TYPE_BROWE).equals(bean.getType()))
                 {//看新闻
 
-                } else if (String.valueOf(ActiveBean.TYPE_OPEN_APP) == bean.getType())
+                } else if (String.valueOf(ActiveBean.TYPE_OPEN_APP).equals(bean.getType()))
                 {//打开App
 
-                } else if (String.valueOf(ActiveBean.TYPE_WEB) == bean.getType())
+                } else if (String.valueOf(ActiveBean.TYPE_WEB).equals(bean.getType()))
                 {//网页
 
                 }
@@ -137,7 +139,6 @@ public class FragmentPerson extends FragmentSupport
             img_get_q.setLayoutParams(params);
         }
         GlideApp.with(img_get_q).asBitmap().load(R.mipmap.ic_get_q_img).centerCrop().into(img_get_q);
-//        GlideApp.with(img_avatar).asBitmap().load(R.mipmap.test_dynamic_1).centerCrop().into(img_avatar);
 
         GlideLoad.load(img_avatar, FxApplication.getInstance().getUserInfoBean().getImg(), true);
         VerificationUtil.setViewValue(tv_name, FxApplication.getInstance().getUserInfoBean().getNickname());

@@ -14,8 +14,10 @@ import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.base.FragmentSupport;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.fx.secondbar.R;
-import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
+import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.CategoryBean;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
+import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
 import com.fx.secondbar.ui.quote.FragmentQuoteItem;
 import com.fx.secondbar.ui.search.AcSearch;
 
@@ -27,7 +29,8 @@ import java.util.List;
  * author: frj
  * modify date: 2018/9/6
  */
-public class FragmentQuotes extends FragmentSupport {
+public class FragmentQuotes extends FragmentSupport
+{
 
     private ImageView img_toolbar_right;
     private SlidingTabLayout tabs;
@@ -35,18 +38,21 @@ public class FragmentQuotes extends FragmentSupport {
 
     private AdHomeItem adapter;
 
-    public static FragmentQuotes newInstance() {
+    public static FragmentQuotes newInstance()
+    {
         return new FragmentQuotes();
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         return inflater.inflate(R.layout.f_quotes, container, false);
     }
 
     @Override
-    protected void initView() {
+    protected void initView()
+    {
         img_toolbar_right = findView(R.id.img_toolbar_right);
         tabs = findView(R.id.tabs);
         viewPager = findView(R.id.viewPager);
@@ -55,16 +61,41 @@ public class FragmentQuotes extends FragmentSupport {
     }
 
     @Override
-    protected void initListener() {
+    protected void initListener()
+    {
         img_toolbar_right.setOnClickListener(this);
     }
 
     @Override
-    protected void initData() {
-        String[] tabTitles = getResources().getStringArray(R.array.quote_tabs);
-        List<FragmentViewPagerBase> fragmengs = new ArrayList<>();
-        for (int i = 0; i < tabTitles.length; i++) {
-            fragmengs.add(FragmentQuoteItem.newInstance());
+    protected void initData()
+    {
+//        String[] tabTitles = getResources().getStringArray(R.array.quote_tabs);
+//        List<FragmentViewPagerBase> fragmengs = new ArrayList<>();
+//        for (int i = 0; i < tabTitles.length; i++) {
+//            fragmengs.add(FragmentQuoteItem.newInstance());
+//        }
+//        adapter = new AdHomeItem(getChildFragmentManager(), fragmengs, tabTitles);
+//        viewPager.setAdapter(adapter);
+//        viewPager.setOffscreenPageLimit(tabTitles.length);
+//        tabs.setViewPager(viewPager);
+
+        List<CategoryBean> categoryBeans = FxApplication.getInstance().getConfigInfo().getListCategoryStar();
+        //第一项默认为全部，未在栏目集合中返回，此处单独处理
+        int size = categoryBeans.size() + 1;
+        String[] tabTitles = new String[size];
+        final List<FragmentViewPagerBase> fragmengs = new ArrayList<>();
+        for (int i = 0; i < size; i++)
+        {
+            String id = "";
+            if (i == 0)
+            {
+                tabTitles[i] = "自选";
+            } else
+            {
+                tabTitles[i] = categoryBeans.get(i - 1).getName();
+                id = categoryBeans.get(i - 1).getCategory_ID();
+            }
+            fragmengs.add(FragmentQuoteItem.newInstance(id));
         }
         adapter = new AdHomeItem(getChildFragmentManager(), fragmengs, tabTitles);
         viewPager.setAdapter(adapter);
@@ -73,9 +104,11 @@ public class FragmentQuotes extends FragmentSupport {
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         super.onClick(v);
-        switch (v.getId()) {
+        switch (v.getId())
+        {
             case R.id.img_toolbar_right:
                 jump(AcSearch.class, AcSearch.TYPE_QUOTES, false);
                 break;

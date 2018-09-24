@@ -23,6 +23,11 @@ public class Constants
     public static final String URL_INFORMATION = ROOT_URL + "/static/mb-front/news.html?id=";
 
     /**
+     * 更新用户数据
+     */
+    public static final String ACTION_REFRESH_USERINFO = "action_refresh_userinfo";
+
+    /**
      * 登录接口
      */
     public static final String API_LOGIN = "login";
@@ -118,4 +123,8 @@ public class Constants
      * 获取栏目接口（配置）
      */
     public static final String API_GET_CATEGORY = "category/all";
+    /**
+     * 上传头像
+     */
+    public static final String API_UPLOAD_AVATAR = "member/uploadImg";
 }

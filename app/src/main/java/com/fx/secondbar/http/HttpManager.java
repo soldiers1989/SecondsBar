@@ -13,6 +13,7 @@ import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
+import com.fx.secondbar.bean.SigninBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBBean;
@@ -21,9 +22,13 @@ import com.fx.secondbar.http.service.IService;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.MalformedJsonException;
 
+import java.io.File;
 import java.net.SocketTimeoutException;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.Subscriber;
@@ -90,7 +95,7 @@ public class HttpManager
      */
     public static void logout(Subscriber<ResponseBean> subscriber)
     {
-        Observable<ResponseBean> observable = getInstance().mService.login().map(new HttpNoDataResultFun<>());
+        Observable<ResponseBean> observable = getInstance().mService.logout().map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
@@ -289,6 +294,38 @@ public class HttpManager
     public static void getConfigInfo(Subscriber<ResConfigInfo> subscriber)
     {
         Observable<ResConfigInfo> observable = getInstance().mService.getConfigInfo().map(new HttpResultFun<ResConfigInfo>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 上传头像
+     *
+     * @param file       头像文件
+     * @param subscriber
+     */
+    public static void uploadAvatar(File file, Subscriber<ResponseBean> subscriber)
+    {
+//        RequestBody body = RequestBody.create(MediaType.parse("image/*"), file);
+        if (file == null)
+        {
+            return;
+        }
+        RequestBody requestBody = null;
+        MultipartBody.Builder build = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        build.addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+        requestBody = build.build();
+        Observable<ResponseBean> observable = getInstance().mService.uploadAvatar(requestBody).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 签到
+     *
+     * @param subscriber
+     */
+    public static void signin(Subscriber<SigninBean> subscriber)
+    {
+        Observable<SigninBean> observable = getInstance().mService.signin().map(new HttpResultFun<SigninBean>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

@@ -33,7 +33,7 @@ public class AdMall extends BaseQuickAdapter<CommodityBean, BaseViewHolder>
         TextView tv_title = helper.getView(R.id.tv_title);
 
         GlideLoad.load(img, item.getImage(), true);
-        VerificationUtil.setViewValue(tv_price, item.getPrice());
+        VerificationUtil.setViewValue(tv_price, String.format(tv_price.getContext().getString(R.string.mall_detail_info_price), item.getPrice()));
         VerificationUtil.setViewValue(tv_title, item.getName());
 
     }

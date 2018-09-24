@@ -1,11 +1,13 @@
 package com.fx.secondbar.bean;
 
+import java.io.Serializable;
+
 /**
  * function:签到规则实体信息
  * author: frj
  * modify date: 2018/9/24
  */
-public class SignRuleBean
+public class SignRuleBean implements Serializable
 {
     private String name;//规则名称
     private String amount;//奖励数量
