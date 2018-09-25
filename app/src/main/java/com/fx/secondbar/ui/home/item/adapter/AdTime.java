@@ -93,7 +93,7 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
         {
 //            GlideApp.with(img).asBitmap().load(item.getDynamicBean().getAvatar()).centerCrop().into(img);
             GlideLoad.load(img, item.getDynamicBean().getImg(), true);
-            VerificationUtil.setViewValue(tv_time, item.getDynamicBean().getOrderdate());
+            VerificationUtil.setViewValue(tv_time, getTimeDes(item.getDynamicBean().getMinutes()));
             VerificationUtil.setViewValue(tv_dynamic, item.getDynamicBean().getGoodsname());
         } else
         {
@@ -102,6 +102,34 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
             VerificationUtil.setViewValue(tv_dynamic, "");
         }
 
+    }
+
+    /**
+     * 根据分钟数，获取时间描述
+     *
+     * @param minues
+     * @return
+     */
+    private String getTimeDes(int minues)
+    {
+        if (minues <= 5)
+        {
+            return "刚刚";
+        } else if (minues <= 60)
+        {
+            return minues + "分钟前";
+        } else
+        {
+            int hours = minues / 60;
+            if (hours <= 31)
+            {
+                return hours + "天前";
+            } else
+            {
+                int month = hours / 31;
+                return month + "月前";
+            }
+        }
     }
 
     /**

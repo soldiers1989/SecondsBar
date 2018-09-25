@@ -48,8 +48,14 @@ import rx.schedulers.Schedulers;
 public class AcAccountSet extends ActivitySupport
 {
 
-
+    /**
+     * 获取头像请求码
+     */
     private static final int REQUEST_CODE_HEAD_IMG = 10;
+    /**
+     * 设置昵称请求码
+     */
+    private static final int REQUEST_CODE_SET_NICKNAME = 11;
 
     private SelectableRoundedImageView img_avatar;
     private TextView tv_nickname;
@@ -289,6 +295,9 @@ public class AcAccountSet extends ActivitySupport
                 jump(MultiImageSelectorActivity.class, bundle, REQUEST_CODE_HEAD_IMG);
                 break;
             case R.id.tv_nickname:
+                Bundle bundleNickName = new Bundle();
+                bundleNickName.putString(KEY_STR, getTextView(tv_nickname));
+                jump(AcSetNickName.class, bundleNickName, REQUEST_CODE_SET_NICKNAME);
                 break;
             case R.id.tv_level:
                 break;
@@ -446,6 +455,16 @@ public class AcAccountSet extends ActivitySupport
                     GlideApp.with(this).asBitmap().load(new File(list.get(0))).centerCrop().into(img_avatar);
                     handleAvatar(list.get(0));
                 }
+            }
+        } else if (REQUEST_CODE_SET_NICKNAME == requestCode)
+        {
+            if (RESULT_OK == resultCode)
+            {
+                if (data == null)
+                {
+                    return;
+                }
+                VerificationUtil.setViewValue(tv_nickname, data.getStringExtra(KEY_STR));
             }
         }
     }

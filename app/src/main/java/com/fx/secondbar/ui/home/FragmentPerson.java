@@ -1,8 +1,13 @@
 package com.fx.secondbar.ui.home;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,6 +35,7 @@ import com.fx.secondbar.ui.person.AcAccountSet;
 import com.fx.secondbar.ui.person.assets.AcAssets;
 import com.fx.secondbar.ui.person.assets.AcIncomeRecord;
 import com.fx.secondbar.ui.purchase.AcMyPurchase;
+import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
@@ -98,7 +104,7 @@ public class FragmentPerson extends FragmentSupport
         recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(DensityUtil.dip2px(getContext(), 15), true, false, false));
         adapter = new AdPerson();
         adapter.bindToRecyclerView(recyclerView);
-        
+
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener()
         {
             @Override
@@ -138,6 +144,18 @@ public class FragmentPerson extends FragmentSupport
             params.height = width * 8 / 23;
             img_get_q.setLayoutParams(params);
         }
+        setPersonInfo();
+        getData(0);
+
+        IntentFilter filter = new IntentFilter(Constants.ACTION_REFRESH_PERSON_SHOW);
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, filter);
+    }
+
+    /**
+     * 设置个人信息显示
+     */
+    private void setPersonInfo()
+    {
         GlideApp.with(img_get_q).asBitmap().load(R.mipmap.ic_get_q_img).centerCrop().into(img_get_q);
 
         GlideLoad.load(img_avatar, FxApplication.getInstance().getUserInfoBean().getImg(), true);
@@ -146,8 +164,23 @@ public class FragmentPerson extends FragmentSupport
         VerificationUtil.setViewValue(tv_ste_value, FxApplication.getInstance().getUserInfoBean().getBalance().toString());
         VerificationUtil.setViewValue(tv_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
         VerificationUtil.setViewValue(tv_today_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
-        getData(0);
     }
+
+
+    private BroadcastReceiver receiver = new BroadcastReceiver()
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            if (intent != null)
+            {
+                if (Constants.ACTION_REFRESH_PERSON_SHOW.equals(intent.getAction()))
+                {
+                    setPersonInfo();
+                }
+            }
+        }
+    };
 
 //    private List<QIntroBean> getDatas()
 //    {
@@ -230,4 +263,10 @@ public class FragmentPerson extends FragmentSupport
         }
     }
 
+    @Override
+    public void onDestroy()
+    {
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(receiver);
+        super.onDestroy();
+    }
 }

@@ -16,6 +16,8 @@ import com.fx.secondbar.bean.QCoinBean;
  */
 public class AdIncomeRecord extends BaseQuickAdapter<QCoinBean, BaseViewHolder>
 {
+//    9c4576a40644061cc78d3099bc39330da97a8fd8
+//    b53137e6817bb3028c1b0f7fdd304bae
     public AdIncomeRecord()
     {
         super(R.layout.ad_income_record);

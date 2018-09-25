@@ -93,6 +93,9 @@
         <activity
             android:name=".ui.AcWebBrowse"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.person.AcSetNickName"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

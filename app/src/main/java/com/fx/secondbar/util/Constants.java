@@ -28,6 +28,11 @@ public class Constants
     public static final String ACTION_REFRESH_USERINFO = "action_refresh_userinfo";
 
     /**
+     * 更新个人中心显示
+     */
+    public static final String ACTION_REFRESH_PERSON_SHOW = "action_refresh_person_show";
+
+    /**
      * 登录接口
      */
     public static final String API_LOGIN = "login";
@@ -124,7 +129,12 @@ public class Constants
      */
     public static final String API_GET_CATEGORY = "category/all";
     /**
-     * 上传头像
+     * 上传头像接口
      */
     public static final String API_UPLOAD_AVATAR = "member/uploadImg";
+
+    /**
+     * 设置昵称接口
+     */
+    public static final String API_SET_NICKNAME = "member/setNickname";
 }

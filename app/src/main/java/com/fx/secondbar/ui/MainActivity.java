@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -109,10 +110,8 @@ public class MainActivity extends ActivitySupport
         switchItem(tv_home);
         login(0);
 
-        IntentFilter filter = new IntentFilter();
-        //刷新用户信息
-        filter.addAction(Constants.ACTION_REFRESH_USERINFO);
-        registerReceiver(receiver, filter);
+        IntentFilter filter = new IntentFilter(Constants.ACTION_REFRESH_USERINFO);
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver()
@@ -297,6 +296,7 @@ public class MainActivity extends ActivitySupport
             public void onNext(UserInfoBean userInfoBean)
             {
                 FxApplication.getInstance().setUserInfoBean(userInfoBean);
+                FxApplication.refreshPersonShowBroadCast();
             }
         });
     }
@@ -342,7 +342,7 @@ public class MainActivity extends ActivitySupport
     @Override
     protected void onDestroy()
     {
-        unregisterReceiver(receiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
         super.onDestroy();
     }
 }

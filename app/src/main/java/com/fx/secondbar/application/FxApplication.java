@@ -6,7 +6,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.btten.bttenlibrary.application.BtApplication;
-import com.btten.bttenlibrary.base.load.LoadManager;
+import com.btten.bttenlibrary.util.LogUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.BuildConfig;
 import com.fx.secondbar.bean.ResConfigInfo;
@@ -166,6 +166,16 @@ public class FxApplication extends BtApplication
      */
     public static void refreshUserInfoBroadCast()
     {
-        LocalBroadcastManager.getInstance(getInstance()).sendBroadcast(new Intent(Constants.ACTION_REFRESH_USERINFO));
+        boolean isSendSuccess = LocalBroadcastManager.getInstance(getInstance()).sendBroadcast(new Intent(Constants.ACTION_REFRESH_USERINFO));
+        LogUtil.e("refreshUserInfoBroadCast", isSendSuccess ? "发送成功" : "发送失败");
+    }
+
+    /**
+     * 发送刷新个人中心显示广播
+     */
+    public static void refreshPersonShowBroadCast()
+    {
+        boolean isSendSuccess = LocalBroadcastManager.getInstance(getInstance()).sendBroadcast(new Intent(Constants.ACTION_REFRESH_PERSON_SHOW));
+        LogUtil.e("refreshPersonShowBroadCast", isSendSuccess ? "发送成功" : "发送失败");
     }
 }

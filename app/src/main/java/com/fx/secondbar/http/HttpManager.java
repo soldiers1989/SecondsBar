@@ -330,6 +330,18 @@ public class HttpManager
     }
 
     /**
+     * 设置昵称
+     *
+     * @param nickName   昵称
+     * @param subscriber
+     */
+    public static void setNickName(String nickName, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.setNickName(nickName).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
      * 绑定订购者
      *
      * @param observable 可被观察者

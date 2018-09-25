@@ -22,6 +22,7 @@ import java.util.List;
 
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -219,4 +220,12 @@ public interface IService
     @GET(Constants.API_SIGNIN)
     Observable<ResponseBean<SigninBean>> signin();
 
+    /**
+     * 设置昵称
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.API_SET_NICKNAME)
+    Observable<ResponseBean> setNickName(@Field("nickname") String nickName);
 }
