@@ -3,12 +3,14 @@ package com.fx.secondbar.http.service;
 
 import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.fx.secondbar.bean.ActiveBean;
+import com.fx.secondbar.bean.BankBean;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
+import com.fx.secondbar.bean.LevelBean;
+import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
-import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
@@ -228,4 +230,63 @@ public interface IService
     @FormUrlEncoded
     @POST(Constants.API_SET_NICKNAME)
     Observable<ResponseBean> setNickName(@Field("nickname") String nickName);
+
+    /**
+     * 获取我的银行卡列表
+     *
+     * @return
+     */
+    @GET(Constants.API_MY_BANK_LIST)
+    Observable<ResponseBean<List<BankBean>>> getMyBank();
+
+    /**
+     * 添加银行卡号
+     *
+     * @param bankNo   银行卡号
+     * @param bankName 银行名称
+     * @param address  开户行地址
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.API_ADD_BANK)
+    Observable<ResponseBean> addBank(@Field("bankno") String bankNo, @Field("bankname") String bankName, @Field("address") String address);
+
+    /**
+     * 绑定手机号
+     *
+     * @param phone 手机号
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.API_BIND_PHONE)
+    Observable<ResponseBean> bindPhone(@Field("phoneno") String phone);
+
+    /**
+     * 设置支付密码
+     *
+     * @param pwd
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.API_SET_PAYPWD)
+    Observable<ResponseBean> setPayPwd(@Field("paymentpassword") String pwd);
+
+    /**
+     * 修改支付密码
+     *
+     * @param pwd
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.API_UPDATE_PAYPWD)
+    Observable<ResponseBean> updatePayPwd(@Field("paymentpassword") String pwd);
+
+    /**
+     * 获取等级列表
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.API_LEVEL_LIST)
+    Observable<ResponseBean<List<LevelBean>>> getLevelList();
 }

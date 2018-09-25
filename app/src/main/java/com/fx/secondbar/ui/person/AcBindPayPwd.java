@@ -1,5 +1,7 @@
 package com.fx.secondbar.ui.person;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -17,11 +19,18 @@ import com.fx.secondbar.util.CountDownButtonHelper;
  */
 public class AcBindPayPwd extends ActivitySupport
 {
+    /**
+     * 设置支付密码请求码
+     */
+    private static final int REQUEST_CODE_SET_PAYPWD = 10;
 
+    private TextView tv_title;
     private EditText ed_code;
     private TextView tv_get_code;
     private Button btn_next;
     private CountDownButtonHelper countDownButtonHelper;//倒计时帮助类
+    //设置还是修改支付密码
+    private int type;
 
     @Override
     protected int getLayoutResId()
@@ -32,6 +41,7 @@ public class AcBindPayPwd extends ActivitySupport
     @Override
     protected void initView()
     {
+        tv_title = findView(R.id.tv_title);
         ed_code = findView(R.id.ed_code);
         tv_get_code = findView(R.id.tv_get_code);
         btn_next = findView(R.id.btn_next);
@@ -51,6 +61,14 @@ public class AcBindPayPwd extends ActivitySupport
     protected void initData()
     {
         countDownButtonHelper = new CountDownButtonHelper(tv_get_code, "获取短信验证码", 60, 1, this);
+        type = getIntent().getIntExtra(KEY, AcInputPayPwd.TYPE_SET);
+        if (AcInputPayPwd.TYPE_SET == type)
+        {
+            tv_title.setText("设置支付密码");
+        } else if (AcInputPayPwd.TYPE_UPDATE == type)
+        {
+            tv_title.setText("修改支付密码");
+        }
     }
 
     @Override
@@ -69,8 +87,21 @@ public class AcBindPayPwd extends ActivitySupport
                 finish();
                 break;
             case R.id.btn_next:
-                jump(AcInputPayPwd.class, AcInputPayPwd.TYPE_SET, true);
+                Bundle bundle = new Bundle();
+                bundle.putInt(KEY, type);
+                jump(AcInputPayPwd.class, bundle, REQUEST_CODE_SET_PAYPWD);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (REQUEST_CODE_SET_PAYPWD == requestCode && RESULT_OK == resultCode)
+        {
+            setResult(RESULT_OK);
+            finish();
         }
     }
 

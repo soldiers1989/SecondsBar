@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ebebeb">
+    android:background="#f2f2f2">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -24,7 +24,7 @@
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/mall_tool_pl"
-                android:text="我的银行卡"
+                android:text="系统消息"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/toolbar_title_font"/>
 
@@ -40,29 +40,27 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
-    <Button
-        android:id="@+id/btn_add"
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/mall_detail_buy_h"
-        android:background="@color/home_tabs_mark_color"
-        android:text="新增银行卡"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/mall_detail_buy_text"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_height="@dimen/home_tabs_h"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:tl_indicator_anim_enable="true"
+        app:tl_indicator_bounce_enable="true"
+        app:tl_indicator_color="@android:color/transparent"
+        app:tl_indicator_width_equal_title="true"
+        app:tl_tab_space_equal="true"
+        app:tl_textBold="BOTH"
+        app:tl_textSelectColor="#1d1d1d"
+        app:tl_textUnselectColor="#969696"
+        app:tl_textsize="@dimen/home_tabs_item_text"
+        app:tl_underline_color="@android:color/transparent"/>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_marginTop="15dip"
-        app:layout_constraintBottom_toTopOf="@+id/btn_add"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            ></android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabs"></android.support.v4.view.ViewPager>
 </android.support.constraint.ConstraintLayout>

@@ -16,6 +16,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.fx.secondbar.R;
 import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
+import com.fx.secondbar.ui.transaction.FragmentCommission;
 import com.fx.secondbar.ui.transaction.FragmentTransactionBuy;
 import com.fx.secondbar.ui.transaction.FragmentTransactionOrder;
 import com.fx.secondbar.ui.transaction.FragmentTransactionSales;
@@ -74,8 +75,8 @@ public class FragmentTransaction extends FragmentSupport
         List<FragmentViewPagerBase> fragmengs = new ArrayList<>();
         fragmengs.add(FragmentTransactionBuy.newInstance());
         fragmengs.add(FragmentTransactionSales.newInstance());
-        fragmengs.add(FragmentTransactionOrder.newInstance());
-        fragmengs.add(FragmentTransactionOrder.newInstance());
+        fragmengs.add(FragmentCommission.newInstance(FragmentCommission.TYPE_CURR));
+        fragmengs.add(FragmentCommission.newInstance(FragmentCommission.TYPE_HISTORY));
         adapter = new AdHomeItem(getChildFragmentManager(), fragmengs, tabTitles);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(tabTitles.length);

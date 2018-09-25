@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ebebeb">
+    android:background="@android:color/white">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -24,7 +24,7 @@
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/mall_tool_pl"
-                android:text="我的银行卡"
+                android:text="系统消息"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/toolbar_title_font"/>
 
@@ -40,29 +40,24 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
-    <Button
-        android:id="@+id/btn_add"
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dip"
+        android:layout_marginTop="18dip"
+        android:text="09月25日 14:36"
+        android:textColor="#818181"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+
+    <TextView
+        android:id="@+id/tv_content"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/mall_detail_buy_h"
-        android:background="@color/home_tabs_mark_color"
-        android:text="新增银行卡"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/mall_detail_buy_text"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_marginTop="15dip"
-        app:layout_constraintBottom_toTopOf="@+id/btn_add"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            ></android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
-
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dip"
+        android:layout_marginTop="20dip"
+        android:layout_marginRight="30dip"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time"/>
 </android.support.constraint.ConstraintLayout>

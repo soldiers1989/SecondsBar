@@ -22,6 +22,7 @@ import com.fx.secondbar.ui.home.item.FragmentTutorial;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
 import com.fx.secondbar.ui.home.item.FragmentWb;
 import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
+import com.fx.secondbar.ui.notify.AcNotifyManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +120,7 @@ public class FragmentHome extends FragmentSupport
                 new DialogSign(getContext()).show();
                 break;
             case R.id.img_toolbar_right:
+                jump(AcNotifyManager.class);
                 break;
             case R.id.fl_search:
                 break;

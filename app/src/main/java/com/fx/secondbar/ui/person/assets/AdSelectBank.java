@@ -24,7 +24,7 @@ public class AdSelectBank extends BaseQuickAdapter<BankBean, BaseViewHolder>
     protected void convert(BaseViewHolder helper, BankBean item)
     {
         TextView tv_bank = helper.getView(R.id.tv_bank);
-        VerificationUtil.setViewValue(tv_bank, item.getName());
-        tv_bank.setCompoundDrawablesWithIntrinsicBounds(item.getIcon(), 0, 0, 0);
+        VerificationUtil.setViewValue(tv_bank, item.getBankname());
+//        tv_bank.setCompoundDrawablesWithIntrinsicBounds(item.getIcon(), 0, 0, 0);
     }
 }

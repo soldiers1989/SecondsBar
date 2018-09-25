@@ -4,9 +4,11 @@ import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.http.HttpGetData;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.ActiveBean;
+import com.fx.secondbar.bean.BankBean;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
+import com.fx.secondbar.bean.LevelBean;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.MyPurchaseBean;
@@ -340,6 +342,79 @@ public class HttpManager
         Observable<ResponseBean> observable = getInstance().mService.setNickName(nickName).map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
+
+    /**
+     * 获取我的银行卡
+     *
+     * @param subscriber
+     */
+    public static void getMyBank(Subscriber<List<BankBean>> subscriber)
+    {
+        Observable<List<BankBean>> observable = getInstance().mService.getMyBank().map(new HttpResultFun<List<BankBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 添加银行卡
+     *
+     * @param bankNo     银行卡号
+     * @param bankName   银行名称
+     * @param address    开户行
+     * @param subscriber
+     */
+    public static void addBank(String bankNo, String bankName, String address, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.addBank(bankNo, bankName, address).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 绑定手机号
+     *
+     * @param phone      手机号
+     * @param subscriber
+     */
+    public static void bindPhone(String phone, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.bindPhone(phone).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 设置6位支付密码
+     *
+     * @param pwd        密码
+     * @param subscriber
+     */
+    public static void setPayPwd(String pwd, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.setPayPwd(pwd).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 修改6位支付密码
+     *
+     * @param pwd        密码
+     * @param subscriber
+     */
+    public static void updatePayPwd(String pwd, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.updatePayPwd(pwd).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取等级列表
+     *
+     * @param subscriber
+     */
+    public static void getLevelList(Subscriber<List<LevelBean>> subscriber)
+    {
+        Observable<List<LevelBean>> observable = getInstance().mService.getLevelList().map(new HttpResultFun<List<LevelBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
 
     /**
      * 绑定订购者

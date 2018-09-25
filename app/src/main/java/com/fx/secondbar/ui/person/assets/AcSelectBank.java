@@ -11,10 +11,6 @@ import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
 import com.fx.secondbar.R;
-import com.fx.secondbar.bean.BankBean;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * function:请选择开户行
@@ -58,19 +54,19 @@ public class AcSelectBank extends ActivitySupport
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(DensityUtil.dip2px(this, 1), false, false, false));
         adapter = new AdSelectBank();
-        adapter.setNewData(getDatas());
+//        adapter.setNewData(getDatas());
         adapter.bindToRecyclerView(recyclerView);
     }
 
-    private List<BankBean> getDatas()
-    {
-        List<BankBean> datas = new ArrayList<>();
-        datas.add(new BankBean("建设银行", R.mipmap.ic_bank_ccb));
-        datas.add(new BankBean("招商银行", R.mipmap.ic_bank_cmb));
-        datas.add(new BankBean("工商银行", R.mipmap.ic_bank_icbc));
-        datas.add(new BankBean("农业银行", R.mipmap.ic_bank_abc));
-        return datas;
-    }
+//    private List<BankBean> getDatas()
+//    {
+//        List<BankBean> datas = new ArrayList<>();
+//        datas.add(new BankBean("建设银行", R.mipmap.ic_bank_ccb));
+//        datas.add(new BankBean("招商银行", R.mipmap.ic_bank_cmb));
+//        datas.add(new BankBean("工商银行", R.mipmap.ic_bank_icbc));
+//        datas.add(new BankBean("农业银行", R.mipmap.ic_bank_abc));
+//        return datas;
+//    }
 
     @Override
     public void onClick(View v)

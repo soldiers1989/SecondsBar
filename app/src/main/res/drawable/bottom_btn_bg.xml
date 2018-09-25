@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_enabled="false">
-        <shape android:shape="rectangle">
-            <corners android:radius="5dip"/>
+        <shape>
             <solid android:color="#919191"/>
         </shape>
     </item>
     <item>
-        <shape android:shape="rectangle">
-            <corners android:radius="5dip"/>
+        <shape>
             <solid android:color="@color/font_yellow_color"/>
         </shape>
     </item>

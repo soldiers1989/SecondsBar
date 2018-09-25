@@ -137,4 +137,30 @@ public class Constants
      * 设置昵称接口
      */
     public static final String API_SET_NICKNAME = "member/setNickname";
+
+    /**
+     * 我的银行卡列表
+     */
+    public static final String API_MY_BANK_LIST = "member/bank/list";
+
+    /**
+     * 添加银行卡
+     */
+    public static final String API_ADD_BANK = "member/bank/add";
+    /**
+     * 绑定手机号
+     */
+    public static final String API_BIND_PHONE = "member/setPhoneNo";
+    /**
+     * 设置支付密码
+     */
+    public static final String API_SET_PAYPWD = "member/setPaymentPassword";
+    /**
+     * 更新支付密码
+     */
+    public static final String API_UPDATE_PAYPWD = "member/editPaymentPassword";
+    /**
+     * 会员等级列表
+     */
+    public static final String API_LEVEL_LIST = "member/level/list";
 }

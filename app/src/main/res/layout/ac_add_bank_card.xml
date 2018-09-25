@@ -68,16 +68,34 @@
         app:layout_constraintStart_toStartOf="@+id/v_show_info"
         app:layout_constraintTop_toTopOf="@+id/v_show_info"/>
 
-    <TextView
-        android:id="@+id/tv_name"
+    <!--<TextView-->
+    <!--android:id="@+id/tv_name"-->
+    <!--android:layout_width="0dip"-->
+    <!--android:layout_height="0dip"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:paddingLeft="10dip"-->
+    <!--android:paddingRight="16dip"-->
+    <!--android:singleLine="true"-->
+    <!--android:text="李大钊"-->
+    <!--android:textColor="#202020"-->
+    <!--android:textSize="14sp"-->
+    <!--app:layout_constraintBottom_toTopOf="@+id/v_show_line"-->
+    <!--app:layout_constraintEnd_toEndOf="@+id/v_show_info"-->
+    <!--app:layout_constraintStart_toEndOf="@+id/tv_name_tips"-->
+    <!--app:layout_constraintTop_toTopOf="@+id/v_show_info"-->
+    <!--/>-->
+
+    <EditText
+        android:id="@+id/ed_name"
         android:layout_width="0dip"
         android:layout_height="0dip"
-        android:gravity="center_vertical"
+        android:background="@null"
+        android:hint="请输入您的姓名"
         android:paddingLeft="10dip"
         android:paddingRight="16dip"
         android:singleLine="true"
-        android:text="李大钊"
         android:textColor="#202020"
+        android:textColorHint="#808080"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/v_show_line"
         app:layout_constraintEnd_toEndOf="@+id/v_show_info"
@@ -90,23 +108,39 @@
         android:layout_width="72dip"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dip"
-        android:text="身份证号"
+        android:text="银行"
         android:textColor="#202020"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/v_show_info"
         app:layout_constraintStart_toStartOf="@+id/v_show_info"
         app:layout_constraintTop_toBottomOf="@+id/v_show_line"/>
 
-    <TextView
-        android:id="@+id/tv_card_num"
+    <!--<TextView-->
+    <!--android:id="@+id/tv_card_num"-->
+    <!--android:layout_width="0dip"-->
+    <!--android:layout_height="0dip"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:paddingLeft="10dip"-->
+    <!--android:paddingRight="16dip"-->
+    <!--android:singleLine="true"-->
+    <!--android:text="123456789012345678"-->
+    <!--android:textColor="#202020"-->
+    <!--android:textSize="14sp"-->
+    <!--app:layout_constraintBottom_toBottomOf="@+id/v_show_info"-->
+    <!--app:layout_constraintEnd_toEndOf="@+id/v_show_info"-->
+    <!--app:layout_constraintStart_toEndOf="@+id/tv_card_tips"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/v_show_line"/>-->
+    <EditText
+        android:id="@+id/ed_bank"
         android:layout_width="0dip"
         android:layout_height="0dip"
-        android:gravity="center_vertical"
+        android:background="@null"
+        android:hint="请输入银行名称"
         android:paddingLeft="10dip"
         android:paddingRight="16dip"
         android:singleLine="true"
-        android:text="123456789012345678"
         android:textColor="#202020"
+        android:textColorHint="#808080"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/v_show_info"
         app:layout_constraintEnd_toEndOf="@+id/v_show_info"
@@ -165,7 +199,7 @@
         android:layout_width="72dip"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dip"
-        android:text="开户银行"
+        android:text="开户行"
         android:textColor="#202020"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/v_input"
@@ -177,10 +211,7 @@
         android:layout_width="0dip"
         android:layout_height="0dip"
         android:background="@null"
-        android:drawableRight="@mipmap/ic_arrow_right_gray"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:hint="请选择您的开户银行"
+        android:hint="请输入您的开户行(省份-城市-开户行)"
         android:paddingLeft="10dip"
         android:paddingRight="16dip"
         android:singleLine="true"
@@ -196,7 +227,8 @@
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mall_detail_buy_h"
-        android:background="@color/home_tabs_mark_color"
+        android:background="@drawable/bottom_btn_bg"
+        android:enabled="false"
         android:text="提交"
         android:textColor="@android:color/white"
         android:textSize="@dimen/mall_detail_buy_text"

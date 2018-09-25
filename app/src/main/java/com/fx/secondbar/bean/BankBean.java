@@ -1,7 +1,5 @@
 package com.fx.secondbar.bean;
 
-import android.support.annotation.DrawableRes;
-
 /**
  * function:银行信息实体
  * author: frj
@@ -9,33 +7,70 @@ import android.support.annotation.DrawableRes;
  */
 public class BankBean
 {
-    private String name;
-    private Integer icon;
-    private String num;
+    private String address;//地址
+    private String memberid;//会员id
+    private String actualname;//开户人姓名
+    private String bankno;//银行卡号
+    private String bankname;//银行名称
+    private String bank_ID;//银行卡id
 
-    public BankBean(String name, @DrawableRes Integer icon)
+    public String getAddress()
     {
-        this.name = name;
-        this.icon = icon;
+        return address;
     }
 
-    public String getName()
+    public void setAddress(String address)
     {
-        return name;
+        this.address = address;
     }
 
-    public void setName(String name)
+    public String getMemberid()
     {
-        this.name = name;
+        return memberid;
     }
 
-    public Integer getIcon()
+    public void setMemberid(String memberid)
     {
-        return icon;
+        this.memberid = memberid;
     }
 
-    public void setIcon(Integer icon)
+    public String getActualname()
     {
-        this.icon = icon;
+        return actualname;
+    }
+
+    public void setActualname(String actualname)
+    {
+        this.actualname = actualname;
+    }
+
+    public String getBankno()
+    {
+        return bankno;
+    }
+
+    public void setBankno(String bankno)
+    {
+        this.bankno = bankno;
+    }
+
+    public String getBankname()
+    {
+        return bankname;
+    }
+
+    public void setBankname(String bankname)
+    {
+        this.bankname = bankname;
+    }
+
+    public String getBank_ID()
+    {
+        return bank_ID;
+    }
+
+    public void setBank_ID(String bank_ID)
+    {
+        this.bank_ID = bank_ID;
     }
 }

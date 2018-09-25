@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.person.assets;
 
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.util.VerificationUtil;
@@ -27,6 +28,26 @@ public class AdMyBankCard extends BaseQuickAdapter<BankBean, BaseViewHolder>
         TextView tv_delete = helper.getView(R.id.tv_delete);
         TextView tv_card_num = helper.getView(R.id.tv_card_num);
 
-        VerificationUtil.setViewValue(tv_bank_name, item.getName());
+        VerificationUtil.setViewValue(tv_bank_name, item.getBankname());
+        VerificationUtil.setViewValue(tv_card_num, "尾号" + getBankNoEnd(item.getBankno()));
+    }
+
+    /**
+     * 获取银行卡尾号
+     *
+     * @param bankNo
+     * @return
+     */
+    private String getBankNoEnd(String bankNo)
+    {
+        if (TextUtils.isEmpty(bankNo))
+        {
+            return "";
+        }
+        if (bankNo.length() > 4)
+        {
+            return bankNo.substring(bankNo.length() - 4);
+        }
+        return bankNo;
     }
 }
