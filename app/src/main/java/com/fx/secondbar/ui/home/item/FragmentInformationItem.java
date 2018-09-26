@@ -26,6 +26,7 @@ import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.AcWebBrowse;
 import com.fx.secondbar.ui.home.item.adapter.AdInfomation;
+import com.fx.secondbar.ui.mall.AcMallDetail;
 import com.fx.secondbar.util.Constants;
 
 import java.util.ArrayList;
@@ -113,6 +114,13 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
                     }
                     bundle.putString(KEY_STR, "秒吧头条");
                     jump(AcWebBrowse.class, bundle, false);
+                } else if (AdInfomation.InfomationEntity.TYPE_COMMODITY == entity.getItemType())
+                {
+                    CommodityBean commodityBean = entity.getCommodityBean();
+                    if (commodityBean != null)
+                    {
+                        jump(AcMallDetail.class, commodityBean.getMerchandise_ID());
+                    }
                 }
             }
         });
@@ -238,9 +246,9 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
         if (indexInformationBean != null)
         {
             AdInfomation.InfomationEntity personEntity = null;
-            if (VerificationUtil.noEmpty(indexInformationBean.getListPeople()))
+            if (VerificationUtil.noEmpty(indexInformationBean.getListPurchase()))
             {
-                personEntity = new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_PERSON, indexInformationBean.getListPeople());
+                personEntity = new AdInfomation.InfomationEntity(AdInfomation.InfomationEntity.TYPE_PERSON, indexInformationBean.getListPurchase());
             }
             AdInfomation.InfomationEntity commodityEntity = null;
             List<CommodityBean> commodityBeans = indexInformationBean.getListMerchandise();

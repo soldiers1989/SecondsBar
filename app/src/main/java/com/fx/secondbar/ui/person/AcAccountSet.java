@@ -441,6 +441,7 @@ public class AcAccountSet extends ActivitySupport
                 {
                     dialog.dismiss();
                 }
+                FxApplication.refreshUserInfoBroadCast();
                 ShowToast.showToast("头像修改成功");
             }
         });

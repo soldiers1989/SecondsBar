@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class IndexInformationBean
 {
-    //推荐名人集合
-    private List<PersonBean> listPeople;
+    //推荐名人申购集合
+    private List<PurchaseInfoBean> listPurchase;
     //资讯集合
     private List<InfomationBean> listNews;
     //推荐商品集合
@@ -18,14 +18,14 @@ public class IndexInformationBean
     //轮播图集合
     private List<BannerBean> listBanner;
 
-    public List<PersonBean> getListPeople()
+    public List<PurchaseInfoBean> getListPurchase()
     {
-        return listPeople;
+        return listPurchase;
     }
 
-    public void setListPeople(List<PersonBean> listPeople)
+    public void setListPurchase(List<PurchaseInfoBean> listPurchase)
     {
-        this.listPeople = listPeople;
+        this.listPurchase = listPurchase;
     }
 
     public List<InfomationBean> getListNews()

@@ -1,5 +1,7 @@
 package com.fx.secondbar.ui.mall;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -8,6 +10,7 @@ import android.graphics.drawable.LevelListDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
@@ -19,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.ShowToast;
@@ -28,9 +32,13 @@ import com.bumptech.glide.request.transition.Transition;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.http.exception.ApiException;
 import com.fx.secondbar.ui.home.DialogShare;
+import com.fx.secondbar.ui.order.AcOrderManage;
+import com.fx.secondbar.ui.person.assets.AcRecharge;
 import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideLoad;
+import com.fx.secondbar.util.ProgressDialogUtil;
 
 import rx.Subscriber;
 
@@ -53,6 +61,8 @@ public class AcMallDetail extends ActivitySupport
     private TextView tv_price;
     private TextView tv_intro;
 
+    private DialogBuy dialogBuy;
+    private ProgressDialog dialog;
 
     @Override
     protected int getLayoutResId()
@@ -93,6 +103,8 @@ public class AcMallDetail extends ActivitySupport
         //宽高比为30:17
         params.height = params.width * 17 / 30;
         img.setLayoutParams(params);
+
+        dialog = ProgressDialogUtil.getProgressDialog(this, getString(R.string.progress_tips), true);
 
         getData(getIntent().getStringExtra(KEY_STR));
     }
@@ -213,7 +225,108 @@ public class AcMallDetail extends ActivitySupport
                     }, null));
                 }
             }
+            dialogBuy = new DialogBuy(this, bean);
+            dialogBuy.setOnBuyListener(new DialogBuy.OnBuyListener()
+            {
+                @Override
+                public void onBuy(String goodsId)
+                {
+                    buyGoods(goodsId);
+                }
+            });
         }
+    }
+
+    /**
+     * 余额不足，去充值的提示
+     */
+    private void rechargeTips()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setMessage("您的余额不足，请前往充值");
+        builder.setPositiveButton("去充值", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                if (dialogBuy != null)
+                {
+                    dialogBuy.dismiss();
+                }
+                jump(AcRecharge.class);
+            }
+        });
+        builder.setNegativeButton("取消", null);
+        builder.show();
+    }
+
+    /**
+     * 购买商品
+     */
+    private void buyGoods(String goodsId)
+    {
+        if (dialog != null)
+        {
+            dialog.show();
+        }
+        HttpManager.buyCommodity(goodsId, new Subscriber<ResponseBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                if (e instanceof ApiException)
+                {
+                    ApiException exception = (ApiException) e;
+                    if (exception != null)
+                    {
+                        //表示余额不足，请前往充值
+                        if ("3".equals(exception.getErrorCode()))
+                        {
+                            rechargeTips();
+                            return;
+                        }
+                    }
+                    ShowToast.showToast(HttpManager.checkLoadError(e));
+                } else
+                {
+                    ShowToast.showToast(HttpManager.checkLoadError(e));
+                }
+            }
+
+            @Override
+            public void onNext(ResponseBean responseBean)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                if (dialogBuy != null)
+                {
+                    dialogBuy.dismiss();
+                }
+                ShowToast.showToast("购买成功");
+                jump(AcOrderManage.class);
+            }
+        });
     }
 
     @Override
@@ -241,7 +354,10 @@ public class AcMallDetail extends ActivitySupport
                 new DialogShare(this).show();
                 break;
             case R.id.btn_buy:
-                new DialogBuy(this).show();
+                if (dialogBuy != null)
+                {
+                    dialogBuy.show();
+                }
                 break;
         }
     }

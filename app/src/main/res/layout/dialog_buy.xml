@@ -23,7 +23,7 @@
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3000.00STE"
+        android:text=""
         android:textColor="@color/home_tabs_mark_color"
         android:textSize="@dimen/dialog_mall_buy_price"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +58,7 @@
             android:layout_toRightOf="@id/tv_name_tips"
             android:gravity="right"
             android:singleLine="true"
-            android:text="秒吧 金莎粉丝见面会"
+            android:text=""
             android:textColor="@color/dialog_mall_buy_item_value"
             android:textSize="@dimen/dialog_mall_buy_des_item_text"/>
     </RelativeLayout>
@@ -100,7 +100,7 @@
             android:layout_toRightOf="@id/tv_time_tips"
             android:gravity="right"
             android:singleLine="true"
-            android:text="100分钟"
+            android:text=""
             android:textColor="@color/dialog_mall_buy_item_value"
             android:textSize="@dimen/dialog_mall_buy_des_item_text"/>
     </RelativeLayout>

@@ -19,7 +19,7 @@ import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.DynamicBean;
 import com.fx.secondbar.bean.InfomationBean;
-import com.fx.secondbar.bean.PersonBean;
+import com.fx.secondbar.bean.PurchaseInfoBean;
 import com.fx.secondbar.ui.purchase.AcPurchaseDetail;
 import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
@@ -183,7 +183,10 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
+                AdPersonItem ad = (AdPersonItem) adapter;
                 Intent intent = new Intent(view.getContext(), AcPurchaseDetail.class);
+                intent.putExtra("activity_str", ad.getItem(position).getPurchase_ID());
+                intent.putExtra("activity_num", ad.getItem(position));
                 view.getContext().startActivity(intent);
             }
         });
@@ -392,7 +395,7 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
         /**
          * 推荐名人列表
          */
-        private List<PersonBean> personBeans;
+        private List<PurchaseInfoBean> personBeans;
         /**
          * 商品实体信息
          */
@@ -421,7 +424,7 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
             infomationBean = bean;
         }
 
-        public TimeEntity(int type, List<PersonBean> bean)
+        public TimeEntity(int type, List<PurchaseInfoBean> bean)
         {
             this(type);
             personBeans = bean;
@@ -449,12 +452,12 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
             this.infomationBean = infomationBean;
         }
 
-        public List<PersonBean> getPersonBeans()
+        public List<PurchaseInfoBean> getPersonBeans()
         {
             return personBeans;
         }
 
-        public void setPersonBeans(List<PersonBean> personBeans)
+        public void setPersonBeans(List<PurchaseInfoBean> personBeans)
         {
             this.personBeans = personBeans;
         }

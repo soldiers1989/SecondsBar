@@ -1,9 +1,8 @@
 package com.fx.secondbar.util;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.text.TextUtils;
-
-import com.btten.bttenlibrary.base.ActivitySupport;
 
 /**
  * function:进度对话框生成器
@@ -20,7 +19,7 @@ public class ProgressDialogUtil
      * @param isCanCancel
      * @return
      */
-    public static ProgressDialog getProgressDialog(ActivitySupport activitySupport, String msg, boolean isCanCancel)
+    public static ProgressDialog getProgressDialog(Activity activitySupport, String msg, boolean isCanCancel)
     {
         if (activitySupport == null)
         {

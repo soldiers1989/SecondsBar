@@ -19,9 +19,10 @@ public class UserInfoBean implements Serializable, Cloneable
     private String account;// 用户账号
     private String nickname;// 昵称
     private Double qcoin;// Q币
-    private Double amt;// 30.0,
+    private Double amt;// 总金额
     private Double freeze;// 0.0,  //冻结金额
     private String inviter; //邀请人
+    private Double todayqcoin;  //今日获得的Q
     private Integer isCheckin;  //是否签到 1表示已签到
     private Integer checkinDays;    //签到天数
     private List<QCoinBean> listQcoin; //今日收益记录
@@ -174,6 +175,16 @@ public class UserInfoBean implements Serializable, Cloneable
     public void setListQcoin(List<QCoinBean> listQcoin)
     {
         this.listQcoin = listQcoin;
+    }
+
+    public Double getTodayqcoin()
+    {
+        return todayqcoin == null ? 0 : todayqcoin;
+    }
+
+    public void setTodayqcoin(Double todayqcoin)
+    {
+        this.todayqcoin = todayqcoin;
     }
 
     @Override

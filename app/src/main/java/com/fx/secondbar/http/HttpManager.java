@@ -13,10 +13,12 @@ import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.PurchaseDetailBean;
+import com.fx.secondbar.bean.QCoinBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
 import com.fx.secondbar.bean.SigninBean;
+import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBBean;
@@ -430,6 +432,19 @@ public class HttpManager
     }
 
     /**
+     * 申购购买接口
+     *
+     * @param purchaseId 申购id
+     * @param seconds    秒数
+     * @param subscriber
+     */
+    public static void purchaseBuy(String purchaseId, String seconds, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.purchaseBuy(purchaseId, seconds).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
      * 获取短信验证码
      *
      * @param phone      手机号
@@ -438,6 +453,57 @@ public class HttpManager
     public static void getPhoneCode(String phone, Subscriber<ResponseBean> subscriber)
     {
         Observable<ResponseBean> observable = getInstance().mService.getPhoneCode(phone).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 购买名人时间
+     *
+     * @param price      价格
+     * @param seconds    秒数
+     * @param subscriber
+     */
+    public static void buyTransaction(String price, String seconds, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.buyTransaction(seconds, price).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 卖出名人时间
+     *
+     * @param price      价格
+     * @param seconds    秒数
+     * @param subscriber
+     */
+    public static void saleTransaction(String price, String seconds, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.saleTransaction(seconds, price).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取Q的收益记录
+     *
+     * @param page       页码
+     * @param pageSize   页大小
+     * @param subscriber
+     */
+    public static void getQRecords(int page, int pageSize, Subscriber<List<QCoinBean>> subscriber)
+    {
+        Observable<List<QCoinBean>> observable = getInstance().mService.getQRecords(page, pageSize).map(new HttpResultFun<List<QCoinBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取交易中心数据
+     *
+     * @param peopleId   名人id
+     * @param subscriber
+     */
+    public static void getTransactionCenter(String peopleId, Subscriber<TransactionBean> subscriber)
+    {
+        Observable<TransactionBean> observable = getInstance().mService.getTransactionCenter(peopleId).map(new HttpResultFun<TransactionBean>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

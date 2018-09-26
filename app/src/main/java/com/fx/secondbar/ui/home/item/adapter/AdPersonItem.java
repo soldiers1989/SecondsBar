@@ -6,7 +6,7 @@ import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
-import com.fx.secondbar.bean.PersonBean;
+import com.fx.secondbar.bean.PurchaseInfoBean;
 import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
@@ -15,7 +15,7 @@ import com.joooonho.SelectableRoundedImageView;
  * author: frj
  * modify date: 2018/9/19
  */
-public class AdPersonItem extends BaseQuickAdapter<PersonBean, BaseViewHolder>
+public class AdPersonItem extends BaseQuickAdapter<PurchaseInfoBean, BaseViewHolder>
 {
     public AdPersonItem()
     {
@@ -23,15 +23,15 @@ public class AdPersonItem extends BaseQuickAdapter<PersonBean, BaseViewHolder>
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, PersonBean item)
+    protected void convert(BaseViewHolder helper, PurchaseInfoBean item)
     {
         SelectableRoundedImageView img = helper.getView(R.id.img);
         TextView tv_price = helper.getView(R.id.tv_price);
         TextView tv_name = helper.getView(R.id.tv_name);
 
-        GlideLoad.load(img, item.getImg(), true);
+        GlideLoad.load(img, item.getPeopleimg(), true);
         setPrice(tv_price, item.getPrice());
-        VerificationUtil.setViewValue(tv_name, item.getName());
+        VerificationUtil.setViewValue(tv_name, item.getPeoplename());
     }
 
     /**

@@ -18,7 +18,7 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.InfomationBean;
-import com.fx.secondbar.bean.PersonBean;
+import com.fx.secondbar.bean.PurchaseInfoBean;
 import com.fx.secondbar.ui.purchase.AcPurchaseDetail;
 import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
@@ -232,7 +232,8 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
             {
                 AdPersonItem ad = (AdPersonItem) adapter;
                 Intent intent = new Intent(view.getContext(), AcPurchaseDetail.class);
-                intent.putExtra("activity_str", ad.getItem(position).getPeople_ID());
+                intent.putExtra("activity_str", ad.getItem(position).getPurchase_ID());
+                intent.putExtra("activity_num", ad.getItem(position));
                 view.getContext().startActivity(intent);
             }
         });
@@ -277,7 +278,7 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
         /**
          * 推荐名人列表
          */
-        private List<PersonBean> personBeans;
+        private List<PurchaseInfoBean> personBeans;
         /**
          * 资讯信息
          */
@@ -302,7 +303,7 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
             commodityBean = bean;
         }
 
-        public InfomationEntity(int type, List<PersonBean> beans)
+        public InfomationEntity(int type, List<PurchaseInfoBean> beans)
         {
             this(type);
             personBeans = beans;
@@ -314,12 +315,12 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
             return itemType;
         }
 
-        public List<PersonBean> getPersonBeans()
+        public List<PurchaseInfoBean> getPersonBeans()
         {
             return personBeans;
         }
 
-        public void setPersonBeans(List<PersonBean> personBeans)
+        public void setPersonBeans(List<PurchaseInfoBean> personBeans)
         {
             this.personBeans = personBeans;
         }

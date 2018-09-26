@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.purchase;
 
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,7 +15,6 @@ import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.PurchaseDetailBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.DialogShare;
-import com.fx.secondbar.ui.quote.AcQuoteBuyConfirm;
 import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
@@ -89,7 +89,9 @@ public class AcPurchaseDetail extends ActivitySupport
                 new DialogShare(this).show();
                 break;
             case R.id.btn_buy:
-                jump(AcQuoteBuyConfirm.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(KEY, getIntent().getParcelableExtra(KEY));
+                jump(AcQuoteBuyConfirm.class, bundle, false);
                 break;
         }
     }
@@ -97,7 +99,7 @@ public class AcPurchaseDetail extends ActivitySupport
     /**
      * 获取数据
      *
-     * @param id
+     * @param id 申购id
      */
     private void getData(String id)
     {
@@ -135,7 +137,7 @@ public class AcPurchaseDetail extends ActivitySupport
     /**
      * 绑定数据
      *
-     * @param bean
+     * @param bean 申购详情实体信息
      */
     private void bindData(PurchaseDetailBean bean)
     {

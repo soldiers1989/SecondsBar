@@ -8,8 +8,8 @@
     android:background="@android:color/white"
     android:minHeight="@dimen/home_infomation_item_sing_h"
     android:paddingLeft="@dimen/home_infomation_item_sing_plr"
-    android:paddingRight="@dimen/home_infomation_item_sing_plr"
-    android:paddingTop="@dimen/home_infomation_item_sing_ptb">
+    android:paddingTop="@dimen/home_infomation_item_sing_ptb"
+    android:paddingRight="@dimen/home_infomation_item_sing_plr">
 
     <com.joooonho.SelectableRoundedImageView
         android:id="@+id/img"
@@ -52,6 +52,7 @@
         android:layout_height="0dip"
         android:layout_marginRight="@dimen/home_infomation_item_sing_title_mr"
         android:ellipsize="end"
+        android:maxLines="3"
         android:textColor="@color/home_infomation_item_title_text"
         android:textSize="@dimen/home_infomation_item_sing_title_text"
         app:layout_constraintBottom_toTopOf="@id/tv_from"

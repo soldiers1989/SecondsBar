@@ -18,12 +18,13 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/mall_tool_pl"
-                android:text="于大宝（YDB）"
+                android:text=""
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/toolbar_title_font"/>
 

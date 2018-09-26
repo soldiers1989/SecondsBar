@@ -209,10 +209,10 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
                 }
             }
             //判断数据是否存在名人申购信息
-            if (VerificationUtil.noEmpty(bean.getListPeople()))
+            if (VerificationUtil.noEmpty(bean.getListPurchase()))
             {
                 list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_TITLE, "名人申购"));
-                list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_PERSON, bean.getListPeople()));
+                list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_PERSON, bean.getListPurchase()));
             }
             //判断数据是否存在名人商品信息
             if (VerificationUtil.noEmpty(bean.getListMerchandise()))

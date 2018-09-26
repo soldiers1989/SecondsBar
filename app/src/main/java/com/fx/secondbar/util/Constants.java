@@ -123,6 +123,10 @@ public class Constants
      * 申购详情接口
      */
     public static final String API_PURCHASE_DETAIL = "purchase/info";
+    /**
+     * 申购购买接口
+     */
+    public static final String API_PURCHASE_BUY = "purchase/buy";
 
     /**
      * 获取栏目接口（配置）
@@ -167,4 +171,13 @@ public class Constants
      * 获取手机验证码
      */
     public static final String API_GET_PHONE_CODE = "member/getPhoneCode";
+
+    /**
+     * 获取收益明细记录
+     */
+    public static final String API_GET_Q_RECORD = "member/Qcoin/list";
+    /**
+     * 交易中心数据接口
+     */
+    public static final String API_TRADING_CENTER = "trading/center";
 }

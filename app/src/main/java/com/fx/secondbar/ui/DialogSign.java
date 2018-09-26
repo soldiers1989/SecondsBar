@@ -239,6 +239,7 @@ public class DialogSign
                     return;
                 }
                 e.printStackTrace();
+                btn_sign.setText("签到");
                 ShowToast.showToast("签到失败");
             }
 
@@ -249,6 +250,7 @@ public class DialogSign
                 {
                     return;
                 }
+                btn_sign.setText("签到");
                 ShowToast.showToast("签到成功");
                 if (btn_sign != null)
                 {

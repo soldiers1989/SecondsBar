@@ -1,23 +1,30 @@
 package com.fx.secondbar.ui.transaction;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.btten.bttenlibrary.util.ShowToast;
 import com.fx.secondbar.R;
-import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
+import com.fx.secondbar.bean.TransactionBean;
+import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.util.ProgressDialogUtil;
+
+import rx.Subscriber;
 
 /**
  * function:委托界面
  * author: frj
  * modify date: 2018/9/25
  */
-public class FragmentCommission extends FragmentViewPagerBase implements SwipeRefreshLayout.OnRefreshListener
+public class FragmentCommission extends FragmentTransactionItem implements SwipeRefreshLayout.OnRefreshListener
 {
     /**
      * 当前委托
@@ -34,6 +41,8 @@ public class FragmentCommission extends FragmentViewPagerBase implements SwipeRe
     private AdCommission adapter;
     //当前类型
     private int type;
+
+    private ProgressDialog dialog;
 
     public static FragmentCommission newInstance(int type)
     {
@@ -74,14 +83,110 @@ public class FragmentCommission extends FragmentViewPagerBase implements SwipeRe
     @Override
     protected void initData()
     {
+        dialog = ProgressDialogUtil.getProgressDialog(getActivity(), getString(R.string.progress_tips), true);
         type = getArguments().getInt(KEY);
-        adapter = new AdCommission();
-        adapter.bindToRecyclerView(recyclerView);
+        //是否将要刷新数据
+        if (isPrepareRefresh)
+        {
+            swipeRefreshLayout.setRefreshing(true);
+            onRefresh();
+            isPrepareRefresh = false;
+        }
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        //是否将要刷新数据
+        if (isPrepareRefresh)
+        {
+            swipeRefreshLayout.setRefreshing(true);
+            onRefresh();
+            isPrepareRefresh = false;
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden)
+    {
+        super.onHiddenChanged(hidden);
+        if (!isHidden())
+        {
+            //是否将要刷新数据
+            if (isPrepareRefresh)
+            {
+                swipeRefreshLayout.setRefreshing(true);
+                onRefresh();
+                isPrepareRefresh = false;
+            }
+        }
+    }
+
+    /**
+     * 刷新数据
+     */
+    private void refreshData(String peopleId)
+    {
+        if (dialog != null)
+        {
+            dialog.show();
+        }
+        HttpManager.getTransactionCenter(peopleId, new Subscriber<TransactionBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(TransactionBean transactionBean)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                String personName = transactionBean.getName();
+                if (!TextUtils.isEmpty(transactionBean.getZjm()))
+                {
+                    personName += "(" + transactionBean.getZjm() + ")";
+                }
+                adapter = new AdCommission(personName);
+                adapter.bindToRecyclerView(recyclerView);
+                if (TYPE_CURR == type)
+                {
+                    adapter.setNewData(transactionBean.getList_current());
+                } else
+                {
+                    adapter.setNewData(transactionBean.getList_history());
+                }
+            }
+        });
     }
 
     @Override
     public void onRefresh()
     {
-
+        refreshData(peopleId);
     }
 }

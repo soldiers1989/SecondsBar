@@ -7,10 +7,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.util.ShowToast;
+import com.btten.bttenlibrary.util.VerificationUtil;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
-import com.fx.secondbar.bean.UserInfoBean;
+import com.fx.secondbar.bean.QCoinBean;
 import com.fx.secondbar.http.HttpManager;
+
+import java.util.List;
 
 import rx.Subscriber;
 
@@ -24,6 +29,7 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private AdIncomeRecord adapter;
+    private int currPage = -1;
 
     @Override
     protected int getLayoutResId()
@@ -53,7 +59,16 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AdIncomeRecord();
         adapter.bindToRecyclerView(recyclerView);
-        adapter.setNewData(FxApplication.getInstance().getUserInfoBean().getListQcoin());
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
+        {
+            @Override
+            public void onLoadMoreRequested()
+            {
+                getRecords(currPage + 1);
+            }
+        }, recyclerView);
+        swipeRefreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override
@@ -69,11 +84,13 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
     }
 
     /**
-     * 登录(Q币收益记录在该接口中返回)
+     * 获取收益记录
+     *
+     * @param page 页码
      */
-    private void login()
+    private void getRecords(final int page)
     {
-        HttpManager.login(new Subscriber<UserInfoBean>()
+        HttpManager.getQRecords(page, PAGE_NUM, new Subscriber<List<QCoinBean>>()
         {
             @Override
             public void onCompleted()
@@ -92,21 +109,35 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
                 {
                     swipeRefreshLayout.setRefreshing(false);
                 }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
             }
 
             @Override
-            public void onNext(UserInfoBean userInfoBean)
+            public void onNext(List<QCoinBean> list)
             {
                 if (isDestroy())
                 {
                     return;
                 }
-                FxApplication.getInstance().setUserInfoBean(userInfoBean);
                 if (swipeRefreshLayout.isRefreshing())
                 {
                     swipeRefreshLayout.setRefreshing(false);
                 }
-                adapter.setNewData(FxApplication.getInstance().getUserInfoBean().getListQcoin());
+                currPage = page;
+                if (PAGE_START == page)
+                {
+                    adapter.setNewData(FxApplication.getInstance().getUserInfoBean().getListQcoin());
+                } else
+                {
+                    adapter.addData(list);
+                }
+                if (VerificationUtil.getSize(list) >= PAGE_NUM)
+                {
+                    adapter.loadMoreComplete();
+                } else
+                {
+                    adapter.loadMoreEnd();
+                }
             }
         });
     }
@@ -126,6 +157,6 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
     @Override
     public void onRefresh()
     {
-        login();
+        getRecords(PAGE_START);
     }
 }

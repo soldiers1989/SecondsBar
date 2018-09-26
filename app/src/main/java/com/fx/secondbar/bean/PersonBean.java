@@ -27,7 +27,6 @@ public class PersonBean
     private String people_ID;// 人物id
     private String achievement;//个人成就
 
-
     public String getPicture()
     {
         return picture;

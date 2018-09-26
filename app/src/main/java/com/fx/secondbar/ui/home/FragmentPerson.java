@@ -163,7 +163,7 @@ public class FragmentPerson extends FragmentSupport
         VerificationUtil.setViewValue(tv_account, FxApplication.getInstance().getUserInfoBean().getAccount());
         VerificationUtil.setViewValue(tv_ste_value, FxApplication.getInstance().getUserInfoBean().getBalance().toString());
         VerificationUtil.setViewValue(tv_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
-        VerificationUtil.setViewValue(tv_today_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
+        VerificationUtil.setViewValue(tv_today_q_value, FxApplication.getInstance().getUserInfoBean().getTodayqcoin().toString());
     }
 
 

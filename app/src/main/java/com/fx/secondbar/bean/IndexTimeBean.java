@@ -9,20 +9,20 @@ import java.util.List;
  */
 public class IndexTimeBean
 {
-    private List<PersonBean> listPeople;    //名人
+    private List<PurchaseInfoBean> listPurchase;    //名人
     private List<InfomationBean> listNews;  //资讯
     private List<BannerBean> listBanner;    //轮播图
     private List<DynamicBean> listOrder;    //交易动态
     private List<CommodityBean> listMerchandise;    //商品
 
-    public List<PersonBean> getListPeople()
+    public List<PurchaseInfoBean> getListPurchase()
     {
-        return listPeople;
+        return listPurchase;
     }
 
-    public void setListPeople(List<PersonBean> listPeople)
+    public void setListPurchase(List<PurchaseInfoBean> listPurchase)
     {
-        this.listPeople = listPeople;
+        this.listPurchase = listPurchase;
     }
 
     public List<InfomationBean> getListNews()

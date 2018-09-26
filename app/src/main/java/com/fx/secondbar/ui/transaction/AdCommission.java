@@ -7,25 +7,30 @@ import android.widget.TextView;
 
 import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.DisplayUtil;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.CommissionBean;
 
 /**
  * function:委托列表适配器
  * author: frj
  * modify date: 2018/9/25
  */
-public class AdCommission extends BaseQuickAdapter<String, BaseViewHolder>
+public class AdCommission extends BaseQuickAdapter<CommissionBean, BaseViewHolder>
 {
-    public AdCommission()
+    private String peopleName;
+
+    public AdCommission(String peopleName)
     {
         super(R.layout.ad_commission);
+        this.peopleName = peopleName;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item)
+    protected void convert(BaseViewHolder helper, CommissionBean item)
     {
         TextView tv_name = helper.getView(R.id.tv_name);
         TextView tv_seconds = helper.getView(R.id.tv_seconds);
@@ -34,7 +39,14 @@ public class AdCommission extends BaseQuickAdapter<String, BaseViewHolder>
         View v_bottom = helper.getView(R.id.v_bottom);
 
         calSize(tv_name, tv_seconds, tv_price, tv_status);
-        if (helper.getLayoutPosition() % 2 == 0)
+
+        VerificationUtil.setViewValue(tv_name, peopleName);
+        VerificationUtil.setViewValue(tv_price, item.getPrice());
+        VerificationUtil.setViewValue(tv_seconds, item.getSecond());
+        VerificationUtil.setViewValue(tv_status, item.getTypename());
+
+        //1表示卖出，2表示买入
+        if ("1".equals(item.getType()))
         {
             tv_status.setTextColor(Color.parseColor("#03c086"));
         } else

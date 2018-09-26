@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.ResQuote;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.home.adapter.AdQuote;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
 
@@ -94,7 +96,12 @@ public class FragmentQuoteItem extends FragmentViewPagerBase implements SwipeRef
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
                 Bundle bundle = new Bundle();
-                bundle.putString(KEY_STR, FragmentQuoteItem.this.adapter.getItem(position).getName());
+                String title = FragmentQuoteItem.this.adapter.getItem(position).getName();
+                if (!TextUtils.isEmpty(FragmentQuoteItem.this.adapter.getItem(position).getZjm()))
+                {
+                    title = title + "(" + FragmentQuoteItem.this.adapter.getItem(position).getZjm() + ")";
+                }
+                bundle.putString(KEY_STR, title);
                 bundle.putInt(KEY, FragmentQuoteItem.this.adapter.getItem(position).getIscollection());
                 bundle.putString("id", FragmentQuoteItem.this.adapter.getItem(position).getPeopleid());
                 jump(AcQuoteDetail.class, bundle, REQUEST_CODE_DETAIL);
@@ -202,6 +209,15 @@ public class FragmentQuoteItem extends FragmentViewPagerBase implements SwipeRef
             {
                 swipeRefreshLayout.setRefreshing(true);
                 onRefresh();
+            } else if (AcQuoteDetail.RESULT_CODE_TRANSACTION == resultCode)
+            {
+                if (data == null)
+                {
+                    return;
+                }
+                String name = data.getStringExtra(KEY_STR);
+                String peopleId = data.getStringExtra(KEY);
+                ((MainActivity) getActivity()).jumpToTransaction(peopleId, name);
             }
         }
     }

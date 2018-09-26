@@ -11,14 +11,14 @@ import com.btten.bttenlibrary.base.adapter.BtAdapter;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.btten.bttenlibrary.util.ViewHolder;
 import com.fx.secondbar.R;
-import com.fx.secondbar.bean.Handicap;
+import com.fx.secondbar.bean.CommissionBean;
 
 /**
  * function:交易-盘口列表适配器
  * author: frj
  * modify date: 2018/9/12
  */
-public class AdTransactionHandicap extends BtAdapter<Handicap>
+public class AdTransactionHandicap extends BtAdapter<CommissionBean>
 {
 
     //用于标识是上盘口还是下盘口，上盘口和下盘口  盘口颜色不一致
@@ -47,8 +47,15 @@ public class AdTransactionHandicap extends BtAdapter<Handicap>
         {
             tv_index.setTextColor(Color.parseColor("#e94961"));
         }
-        VerificationUtil.setViewValue(tv_index, getItem(position).getIndex(), "");
-        VerificationUtil.setViewValue(tv_num, getItem(position).getNum(), "");
+        if (isTop)
+        {
+            VerificationUtil.setViewValue(tv_index, "卖" + (position + 1));
+        } else
+        {
+            VerificationUtil.setViewValue(tv_index, "买" + (position + 1));
+        }
+
+        VerificationUtil.setViewValue(tv_num, getItem(position).getSecond(), "");
         VerificationUtil.setViewValue(tv_price, getItem(position).getPrice(), "");
         return convertView;
     }

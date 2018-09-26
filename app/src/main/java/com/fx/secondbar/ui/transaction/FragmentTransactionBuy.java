@@ -1,37 +1,80 @@
 package com.fx.secondbar.ui.transaction;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.InputFilter;
 import android.text.SpannableString;
+import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.btten.bttenlibrary.base.bean.ResponseBean;
+import com.btten.bttenlibrary.util.Arithmetic;
+import com.btten.bttenlibrary.util.LogUtil;
+import com.btten.bttenlibrary.util.ShowToast;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
-import com.fx.secondbar.bean.Handicap;
+import com.fx.secondbar.bean.CommissionBean;
+import com.fx.secondbar.bean.TransactionBean;
+import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.adapter.AdTransactionHandicap;
-import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
+import com.fx.secondbar.util.CashierInputFilter;
+import com.fx.secondbar.util.ProgressDialogUtil;
 import com.fx.secondbar.view.CopyListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * function:交易-购买
  * author: frj
  * modify date: 2018/9/20
  */
-public class FragmentTransactionBuy extends FragmentViewPagerBase
+public class FragmentTransactionBuy extends FragmentTransactionItem
 {
 
     private CopyListView list_top;
     private CopyListView list_bottom;
     private TextView tv_price_down;
     private TextView tv_price_up;
+    private TextView tv_new_price;  //最新价格
+    private TextView tv_can_num;     //可购买的秒数
+    private TextView tv_buy_submit;
+    private EditText ed_input;      //输入的价格
+    private EditText ed_seconds;    //购买的秒数
+    private TextView tv_price;      //总价
+    private TextView tv_price_token;    //可用的代币数量
+    private TextView tv_code;       //代币名称
+    private TextView tv_price_ste;  //可用STE
+    private TextView tv_time;       //可买秒数
+
+    /**
+     * 最低价
+     */
+    private double priceDown;
+    /**
+     * 最高价
+     */
+    private double priceUp;
+    /**
+     * 可购买的秒数
+     */
+    private int canBuySeconds = 0;
+
+    private ProgressDialog dialog;
+
+    private AdTransactionHandicap adSale;
+    private AdTransactionHandicap adBuy;
 
     public static FragmentTransactionBuy newInstance()
     {
@@ -58,59 +101,349 @@ public class FragmentTransactionBuy extends FragmentViewPagerBase
         list_bottom = findView(R.id.list_bottom);
         tv_price_down = findView(R.id.tv_price_down);
         tv_price_up = findView(R.id.tv_price_up);
+        tv_new_price = findView(R.id.tv_new_price);
+        tv_can_num = findView(R.id.tv_can_num);
+        tv_buy_submit = findView(R.id.tv_buy_submit);
+        ed_input = findView(R.id.ed_input);
+        ed_seconds = findView(R.id.ed_seconds);
+        tv_price = findView(R.id.tv_price);
+        tv_price_token = findView(R.id.tv_price_token);
+        tv_code = findView(R.id.tv_code);
+        tv_price_ste = findView(R.id.tv_price_ste);
+        tv_time = findView(R.id.tv_time);
     }
 
     @Override
     protected void initListener()
     {
-
+        tv_buy_submit.setOnClickListener(this);
+        addFilter(ed_input, new CashierInputFilter());
+        ed_input.addTextChangedListener(watcher);
+        ed_seconds.addTextChangedListener(watcher);
     }
 
     @Override
     protected void initData()
     {
-        AdTransactionHandicap adTransactionHandicap = new AdTransactionHandicap(getContext(), true);
-        adTransactionHandicap.addList(getDatas(), false);
-        list_top.setAdapter(adTransactionHandicap);
+        adSale = new AdTransactionHandicap(getContext(), true);
+        list_top.setAdapter(adSale);
 
-        AdTransactionHandicap adBottom = new AdTransactionHandicap(getContext(), false);
-        adBottom.addList(getBottomDatas(), false);
-        list_bottom.setAdapter(adBottom);
+        adBuy = new AdTransactionHandicap(getContext(), false);
+        list_bottom.setAdapter(adBuy);
 
-        String down = String.format(getString(R.string.transaction_head_price_down), "2.58");
-        String downTips = getString(R.string.transaction_head_price_down_tips);
-        String up = String.format(getString(R.string.transaction_head_price_up), "3.16");
-        String upTips = getString(R.string.transaction_head_price_up_tips);
-        SpannableString spDown = new SpannableString(down);
-        spDown.setSpan(new ForegroundColorSpan(Color.parseColor("#03c086")), downTips.length(), down.length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tv_price_down.setText(spDown);
 
-        SpannableString spUp = new SpannableString(up);
-        spUp.setSpan(new ForegroundColorSpan(Color.parseColor("#e94961")), upTips.length(), up.length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tv_price_up.setText(spUp);
+        dialog = ProgressDialogUtil.getProgressDialog(getActivity(), getString(R.string.progress_tips), true);
+
+
+        LogUtil.e("initData,isPrepareRefresh:" + isPrepareRefresh);
+        //是否将要刷新数据
+        if (isPrepareRefresh)
+        {
+            refreshData(peopleId);
+            isPrepareRefresh = false;
+        }
     }
 
-    private List<Handicap> getDatas()
+    @Override
+    public void onResume()
     {
-        List<Handicap> list = new ArrayList<>();
-        list.add(new Handicap("卖5", "0.00", "0.00"));
-        list.add(new Handicap("卖4", "0.00", "0.00"));
-        list.add(new Handicap("卖3", "0.00", "0.00"));
-        list.add(new Handicap("卖2", "0.00", "0.00"));
-        list.add(new Handicap("卖1", "0.00", "0.00"));
-        list.add(new Handicap("", "", ""));
-        return list;
+        super.onResume();
+        LogUtil.e("onResume,isPrepareRefresh:" + isPrepareRefresh);
+        //是否将要刷新数据
+        if (isPrepareRefresh)
+        {
+            refreshData(peopleId);
+            isPrepareRefresh = false;
+        }
     }
 
-    private List<Handicap> getBottomDatas()
+    @Override
+    public void onHiddenChanged(boolean hidden)
     {
-        List<Handicap> list = new ArrayList<>();
-        list.add(new Handicap("买5", "0.00", "0.00"));
-        list.add(new Handicap("买4", "0.00", "0.00"));
-        list.add(new Handicap("买3", "0.00", "0.00"));
-        list.add(new Handicap("买2", "0.00", "0.00"));
-        list.add(new Handicap("买1", "0.00", "0.00"));
-        list.add(new Handicap("", "", ""));
-        return list;
+        super.onHiddenChanged(hidden);
+        LogUtil.e("onHiddenChanged");
+        if (!isHidden())
+        {
+            //是否将要刷新数据
+            if (isPrepareRefresh)
+            {
+                refreshData(peopleId);
+                isPrepareRefresh = false;
+            }
+        }
+    }
+
+    /**
+     * 添加输入过滤器
+     *
+     * @param ed
+     * @param inputFilter
+     */
+    private void addFilter(EditText ed, InputFilter inputFilter)
+    {
+        InputFilter inputFilters[] = ed.getFilters();
+        InputFilter afterFilters[] = null;
+        if (inputFilters != null)
+        {
+            afterFilters = new InputFilter[inputFilters.length + 1];
+            for (int i = 0; i < inputFilters.length; i++)
+            {
+                afterFilters[i] = inputFilters[i];
+            }
+            afterFilters[inputFilters.length] = inputFilter;
+        } else
+        {
+            afterFilters = new InputFilter[1];
+            afterFilters[0] = inputFilter;
+        }
+        ed.setFilters(afterFilters);
+    }
+
+    private TextWatcher watcher = new TextWatcher()
+    {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after)
+        {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count)
+        {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s)
+        {
+            try
+            {
+                //计算总价
+                String priceStr = getTextView(ed_input);
+                String secondStr = getTextView(ed_seconds);
+                float inputPrice = Float.parseFloat(priceStr);
+                int inputSecond = Integer.parseInt(secondStr);
+                VerificationUtil.setViewValue(tv_price, Arithmetic.mul(inputPrice, inputSecond) + "STE");
+            } catch (NumberFormatException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    /**
+     * 清除输入值
+     */
+    private void clearInputValue()
+    {
+        ed_input.setText("");
+        ed_seconds.setText("");
+        tv_price.setText("");
+    }
+
+    /**
+     * 绑定数据
+     *
+     * @param bean
+     */
+    private void bindData(TransactionBean bean)
+    {
+        if (bean != null)
+        {
+            String down = String.format(getString(R.string.transaction_head_price_down), String.valueOf(bean.getPrice_DT()));
+            String downTips = getString(R.string.transaction_head_price_down_tips);
+            String up = String.format(getString(R.string.transaction_head_price_up), String.valueOf(bean.getPrice_ZT()));
+            String upTips = getString(R.string.transaction_head_price_up_tips);
+            SpannableString spDown = new SpannableString(down);
+            spDown.setSpan(new ForegroundColorSpan(Color.parseColor("#03c086")), downTips.length(), down.length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tv_price_down.setText(spDown);
+
+            SpannableString spUp = new SpannableString(up);
+            spUp.setSpan(new ForegroundColorSpan(Color.parseColor("#e94961")), upTips.length(), up.length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tv_price_up.setText(spUp);
+
+            VerificationUtil.setViewValue(tv_new_price, String.format(getString(R.string.transaction_head_new_price), String.valueOf(bean.getPrice())));
+            VerificationUtil.setViewValue(tv_code, "可用" + bean.getZjm());
+            VerificationUtil.setViewValue(tv_can_num, String.valueOf(bean.getCanbuyseconds()));
+            VerificationUtil.setViewValue(tv_price_ste, String.valueOf(bean.getBalanceamt()));
+
+            priceDown = bean.getPrice_DT();
+            priceUp = bean.getPrice_ZT();
+            canBuySeconds = bean.getCanbuyseconds().intValue();
+
+            addAdapterData(bean.getList_buy(), adBuy, list_bottom);
+            addAdapterData(bean.getList_sell(), adSale, list_top);
+        }
+    }
+
+    /**
+     * 添加适配器数据
+     *
+     * @param sourceList   数据源
+     * @param adapter      适配器对象
+     * @param copyListView 列表对象
+     */
+    private void addAdapterData(List<CommissionBean> sourceList, AdTransactionHandicap adapter, CopyListView copyListView)
+    {
+        List<CommissionBean> list = new ArrayList<>();
+        int size = VerificationUtil.getSize(sourceList);
+        if (size > 5)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                list.add(i, sourceList.get(i));
+            }
+        } else if (size < 5)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                list.add(sourceList.get(i));
+            }
+            for (int i = 0; i < (5 - list.size()); i++)
+            {
+                list.add(new CommissionBean());
+            }
+        }
+        adapter.addList(list, false);
+        copyListView.setAdapter(adapter);
+    }
+
+    /**
+     * 刷新数据
+     */
+    private void refreshData(String peopleId)
+    {
+        if (dialog != null)
+        {
+            dialog.show();
+        }
+        HttpManager.getTransactionCenter(peopleId, new Subscriber<TransactionBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(TransactionBean transactionBean)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                bindData(transactionBean);
+            }
+        });
+    }
+
+    /**
+     * 购买
+     *
+     * @param price
+     * @param seconds
+     */
+    private void buy(String price, String seconds)
+    {
+        if (dialog != null)
+        {
+            dialog.show();
+        }
+        HttpManager.buyTransaction(price, seconds, new Subscriber<ResponseBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                e.printStackTrace();
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(ResponseBean responseBean)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                ShowToast.showToast("购买成功");
+                refreshData(peopleId);
+                clearInputValue();
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        super.onClick(v);
+        switch (v.getId())
+        {
+            case R.id.tv_buy_submit:
+                try
+                {
+                    if (VerificationUtil.requiredFieldValidator(getActivity(), new View[]{ed_input, ed_seconds}, new String[]{"请输入购买价格", "请输入购买的秒数"}))
+                    {
+                        int seconds = Integer.parseInt(getTextView(ed_seconds));
+                        if (seconds > canBuySeconds)
+                        {
+                            ShowToast.showToast("您购买的秒数不能大于您可购买的秒数");
+                            return;
+                        }
+                        float price = Float.parseFloat(getTextView(ed_input));
+                        if (price > priceUp)
+                        {
+                            ShowToast.showToast("您购买的价格不能大于涨停价格");
+                            return;
+                        }
+                        if (price < priceDown)
+                        {
+                            ShowToast.showToast("您购买的价格不能小于跌停价格");
+                            return;
+                        }
+                        buy(String.valueOf(price), String.valueOf(seconds));
+                    }
+                } catch (NumberFormatException e)
+                {
+                    e.printStackTrace();
+                }
+                break;
+        }
     }
 }

@@ -34,7 +34,7 @@
             android:name=".ui.quote.AcQuoteDetail"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.quote.AcQuoteBuyConfirm"
+            android:name=".ui.purchase.AcQuoteBuyConfirm"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.purchase.AcPurchaseOrderDetail"

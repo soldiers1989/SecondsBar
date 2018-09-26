@@ -2,6 +2,7 @@ package com.fx.secondbar.ui.quote;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
@@ -36,7 +37,12 @@ import rx.Subscriber;
 public class AcQuoteDetail extends ActivitySupport
 {
 
-    private static final String URL = Constants.ROOT_URL + "/static/mb-front/market.html";
+    private static final String URL = Constants.ROOT_URL + "/static/mb-front/market.html?id=";
+
+    /**
+     * 跳转至交易中心界面
+     */
+    public static final int RESULT_CODE_TRANSACTION = 10;
 
     private TextView tv_title;
     private ProgressBar progressBar1;
@@ -83,9 +89,10 @@ public class AcQuoteDetail extends ActivitySupport
         initWebView();
         progressDialog = ProgressDialogUtil.getProgressDialog(this, getString(R.string.progress_tips), true);
         VerificationUtil.setViewValue(tv_title, getIntent().getStringExtra(KEY_STR));
-        webView.loadUrl(URL);
 
         peopleId = getIntent().getStringExtra("id");
+
+        webView.loadUrl(URL + peopleId);
 
         //获取是否自选值
         type = getIntent().getIntExtra(KEY, 0);
@@ -301,7 +308,11 @@ public class AcQuoteDetail extends ActivitySupport
                 break;
 
             case R.id.btn_transaction://交易中心
-                jump(AcQuoteBuyConfirm.class);
+                Intent intent = new Intent();
+                intent.putExtra(KEY, peopleId);
+                intent.putExtra(KEY_STR, getTextView(tv_title));
+                setResult(RESULT_CODE_TRANSACTION, intent);
+                finish();
                 break;
             case R.id.btn_add_custom://添加自选
                 if (type == 1)

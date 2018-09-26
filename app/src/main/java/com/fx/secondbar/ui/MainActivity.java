@@ -198,7 +198,7 @@ public class MainActivity extends ActivitySupport
     /**
      * 切换显示
      *
-     * @param view
+     * @param view 点击的项控件
      */
     private void switchItem(View view)
     {
@@ -299,6 +299,20 @@ public class MainActivity extends ActivitySupport
                 FxApplication.refreshPersonShowBroadCast();
             }
         });
+    }
+
+    /**
+     * 跳转至交易中心
+     */
+    public void jumpToTransaction(String peopleId, String personName)
+    {
+        FragmentTransaction fragmentTransaction = (FragmentTransaction) fragments[INDEX_TRANSACTION];
+        if (fragmentTransaction != null)
+        {
+            fragmentTransaction.setData(peopleId, personName);
+        }
+        switchItem(tv_transaction);
+
     }
 
     @Override

@@ -12,10 +12,12 @@ import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.PurchaseDetailBean;
+import com.fx.secondbar.bean.QCoinBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
 import com.fx.secondbar.bean.SigninBean;
+import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBBean;
@@ -304,6 +306,16 @@ public interface IService
     Observable<ResponseBean<PurchaseDetailBean>> getPurchaseDetail(@Query("purchaseid") String id);
 
     /**
+     * 申购购买接口
+     *
+     * @param purchaseId 申购Id
+     * @param seconds    秒数
+     * @return
+     */
+    @GET(Constants.API_PURCHASE_BUY)
+    Observable<ResponseBean> purchaseBuy(@Query("purchaseid") String purchaseId, @Query("seconds") String seconds);
+
+    /**
      * 获取手机验证码
      *
      * @param phone 手机号
@@ -311,4 +323,43 @@ public interface IService
      */
     @GET(Constants.API_GET_PHONE_CODE)
     Observable<ResponseBean> getPhoneCode(@Query("phoneno") String phone);
+
+    /**
+     * 名人时间购买
+     *
+     * @param seconds 秒数
+     * @param price   价格
+     * @return
+     */
+    @GET(Constants.API_TRANSACTION_BUY)
+    Observable<ResponseBean> buyTransaction(@Query("seconds") String seconds, @Query("price") String price);
+
+    /**
+     * 名人时间出售
+     *
+     * @param seconds 秒数
+     * @param price   价格
+     * @return
+     */
+    @GET(Constants.API_TRANSACTION_SALE)
+    Observable<ResponseBean> saleTransaction(@Query("seconds") String seconds, @Query("price") String price);
+
+    /**
+     * 获取Q收益明细
+     *
+     * @param page     页码
+     * @param pageSize 页大小
+     * @return
+     */
+    @GET(Constants.API_GET_Q_RECORD)
+    Observable<ResponseBean<List<QCoinBean>>> getQRecords(@Query("page") int page, @Query("count") int pageSize);
+
+    /**
+     * 获取交易中心数据
+     *
+     * @param peopleId 名人id
+     * @return
+     */
+    @GET(Constants.API_TRADING_CENTER)
+    Observable<ResponseBean<TransactionBean>> getTransactionCenter(@Query("peopleid") String peopleId);
 }
