@@ -20,6 +20,14 @@ import java.util.List;
  */
 public class AcMessageList extends ActivitySupport
 {
+    /**
+     * 系统消息类型
+     */
+    public static final int TYPE_SYSTEM = 0;
+    /**
+     * 公告消息类型
+     */
+    public static final int TYPE_ANNO = 1;
 
     private SlidingTabLayout tabs;
     private ViewPager viewPager;
@@ -53,8 +61,8 @@ public class AcMessageList extends ActivitySupport
     {
         String[] tabTitles = new String[]{"未读", "已读"};
         final List<FragmentViewPagerBase> fragmengs = new ArrayList<>();
-        fragmengs.add(FragmentMessage.newInstance(FragmentMessage.TYPE_UNREAD));
-        fragmengs.add(FragmentMessage.newInstance(FragmentMessage.TYPE_READED));
+        fragmengs.add(FragmentMessage.newInstance(getIntent().getIntExtra(KEY, TYPE_SYSTEM), FragmentMessage.TYPE_UNREAD));
+        fragmengs.add(FragmentMessage.newInstance(getIntent().getIntExtra(KEY, TYPE_SYSTEM), FragmentMessage.TYPE_READED));
         adapter = new AdHomeItem(getSupportFragmentManager(), fragmengs, tabTitles);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(tabTitles.length);

@@ -119,9 +119,11 @@ public class FxApplication extends BtApplication
     {
         if (mUserInfoBean == null)
         {
-            mUserInfoBean = new UserInfoBean();
+            this.mUserInfoBean = new UserInfoBean();
+        } else
+        {
+            this.mUserInfoBean = mUserInfoBean.clone();
         }
-        this.mUserInfoBean = mUserInfoBean;
         DataCacheUtils.saveListCache(this, mUserInfoBean, DataCacheUtils.FILE_USERINFO);
     }
 
@@ -155,9 +157,11 @@ public class FxApplication extends BtApplication
     {
         if (mConfigInfo == null)
         {
-            mConfigInfo = new ResConfigInfo();
+            this.mConfigInfo = new ResConfigInfo();
+        } else
+        {
+            this.mConfigInfo = mConfigInfo.clone();
         }
-        this.mConfigInfo = mConfigInfo;
         DataCacheUtils.saveListCache(this, mConfigInfo, DataCacheUtils.FILE_CONFIG_INFO);
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
  * author: frj
  * modify date: 2018/9/24
  */
-public class ResConfigInfo implements Serializable
+public class ResConfigInfo implements Serializable, Cloneable
 {
     //资讯栏目
     private List<CategoryBean> listCategoryNews;
@@ -46,5 +46,20 @@ public class ResConfigInfo implements Serializable
     public void setListSigninRule(List<SignRuleBean> listSigninRule)
     {
         this.listSigninRule = listSigninRule;
+    }
+
+    @Override
+    public ResConfigInfo clone()
+    {
+        ResConfigInfo configInfo = null;
+        try
+        {
+            configInfo = (ResConfigInfo) super.clone();
+        } catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+            configInfo = new ResConfigInfo();
+        }
+        return configInfo;
     }
 }

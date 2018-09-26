@@ -12,6 +12,7 @@ import com.fx.secondbar.bean.LevelBean;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.MyPurchaseBean;
+import com.fx.secondbar.bean.PurchaseDetailBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
@@ -372,11 +373,12 @@ public class HttpManager
      * 绑定手机号
      *
      * @param phone      手机号
+     * @param code       短信验证码
      * @param subscriber
      */
-    public static void bindPhone(String phone, Subscriber<ResponseBean> subscriber)
+    public static void bindPhone(String phone, String code, Subscriber<ResponseBean> subscriber)
     {
-        Observable<ResponseBean> observable = getInstance().mService.bindPhone(phone).map(new HttpNoDataResultFun<>());
+        Observable<ResponseBean> observable = getInstance().mService.bindPhone(phone, code).map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
@@ -386,9 +388,9 @@ public class HttpManager
      * @param pwd        密码
      * @param subscriber
      */
-    public static void setPayPwd(String pwd, Subscriber<ResponseBean> subscriber)
+    public static void setPayPwd(String pwd, String code, Subscriber<ResponseBean> subscriber)
     {
-        Observable<ResponseBean> observable = getInstance().mService.setPayPwd(pwd).map(new HttpNoDataResultFun<>());
+        Observable<ResponseBean> observable = getInstance().mService.setPayPwd(pwd, code).map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
@@ -398,9 +400,9 @@ public class HttpManager
      * @param pwd        密码
      * @param subscriber
      */
-    public static void updatePayPwd(String pwd, Subscriber<ResponseBean> subscriber)
+    public static void updatePayPwd(String pwd, String code, Subscriber<ResponseBean> subscriber)
     {
-        Observable<ResponseBean> observable = getInstance().mService.updatePayPwd(pwd).map(new HttpNoDataResultFun<>());
+        Observable<ResponseBean> observable = getInstance().mService.updatePayPwd(pwd, code).map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
@@ -412,6 +414,30 @@ public class HttpManager
     public static void getLevelList(Subscriber<List<LevelBean>> subscriber)
     {
         Observable<List<LevelBean>> observable = getInstance().mService.getLevelList().map(new HttpResultFun<List<LevelBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取申购详情
+     *
+     * @param id
+     * @param subscriber
+     */
+    public static void getPurchaseDetail(String id, Subscriber<PurchaseDetailBean> subscriber)
+    {
+        Observable<PurchaseDetailBean> observable = getInstance().mService.getPurchaseDetail(id).map(new HttpResultFun<PurchaseDetailBean>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取短信验证码
+     *
+     * @param phone      手机号
+     * @param subscriber
+     */
+    public static void getPhoneCode(String phone, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.getPhoneCode(phone).map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

@@ -230,7 +230,9 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
+                AdPersonItem ad = (AdPersonItem) adapter;
                 Intent intent = new Intent(view.getContext(), AcPurchaseDetail.class);
+                intent.putExtra("activity_str", ad.getItem(position).getPeople_ID());
                 view.getContext().startActivity(intent);
             }
         });

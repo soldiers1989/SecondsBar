@@ -8,7 +8,7 @@ import java.util.List;
  * author: frj
  * modify date: 2018/9/22
  */
-public class UserInfoBean implements Serializable
+public class UserInfoBean implements Serializable, Cloneable
 {
     private String paymentpassword;//是否设置支付密码 1表示已设置
     private String img;// 头像地址
@@ -174,5 +174,20 @@ public class UserInfoBean implements Serializable
     public void setListQcoin(List<QCoinBean> listQcoin)
     {
         this.listQcoin = listQcoin;
+    }
+
+    @Override
+    public UserInfoBean clone()
+    {
+        UserInfoBean bean = null;
+        try
+        {
+            bean = (UserInfoBean) super.clone();
+        } catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+            bean = new UserInfoBean();
+        }
+        return bean;
     }
 }

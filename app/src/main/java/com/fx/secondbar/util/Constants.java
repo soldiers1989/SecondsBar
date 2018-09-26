@@ -163,4 +163,8 @@ public class Constants
      * 会员等级列表
      */
     public static final String API_LEVEL_LIST = "member/level/list";
+    /**
+     * 获取手机验证码
+     */
+    public static final String API_GET_PHONE_CODE = "member/getPhoneCode";
 }

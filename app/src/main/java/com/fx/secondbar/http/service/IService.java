@@ -11,6 +11,7 @@ import com.fx.secondbar.bean.LevelBean;
 import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
+import com.fx.secondbar.bean.PurchaseDetailBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
@@ -255,31 +256,34 @@ public interface IService
      * 绑定手机号
      *
      * @param phone 手机号
+     * @param code  短信验证码
      * @return
      */
     @FormUrlEncoded
     @POST(Constants.API_BIND_PHONE)
-    Observable<ResponseBean> bindPhone(@Field("phoneno") String phone);
+    Observable<ResponseBean> bindPhone(@Field("phoneno") String phone, @Field("code") String code);
 
     /**
      * 设置支付密码
      *
      * @param pwd
+     * @param code 短信验证码
      * @return
      */
     @FormUrlEncoded
     @POST(Constants.API_SET_PAYPWD)
-    Observable<ResponseBean> setPayPwd(@Field("paymentpassword") String pwd);
+    Observable<ResponseBean> setPayPwd(@Field("paymentpassword") String pwd, @Field("code") String code);
 
     /**
      * 修改支付密码
      *
      * @param pwd
+     * @param code 短信验证码
      * @return
      */
     @FormUrlEncoded
     @POST(Constants.API_UPDATE_PAYPWD)
-    Observable<ResponseBean> updatePayPwd(@Field("paymentpassword") String pwd);
+    Observable<ResponseBean> updatePayPwd(@Field("paymentpassword") String pwd, @Field("code") String code);
 
     /**
      * 获取等级列表
@@ -289,4 +293,22 @@ public interface IService
     @FormUrlEncoded
     @POST(Constants.API_LEVEL_LIST)
     Observable<ResponseBean<List<LevelBean>>> getLevelList();
+
+    /**
+     * 获取申购详情
+     *
+     * @param id
+     * @return
+     */
+    @GET(Constants.API_PURCHASE_DETAIL)
+    Observable<ResponseBean<PurchaseDetailBean>> getPurchaseDetail(@Query("purchaseid") String id);
+
+    /**
+     * 获取手机验证码
+     *
+     * @param phone 手机号
+     * @return
+     */
+    @GET(Constants.API_GET_PHONE_CODE)
+    Observable<ResponseBean> getPhoneCode(@Query("phoneno") String phone);
 }

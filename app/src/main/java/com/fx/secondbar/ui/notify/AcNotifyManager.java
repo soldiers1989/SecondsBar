@@ -59,8 +59,10 @@ public class AcNotifyManager extends ActivitySupport
                 finish();
                 break;
             case R.id.v_system:
+                jump(AcMessageList.class, AcMessageList.TYPE_SYSTEM, false);
                 break;
             case R.id.v_notify:
+                jump(AcMessageList.class, AcMessageList.TYPE_ANNO, false);
                 break;
         }
     }

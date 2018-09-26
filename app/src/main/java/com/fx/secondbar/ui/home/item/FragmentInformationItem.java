@@ -88,7 +88,7 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
     @Override
     protected void initListener()
     {
-
+        swipeRefreshLayout.setOnRefreshListener(this);
     }
 
     @Override
@@ -294,7 +294,10 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
                     List<String> pictures = infomationBeans.get(0).getPictures();
                     AdInfomation.InfomationEntity infomationEntity = new AdInfomation.InfomationEntity(VerificationUtil.noEmpty(pictures) ? AdInfomation.InfomationEntity.TYPE_MULTI_IMG : AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, infomationBeans.get(0));
                     list.add(infomationEntity);
-                    list.add(personEntity);
+                    if (personEntity != null)
+                    {
+                        list.add(personEntity);
+                    }
                     if (commodityEntity != null)
                     {
                         list.add(commodityEntity);

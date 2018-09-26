@@ -7,11 +7,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
-import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.PersonBean;
+import com.fx.secondbar.bean.PurchaseDetailBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.DialogShare;
 import com.fx.secondbar.ui.quote.AcQuoteBuyConfirm;
@@ -72,7 +72,8 @@ public class AcPurchaseDetail extends ActivitySupport
     @Override
     protected void initData()
     {
-        GlideApp.with(img_avatar).asBitmap().load(R.mipmap.test_person_item1).centerCrop().into(img_avatar);
+//        GlideApp.with(img_avatar).asBitmap().load(R.mipmap.test_person_item1).centerCrop().into(img_avatar);
+        getData(getIntent().getStringExtra(KEY_STR));
     }
 
     @Override
@@ -100,7 +101,7 @@ public class AcPurchaseDetail extends ActivitySupport
      */
     private void getData(String id)
     {
-        HttpManager.getQuoteDetail(id, new Subscriber<PersonBean>()
+        HttpManager.getPurchaseDetail(id, new Subscriber<PurchaseDetailBean>()
         {
             @Override
             public void onCompleted()
@@ -120,13 +121,13 @@ public class AcPurchaseDetail extends ActivitySupport
             }
 
             @Override
-            public void onNext(PersonBean personBean)
+            public void onNext(PurchaseDetailBean bean)
             {
                 if (isDestroy())
                 {
                     return;
                 }
-                bindData(personBean);
+                bindData(bean);
             }
         });
     }
@@ -136,23 +137,31 @@ public class AcPurchaseDetail extends ActivitySupport
      *
      * @param bean
      */
-    private void bindData(PersonBean bean)
+    private void bindData(PurchaseDetailBean bean)
     {
         if (bean != null)
         {
-            GlideLoad.load(img_top, bean.getPicture());
-            GlideLoad.load(img_avatar, bean.getImg(), true);
-            if (TextUtils.isEmpty(bean.getZjm()))
+            PersonBean personBean = bean.getPeopleVO();
+            if (personBean != null)
             {
-                VerificationUtil.setViewValue(tv_person_name, bean.getName());
-            } else
-            {
-                VerificationUtil.setViewValue(tv_person_name, bean.getName() + "(" + bean.getZjm() + ")");
+                GlideLoad.load(img_top, personBean.getPicture());
+                GlideLoad.load(img_avatar, personBean.getImg(), true);
+                if (TextUtils.isEmpty(personBean.getZjm()))
+                {
+                    VerificationUtil.setViewValue(tv_person_name, personBean.getName());
+                } else
+                {
+                    VerificationUtil.setViewValue(tv_person_name, personBean.getName() + "(" + personBean.getZjm() + ")");
+                }
+
+                VerificationUtil.setViewValue(tv_person_price, String.format(getString(R.string.purchase_money_text), VerificationUtil.verifyDefault(personBean.getPrice(), "0")));
+                VerificationUtil.setViewValue(tv_person_position, String.format(getString(R.string.mall_detail_info_position), VerificationUtil.verifyDefault(personBean.getJob(), "")));
+                VerificationUtil.setViewValue(tv_person_school, String.format(getString(R.string.mall_detail_info_school), VerificationUtil.verifyDefault(personBean.getSchool(), "")));
+                VerificationUtil.setViewValue(tv_experience, personBean.getExperience());
+                String use = String.format(getString(R.string.purchase_detail_time_use), personBean.getName(), personBean.getAddress());
+                VerificationUtil.setViewValue(tv_use, use);
             }
-            VerificationUtil.setViewValue(tv_person_price, String.format(getString(R.string.mall_detail_info_price), VerificationUtil.verifyDefault(bean.getPrice(), "0")));
-            VerificationUtil.setViewValue(tv_person_position, String.format(getString(R.string.mall_detail_info_position), VerificationUtil.verifyDefault(bean.getJob(), "")));
-            VerificationUtil.setViewValue(tv_person_school, String.format(getString(R.string.mall_detail_info_school), VerificationUtil.verifyDefault(bean.getSchool(), "")));
-            VerificationUtil.setViewValue(tv_experience, bean.getExperience());
+            tagCloudView.setTags(bean.getListTimers());
         }
     }
 

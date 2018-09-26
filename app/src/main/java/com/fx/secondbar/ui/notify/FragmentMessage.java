@@ -33,10 +33,20 @@ public class FragmentMessage extends FragmentViewPagerBase implements SwipeRefre
     private RecyclerView recyclerView;
     private AdMessage adapter;
 
-    public static FragmentMessage newInstance(int type)
+    /**
+     * 系统消息或公告消息
+     */
+    private int type;
+    /**
+     * 已读消息或未读消息
+     */
+    private int typeRead;
+
+    public static FragmentMessage newInstance(int type, int readType)
     {
         Bundle bundle = new Bundle();
         bundle.putInt(KEY, type);
+        bundle.putInt(KEY_STR, readType);
         FragmentMessage fragmentMessage = new FragmentMessage();
         fragmentMessage.setArguments(bundle);
         return fragmentMessage;
@@ -71,6 +81,8 @@ public class FragmentMessage extends FragmentViewPagerBase implements SwipeRefre
     @Override
     protected void initData()
     {
+        type = getArguments().getInt(KEY);
+        typeRead = getArguments().getInt(KEY_STR);
         adapter = new AdMessage();
         adapter.bindToRecyclerView(recyclerView);
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener()

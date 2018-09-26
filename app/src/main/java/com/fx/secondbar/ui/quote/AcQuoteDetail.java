@@ -45,6 +45,13 @@ public class AcQuoteDetail extends ActivitySupport
 
     private ProgressDialog progressDialog;
 
+    //判断是否自选，1表示自选
+    private int type;
+    //名人id值
+    private String peopleId;
+    //判断回到上个页面之后是否需要刷新数据
+    private boolean isNeedRefresh = false;
+
     @Override
     protected int getLayoutResId()
     {
@@ -77,6 +84,19 @@ public class AcQuoteDetail extends ActivitySupport
         progressDialog = ProgressDialogUtil.getProgressDialog(this, getString(R.string.progress_tips), true);
         VerificationUtil.setViewValue(tv_title, getIntent().getStringExtra(KEY_STR));
         webView.loadUrl(URL);
+
+        peopleId = getIntent().getStringExtra("id");
+
+        //获取是否自选值
+        type = getIntent().getIntExtra(KEY, 0);
+        //1表示自选
+        if (1 == type)
+        {
+            btn_add_custom.setText("删除自选");
+        } else
+        {
+            btn_add_custom.setText("添加自选");
+        }
     }
 
     /**
@@ -167,6 +187,10 @@ public class AcQuoteDetail extends ActivitySupport
      */
     private void addCustom(String peopleId)
     {
+        if (progressDialog != null)
+        {
+            progressDialog.show();
+        }
         HttpManager.addCustomPerson(peopleId, new Subscriber<ResponseBean>()
         {
             @Override
@@ -187,6 +211,7 @@ public class AcQuoteDetail extends ActivitySupport
                 {
                     progressDialog.dismiss();
                 }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
             }
 
             @Override
@@ -202,6 +227,8 @@ public class AcQuoteDetail extends ActivitySupport
                 }
                 ShowToast.showToast("添加成功");
                 btn_add_custom.setText("删除自选");
+                type = 1;
+                isNeedRefresh = true;
             }
         });
     }
@@ -213,6 +240,10 @@ public class AcQuoteDetail extends ActivitySupport
      */
     private void removeCustom(String peopleId)
     {
+        if (progressDialog != null)
+        {
+            progressDialog.show();
+        }
         HttpManager.addCustomPerson(peopleId, new Subscriber<ResponseBean>()
         {
             @Override
@@ -233,6 +264,7 @@ public class AcQuoteDetail extends ActivitySupport
                 {
                     progressDialog.dismiss();
                 }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
             }
 
             @Override
@@ -248,6 +280,8 @@ public class AcQuoteDetail extends ActivitySupport
                 }
                 ShowToast.showToast("删除成功");
                 btn_add_custom.setText("添加自选");
+                type = 0;
+                isNeedRefresh = true;
             }
         });
     }
@@ -259,6 +293,10 @@ public class AcQuoteDetail extends ActivitySupport
         switch (v.getId())
         {
             case R.id.ib_back:
+                if (isNeedRefresh)
+                {
+                    setResult(RESULT_OK);
+                }
                 finish();
                 break;
 
@@ -266,6 +304,13 @@ public class AcQuoteDetail extends ActivitySupport
                 jump(AcQuoteBuyConfirm.class);
                 break;
             case R.id.btn_add_custom://添加自选
+                if (type == 1)
+                {
+                    removeCustom(peopleId);
+                } else
+                {
+                    addCustom(peopleId);
+                }
                 break;
         }
     }
@@ -291,6 +336,13 @@ public class AcQuoteDetail extends ActivitySupport
             {
                 webView.goBack();
                 return true;
+            } else
+            {
+                if (isNeedRefresh)
+                {
+                    setResult(RESULT_OK);
+                }
+                finish();
             }
         }
         return super.onKeyDown(keyCode, event);

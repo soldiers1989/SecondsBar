@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.quote;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,17 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
-import com.fx.secondbar.bean.QuoteBean;
 import com.fx.secondbar.bean.ResQuote;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.adapter.AdQuote;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
-
-import java.util.List;
 
 import rx.Subscriber;
 
@@ -31,6 +30,7 @@ import rx.Subscriber;
  */
 public class FragmentQuoteItem extends FragmentViewPagerBase implements SwipeRefreshLayout.OnRefreshListener
 {
+    private static final int REQUEST_CODE_DETAIL = 1;
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
@@ -93,7 +93,11 @@ public class FragmentQuoteItem extends FragmentViewPagerBase implements SwipeRef
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
-                jump(AcQuoteDetail.class, FragmentQuoteItem.this.adapter.getItem(position).getName());
+                Bundle bundle = new Bundle();
+                bundle.putString(KEY_STR, FragmentQuoteItem.this.adapter.getItem(position).getName());
+                bundle.putInt(KEY, FragmentQuoteItem.this.adapter.getItem(position).getIscollection());
+                bundle.putString("id", FragmentQuoteItem.this.adapter.getItem(position).getPeopleid());
+                jump(AcQuoteDetail.class, bundle, REQUEST_CODE_DETAIL);
             }
         });
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
@@ -186,5 +190,19 @@ public class FragmentQuoteItem extends FragmentViewPagerBase implements SwipeRef
     public void onRefresh()
     {
         getData(PAGE_START, categoryId);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (REQUEST_CODE_DETAIL == requestCode)
+        {
+            if (ActivitySupport.RESULT_OK == resultCode)
+            {
+                swipeRefreshLayout.setRefreshing(true);
+                onRefresh();
+            }
+        }
     }
 }

@@ -19,6 +19,7 @@ public class QuoteBean
     private String img;//头像
     private String peopleid;//名人id
     private Double price;   //当前价格
+    private Integer iscollection;   //1表示已自选
 
     public Double getYesterdaysprice()
     {
@@ -128,5 +129,15 @@ public class QuoteBean
     public void setPrice(Double price)
     {
         this.price = price;
+    }
+
+    public Integer getIscollection()
+    {
+        return iscollection == null ? 0 : iscollection;
+    }
+
+    public void setIscollection(Integer iscollection)
+    {
+        this.iscollection = iscollection;
     }
 }

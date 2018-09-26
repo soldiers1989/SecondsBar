@@ -56,6 +56,14 @@ public class AcAccountSet extends ActivitySupport
      * 设置昵称请求码
      */
     private static final int REQUEST_CODE_SET_NICKNAME = 11;
+    /**
+     * 绑定手机号
+     */
+    private static final int REQUEST_CODE_BIND_PHONE = 12;
+    /**
+     * 设置支付密码
+     */
+    private static final int REQUEST_CODE_SET_PAYPWD = 13;
 
     private SelectableRoundedImageView img_avatar;
     private TextView tv_nickname;
@@ -112,6 +120,7 @@ public class AcAccountSet extends ActivitySupport
         GlideLoad.load(img_avatar, FxApplication.getInstance().getUserInfoBean().getImg(), true);
         VerificationUtil.setViewValue(tv_nickname, FxApplication.getInstance().getUserInfoBean().getNickname());
         VerificationUtil.setViewValue(tv_level, "LV" + FxApplication.getInstance().getUserInfoBean().getLevel());
+        VerificationUtil.setViewValue(tv_phone, FxApplication.getInstance().getUserInfoBean().getAccount(), "去绑定");
         //判断是否设置支付密码，1表示已设置。
         VerificationUtil.setViewValue(tv_pay_pwd, "1".equals(FxApplication.getInstance().getUserInfoBean().getPaymentpassword()) ? "已设置" : "去设置");
     }
@@ -302,10 +311,10 @@ public class AcAccountSet extends ActivitySupport
             case R.id.tv_level:
                 break;
             case R.id.tv_phone:
-                jump(AcBindPhone.class);
+                jump(AcBindPhone.class, REQUEST_CODE_BIND_PHONE);
                 break;
             case R.id.tv_pay_pwd:
-                jump(AcBindPayPwd.class);
+                jump(AcBindPayPwd.class, REQUEST_CODE_SET_PAYPWD);
                 break;
             case R.id.tv_cache_size:
                 clearCache();
@@ -465,6 +474,23 @@ public class AcAccountSet extends ActivitySupport
                     return;
                 }
                 VerificationUtil.setViewValue(tv_nickname, data.getStringExtra(KEY_STR));
+            }
+        } else if (REQUEST_CODE_BIND_PHONE == requestCode)
+        {
+            if (RESULT_OK == resultCode)
+            {
+                if (data == null)
+                {
+                    return;
+                }
+                VerificationUtil.setViewValue(tv_phone, data.getStringExtra(KEY_STR));
+            }
+        } else if (REQUEST_CODE_SET_PAYPWD == requestCode)
+        {
+            if (RESULT_OK == resultCode)
+            {
+
+                VerificationUtil.setViewValue(tv_pay_pwd, "已设置");
             }
         }
     }

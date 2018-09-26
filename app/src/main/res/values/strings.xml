@@ -110,4 +110,6 @@
     <string name="sign_cotinuous_day">连续签到%s天！</string>
     <string name="sign_rule_des">中断签到将会从第1天开始\n连续签到7天以上，每天1888Q</string>
     <string name="read_person_count">阅读量：%s</string>
+
+    <string name="purchase_detail_time_use">%1$s时间仅限于以下几种情况（常住地：%2$s）</string>
 </resources>

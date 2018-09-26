@@ -9,7 +9,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.util.CountDownButtonHelper;
 
 /**
@@ -25,6 +27,7 @@ public class AcBindPayPwd extends ActivitySupport
     private static final int REQUEST_CODE_SET_PAYPWD = 10;
 
     private TextView tv_title;
+    private TextView tv_phone;
     private EditText ed_code;
     private TextView tv_get_code;
     private Button btn_next;
@@ -44,6 +47,7 @@ public class AcBindPayPwd extends ActivitySupport
         tv_title = findView(R.id.tv_title);
         ed_code = findView(R.id.ed_code);
         tv_get_code = findView(R.id.tv_get_code);
+        tv_phone = findView(R.id.tv_phone);
         btn_next = findView(R.id.btn_next);
         findView(R.id.ib_back).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
@@ -62,6 +66,7 @@ public class AcBindPayPwd extends ActivitySupport
     {
         countDownButtonHelper = new CountDownButtonHelper(tv_get_code, "获取短信验证码", 60, 1, this);
         type = getIntent().getIntExtra(KEY, AcInputPayPwd.TYPE_SET);
+        VerificationUtil.setViewValue(tv_phone, FxApplication.getInstance().getUserInfoBean().getAccount(), "");
         if (AcInputPayPwd.TYPE_SET == type)
         {
             tv_title.setText("设置支付密码");
@@ -87,9 +92,14 @@ public class AcBindPayPwd extends ActivitySupport
                 finish();
                 break;
             case R.id.btn_next:
-                Bundle bundle = new Bundle();
-                bundle.putInt(KEY, type);
-                jump(AcInputPayPwd.class, bundle, REQUEST_CODE_SET_PAYPWD);
+                if (VerificationUtil.validator(this, ed_code, "请输入短信验证码"))
+                {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(KEY_STR, getTextView(ed_code));
+                    bundle.putInt(KEY, type);
+                    jump(AcInputPayPwd.class, bundle, REQUEST_CODE_SET_PAYPWD);
+                }
+
                 break;
         }
     }
