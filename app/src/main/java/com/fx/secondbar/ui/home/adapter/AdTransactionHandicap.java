@@ -55,8 +55,8 @@ public class AdTransactionHandicap extends BtAdapter<CommissionBean>
             VerificationUtil.setViewValue(tv_index, "买" + (position + 1));
         }
 
-        VerificationUtil.setViewValue(tv_num, getItem(position).getSecond(), "");
-        VerificationUtil.setViewValue(tv_price, getItem(position).getPrice(), "");
+        VerificationUtil.setViewValue(tv_num, getItem(position).getSecond(), "0");
+        VerificationUtil.setViewValue(tv_price, getItem(position).getPrice(), "0");
         return convertView;
     }
 }

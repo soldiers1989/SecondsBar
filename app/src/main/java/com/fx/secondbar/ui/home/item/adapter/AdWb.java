@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -71,6 +72,8 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
         GlideLoad.load(img, item.getAvatar(), true);
         VerificationUtil.setViewValue(tv_name, item.getUsername());
         VerificationUtil.setViewValue(tv_content, item.getContent());
+        tv_content.setText(Html.fromHtml(item.getContent()));
+//        VerificationUtil.setViewValue(tv_content, item.getContent());
         img_share.setOnClickListener(new View.OnClickListener()
         {
             @Override

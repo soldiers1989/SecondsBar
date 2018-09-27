@@ -349,8 +349,16 @@ public class MainActivity extends ActivitySupport
             fragmentTransaction.setData(peopleId, personName);
         }
         switchItem(tv_transaction);
-
     }
+
+    /**
+     * 跳转至首页
+     */
+    public void jumpToHome()
+    {
+        switchItem(tv_home);
+    }
+
 
     @Override
     public void onClick(View v)

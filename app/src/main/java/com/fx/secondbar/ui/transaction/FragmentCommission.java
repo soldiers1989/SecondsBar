@@ -128,10 +128,10 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
      */
     private void refreshData(String peopleId)
     {
-        if (dialog != null)
-        {
-            dialog.show();
-        }
+//        if (dialog != null)
+//        {
+//            dialog.show();
+//        }
         HttpManager.getTransactionCenter(peopleId, new Subscriber<TransactionBean>()
         {
             @Override
@@ -148,9 +148,13 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
                     return;
                 }
                 e.printStackTrace();
-                if (dialog != null)
+//                if (dialog != null)
+//                {
+//                    dialog.dismiss();
+//                }
+                if (swipeRefreshLayout.isRefreshing())
                 {
-                    dialog.dismiss();
+                    swipeRefreshLayout.setRefreshing(false);
                 }
                 ShowToast.showToast(HttpManager.checkLoadError(e));
             }
@@ -162,9 +166,13 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
                 {
                     return;
                 }
-                if (dialog != null)
+//                if (dialog != null)
+//                {
+//                    dialog.dismiss();
+//                }
+                if (swipeRefreshLayout.isRefreshing())
                 {
-                    dialog.dismiss();
+                    swipeRefreshLayout.setRefreshing(false);
                 }
                 String personName = transactionBean.getName();
                 if (!TextUtils.isEmpty(transactionBean.getZjm()))

@@ -33,7 +33,7 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.http.exception.ApiException;
-import com.fx.secondbar.ui.home.DialogShare;
+import com.fx.secondbar.ui.home.AcShareDialog;
 import com.fx.secondbar.ui.order.AcOrderManage;
 import com.fx.secondbar.ui.person.assets.AcRecharge;
 import com.fx.secondbar.util.Constants;
@@ -165,64 +165,10 @@ public class AcMallDetail extends ActivitySupport
             {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
                 {
-                    tv_intro.setText(Html.fromHtml(bean.getContent(), Html.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH | Html.FROM_HTML_SEPARATOR_LINE_BREAK_HEADING | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST_ITEM | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST | Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV | Html.FROM_HTML_SEPARATOR_LINE_BREAK_BLOCKQUOTE | Html.FROM_HTML_OPTION_USE_CSS_COLORS, new Html.ImageGetter()
-                    {
-                        @Override
-                        public Drawable getDrawable(String source)
-                        {
-                            String url = "";
-                            if (!TextUtils.isEmpty(source))
-                            {
-                                if (source.startsWith("http"))
-                                {
-                                    url = source;
-                                } else
-                                {
-                                    url = Constants.ROOT_URL + source;
-                                }
-                            }
-                            //级别列表Drawable
-                            final LevelListDrawable drawable = new LevelListDrawable();
-                            GlideApp.with(AcMallDetail.this).asBitmap().load(url).into(new SimpleTarget<Bitmap>()
-                            {
-                                @Override
-                                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition)
-                                {
-                                    try
-                                    {
-                                        if (resource != null)
-                                        {
-                                            BitmapDrawable bitmapDrawable = new BitmapDrawable(resource);
-                                            drawable.addLevel(1, 1, bitmapDrawable);
-                                            drawable.setBounds(0, 0, resource.getWidth(), resource.getHeight());
-                                            drawable.setLevel(1);
-                                            CharSequence text = tv_intro.getText();
-                                            tv_intro.setText(text);
-                                            tv_intro.refreshDrawableState();
-                                        }
-                                    } catch (Exception e)
-                                    {
-                                        e.printStackTrace();
-                                    } catch (Error error)
-                                    {
-                                        error.printStackTrace();
-                                    }
-                                }
-                            });
-
-                            return drawable;
-                        }
-                    }, null));
+                    tv_intro.setText(Html.fromHtml(bean.getContent(), Html.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH | Html.FROM_HTML_SEPARATOR_LINE_BREAK_HEADING | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST_ITEM | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST | Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV | Html.FROM_HTML_SEPARATOR_LINE_BREAK_BLOCKQUOTE | Html.FROM_HTML_OPTION_USE_CSS_COLORS, new CustomImageGetter(tv_intro), null));
                 } else
                 {
-                    tv_intro.setText(Html.fromHtml(bean.getContent(), new Html.ImageGetter()
-                    {
-                        @Override
-                        public Drawable getDrawable(String source)
-                        {
-                            return null;
-                        }
-                    }, null));
+                    tv_intro.setText(Html.fromHtml(bean.getContent(), new CustomImageGetter(tv_intro), null));
                 }
             }
             dialogBuy = new DialogBuy(this, bean);
@@ -351,7 +297,7 @@ public class AcMallDetail extends ActivitySupport
                 onBackPressed();
                 break;
             case R.id.img_forward:
-                new DialogShare(this).show();
+                jump(AcShareDialog.class);
                 break;
             case R.id.btn_buy:
                 if (dialogBuy != null)
@@ -359,6 +305,67 @@ public class AcMallDetail extends ActivitySupport
                     dialogBuy.show();
                 }
                 break;
+        }
+    }
+
+    public static class CustomImageGetter implements Html.ImageGetter
+    {
+
+        private TextView textView;
+
+        public CustomImageGetter(TextView textView)
+        {
+            this.textView = textView;
+        }
+
+        @Override
+        public Drawable getDrawable(String source)
+        {
+            if (textView != null)
+            {
+                String url = "";
+                if (!TextUtils.isEmpty(source))
+                {
+                    if (source.startsWith("http"))
+                    {
+                        url = source;
+                    } else
+                    {
+                        url = Constants.ROOT_URL + source;
+                    }
+                }
+                //级别列表Drawable
+                final LevelListDrawable drawable = new LevelListDrawable();
+                GlideApp.with(textView.getContext()).asBitmap().load(url).into(new SimpleTarget<Bitmap>()
+                {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition)
+                    {
+                        try
+                        {
+                            if (resource != null)
+                            {
+                                BitmapDrawable bitmapDrawable = new BitmapDrawable(resource);
+                                drawable.addLevel(1, 1, bitmapDrawable);
+                                drawable.setBounds(0, 0, resource.getWidth(), resource.getHeight());
+                                drawable.setLevel(1);
+                                CharSequence text = textView.getText();
+                                textView.setText(text);
+                                textView.refreshDrawableState();
+                            }
+                        } catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        } catch (Error error)
+                        {
+                            error.printStackTrace();
+                        }
+                    }
+                });
+
+                return drawable;
+            }
+            return null;
         }
     }
 }

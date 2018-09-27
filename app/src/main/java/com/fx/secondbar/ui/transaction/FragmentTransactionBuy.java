@@ -141,6 +141,9 @@ public class FragmentTransactionBuy extends FragmentTransactionItem
         {
             refreshData(peopleId);
             isPrepareRefresh = false;
+        } else
+        {
+            bindData(new TransactionBean());
         }
     }
 
@@ -263,7 +266,7 @@ public class FragmentTransactionBuy extends FragmentTransactionItem
             tv_price_up.setText(spUp);
 
             VerificationUtil.setViewValue(tv_new_price, String.format(getString(R.string.transaction_head_new_price), String.valueOf(bean.getPrice())));
-            VerificationUtil.setViewValue(tv_code, "可用" + bean.getZjm());
+            VerificationUtil.setViewValue(tv_code, "可用" + VerificationUtil.verifyDefault(bean.getZjm(), "-"));
             VerificationUtil.setViewValue(tv_can_num, String.valueOf(bean.getCanbuyseconds()));
             VerificationUtil.setViewValue(tv_price_ste, String.valueOf(bean.getBalanceamt()));
 
@@ -299,7 +302,7 @@ public class FragmentTransactionBuy extends FragmentTransactionItem
             {
                 list.add(sourceList.get(i));
             }
-            for (int i = 0; i < (5 - list.size()); i++)
+            for (int i = 0; i < (5 - size); i++)
             {
                 list.add(new CommissionBean());
             }

@@ -39,7 +39,7 @@ public class AcSetNickName extends ActivitySupport
     {
         ed_nickname = findView(R.id.ed_nickname);
         findView(R.id.ib_back).setOnClickListener(this);
-        findView(R.id.tv_submit).setOnClickListener(this);
+        findView(R.id.btn_submit).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -121,7 +121,7 @@ public class AcSetNickName extends ActivitySupport
             case R.id.ib_back:
                 finish();
                 break;
-            case R.id.tv_submit:
+            case R.id.btn_submit:
                 if (VerificationUtil.validator(this, ed_nickname, "请输入昵称"))
                 {
                     setNickName(getTextView(ed_nickname));

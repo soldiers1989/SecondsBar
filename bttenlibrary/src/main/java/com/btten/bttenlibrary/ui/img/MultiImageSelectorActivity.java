@@ -98,7 +98,7 @@ public class MultiImageSelectorActivity extends ActivitySupport implements Multi
         });
 
         setSupportActionBar(toolbar);
-        initToolBar();
+//        initToolBar();
     }
 
     @Override

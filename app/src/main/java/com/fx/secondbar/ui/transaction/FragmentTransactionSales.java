@@ -137,6 +137,9 @@ public class FragmentTransactionSales extends FragmentTransactionItem
         {
             refreshData(peopleId);
             isPrepareRefresh = false;
+        } else
+        {
+            bindData(new TransactionBean());
         }
     }
 
@@ -284,7 +287,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
             {
                 list.add(sourceList.get(i));
             }
-            for (int i = 0; i < (5 - list.size()); i++)
+            for (int i = 0; i < (5 - size); i++)
             {
                 list.add(new CommissionBean());
             }

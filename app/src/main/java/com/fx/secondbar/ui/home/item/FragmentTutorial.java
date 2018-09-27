@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.home.AcTutorialDetail;
 import com.fx.secondbar.ui.home.item.adapter.AdTutorial;
 
 import java.util.List;
@@ -78,6 +79,16 @@ public class FragmentTutorial extends FragmentViewPagerBase
                 getData(currPage + 1);
             }
         }, recyclerView);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position)
+            {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(KEY, FragmentTutorial.this.adapter.getItem(position));
+                jump(AcTutorialDetail.class, bundle, false);
+            }
+        });
     }
 
     /**

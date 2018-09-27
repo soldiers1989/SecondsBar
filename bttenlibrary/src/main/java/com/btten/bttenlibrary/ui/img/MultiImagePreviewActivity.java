@@ -61,7 +61,7 @@ public class MultiImagePreviewActivity extends ActivitySupport implements OnPage
         tv_mark = findView(R.id.tv_mark);
         viewPager = findView(R.id.viewPager);
         setSupportActionBar(toolbar);
-        initToolBar();
+//        initToolBar();
     }
 
     @Override

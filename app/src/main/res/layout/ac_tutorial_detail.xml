@@ -19,12 +19,13 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/mall_tool_pl"
-                android:text="修改昵称"
+                android:text=""
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/toolbar_title_font"/>
 
@@ -40,41 +41,28 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
-    <View
-        android:id="@+id/v_line"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="36dip"
-        android:layout_marginTop="74dip"
-        android:layout_marginRight="36dip"
-        android:background="#d7d7d7"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+        android:layout_height="0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-    <EditText
-        android:id="@+id/ed_nickname"
-        android:layout_width="match_parent"
-        android:layout_height="48dip"
-        android:layout_marginLeft="36dip"
-        android:layout_marginRight="36dip"
-        android:background="@null"
-        android:hint="请输入昵称(最多13个字符)"
-        android:singleLine="true"
-        android:textColor="#111111"
-        android:textColorHint="#a9a9a9"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/v_line"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="30dip"
+            android:paddingTop="20dip"
+            android:paddingRight="30dip">
 
-    <Button
-        android:id="@+id/btn_submit"
-        android:layout_width="match_parent"
-        android:layout_height="40dip"
-        android:layout_marginLeft="36dip"
-        android:layout_marginTop="32dip"
-        android:layout_marginRight="36dip"
-        android:background="@color/font_yellow_color"
-        android:gravity="center"
-        android:text="保存"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/v_line"/>
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#3b3b3b"
+                android:textSize="14sp"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
 </android.support.constraint.ConstraintLayout>

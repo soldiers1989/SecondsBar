@@ -59,5 +59,7 @@
         android:layout_marginLeft="30dip"
         android:layout_marginTop="20dip"
         android:layout_marginRight="30dip"
+        android:textColor="#3b3b3b"
+        android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@+id/tv_time"/>
 </android.support.constraint.ConstraintLayout>

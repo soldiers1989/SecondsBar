@@ -14,7 +14,6 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.PurchaseDetailBean;
 import com.fx.secondbar.http.HttpManager;
-import com.fx.secondbar.ui.home.DialogShare;
 import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
@@ -86,7 +85,7 @@ public class AcPurchaseDetail extends ActivitySupport
                 finish();
                 break;
             case R.id.ib_share:
-                new DialogShare(this).show();
+                jump(AcPurchaseDetail.class);
                 break;
             case R.id.btn_buy:
                 Bundle bundle = new Bundle();

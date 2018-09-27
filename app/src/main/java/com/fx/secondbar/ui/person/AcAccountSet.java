@@ -117,7 +117,15 @@ public class AcAccountSet extends ActivitySupport
     protected void initData()
     {
         dialog = ProgressDialogUtil.getProgressDialog(this, getString(R.string.progress_tips), true);
-        GlideLoad.load(img_avatar, FxApplication.getInstance().getUserInfoBean().getImg(), true);
+        setData();
+    }
+
+    /**
+     * 设置用户数据
+     */
+    private void setData()
+    {
+        GlideLoad.load(img_avatar, FxApplication.getInstance().getUserInfoBean().getImg(), true, R.mipmap.default_avatar, R.mipmap.default_avatar);
         VerificationUtil.setViewValue(tv_nickname, FxApplication.getInstance().getUserInfoBean().getNickname());
         VerificationUtil.setViewValue(tv_level, "LV" + FxApplication.getInstance().getUserInfoBean().getLevel());
         VerificationUtil.setViewValue(tv_phone, FxApplication.getInstance().getUserInfoBean().getAccount(), "去绑定");
@@ -288,6 +296,9 @@ public class AcAccountSet extends ActivitySupport
                     dialog.dismiss();
                 }
                 FxApplication.getInstance().setUserInfoBean(userInfoBean);
+                FxApplication.refreshPersonShowBroadCast();
+                setData();
+
             }
         });
     }

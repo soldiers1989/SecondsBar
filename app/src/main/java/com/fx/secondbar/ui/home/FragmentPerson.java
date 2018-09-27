@@ -29,6 +29,7 @@ import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.DialogSign;
+import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.home.adapter.AdPerson;
 import com.fx.secondbar.ui.order.AcOrderManage;
 import com.fx.secondbar.ui.person.AcAccountSet;
@@ -120,10 +121,12 @@ public class FragmentPerson extends FragmentSupport
 
                 } else if (String.valueOf(ActiveBean.TYPE_SHARE).equals(bean.getType()))
                 {//分享
-
+                    //跳转至首页
+                    ((MainActivity) getActivity()).jumpToHome();
                 } else if (String.valueOf(ActiveBean.TYPE_BROWE).equals(bean.getType()))
                 {//看新闻
-
+                    //跳转至首页
+                    ((MainActivity) getActivity()).jumpToHome();
                 } else if (String.valueOf(ActiveBean.TYPE_OPEN_APP).equals(bean.getType()))
                 {//打开App
 
@@ -158,7 +161,7 @@ public class FragmentPerson extends FragmentSupport
     {
         GlideApp.with(img_get_q).asBitmap().load(R.mipmap.ic_get_q_img).centerCrop().into(img_get_q);
 
-        GlideLoad.load(img_avatar, FxApplication.getInstance().getUserInfoBean().getImg(), true);
+        GlideLoad.load(img_avatar, FxApplication.getInstance().getUserInfoBean().getImg(), true, R.mipmap.default_avatar, R.mipmap.default_avatar);
         VerificationUtil.setViewValue(tv_name, FxApplication.getInstance().getUserInfoBean().getNickname());
         VerificationUtil.setViewValue(tv_account, FxApplication.getInstance().getUserInfoBean().getAccount(), "请绑定手机号");
         VerificationUtil.setViewValue(tv_ste_value, FxApplication.getInstance().getUserInfoBean().getBalance().toString());

@@ -21,6 +21,7 @@ import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
 import com.fx.secondbar.ui.search.AcSearch;
 import com.fx.secondbar.ui.transaction.FragmentCommission;
 import com.fx.secondbar.ui.transaction.FragmentTransactionBuy;
+import com.fx.secondbar.ui.transaction.FragmentTransactionBuyed;
 import com.fx.secondbar.ui.transaction.FragmentTransactionItem;
 import com.fx.secondbar.ui.transaction.FragmentTransactionSales;
 
@@ -85,6 +86,7 @@ public class FragmentTransaction extends FragmentSupport
         fragmengs.add(FragmentTransactionSales.newInstance());
         fragmengs.add(FragmentCommission.newInstance(FragmentCommission.TYPE_CURR));
         fragmengs.add(FragmentCommission.newInstance(FragmentCommission.TYPE_HISTORY));
+        fragmengs.add(FragmentTransactionBuyed.newInstance());
         adapter = new AdHomeItem(getChildFragmentManager(), fragmengs, tabTitles);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(tabTitles.length);

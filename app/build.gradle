@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    
+
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.fx.secondbar"
@@ -14,6 +14,12 @@ android {
             //设置支持的SO库架构
             abiFilters 'armeabi'//'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "17ac2f836f693481d1d75f55", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
     }
 
     signingConfigs {
@@ -59,4 +65,7 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     //    implementation 'com.sina.weibo.sdk:core:4.3.0:openDefaultRelease@aar'
     implementation(name: 'core-4.3.1-openDefaultRelease', ext: 'aar')
+
+    implementation 'cn.jiguang.sdk:jpush:3.1.6'  // 此处以JPush 3.1.6 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:1.2.5'  // 此处以JCore 1.2.5 版本为例。
 }

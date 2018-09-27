@@ -1,11 +1,14 @@
 package com.fx.secondbar.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * function:教程实体信息
  * author: frj
  * modify date: 2018/9/23
  */
-public class TurialBean
+public class TurialBean implements Parcelable
 {
     private String file;//null,
     private String status;//状态值
@@ -106,4 +109,56 @@ public class TurialBean
     {
         this.course_ID = course_ID;
     }
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeString(this.file);
+        dest.writeString(this.status);
+        dest.writeString(this.content);
+        dest.writeString(this.title);
+        dest.writeString(this.sorts);
+        dest.writeString(this.type);
+        dest.writeString(this.img);
+        dest.writeString(this.createtime);
+        dest.writeString(this.course_ID);
+    }
+
+    public TurialBean()
+    {
+    }
+
+    protected TurialBean(Parcel in)
+    {
+        this.file = in.readString();
+        this.status = in.readString();
+        this.content = in.readString();
+        this.title = in.readString();
+        this.sorts = in.readString();
+        this.type = in.readString();
+        this.img = in.readString();
+        this.createtime = in.readString();
+        this.course_ID = in.readString();
+    }
+
+    public static final Parcelable.Creator<TurialBean> CREATOR = new Parcelable.Creator<TurialBean>()
+    {
+        @Override
+        public TurialBean createFromParcel(Parcel source)
+        {
+            return new TurialBean(source);
+        }
+
+        @Override
+        public TurialBean[] newArray(int size)
+        {
+            return new TurialBean[size];
+        }
+    };
 }
