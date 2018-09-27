@@ -10,6 +10,7 @@ import com.fx.secondbar.R;
  * function:关于我们
  * author: frj
  * modify date: 2018/9/21
+ *
  */
 public class AcAboutUs extends ActivitySupport
 {

@@ -14,6 +14,9 @@ import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.config.BaseConfig;
 import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.DataCacheUtils;
+import com.fx.secondbar.util.ShareUtils;
+import com.sina.weibo.sdk.WbSdk;
+import com.sina.weibo.sdk.auth.AuthInfo;
 import com.tencent.smtt.sdk.QbSdk;
 
 import java.util.ArrayList;
@@ -54,6 +57,8 @@ public class FxApplication extends BtApplication
             }
         };    //x5内核初始化接口
         QbSdk.initX5Environment(getApplicationContext(), cb);
+        //初始化微博sdk
+        WbSdk.install(this, new AuthInfo(this, ShareUtils.SINA_APPKEY, ShareUtils.REDIRECT_URL, ShareUtils.SCOPE));
     }
 
     @Override
@@ -180,6 +185,15 @@ public class FxApplication extends BtApplication
     public static void refreshPersonShowBroadCast()
     {
         boolean isSendSuccess = LocalBroadcastManager.getInstance(getInstance()).sendBroadcast(new Intent(Constants.ACTION_REFRESH_PERSON_SHOW));
+        LogUtil.e("refreshPersonShowBroadCast", isSendSuccess ? "发送成功" : "发送失败");
+    }
+
+    /**
+     * 发送分享成功广播
+     */
+    public static void shareSuccessBroadCast()
+    {
+        boolean isSendSuccess = LocalBroadcastManager.getInstance(getInstance()).sendBroadcast(new Intent(Constants.ACTION_SHARE_SUCCESS));
         LogUtil.e("refreshPersonShowBroadCast", isSendSuccess ? "发送成功" : "发送失败");
     }
 }

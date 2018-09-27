@@ -8,6 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:toolbarStyle">@style/BaseToolBar</item>
     </style>
+     
+
+    <style name="myTransparent" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
 
     <!--toolbar默认样式-->
     <style name="BaseToolBar">

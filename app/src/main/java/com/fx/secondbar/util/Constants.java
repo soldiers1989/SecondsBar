@@ -33,6 +33,11 @@ public class Constants
     public static final String ACTION_REFRESH_PERSON_SHOW = "action_refresh_person_show";
 
     /**
+     * 分享成功广播Action
+     */
+    public static final String ACTION_SHARE_SUCCESS = "action_share_success";
+
+    /**
      * 登录接口
      */
     public static final String API_LOGIN = "login";

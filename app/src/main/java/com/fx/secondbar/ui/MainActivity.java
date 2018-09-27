@@ -13,9 +13,11 @@ import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.base.FragmentSupport;
+import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.util.LogUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.FragmentHome;
@@ -111,6 +113,7 @@ public class MainActivity extends ActivitySupport
         login(0);
 
         IntentFilter filter = new IntentFilter(Constants.ACTION_REFRESH_USERINFO);
+        filter.addAction(Constants.ACTION_SHARE_SUCCESS);
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
     }
 
@@ -126,6 +129,9 @@ public class MainActivity extends ActivitySupport
             if (Constants.ACTION_REFRESH_USERINFO.equals(intent.getAction()))
             {
                 login(0);
+            } else if (Constants.ACTION_SHARE_SUCCESS.equals(intent.getAction()))
+            {
+                completeShareTask(0);
             }
         }
     };
@@ -297,6 +303,37 @@ public class MainActivity extends ActivitySupport
             {
                 FxApplication.getInstance().setUserInfoBean(userInfoBean);
                 FxApplication.refreshPersonShowBroadCast();
+            }
+        });
+    }
+
+    /**
+     * 完成打开App的任务
+     */
+    private void completeShareTask(final int retry)
+    {
+        HttpManager.finishActive(String.valueOf(ActiveBean.TYPE_SHARE), new Subscriber<ResponseBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (retry < 3)
+                {
+                    completeShareTask(retry + 1);
+                }
+
+            }
+
+            @Override
+            public void onNext(ResponseBean responseBean)
+            {
+
             }
         });
     }

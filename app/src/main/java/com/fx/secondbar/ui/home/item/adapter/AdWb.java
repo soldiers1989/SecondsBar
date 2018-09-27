@@ -1,12 +1,14 @@
 package com.fx.secondbar.ui.home.item.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
@@ -14,7 +16,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.WBBean;
-import com.fx.secondbar.ui.home.DialogShare;
+import com.fx.secondbar.ui.home.AcShareDialog;
 import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
@@ -29,13 +31,16 @@ import java.util.List;
 public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
 {
 
-    public AdWb()
+    private ActivitySupport activity;
+
+    public AdWb(ActivitySupport activity)
     {
         super(R.layout.ad_wb);
+        this.activity = activity;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, WBBean item)
+    protected void convert(BaseViewHolder helper, final WBBean item)
     {
         SelectableRoundedImageView img = helper.getView(R.id.img);
         ImageButton img_share = helper.getView(R.id.img_share);
@@ -71,7 +76,14 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
             @Override
             public void onClick(View v)
             {
-                new DialogShare(v.getContext()).show();
+                if (activity != null)
+                {
+                    Intent intent = new Intent(activity, AcShareDialog.class);
+                    intent.putExtra(AcShareDialog.KEY_TITLE, item.getTitle());
+                    intent.putExtra(AcShareDialog.KEY_CONTENT, item.getContent());
+                    intent.putExtra(AcShareDialog.KEY_URL, "");
+                    activity.startActivity(intent);
+                }
             }
         });
     }
@@ -116,26 +128,6 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
         }
         return null;
     }
-
-//    /**
-//     * 获取图片链接
-//     *
-//     * @return
-//     */
-//    private List<Integer> getDatas()
-//    {
-//        List<Integer> list = new ArrayList<>();
-//        list.add(R.mipmap.test_wb1);
-//        list.add(R.mipmap.test_wb2);
-//        list.add(R.mipmap.test_wb3);
-//        list.add(R.mipmap.test_wb4);
-//        list.add(R.mipmap.test_wb5);
-//        list.add(R.mipmap.test_wb6);
-//        list.add(R.mipmap.test_wb7);
-//        list.add(R.mipmap.test_wb8);
-//        list.add(R.mipmap.test_wb9);
-//        return list;
-//    }
 
     /**
      * 获取图片列数

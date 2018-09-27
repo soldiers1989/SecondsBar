@@ -160,7 +160,7 @@ public class FragmentPerson extends FragmentSupport
 
         GlideLoad.load(img_avatar, FxApplication.getInstance().getUserInfoBean().getImg(), true);
         VerificationUtil.setViewValue(tv_name, FxApplication.getInstance().getUserInfoBean().getNickname());
-        VerificationUtil.setViewValue(tv_account, FxApplication.getInstance().getUserInfoBean().getAccount());
+        VerificationUtil.setViewValue(tv_account, FxApplication.getInstance().getUserInfoBean().getAccount(), "请绑定手机号");
         VerificationUtil.setViewValue(tv_ste_value, FxApplication.getInstance().getUserInfoBean().getBalance().toString());
         VerificationUtil.setViewValue(tv_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
         VerificationUtil.setViewValue(tv_today_q_value, FxApplication.getInstance().getUserInfoBean().getTodayqcoin().toString());

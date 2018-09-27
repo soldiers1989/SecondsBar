@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000">
+
+    <View
+        android:id="@+id/v_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="160dip"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/home_share_title_mt"
+        android:text="@string/home_share_title"
+        android:textColor="@color/home_share_title"
+        android:textSize="@dimen/home_share_title"
+        app:layout_constraintEnd_toEndOf="@+id/v_bottom"
+        app:layout_constraintStart_toStartOf="@+id/v_bottom"
+        app:layout_constraintTop_toTopOf="@+id/v_bottom"/>
+
+    <View
+        android:layout_width="@dimen/home_share_line_w"
+        android:layout_height="@dimen/home_share_line_h"
+        android:layout_marginRight="@dimen/home_share_line_mlr"
+        android:background="@color/home_share_line"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        app:layout_constraintEnd_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toTopOf="@id/tv_title"
+        />
+
+    <View
+        android:layout_width="@dimen/home_share_line_w"
+        android:layout_height="@dimen/home_share_line_h"
+        android:layout_marginLeft="@dimen/home_share_line_mlr"
+        android:background="@color/home_share_line"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        app:layout_constraintStart_toEndOf="@id/tv_title"
+        app:layout_constraintTop_toTopOf="@id/tv_title"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/v_bottom"
+        app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+        <View
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/img_qq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/home_share_item_p"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_qq"/>
+
+        <View
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/img_weibo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/home_share_item_p"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_weibo"/>
+
+        <View
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/img_cycle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/home_share_item_p"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_cicle"/>
+
+        <View
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/img_wechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/home_share_item_p"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_wechat"/>
+
+        <View
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

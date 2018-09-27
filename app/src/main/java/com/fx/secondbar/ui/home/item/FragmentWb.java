@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
@@ -77,7 +78,7 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
     protected void initData()
     {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new AdWb();
+        adapter = new AdWb((ActivitySupport) getActivity());
         adapter.bindToRecyclerView(recyclerView);
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
         {

@@ -17,14 +17,16 @@ import com.fx.secondbar.R;
  * author: frj
  * modify date: 2018/9/9
  */
-public class DialogShare {
+public class DialogShare
+{
 
     private Context context;
     private Dialog dialog;
 
     private OnSharePlatformListener listener;
 
-    public DialogShare(@NonNull Context context) {
+    public DialogShare(@NonNull Context context)
+    {
         this.context = context;
         init();
     }
@@ -32,7 +34,8 @@ public class DialogShare {
     /**
      * 初始化
      */
-    private void init() {
+    private void init()
+    {
         dialog = new Dialog(context, R.style.dialog_share);
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
@@ -50,27 +53,39 @@ public class DialogShare {
      * @param context
      * @return
      */
-    private View createView(Context context) {
+    private View createView(Context context)
+    {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_share, null);
         ImageButton img_qq = view.findViewById(R.id.img_qq);
         ImageButton img_weibo = view.findViewById(R.id.img_weibo);
         ImageButton img_cycle = view.findViewById(R.id.img_cycle);
         ImageButton img_wechat = view.findViewById(R.id.img_wechat);
 
-        View.OnClickListener onClickListener = new View.OnClickListener() {
+        View.OnClickListener onClickListener = new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                if (listener == null) {
+            public void onClick(View v)
+            {
+                if (listener == null)
+                {
                     return;
                 }
-                if (R.id.img_qq == v.getId()) {
+                if (R.id.img_qq == v.getId())
+                {
                     listener.onShare(OnSharePlatformListener.PLATFORM_QQ);
-                } else if (R.id.img_weibo == v.getId()) {
+                } else if (R.id.img_weibo == v.getId())
+                {
                     listener.onShare(OnSharePlatformListener.PLATFORM_WEIBO);
-                } else if (R.id.img_cycle == v.getId()) {
+                } else if (R.id.img_cycle == v.getId())
+                {
                     listener.onShare(OnSharePlatformListener.PLATFORM_CYCLE);
-                } else if (R.id.img_wechat == v.getId()) {
+                } else if (R.id.img_wechat == v.getId())
+                {
                     listener.onShare(OnSharePlatformListener.PLATFORM_WECHAT);
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
                 }
             }
         };
@@ -86,15 +101,19 @@ public class DialogShare {
      *
      * @param listener
      */
-    public void setOnSharePlatformListener(OnSharePlatformListener listener) {
+    public DialogShare setOnSharePlatformListener(OnSharePlatformListener listener)
+    {
         this.listener = listener;
+        return this;
     }
 
     /**
      * 显示对话框
      */
-    public void show() {
-        if (dialog != null && !dialog.isShowing()) {
+    public void show()
+    {
+        if (dialog != null && !dialog.isShowing())
+        {
             dialog.show();
         }
     }
@@ -102,13 +121,16 @@ public class DialogShare {
     /**
      * 隐藏对话框
      */
-    public void dismiss() {
-        if (dialog != null) {
+    public void dismiss()
+    {
+        if (dialog != null)
+        {
             dialog.dismiss();
         }
     }
 
-    public interface OnSharePlatformListener {
+    public interface OnSharePlatformListener
+    {
 
         /**
          * QQ
