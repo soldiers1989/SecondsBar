@@ -7,8 +7,10 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.btten.bttenlibrary.util.LogUtil;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
@@ -29,10 +31,12 @@ public class FragmentInfomation extends FragmentViewPagerBase
     private SlidingTabLayout tabs;
     private ViewPager viewPager;
     private AdHomeItem adapter;
+    private TextView tv_today_q;
 
     @Override
     public void onStarShow()
     {
+        setTodayIncome();
     }
 
     @Nullable
@@ -48,6 +52,7 @@ public class FragmentInfomation extends FragmentViewPagerBase
     {
         tabs = findView(R.id.tabs);
         viewPager = findView(R.id.viewPager);
+        tv_today_q = findView(R.id.tv_today_q);
     }
 
     @Override
@@ -94,6 +99,26 @@ public class FragmentInfomation extends FragmentViewPagerBase
             }
         });
         viewPager.setCurrentItem(0);
+
+        setTodayIncome();
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        setTodayIncome();
+    }
+
+    /**
+     * 设置今日收益
+     */
+    private void setTodayIncome()
+    {
+        if (tv_today_q != null)
+        {
+            tv_today_q.setText(VerificationUtil.verifyDefault(String.valueOf(FxApplication.getInstance().getUserInfoBean().getTodayqcoin()), "0"));
+        }
     }
 
 }

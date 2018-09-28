@@ -60,10 +60,11 @@
             android:textSize="15sp"/>
 
         <TextView
+            android:id="@+id/tv_select_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawablePadding="8dip"
             android:drawableRight="@mipmap/ic_arrow_right_gray"
+            android:drawablePadding="8dip"
             android:gravity="right|center_vertical"
             android:text="我的银行卡"
             android:textColor="#808080"

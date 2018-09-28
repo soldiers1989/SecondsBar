@@ -22,13 +22,45 @@
         app:tl_indicator_style="BLOCK"
         app:tl_indicator_width_equal_title="true"
         app:tl_tab_space_equal="true"
-        app:tl_textBold="BOTH"
         app:tl_textSelectColor="@android:color/white"
         app:tl_textUnselectColor="@color/home_tabs_item_text_unsel"
         app:tl_textsize="@dimen/home_infomation_head_item_text"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
+        <LinearLayout
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="15dip"
+            android:layout_marginBottom="19dip"
+            android:background="@mipmap/ic_today_income"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_today_q"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今日Q"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"/>
+        </LinearLayout>
+    </FrameLayout>
+
 </LinearLayout>

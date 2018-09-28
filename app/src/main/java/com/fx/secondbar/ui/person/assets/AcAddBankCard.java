@@ -55,6 +55,7 @@ public class AcAddBankCard extends ActivitySupport
         findView(R.id.ib_back).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
+
     }
 
     @Override

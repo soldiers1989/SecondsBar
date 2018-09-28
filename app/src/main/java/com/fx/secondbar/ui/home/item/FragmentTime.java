@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -160,6 +161,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
                 {
                     return;
                 }
+                e.printStackTrace();
                 if (swipeRefreshLayout.isRefreshing())
                 {
                     swipeRefreshLayout.setRefreshing(false);
@@ -229,7 +231,13 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
                 list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_TITLE, "名人资讯"));
                 for (InfomationBean infomationBean : bean.getListNews())
                 {
-                    if (VerificationUtil.noEmpty(infomationBean.getPictures()))
+                    String pictures = infomationBean.getPictures();
+                    String[] picture = null;
+                    if (!TextUtils.isEmpty(pictures))
+                    {
+                        picture = pictures.split(",");
+                    }
+                    if (picture != null && picture.length > 1)
                     {
                         list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_MULTI_IMG, infomationBean));
                     } else

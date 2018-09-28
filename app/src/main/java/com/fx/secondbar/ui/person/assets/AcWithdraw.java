@@ -20,6 +20,7 @@ public class AcWithdraw extends ActivitySupport
     private LinearLayout ll_bank;
     private TextView tv_all;
     private TextView tv_conversion_tips;
+    private TextView tv_select_card;    //选中的银行卡
     private Button btn_withdraw;
 
     @Override
@@ -34,6 +35,7 @@ public class AcWithdraw extends ActivitySupport
         ll_bank = findView(R.id.ll_bank);
         tv_all = findView(R.id.tv_all);
         tv_conversion_tips = findView(R.id.tv_conversion_tips);
+        tv_select_card = findView(R.id.tv_select_card);
         btn_withdraw = findView(R.id.btn_withdraw);
 
         findView(R.id.ib_back).setOnClickListener(this);

@@ -3,6 +3,7 @@ package com.fx.secondbar.ui.home.item.adapter;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -182,12 +183,35 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
         TextView tv_count = helper.getView(R.id.tv_count);
         if (item.getInfomationBean() != null)
         {
-            List<String> list = item.getInfomationBean().getPictures();
-            if (list != null && list.size() >= 3)
+            String pictures = item.getInfomationBean().getPictures();
+            if (!TextUtils.isEmpty(pictures))
             {
-                GlideLoad.load(img1, list.get(0), true);
-                GlideLoad.load(img2, list.get(1), true);
-                GlideLoad.load(img3, list.get(2), true);
+                String[] picture = pictures.split(",");
+                if (picture != null)
+                {
+                    if (picture.length > 0)
+                    {
+                        GlideLoad.load(img1, picture[0], true);
+                        if (picture.length > 1)
+                        {
+                            GlideLoad.load(img1, picture[1], true);
+                        }
+                        if (picture.length > 2)
+                        {
+                            GlideLoad.load(img1, picture[2], true);
+                        }
+                    } else
+                    {
+                        GlideLoad.load(img1, "", true);
+                        GlideLoad.load(img2, "", true);
+                        GlideLoad.load(img3, "", true);
+                    }
+                } else
+                {
+                    GlideLoad.load(img1, "", true);
+                    GlideLoad.load(img2, "", true);
+                    GlideLoad.load(img3, "", true);
+                }
             } else
             {
                 GlideLoad.load(img1, "", true);

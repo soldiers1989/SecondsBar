@@ -20,10 +20,8 @@ import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.ResourceHelper;
 import com.btten.bttenlibrary.util.glide.GlideUtils;
 import com.btten.bttenlibrary.view.photoview.PhotoView;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 

@@ -114,4 +114,54 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
     </LinearLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/v_bottom"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dip"
+            android:paddingTop="20dip"
+            android:paddingRight="15dip"
+            android:paddingBottom="20dip">
+
+            <LinearLayout
+                android:id="@+id/ll_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/share_dialog_content_bg"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_get_q_img"/>
+
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:text="啊哈哈哈哈哈哈,我也不知道该说些什么,反正就是很烦啦,我也不知道该怎么办怎么做怎么活下去,好累哦"
+                    android:textColor="#333333"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_get_q_img"/>
+            </LinearLayout>
+        </FrameLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
 </android.support.constraint.ConstraintLayout>

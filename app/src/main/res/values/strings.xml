@@ -83,10 +83,10 @@
     <string name="transaction_head_sale">卖出</string>
     <string name="transaction_head_seconds_value">%s秒</string>
     <string name="transaction_head_price_value">STE</string>
-    <string name="transaction_head_price_up">涨停:%s</string>
-    <string name="transaction_head_price_down">跌停:%s</string>
-    <string name="transaction_head_price_down_tips">跌停:</string>
-    <string name="transaction_head_price_up_tips">涨停:</string>
+    <string name="transaction_head_price_up">涨停：%s</string>
+    <string name="transaction_head_price_down">跌停：%s</string>
+    <string name="transaction_head_price_down_tips">跌停：</string>
+    <string name="transaction_head_price_up_tips">涨停：</string>
     <string name="transaction_head_new_price">最新价：%s</string>
 
     <string name="order_detail_person_name">申购名人：%s</string>

@@ -1,15 +1,18 @@
 package com.fx.secondbar.ui.home;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +36,7 @@ import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.home.adapter.AdPerson;
 import com.fx.secondbar.ui.order.AcOrderManage;
 import com.fx.secondbar.ui.person.AcAccountSet;
+import com.fx.secondbar.ui.person.AcBindPhone;
 import com.fx.secondbar.ui.person.assets.AcAssets;
 import com.fx.secondbar.ui.person.assets.AcIncomeRecord;
 import com.fx.secondbar.ui.purchase.AcMyPurchase;
@@ -51,6 +55,12 @@ import rx.Subscriber;
  */
 public class FragmentPerson extends FragmentSupport
 {
+
+    /**
+     * 绑定手机号
+     */
+    private static final int REQUEST_CODE_BIND_PHONE = 12;
+
     private SelectableRoundedImageView img_avatar;
     private TextView tv_name;
     private TextView tv_account;
@@ -159,11 +169,34 @@ public class FragmentPerson extends FragmentSupport
      */
     private void setPersonInfo()
     {
-        GlideApp.with(img_get_q).asBitmap().load(R.mipmap.ic_get_q_img).centerCrop().into(img_get_q);
+//        GlideApp.with(img_get_q).asBitmap().load(R.mipmap.ic_get_q_img).centerCrop().into(img_get_q);
+        GlideApp.with(img_get_q).asBitmap().load(R.mipmap.test_turial_1).centerCrop().into(img_get_q);
 
         GlideLoad.load(img_avatar, FxApplication.getInstance().getUserInfoBean().getImg(), true, R.mipmap.default_avatar, R.mipmap.default_avatar);
         VerificationUtil.setViewValue(tv_name, FxApplication.getInstance().getUserInfoBean().getNickname());
-        VerificationUtil.setViewValue(tv_account, FxApplication.getInstance().getUserInfoBean().getAccount(), "请绑定手机号");
+        if (TextUtils.isEmpty(FxApplication.getInstance().getUserInfoBean().getAccount()))
+        {
+            if (tv_account != null)
+            {
+                tv_account.setText("请帮定手机号");
+                tv_account.setTextColor(Color.parseColor("#ff3b63"));
+                tv_account.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        jump(AcBindPhone.class, REQUEST_CODE_BIND_PHONE);
+                    }
+                });
+            }
+        } else
+        {
+            if (tv_account != null)
+            {
+                tv_account.setText(FxApplication.getInstance().getUserInfoBean().getAccount());
+                tv_account.setTextColor(Color.WHITE);
+            }
+        }
         VerificationUtil.setViewValue(tv_ste_value, FxApplication.getInstance().getUserInfoBean().getBalance().toString());
         VerificationUtil.setViewValue(tv_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
         VerificationUtil.setViewValue(tv_today_q_value, FxApplication.getInstance().getUserInfoBean().getTodayqcoin().toString());
@@ -271,5 +304,24 @@ public class FragmentPerson extends FragmentSupport
     {
         LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(receiver);
         super.onDestroy();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (REQUEST_CODE_BIND_PHONE == requestCode)
+        {
+            if (Activity.RESULT_OK == resultCode)
+            {
+                if (data == null)
+                {
+                    return;
+                }
+                VerificationUtil.setViewValue(tv_account, data.getStringExtra(KEY_STR));
+                tv_account.setTextColor(Color.WHITE);
+                tv_account.setOnClickListener(null);
+            }
+        }
     }
 }

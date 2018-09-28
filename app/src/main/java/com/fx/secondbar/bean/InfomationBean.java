@@ -1,7 +1,5 @@
 package com.fx.secondbar.bean;
 
-import java.util.List;
-
 /**
  * function ;//资讯信息实体
  * author ;// frj
@@ -10,7 +8,7 @@ import java.util.List;
 public class InfomationBean
 {
     private String username;//用户名
-    private List<String> pictures;// 图片集合
+    private String pictures;// 图片集合
     private String content;// 内容
     private String share_COPY;//来源
     private String picture;//图片
@@ -32,12 +30,12 @@ public class InfomationBean
         this.username = username;
     }
 
-    public List<String> getPictures()
+    public String getPictures()
     {
         return pictures;
     }
 
-    public void setPictures(List<String> pictures)
+    public void setPictures(String pictures)
     {
         this.pictures = pictures;
     }

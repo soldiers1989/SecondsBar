@@ -90,10 +90,10 @@ public class AcInputPayPwd extends ActivitySupport
                         {
                             if (TYPE_SET == type)
                             {
-                                setPayPwd(result, getIntent().getStringExtra(KEY_STR));
+                                setPayPwd(result, FxApplication.getInstance().getUserInfoBean().getAccount(), getIntent().getStringExtra(KEY_STR));
                             } else
                             {
-                                updatePayPwd(result, getIntent().getStringExtra(KEY_STR));
+                                updatePayPwd(result, FxApplication.getInstance().getUserInfoBean().getAccount(), getIntent().getStringExtra(KEY_STR));
                             }
                         } else
                         {
@@ -142,14 +142,14 @@ public class AcInputPayPwd extends ActivitySupport
      *
      * @param payPwd 支付密码
      */
-    private void setPayPwd(String payPwd, String code)
+    private void setPayPwd(String payPwd, String phone, String code)
     {
         if (dialog != null)
         {
             dialog.show();
         }
 
-        HttpManager.setPayPwd(payPwd, code, new Subscriber<ResponseBean>()
+        HttpManager.setPayPwd(payPwd, phone, code, new Subscriber<ResponseBean>()
         {
             @Override
             public void onCompleted()
@@ -196,14 +196,14 @@ public class AcInputPayPwd extends ActivitySupport
      *
      * @param payPwd 支付密码
      */
-    private void updatePayPwd(String payPwd, String code)
+    private void updatePayPwd(String payPwd, String phone, String code)
     {
         if (dialog != null)
         {
             dialog.show();
         }
 
-        HttpManager.updatePayPwd(payPwd, code, new Subscriber<ResponseBean>()
+        HttpManager.updatePayPwd(payPwd, phone, code, new Subscriber<ResponseBean>()
         {
             @Override
             public void onCompleted()

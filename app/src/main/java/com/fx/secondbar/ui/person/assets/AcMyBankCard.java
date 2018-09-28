@@ -12,6 +12,7 @@ import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.BankBean;
 import com.fx.secondbar.http.HttpManager;
@@ -68,6 +69,22 @@ public class AcMyBankCard extends ActivitySupport implements SwipeRefreshLayout.
         recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(DensityUtil.dip2px(this, 1), false, false, false));
         adapter = new AdMyBankCard();
         adapter.bindToRecyclerView(recyclerView);
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener()
+        {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position)
+            {
+                //删除银行卡
+            }
+        });
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position)
+            {
+                //点击选中返回上一个页面
+            }
+        });
         swipeRefreshLayout.setRefreshing(true);
         onRefresh();
     }

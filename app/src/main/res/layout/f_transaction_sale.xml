@@ -13,7 +13,7 @@
         android:layout_height="36dip"
         android:background="@drawable/transaction_sale_btn"
         android:gravity="center"
-        android:text="卖出"
+        android:text="转让"
         android:textColor="@android:color/white"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"

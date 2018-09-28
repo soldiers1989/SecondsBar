@@ -18,6 +18,7 @@ import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.util.Constants;
+import com.fx.secondbar.util.DeviceUuidFactory;
 import com.fx.secondbar.util.ProgressDialogUtil;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
@@ -37,7 +38,7 @@ import rx.Subscriber;
 public class AcQuoteDetail extends ActivitySupport
 {
 
-    private static final String URL = Constants.ROOT_URL + "/static/mb-front/market.html?id=";
+    private static final String URL = Constants.ROOT_URL + "/static/mb-front/market.html?id=%s&deviceid=%s";
 
     /**
      * 跳转至交易中心界面
@@ -92,7 +93,8 @@ public class AcQuoteDetail extends ActivitySupport
 
         peopleId = getIntent().getStringExtra("id");
 
-        webView.loadUrl(URL + peopleId);
+
+        webView.loadUrl(String.format(URL, peopleId, new DeviceUuidFactory(this).getDeviceUuid()));
 
         //获取是否自选值
         type = getIntent().getIntExtra(KEY, 0);

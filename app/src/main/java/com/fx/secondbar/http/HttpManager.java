@@ -390,9 +390,9 @@ public class HttpManager
      * @param pwd        密码
      * @param subscriber
      */
-    public static void setPayPwd(String pwd, String code, Subscriber<ResponseBean> subscriber)
+    public static void setPayPwd(String pwd, String phone, String code, Subscriber<ResponseBean> subscriber)
     {
-        Observable<ResponseBean> observable = getInstance().mService.setPayPwd(pwd, code).map(new HttpNoDataResultFun<>());
+        Observable<ResponseBean> observable = getInstance().mService.setPayPwd(pwd, phone, code).map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
@@ -402,9 +402,9 @@ public class HttpManager
      * @param pwd        密码
      * @param subscriber
      */
-    public static void updatePayPwd(String pwd, String code, Subscriber<ResponseBean> subscriber)
+    public static void updatePayPwd(String pwd, String phone, String code, Subscriber<ResponseBean> subscriber)
     {
-        Observable<ResponseBean> observable = getInstance().mService.updatePayPwd(pwd, code).map(new HttpNoDataResultFun<>());
+        Observable<ResponseBean> observable = getInstance().mService.updatePayPwd(pwd, phone, code).map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

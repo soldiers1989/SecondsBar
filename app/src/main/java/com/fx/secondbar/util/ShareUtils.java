@@ -12,11 +12,13 @@ import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.sina.weibo.sdk.WbSdk;
+import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
 import com.sina.weibo.sdk.share.WbShareHandler;
 import com.tencent.connect.share.QQShare;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXImageObject;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -252,6 +254,21 @@ public class ShareUtils
     }
 
     /**
+     * 构建QQ分享内容（纯图片）
+     *
+     * @param path 图片本地路径
+     * @return
+     */
+    public static Bundle buildQQShareContent(String path)
+    {
+        Bundle bundle = new Bundle();
+        bundle.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_IMAGE);
+        bundle.putString(QQShare.SHARE_TO_QQ_APP_NAME, FxApplication.getInstance().getString(R.string.app_name) + TENCENT_APPID);
+        bundle.putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL, path);
+        return bundle;
+    }
+
+    /**
      * 构建微博分享内容
      *
      * @param title 标题
@@ -272,6 +289,22 @@ public class ShareUtils
         textObject.title = title;
         textObject.actionUrl = String.format(getShareUrl(), id);
         weiboMessage.textObject = textObject;
+        return weiboMessage;
+    }
+
+    /**
+     * 构建微博分享（纯图片）
+     *
+     * @param bitmap
+     * @return
+     */
+    public static WeiboMultiMessage buildWeiboShareContent(Bitmap bitmap)
+    {
+        WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
+        ImageObject imgObj = new ImageObject();
+        imgObj.setImageObject(bitmap);
+        bitmap.recycle();
+        weiboMessage.imageObject = imgObj;
         return weiboMessage;
     }
 
@@ -301,6 +334,24 @@ public class ShareUtils
         {
             msg.thumbData = bytes;
         }
+        return msg;
+    }
+
+    /**
+     * 构建微信分享内容
+     *
+     * @param bitmap 图片
+     * @return
+     */
+    public static WXMediaMessage buildWXShareContent(Bitmap bitmap)
+    {
+        WXImageObject imgObj = new WXImageObject(bitmap);
+        WXMediaMessage msg = new WXMediaMessage();
+        Bitmap thumbBitmap = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
+        bitmap.recycle();
+        msg.mediaObject = imgObj;
+        msg.thumbData = BitmapUtil.Bitmap2Bytes(thumbBitmap);
+        thumbBitmap.recycle();
         return msg;
     }
 }

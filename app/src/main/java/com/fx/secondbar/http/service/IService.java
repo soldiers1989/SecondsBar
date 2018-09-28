@@ -274,7 +274,7 @@ public interface IService
      */
     @FormUrlEncoded
     @POST(Constants.API_SET_PAYPWD)
-    Observable<ResponseBean> setPayPwd(@Field("paymentpassword") String pwd, @Field("code") String code);
+    Observable<ResponseBean> setPayPwd(@Field("paymentpassword") String pwd, @Field("phoneno") String phone, @Field("code") String code);
 
     /**
      * 修改支付密码
@@ -285,7 +285,7 @@ public interface IService
      */
     @FormUrlEncoded
     @POST(Constants.API_UPDATE_PAYPWD)
-    Observable<ResponseBean> updatePayPwd(@Field("paymentpassword") String pwd, @Field("code") String code);
+    Observable<ResponseBean> updatePayPwd(@Field("paymentpassword") String pwd, @Field("phoneno") String phone, @Field("code") String code);
 
     /**
      * 获取等级列表

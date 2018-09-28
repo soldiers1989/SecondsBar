@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -192,6 +193,7 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
                 {
                     return;
                 }
+                e.printStackTrace();
                 if (swipeRefreshLayout.isRefreshing())
                 {
                     swipeRefreshLayout.setRefreshing(false);
@@ -277,8 +279,14 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
                                 list.add(commodityEntity);
                             }
                         }
-                        List<String> pictures = infomationBeans.get(i).getPictures();
-                        AdInfomation.InfomationEntity infomationEntity = new AdInfomation.InfomationEntity(VerificationUtil.noEmpty(pictures) ? AdInfomation.InfomationEntity.TYPE_MULTI_IMG : AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, infomationBeans.get(i));
+//                        List<String> pictures = infomationBeans.get(i).getPictures();
+                        String pictures = infomationBeans.get(i).getPictures();
+                        String[] picture = null;
+                        if (!TextUtils.isEmpty(pictures))
+                        {
+                            picture = pictures.split(",");
+                        }
+                        AdInfomation.InfomationEntity infomationEntity = new AdInfomation.InfomationEntity((picture != null && picture.length != 1) ? AdInfomation.InfomationEntity.TYPE_MULTI_IMG : AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, infomationBeans.get(i));
                         list.add(infomationEntity);
                     }
                 } else if (infomationBeans.size() >= 2)
@@ -293,14 +301,26 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
                                 list.add(commodityEntity);
                             }
                         }
-                        List<String> pictures = infomationBeans.get(i).getPictures();
-                        AdInfomation.InfomationEntity infomationEntity = new AdInfomation.InfomationEntity(VerificationUtil.noEmpty(pictures) ? AdInfomation.InfomationEntity.TYPE_MULTI_IMG : AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, infomationBeans.get(i));
+//                        List<String> pictures = infomationBeans.get(i).getPictures();
+                        String pictures = infomationBeans.get(i).getPictures();
+                        String[] picture = null;
+                        if (!TextUtils.isEmpty(pictures))
+                        {
+                            picture = pictures.split(",");
+                        }
+                        AdInfomation.InfomationEntity infomationEntity = new AdInfomation.InfomationEntity((picture != null && picture.length != 1) ? AdInfomation.InfomationEntity.TYPE_MULTI_IMG : AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, infomationBeans.get(i));
                         list.add(infomationEntity);
                     }
                 } else
                 {
-                    List<String> pictures = infomationBeans.get(0).getPictures();
-                    AdInfomation.InfomationEntity infomationEntity = new AdInfomation.InfomationEntity(VerificationUtil.noEmpty(pictures) ? AdInfomation.InfomationEntity.TYPE_MULTI_IMG : AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, infomationBeans.get(0));
+//                    List<String> pictures = infomationBeans.get(0).getPictures();
+                    String pictures = infomationBeans.get(0).getPictures();
+                    String[] picture = null;
+                    if (!TextUtils.isEmpty(pictures))
+                    {
+                        picture = pictures.split(",");
+                    }
+                    AdInfomation.InfomationEntity infomationEntity = new AdInfomation.InfomationEntity((picture != null && picture.length != 1) ? AdInfomation.InfomationEntity.TYPE_MULTI_IMG : AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, infomationBeans.get(0));
                     list.add(infomationEntity);
                     if (personEntity != null)
                     {

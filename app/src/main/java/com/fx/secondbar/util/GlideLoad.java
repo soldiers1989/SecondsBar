@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.glide.GlideRequest;
 import com.btten.bttenlibrary.glide.GlideRequests;
+import com.fx.secondbar.R;
 
 /**
  * function:Glide加载工具类
@@ -38,7 +39,7 @@ public class GlideLoad
      */
     public static void load(ImageView img, String url, boolean asBitmap)
     {
-        load(img, url, asBitmap, 0, 0);
+        load(img, url, asBitmap, R.drawable.ic_default_adimage, R.drawable.ic_default_adimage);
     }
 
     /**

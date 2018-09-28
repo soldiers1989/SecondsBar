@@ -30,6 +30,7 @@ public class AdMyBankCard extends BaseQuickAdapter<BankBean, BaseViewHolder>
 
         VerificationUtil.setViewValue(tv_bank_name, item.getBankname());
         VerificationUtil.setViewValue(tv_card_num, "尾号" + getBankNoEnd(item.getBankno()));
+        helper.addOnClickListener(R.id.tv_delete);
     }
 
     /**

@@ -16,6 +16,7 @@
         android:layout_width="@dimen/home_infomation_item_sing_img_w"
         android:layout_height="0dip"
         android:layout_marginBottom="@dimen/home_infomation_item_sing_ptb"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
