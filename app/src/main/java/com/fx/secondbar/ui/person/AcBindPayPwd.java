@@ -9,10 +9,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.base.bean.ResponseBean;
+import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.util.CountDownButtonHelper;
+
+import rx.Subscriber;
 
 /**
  * function:绑定支付密码
@@ -76,6 +81,49 @@ public class AcBindPayPwd extends ActivitySupport
         }
     }
 
+
+    /**
+     * 获取短信验证码
+     *
+     * @param phone
+     */
+    private void getPhoneCode(String phone)
+    {
+        HttpManager.getPhoneCode(phone, new Subscriber<ResponseBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+                tv_get_code.setEnabled(true);
+            }
+
+            @Override
+            public void onNext(ResponseBean responseBean)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                if (countDownButtonHelper != null)
+                {
+                    countDownButtonHelper.start();
+                }
+            }
+        });
+    }
+
     @Override
     public void onClick(View v)
     {
@@ -83,10 +131,8 @@ public class AcBindPayPwd extends ActivitySupport
         switch (v.getId())
         {
             case R.id.tv_get_code:
-                if (countDownButtonHelper != null)
-                {
-                    countDownButtonHelper.start();
-                }
+                tv_get_code.setEnabled(false);
+                getPhoneCode(FxApplication.getInstance().getUserInfoBean().getAccount());
                 break;
             case R.id.ib_back:
                 finish();

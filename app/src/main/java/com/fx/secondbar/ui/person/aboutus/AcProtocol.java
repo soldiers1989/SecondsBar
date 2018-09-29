@@ -7,24 +7,22 @@ import com.btten.bttenlibrary.base.ActivitySupport;
 import com.fx.secondbar.R;
 
 /**
- * function:关于我们
+ * function:用户协议
  * author: frj
- * modify date: 2018/9/21
+ * modify date: 2018/9/29
  */
-public class AcAboutUs extends ActivitySupport
+public class AcProtocol extends ActivitySupport
 {
     @Override
     protected int getLayoutResId()
     {
-        return R.layout.ac_about_us;
+        return R.layout.ac_protocol;
     }
 
     @Override
     protected void initView()
     {
         findView(R.id.ib_back).setOnClickListener(this);
-        findView(R.id.tv_protocol).setOnClickListener(this);
-        findView(R.id.tv_privacy).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -49,11 +47,6 @@ public class AcAboutUs extends ActivitySupport
         {
             case R.id.ib_back:
                 finish();
-                break;
-            case R.id.tv_protocol:
-                jump(AcProtocol.class);
-                break;
-            case R.id.tv_privacy:
                 break;
         }
     }

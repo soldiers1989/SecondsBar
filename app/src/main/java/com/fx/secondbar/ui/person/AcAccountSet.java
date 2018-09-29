@@ -1,9 +1,12 @@
 package com.fx.secondbar.ui.person;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -322,10 +325,31 @@ public class AcAccountSet extends ActivitySupport
             case R.id.tv_level:
                 break;
             case R.id.tv_phone:
-                jump(AcBindPhone.class, REQUEST_CODE_BIND_PHONE);
+                if (TextUtils.isEmpty(FxApplication.getInstance().getUserInfoBean().getAccount()))
+                {
+                    jump(AcBindPhone.class, REQUEST_CODE_BIND_PHONE);
+                }
                 break;
             case R.id.tv_pay_pwd:
-                jump(AcBindPayPwd.class, REQUEST_CODE_SET_PAYPWD);
+                if (TextUtils.isEmpty(FxApplication.getInstance().getUserInfoBean().getAccount()))
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setCancelable(false);
+                    builder.setMessage("您还未绑定手机号，请先绑定~");
+                    builder.setPositiveButton("去绑定", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            jump(AcBindPhone.class, REQUEST_CODE_BIND_PHONE);
+                        }
+                    });
+                    builder.setNegativeButton("取消", null);
+                    builder.show();
+                } else
+                {
+                    jump(AcBindPayPwd.class, REQUEST_CODE_SET_PAYPWD);
+                }
                 break;
             case R.id.tv_cache_size:
                 clearCache();
