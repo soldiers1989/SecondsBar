@@ -74,6 +74,7 @@
             android:textSize="16sp"/>
 
         <TextView
+            android:id="@+id/tv_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0.00"
@@ -100,6 +101,7 @@
             android:textSize="16sp"/>
 
         <TextView
+            android:id="@+id/tv_q_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0.00"
@@ -113,8 +115,8 @@
         android:layout_height="45dip"
         android:layout_marginTop="32dip"
         android:drawableLeft="@mipmap/ic_recharge"
-        android:drawablePadding="12dip"
         android:drawableRight="@mipmap/ic_arrow_right_gray"
+        android:drawablePadding="12dip"
         android:gravity="center_vertical"
         android:paddingLeft="15dip"
         android:paddingRight="15dip"
@@ -137,8 +139,8 @@
         android:layout_width="match_parent"
         android:layout_height="45dip"
         android:drawableLeft="@mipmap/ic_withdraw"
-        android:drawablePadding="12dip"
         android:drawableRight="@mipmap/ic_arrow_right_gray"
+        android:drawablePadding="12dip"
         android:gravity="center_vertical"
         android:paddingLeft="15dip"
         android:paddingRight="15dip"
@@ -179,8 +181,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawablePadding="10dip"
             android:drawableRight="@mipmap/ic_arrow_right_gray"
+            android:drawablePadding="10dip"
             android:gravity="right"
             android:text="暂未开放"
             android:textColor="#8d8d8d"

@@ -1,8 +1,13 @@
 package com.fx.secondbar.ui.home.item;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +21,7 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.CategoryBean;
 import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
+import com.fx.secondbar.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,6 +106,9 @@ public class FragmentInfomation extends FragmentViewPagerBase
         });
         viewPager.setCurrentItem(0);
 
+        IntentFilter filter = new IntentFilter(Constants.ACTION_REFRESH_PERSON_SHOW);
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, filter);
+
         setTodayIncome();
     }
 
@@ -109,6 +118,21 @@ public class FragmentInfomation extends FragmentViewPagerBase
         super.onResume();
         setTodayIncome();
     }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver()
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            if (intent != null)
+            {
+                if (Constants.ACTION_REFRESH_PERSON_SHOW.equals(intent.getAction()))
+                {
+                    setTodayIncome();
+                }
+            }
+        }
+    };
 
     /**
      * 设置今日收益
@@ -121,4 +145,10 @@ public class FragmentInfomation extends FragmentViewPagerBase
         }
     }
 
+    @Override
+    public void onDestroy()
+    {
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(receiver);
+        super.onDestroy();
+    }
 }

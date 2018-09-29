@@ -114,4 +114,6 @@
 
     <string name="purchase_detail_time_use">%1$s时间仅限于以下几种情况（常住地：%2$s）</string>
     <string name="purchase_confirm_buy_available_tips">可预购（每人可申购%s秒）</string>
+
+    <string name="recharge_pay_tips">%s%s元</string>
 </resources>

@@ -136,7 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/share_dialog_content_bg"
+                android:background="#ebebeb"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
                 >
@@ -144,22 +144,101 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_get_q_img"/>
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_share_top"/>
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ic_share_time_03"
+                    android:drawablePadding="12dip"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dip"
+                    android:paddingTop="30dip"
+                    android:paddingRight="15dip"
+                    android:paddingBottom="20dip"
+                    android:text="2018-09-28 23:24"
+                    android:textColor="#8b8a8a"
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/tv_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:text="啊哈哈哈哈哈哈,我也不知道该说些什么,反正就是很烦啦,我也不知道该怎么办怎么做怎么活下去,好累哦"
+                    android:lineSpacingMultiplier="1.2"
+                    android:paddingLeft="15dip"
+                    android:paddingRight="15dip"
                     android:textColor="#333333"
                     android:textSize="16sp"/>
 
-                <ImageView
+                <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_get_q_img"/>
+                    android:paddingLeft="15dip"
+                    android:paddingTop="24dip"
+                    android:paddingRight="15dip"
+                    android:paddingBottom="36dip">
+
+                    <ImageView
+                        android:id="@+id/img_code"
+                        android:layout_width="120dip"
+                        android:layout_height="120dip"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/scan_code"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_tips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dip"
+                        android:text="长按二维码领取"
+                        android:textColor="#8a8a8a"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/img_code"
+                        app:layout_constraintTop_toTopOf="@+id/img_code"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dip"
+                        android:text="以Q积分形式发放"
+                        android:textColor="#8a8a8a"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_code"
+                        app:layout_constraintStart_toStartOf="@+id/tv_tips"/>
+
+                    <TextView
+                        android:id="@+id/tv_reward"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="188"
+                        android:textColor="@color/font_yellow_color"
+                        android:textSize="36sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_code"
+                        app:layout_constraintStart_toStartOf="@+id/tv_tips"
+                        app:layout_constraintTop_toTopOf="@+id/img_code"/>
+
+                    <TextView
+                        android:id="@+id/tv_reward_tips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="9dip"
+                        android:text="Q积分"
+                        android:textColor="#292929"
+                        android:textSize="24sp"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/tv_reward"
+                        app:layout_constraintStart_toEndOf="@+id/tv_reward"/>
+                </android.support.constraint.ConstraintLayout>
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:src="@mipmap/ic_share_bottom_logo"/>
         </FrameLayout>
 
 

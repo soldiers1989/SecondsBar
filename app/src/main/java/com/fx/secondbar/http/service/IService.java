@@ -13,6 +13,7 @@ import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.PurchaseDetailBean;
 import com.fx.secondbar.bean.QCoinBean;
+import com.fx.secondbar.bean.RechargeRecordBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
@@ -362,4 +363,23 @@ public interface IService
      */
     @GET(Constants.API_TRADING_CENTER)
     Observable<ResponseBean<TransactionBean>> getTransactionCenter(@Query("peopleid") String peopleId);
+
+    /**
+     * 获取支付宝充值字符串
+     *
+     * @param money 金额
+     * @return
+     */
+    @POST(Constants.API_RECHARGE)
+    Observable<ResponseBean<String>> getRechargeOrderInfo(@Query("money") String money);
+
+    /**
+     * 获取充值记录
+     *
+     * @param page     页码
+     * @param pageSize 页大小
+     * @return
+     */
+    @GET(Constants.API_RECHARGE_RECORD)
+    Observable<ResponseBean<List<RechargeRecordBean>>> getRechargeRecord(@Query("page") int page, @Query("count") int pageSize);
 }

@@ -9,8 +9,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.util.LogUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
@@ -58,7 +60,9 @@ public class AcWebBrowse extends ActivitySupport
     {
         initWebView();
         VerificationUtil.setViewValue(tv_title, getIntent().getStringExtra(KEY_STR));
-        webView.loadUrl(getIntent().getStringExtra(KEY));
+        String url = getIntent().getStringExtra(KEY);
+        LogUtil.e(url);
+        webView.loadUrl(url);
     }
 
     /**
@@ -206,5 +210,12 @@ public class AcWebBrowse extends ActivitySupport
                 }
             }, timeout);
         }
+    }
+
+    @Override
+    public void finish()
+    {
+        FxApplication.refreshUserInfoBroadCast();
+        super.finish();
     }
 }

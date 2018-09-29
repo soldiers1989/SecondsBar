@@ -7,10 +7,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.util.ShowToast;
+import com.btten.bttenlibrary.util.VerificationUtil;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.RechargeRecordBean;
+import com.fx.secondbar.http.HttpManager;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * function:资产明细
@@ -23,6 +29,8 @@ public class AcAssetDetail extends ActivitySupport implements SwipeRefreshLayout
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private AdAssetDetail adapter;
+
+    private int currPage = -1;
 
     @Override
     protected int getLayoutResId()
@@ -51,18 +59,77 @@ public class AcAssetDetail extends ActivitySupport implements SwipeRefreshLayout
     {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AdAssetDetail();
-        adapter.setNewData(getDatas());
         adapter.bindToRecyclerView(recyclerView);
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
+        {
+            @Override
+            public void onLoadMoreRequested()
+            {
+                getData(currPage + 1);
+            }
+        }, recyclerView);
+        swipeRefreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
-    private List<String> getDatas()
+    /**
+     * 获取数据
+     *
+     * @param page 页码
+     */
+    private void getData(final int page)
     {
-        List<String> data = new ArrayList<>();
-        data.add("");
-        data.add("");
-        data.add("");
-        data.add("");
-        return data;
+        HttpManager.getRechargeRecord(page, PAGE_NUM, new Subscriber<List<RechargeRecordBean>>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(List<RechargeRecordBean> rechargeRecordBeans)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                currPage = page;
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                if (PAGE_START == page)
+                {
+                    adapter.setNewData(rechargeRecordBeans);
+                } else
+                {
+                    adapter.addData(rechargeRecordBeans);
+                }
+                if (VerificationUtil.getSize(rechargeRecordBeans) >= PAGE_NUM)
+                {
+                    adapter.loadMoreComplete();
+                } else
+                {
+                    adapter.loadMoreEnd();
+                }
+            }
+        });
     }
 
     @Override
@@ -92,6 +159,6 @@ public class AcAssetDetail extends ActivitySupport implements SwipeRefreshLayout
     @Override
     public void onRefresh()
     {
-
+        getData(PAGE_START);
     }
 }

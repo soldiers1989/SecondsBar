@@ -14,6 +14,7 @@ import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.PurchaseDetailBean;
 import com.fx.secondbar.bean.QCoinBean;
+import com.fx.secondbar.bean.RechargeRecordBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
@@ -504,6 +505,31 @@ public class HttpManager
     public static void getTransactionCenter(String peopleId, Subscriber<TransactionBean> subscriber)
     {
         Observable<TransactionBean> observable = getInstance().mService.getTransactionCenter(peopleId).map(new HttpResultFun<TransactionBean>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取充值订单支付字符串
+     *
+     * @param money      金额
+     * @param subscriber
+     */
+    public static void getRechargeOrderInfo(String money, Subscriber<String> subscriber)
+    {
+        Observable<String> observable = getInstance().mService.getRechargeOrderInfo(money).map(new HttpResultFun<String>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取充值记录
+     *
+     * @param page
+     * @param pageSize
+     * @param subscriber
+     */
+    public static void getRechargeRecord(int page, int pageSize, Subscriber<List<RechargeRecordBean>> subscriber)
+    {
+        Observable<List<RechargeRecordBean>> observable = getInstance().mService.getRechargeRecord(page, pageSize).map(new HttpResultFun<List<RechargeRecordBean>>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

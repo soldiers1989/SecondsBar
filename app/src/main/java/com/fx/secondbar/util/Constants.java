@@ -20,7 +20,7 @@ public class Constants
     /**
      * 资讯详情访问地址
      */
-    public static final String URL_INFORMATION = ROOT_URL + "/static/mb-front/news.html?id=";
+    public static final String URL_INFORMATION = ROOT_URL + "/static/mb-front/news.html?id=%s&deviceid=%s";
 
     /**
      * 更新用户数据
@@ -185,4 +185,14 @@ public class Constants
      * 交易中心数据接口
      */
     public static final String API_TRADING_CENTER = "trading/center";
+
+    /**
+     * 充值
+     */
+    public static final String API_RECHARGE = "member/payment";
+
+    /**
+     * 充值记录
+     */
+    public static final String API_RECHARGE_RECORD = "rechargerecord/list";
 }

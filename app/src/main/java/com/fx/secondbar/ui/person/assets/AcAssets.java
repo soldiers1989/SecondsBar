@@ -1,11 +1,20 @@
 package com.fx.secondbar.ui.person.assets;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.ShowToast;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.util.Constants;
 
 /**
  * function:我的资产
@@ -14,6 +23,10 @@ import com.fx.secondbar.R;
  */
 public class AcAssets extends ActivitySupport
 {
+
+    private TextView tv_balance;
+    private TextView tv_q_value;
+
     @Override
     protected int getLayoutResId()
     {
@@ -23,6 +36,8 @@ public class AcAssets extends ActivitySupport
     @Override
     protected void initView()
     {
+        tv_balance = findView(R.id.tv_balance);
+        tv_q_value = findView(R.id.tv_q_value);
         findView(R.id.ib_back).setOnClickListener(this);
         findView(R.id.tv_detail).setOnClickListener(this);
         findView(R.id.tv_recharge).setOnClickListener(this);
@@ -41,7 +56,33 @@ public class AcAssets extends ActivitySupport
     @Override
     protected void initData()
     {
+        IntentFilter filter = new IntentFilter(Constants.ACTION_REFRESH_PERSON_SHOW);
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
+        setPersonInfo();
+    }
 
+    private BroadcastReceiver receiver = new BroadcastReceiver()
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            if (intent != null)
+            {
+                if (Constants.ACTION_REFRESH_PERSON_SHOW.equals(intent.getAction()))
+                {
+                    setPersonInfo();
+                }
+            }
+        }
+    };
+
+    /**
+     * 更新信息
+     */
+    private void setPersonInfo()
+    {
+        VerificationUtil.setViewValue(tv_balance, FxApplication.getInstance().getUserInfoBean().getAmt().toString());
+        VerificationUtil.setViewValue(tv_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
     }
 
     @Override
@@ -79,4 +120,12 @@ public class AcAssets extends ActivitySupport
     {
         return new int[0];
     }
+
+    @Override
+    public void onDestroy()
+    {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+        super.onDestroy();
+    }
+
 }

@@ -5,15 +5,16 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.LogUtil;
 import com.btten.bttenlibrary.util.ShowToast;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.util.Constants;
@@ -79,7 +80,7 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
     //分享类型
     private int type;
 
-
+    private TextView tv_content;
     private LinearLayout ll_content;
 
     @Override
@@ -95,25 +96,10 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
         ImageButton img_weibo = findViewById(R.id.img_weibo);
         ImageButton img_cycle = findViewById(R.id.img_cycle);
         ImageButton img_wechat = findViewById(R.id.img_wechat);
+        tv_content = findView(R.id.tv_content);
         ll_content = findView(R.id.ll_content);
         ll_content.setDrawingCacheEnabled(true);
         ll_content.buildDrawingCache();
-        findView(R.id.nestedScrollView).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                finish();
-            }
-        });
-        findView(R.id.v_bottom).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-
-            }
-        });
 
         View.OnClickListener onClickListener = new View.OnClickListener()
         {
@@ -161,6 +147,8 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
         //微博分享对象构建
         wbShareHandler = new WbShareHandler(this);
         wbShareHandler.registerApp();
+
+        tv_content.setText(Html.fromHtml(VerificationUtil.verifyDefault(getIntent().getStringExtra(KEY_CONTENT), "")));
     }
 
     @Override
@@ -174,37 +162,6 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
     {
         return new int[0];
     }
-
-    private Handler handler = new Handler()
-    {
-        @Override
-        public void handleMessage(Message msg)
-        {
-            super.handleMessage(msg);
-            int platform = msg.what;
-            Bitmap bitmap = (Bitmap) msg.obj;
-            if (bitmap.isRecycled())
-            {
-                LogUtil.e("bitmap is recycled");
-            }
-            LogUtil.e("bitmap size:" + bitmap.getByteCount());
-            String path = saveBitmapToFile(bitmap);
-            if (PLATFORM_QQ == platform)
-            {
-                shareToQQ(AcShareDialog.this, ShareUtils.buildQQShareContent(path));
-            } else if (PLATFORM_WEIBO == platform)
-            {
-                shareToWeibo(AcShareDialog.this, ShareUtils.buildWeiboShareContent(bitmap));
-            } else if (PLATFORM_TIMELINE == platform)
-            {
-                shareToWechatFriends(ShareUtils.buildWXShareContent(bitmap));
-            } else if (PLATFORM_WECHAT == platform)
-            {
-                shareToWechat(ShareUtils.buildWXShareContent(bitmap));
-            }
-        }
-    };
-
 
     /**
      * 分享到QQ

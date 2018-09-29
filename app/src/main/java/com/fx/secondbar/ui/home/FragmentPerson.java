@@ -178,7 +178,7 @@ public class FragmentPerson extends FragmentSupport
         {
             if (tv_account != null)
             {
-                tv_account.setText("请帮定手机号");
+                tv_account.setText("请绑定手机号");
                 tv_account.setTextColor(Color.parseColor("#ff3b63"));
                 tv_account.setOnClickListener(new View.OnClickListener()
                 {
@@ -197,7 +197,7 @@ public class FragmentPerson extends FragmentSupport
                 tv_account.setTextColor(Color.WHITE);
             }
         }
-        VerificationUtil.setViewValue(tv_ste_value, FxApplication.getInstance().getUserInfoBean().getBalance().toString());
+        VerificationUtil.setViewValue(tv_ste_value, FxApplication.getInstance().getUserInfoBean().getAmt().toString());
         VerificationUtil.setViewValue(tv_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
         VerificationUtil.setViewValue(tv_today_q_value, FxApplication.getInstance().getUserInfoBean().getTodayqcoin().toString());
     }

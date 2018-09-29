@@ -29,6 +29,7 @@ import com.fx.secondbar.ui.AcWebBrowse;
 import com.fx.secondbar.ui.home.item.adapter.AdInfomation;
 import com.fx.secondbar.ui.mall.AcMallDetail;
 import com.fx.secondbar.util.Constants;
+import com.fx.secondbar.util.DeviceUuidFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +112,9 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
                     Bundle bundle = new Bundle();
                     if (entity.getInfomationBean() != null)
                     {
-                        bundle.putString(KEY, Constants.URL_INFORMATION + entity.getInfomationBean().getNews_ID());
+                        String url = String.format(Constants.URL_INFORMATION, entity.getInfomationBean().getNews_ID(), new DeviceUuidFactory(getContext()).getDeviceUuid());
+                        bundle.putString(KEY, url);
+//                        bundle.putString(KEY, Constants.URL_INFORMATION + entity.getInfomationBean().getNews_ID());
                     }
                     bundle.putString(KEY_STR, "秒吧头条");
                     jump(AcWebBrowse.class, bundle, false);

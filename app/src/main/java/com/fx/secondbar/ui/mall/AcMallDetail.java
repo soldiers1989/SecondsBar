@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LevelListDrawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -297,7 +298,9 @@ public class AcMallDetail extends ActivitySupport
                 onBackPressed();
                 break;
             case R.id.img_forward:
-                jump(AcShareDialog.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(AcShareDialog.KEY_CONTENT, getTextView(tv_title));
+                jump(AcShareDialog.class, bundle, false);
                 break;
             case R.id.btn_buy:
                 if (dialogBuy != null)
