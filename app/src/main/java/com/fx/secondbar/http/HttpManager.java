@@ -462,11 +462,12 @@ public class HttpManager
      *
      * @param price      价格
      * @param seconds    秒数
+     * @param peopleId   名人id值
      * @param subscriber
      */
-    public static void buyTransaction(String price, String seconds, Subscriber<ResponseBean> subscriber)
+    public static void buyTransaction(String price, String seconds, String peopleId, Subscriber<ResponseBean> subscriber)
     {
-        Observable<ResponseBean> observable = getInstance().mService.buyTransaction(seconds, price).map(new HttpNoDataResultFun<>());
+        Observable<ResponseBean> observable = getInstance().mService.buyTransaction(seconds, price, peopleId).map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
@@ -475,11 +476,12 @@ public class HttpManager
      *
      * @param price      价格
      * @param seconds    秒数
+     * @param peopleId   名人id值
      * @param subscriber
      */
-    public static void saleTransaction(String price, String seconds, Subscriber<ResponseBean> subscriber)
+    public static void saleTransaction(String price, String seconds, String peopleId, Subscriber<ResponseBean> subscriber)
     {
-        Observable<ResponseBean> observable = getInstance().mService.saleTransaction(seconds, price).map(new HttpNoDataResultFun<>());
+        Observable<ResponseBean> observable = getInstance().mService.saleTransaction(seconds, price, peopleId).map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

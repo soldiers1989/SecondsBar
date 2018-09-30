@@ -31,6 +31,7 @@ import com.btten.bttenlibrary.util.VerificationUtil;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.http.exception.ApiException;
@@ -271,6 +272,8 @@ public class AcMallDetail extends ActivitySupport
                     dialogBuy.dismiss();
                 }
                 ShowToast.showToast("购买成功");
+                //通知更新用户余额信息
+                FxApplication.refreshUserInfoBroadCast();
                 jump(AcOrderManage.class);
             }
         });

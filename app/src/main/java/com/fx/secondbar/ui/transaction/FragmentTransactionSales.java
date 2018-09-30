@@ -55,7 +55,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
     private TextView tv_price_token;    //可用的代币数量
     private TextView tv_code;       //代币名称
     private TextView tv_price_ste;  //可用STE
-    private TextView tv_time;       //可买秒数
+    private TextView tv_time;       //可用时间
 
     /**
      * 最低价
@@ -357,13 +357,13 @@ public class FragmentTransactionSales extends FragmentTransactionItem
     /**
      * 卖出
      */
-    private void sale(String price, String seconds)
+    private void sale(String price, String seconds, final String peopleId)
     {
         if (dialog != null)
         {
             dialog.show();
         }
-        HttpManager.saleTransaction(price, seconds, new Subscriber<ResponseBean>()
+        HttpManager.saleTransaction(price, seconds, peopleId, new Subscriber<ResponseBean>()
         {
             @Override
             public void onCompleted()
@@ -432,7 +432,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
                             ShowToast.showToast("您卖出的价格不能小于跌停价格");
                             return;
                         }
-                        sale(String.valueOf(price), String.valueOf(seconds));
+                        sale(String.valueOf(price), String.valueOf(seconds), peopleId);
                     }
                 } catch (NumberFormatException e)
                 {

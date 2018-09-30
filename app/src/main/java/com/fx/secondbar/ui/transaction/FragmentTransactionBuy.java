@@ -365,13 +365,13 @@ public class FragmentTransactionBuy extends FragmentTransactionItem
      * @param price
      * @param seconds
      */
-    private void buy(String price, String seconds)
+    private void buy(String price, String seconds, final String peopleId)
     {
         if (dialog != null)
         {
             dialog.show();
         }
-        HttpManager.buyTransaction(price, seconds, new Subscriber<ResponseBean>()
+        HttpManager.buyTransaction(price, seconds, peopleId, new Subscriber<ResponseBean>()
         {
             @Override
             public void onCompleted()
@@ -429,7 +429,7 @@ public class FragmentTransactionBuy extends FragmentTransactionItem
                             ShowToast.showToast("您购买的秒数不能大于您可购买的秒数");
                             return;
                         }
-                        float price = Float.parseFloat(getTextView(ed_input));
+                        double price = Double.parseDouble(getTextView(ed_input));
                         if (price > priceUp)
                         {
                             ShowToast.showToast("您购买的价格不能大于涨停价格");
@@ -440,7 +440,7 @@ public class FragmentTransactionBuy extends FragmentTransactionItem
                             ShowToast.showToast("您购买的价格不能小于跌停价格");
                             return;
                         }
-                        buy(String.valueOf(price), String.valueOf(seconds));
+                        buy(String.valueOf(price), String.valueOf(seconds), peopleId);
                     }
                 } catch (NumberFormatException e)
                 {

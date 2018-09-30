@@ -328,22 +328,24 @@ public interface IService
     /**
      * 名人时间购买
      *
-     * @param seconds 秒数
-     * @param price   价格
+     * @param seconds  秒数
+     * @param price    价格
+     * @param peopleId 名人id值
      * @return
      */
     @GET(Constants.API_TRANSACTION_BUY)
-    Observable<ResponseBean> buyTransaction(@Query("seconds") String seconds, @Query("price") String price);
+    Observable<ResponseBean> buyTransaction(@Query("seconds") String seconds, @Query("price") String price, @Query("peopleid") String peopleId);
 
     /**
      * 名人时间出售
      *
-     * @param seconds 秒数
-     * @param price   价格
+     * @param seconds  秒数
+     * @param price    价格
+     * @param peopleId 名人id值
      * @return
      */
     @GET(Constants.API_TRANSACTION_SALE)
-    Observable<ResponseBean> saleTransaction(@Query("seconds") String seconds, @Query("price") String price);
+    Observable<ResponseBean> saleTransaction(@Query("seconds") String seconds, @Query("price") String price, @Query("peopleid") String peopleId);
 
     /**
      * 获取Q收益明细

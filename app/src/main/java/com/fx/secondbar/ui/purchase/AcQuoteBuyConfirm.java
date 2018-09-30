@@ -15,6 +15,7 @@ import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.PurchaseInfoBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.http.exception.ApiException;
@@ -217,6 +218,8 @@ public class AcQuoteBuyConfirm extends ActivitySupport
                     dialog.dismiss();
                 }
                 ShowToast.showToast("申购成功");
+                //通知更新用户余额信息
+                FxApplication.refreshUserInfoBroadCast();
                 jump(AcMyPurchase.class, true);
             }
         });

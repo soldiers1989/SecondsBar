@@ -24,7 +24,7 @@
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/mall_tool_pl"
-                android:text="订单详情"
+                android:text="申购订单详情"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/toolbar_title_font"/>
 
@@ -80,8 +80,8 @@
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dip"
-        android:layout_marginRight="30dip"
         android:layout_marginTop="20dip"
+        android:layout_marginRight="30dip"
         android:text="@string/order_detail_person_name"
         android:textColor="#777777"
         android:textSize="16sp"

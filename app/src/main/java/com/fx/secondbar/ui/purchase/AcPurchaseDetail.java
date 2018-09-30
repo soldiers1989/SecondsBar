@@ -14,6 +14,7 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.PurchaseDetailBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.home.AcShareDialog;
 import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
@@ -85,7 +86,7 @@ public class AcPurchaseDetail extends ActivitySupport
                 finish();
                 break;
             case R.id.ib_share:
-                jump(AcPurchaseDetail.class);
+                jump(AcShareDialog.class);
                 break;
             case R.id.btn_buy:
                 Bundle bundle = new Bundle();
@@ -142,20 +143,19 @@ public class AcPurchaseDetail extends ActivitySupport
     {
         if (bean != null)
         {
+            VerificationUtil.setViewValue(tv_person_price, String.format(getString(R.string.purchase_money_text), VerificationUtil.verifyDefault(bean.getPrice(), "0")));
+            GlideLoad.load(img_avatar, bean.getPeopleimg(), true);
+            if (TextUtils.isEmpty(bean.getZjm()))
+            {
+                VerificationUtil.setViewValue(tv_person_name, bean.getPeoplename());
+            } else
+            {
+                VerificationUtil.setViewValue(tv_person_name, bean.getPeoplename() + "(" + bean.getZjm() + ")");
+            }
             PersonBean personBean = bean.getPeopleVO();
             if (personBean != null)
             {
                 GlideLoad.load(img_top, personBean.getPicture());
-                GlideLoad.load(img_avatar, personBean.getImg(), true);
-                if (TextUtils.isEmpty(personBean.getZjm()))
-                {
-                    VerificationUtil.setViewValue(tv_person_name, personBean.getName());
-                } else
-                {
-                    VerificationUtil.setViewValue(tv_person_name, personBean.getName() + "(" + personBean.getZjm() + ")");
-                }
-
-                VerificationUtil.setViewValue(tv_person_price, String.format(getString(R.string.purchase_money_text), VerificationUtil.verifyDefault(personBean.getPrice(), "0")));
                 VerificationUtil.setViewValue(tv_person_position, String.format(getString(R.string.mall_detail_info_position), VerificationUtil.verifyDefault(personBean.getJob(), "")));
                 VerificationUtil.setViewValue(tv_person_school, String.format(getString(R.string.mall_detail_info_school), VerificationUtil.verifyDefault(personBean.getSchool(), "")));
                 VerificationUtil.setViewValue(tv_experience, personBean.getExperience());

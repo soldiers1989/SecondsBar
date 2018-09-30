@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.purchase;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -64,7 +65,9 @@ public class AcMyPurchase extends ActivitySupport implements SwipeRefreshLayout.
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
-                jump(AcPurchaseOrderDetail.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(KEY, AcMyPurchase.this.adapter.getItem(position));
+                jump(AcPurchaseOrderDetail.class, bundle, false);
             }
         });
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
