@@ -13,6 +13,7 @@ import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.PurchaseDetailBean;
+import com.fx.secondbar.bean.PurchaseInfoBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.AcShareDialog;
 import com.fx.secondbar.util.GlideLoad;
@@ -37,6 +38,9 @@ public class AcPurchaseDetail extends ActivitySupport
     private TextView tv_use;
     private TagCloudView tagCloudView;
     private TextView tv_experience;
+
+    //名人图片
+    private String personPicture;
 
     @Override
     protected int getLayoutResId()
@@ -86,7 +90,15 @@ public class AcPurchaseDetail extends ActivitySupport
                 finish();
                 break;
             case R.id.ib_share:
-                jump(AcShareDialog.class);
+                StringBuilder sb = new StringBuilder();
+                sb.append(getTextView(tv_person_name));
+                sb.append("==");
+                sb.append(getTextView(tv_person_price));
+                Bundle bundleShare = new Bundle();
+                bundleShare.putInt(AcShareDialog.KEY_TYPE, AcShareDialog.TYPE_POST_PURCHASE);
+                bundleShare.putString(AcShareDialog.KEY_CONTENT, sb.toString());
+                bundleShare.putString(AcShareDialog.KEY_IMG, personPicture);
+                jump(AcShareDialog.class, bundleShare, false);
                 break;
             case R.id.btn_buy:
                 Bundle bundle = new Bundle();
@@ -143,15 +155,21 @@ public class AcPurchaseDetail extends ActivitySupport
     {
         if (bean != null)
         {
-            VerificationUtil.setViewValue(tv_person_price, String.format(getString(R.string.purchase_money_text), VerificationUtil.verifyDefault(bean.getPrice(), "0")));
-            GlideLoad.load(img_avatar, bean.getPeopleimg(), true);
-            if (TextUtils.isEmpty(bean.getZjm()))
+            PurchaseInfoBean purchaseInfoBean = bean.getPurchaseVO();
+            if (purchaseInfoBean != null)
             {
-                VerificationUtil.setViewValue(tv_person_name, bean.getPeoplename());
-            } else
-            {
-                VerificationUtil.setViewValue(tv_person_name, bean.getPeoplename() + "(" + bean.getZjm() + ")");
+                VerificationUtil.setViewValue(tv_person_price, String.format(getString(R.string.purchase_money_text), VerificationUtil.verifyDefault(purchaseInfoBean.getPrice(), "0")));
+                GlideLoad.load(img_avatar, purchaseInfoBean.getPeopleimg(), true);
+                personPicture = purchaseInfoBean.getPeopleimg();
+                if (TextUtils.isEmpty(purchaseInfoBean.getZjm()))
+                {
+                    VerificationUtil.setViewValue(tv_person_name, purchaseInfoBean.getPeoplename());
+                } else
+                {
+                    VerificationUtil.setViewValue(tv_person_name, purchaseInfoBean.getPeoplename() + "(" + purchaseInfoBean.getZjm() + ")");
+                }
             }
+
             PersonBean personBean = bean.getPeopleVO();
             if (personBean != null)
             {

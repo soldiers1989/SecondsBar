@@ -123,7 +123,7 @@
         app:layout_constraintBottom_toTopOf="@+id/v_bottom"
         app:layout_constraintTop_toTopOf="parent">
 
-        <FrameLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="15dip"
@@ -135,10 +135,12 @@
                 android:id="@+id/ll_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="top"
                 android:background="#ebebeb"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 >
 
                 <ImageView
@@ -158,7 +160,6 @@
                     android:paddingTop="30dip"
                     android:paddingRight="15dip"
                     android:paddingBottom="20dip"
-                    android:text="2018-09-28 23:24"
                     android:textColor="#8b8a8a"
                     android:textSize="14sp"/>
 
@@ -170,7 +171,121 @@
                     android:paddingLeft="15dip"
                     android:paddingRight="15dip"
                     android:textColor="#333333"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/cl_commodity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dip"
+                    android:paddingRight="15dip"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/img_commodity"
+                        android:layout_width="@dimen/home_infomation_item_multi_commodity_img_size"
+                        android:layout_height="@dimen/home_infomation_item_multi_commodity_img_size"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_commodity_title"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/home_infomation_item_multi_commodity_content_ml"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/home_infomation_item_sing_title_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_commodity"
+                        app:layout_constraintTop_toTopOf="@+id/img_commodity"/>
+
+                    <TextView
+                        android:id="@+id/tv_commodity_price"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/home_tabs_mark_color"
+                        android:textSize="@dimen/home_infomation_item_sing_title_text"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_commodity"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_commodity_title"/>
+
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="@dimen/home_infomation_item_multi_commodity_content_time_place_h"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_commodity"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_commodity_title"
+                        app:layout_constraintTop_toTopOf="@+id/img_commodity">
+
+                        <TextView
+                            android:id="@+id/tv_timelength"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/home_infomation_item_time_place_text"
+                            android:textSize="@dimen/home_infomation_item_multi_commodity_content_time_place_text"/>
+
+                        <TextView
+                            android:id="@+id/tv_place"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/home_infomation_item_time_place_text"
+                            android:textSize="@dimen/home_infomation_item_multi_commodity_content_time_place_text"/>
+                    </LinearLayout>
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/cl_purchase"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dip"
+                    android:paddingRight="15dip"
+                    android:visibility="gone">
+
+                    <com.joooonho.SelectableRoundedImageView
+                        android:id="@+id/img_avatar"
+                        android:layout_width="71dip"
+                        android:layout_height="71dip"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:sriv_oval="true"/>
+
+                    <TextView
+                        android:id="@+id/tv_person_name"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dip"
+                        android:layout_marginTop="10dip"
+                        android:layout_marginRight="20dip"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_avatar"
+                        app:layout_constraintTop_toTopOf="@+id/img_avatar"/>
+
+                    <TextView
+                        android:id="@+id/tv_person_price"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dip"
+                        android:layout_marginRight="20dip"
+                        android:layout_marginBottom="10dip"
+                        android:textColor="@color/font_yellow_color"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_avatar"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_avatar"/>
+                </android.support.constraint.ConstraintLayout>
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -237,9 +352,11 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:src="@mipmap/ic_share_bottom_logo"/>
-        </FrameLayout>
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_share_bottom_logo"
+                app:layout_constraintBottom_toBottomOf="@+id/ll_content"
+                app:layout_constraintEnd_toEndOf="@+id/ll_content"/>
+        </android.support.constraint.ConstraintLayout>
 
 
     </android.support.v4.widget.NestedScrollView>

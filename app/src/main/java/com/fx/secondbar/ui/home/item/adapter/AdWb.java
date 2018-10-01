@@ -82,6 +82,7 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
                 if (activity != null)
                 {
                     Intent intent = new Intent(activity, AcShareDialog.class);
+                    intent.putExtra(AcShareDialog.KEY_TYPE, AcShareDialog.TYPE_POSTER_CONTENT);
                     intent.putExtra(AcShareDialog.KEY_TITLE, item.getTitle());
                     intent.putExtra(AcShareDialog.KEY_CONTENT, item.getContent());
                     intent.putExtra(AcShareDialog.KEY_URL, "");

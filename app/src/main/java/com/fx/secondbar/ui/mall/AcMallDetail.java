@@ -66,6 +66,9 @@ public class AcMallDetail extends ActivitySupport
     private DialogBuy dialogBuy;
     private ProgressDialog dialog;
 
+    //商品图片
+    private String goodsPicture;
+
     @Override
     protected int getLayoutResId()
     {
@@ -158,6 +161,7 @@ public class AcMallDetail extends ActivitySupport
     {
         if (bean != null)
         {
+            goodsPicture = bean.getImage();
             GlideLoad.load(img, bean.getImage());
             VerificationUtil.setViewValue(tv_title, bean.getName());
             VerificationUtil.setViewValue(tv_time, String.format(getString(R.string.mall_detail_info_time), VerificationUtil.verifyDefault(bean.getTimelength(), "0")));
@@ -302,7 +306,17 @@ public class AcMallDetail extends ActivitySupport
                 break;
             case R.id.img_forward:
                 Bundle bundle = new Bundle();
-                bundle.putString(AcShareDialog.KEY_CONTENT, getTextView(tv_title));
+                bundle.putInt(AcShareDialog.KEY_TYPE, AcShareDialog.TYPE_POSTER_GOODS);
+                StringBuilder sb = new StringBuilder();
+                sb.append(getTextView(tv_title));
+                sb.append("==");
+                sb.append(getTextView(tv_time));
+                sb.append("==");
+                sb.append(getTextView(tv_place));
+                sb.append("==");
+                sb.append(getTextView(tv_price));
+                bundle.putString(AcShareDialog.KEY_CONTENT, sb.toString());
+                bundle.putString(AcShareDialog.KEY_IMG, goodsPicture);
                 jump(AcShareDialog.class, bundle, false);
                 break;
             case R.id.btn_buy:

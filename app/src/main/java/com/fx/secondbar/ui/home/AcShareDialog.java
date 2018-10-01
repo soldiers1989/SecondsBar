@@ -5,20 +5,25 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.constraint.ConstraintLayout;
 import android.text.Html;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.util.DateUtils;
 import com.btten.bttenlibrary.util.LogUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.util.Constants;
+import com.fx.secondbar.util.GlideLoad;
 import com.fx.secondbar.util.ShareUtils;
+import com.joooonho.SelectableRoundedImageView;
 import com.sina.weibo.sdk.WbSdk;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
 import com.sina.weibo.sdk.share.WbShareCallback;
@@ -34,6 +39,7 @@ import com.tencent.tauth.UiError;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Date;
 
 /**
  * function:Dialog样式分享对话框
@@ -49,13 +55,26 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
     private static final int PLATFORM_TIMELINE = 4;
 
     /**
-     * 当前分享类型-图片
+     * 当前分享类型-图片海报，内容
      */
-    private static final int TYPE_IMG = 1;
+    public static final int TYPE_POSTER_CONTENT = 1;
+    /**
+     * 当前分享类型-图片海报，申购
+     */
+    public static final int TYPE_POST_PURCHASE = 2;
+    /**
+     * 当前分享类型-图片海报，商品
+     */
+    public static final int TYPE_POSTER_GOODS = 3;
     /**
      * 当前分享类型-文本
      */
-    private static final int TYPE_TEXT = 2;
+    public static final int TYPE_TEXT = 4;
+
+    /**
+     * 类型的key值
+     */
+    public static final String KEY_TYPE = "key_type";
     /**
      * 图片的Key
      */
@@ -80,8 +99,23 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
     //分享类型
     private int type;
 
-    private TextView tv_content;
+    private TextView tv_time;               //分享时间
     private LinearLayout ll_content;
+
+    private TextView tv_content;
+
+    private ConstraintLayout cl_commodity;
+    private ImageView img_commodity;        //商品图片
+    private TextView tv_commodity_title;    //商品标题
+    private TextView tv_commodity_price;    //商品价格
+    private TextView tv_timelength;         //商品时长
+    private TextView tv_place;              //商品地点
+
+    private ConstraintLayout cl_purchase;
+    private SelectableRoundedImageView img_avatar;  //名人头像
+    private TextView tv_person_name;        //名人姓名
+    private TextView tv_person_price;       //名人价格
+
 
     @Override
     protected int getLayoutResId()
@@ -96,8 +130,22 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
         ImageButton img_weibo = findViewById(R.id.img_weibo);
         ImageButton img_cycle = findViewById(R.id.img_cycle);
         ImageButton img_wechat = findViewById(R.id.img_wechat);
+        tv_time = findView(R.id.tv_time);
         tv_content = findView(R.id.tv_content);
         ll_content = findView(R.id.ll_content);
+
+        cl_commodity = findView(R.id.cl_commodity);
+        img_commodity = findView(R.id.img_commodity);
+        tv_commodity_title = findView(R.id.tv_commodity_title);
+        tv_commodity_price = findView(R.id.tv_commodity_price);
+        tv_timelength = findView(R.id.tv_timelength);
+        tv_place = findView(R.id.tv_place);
+
+        cl_purchase = findView(R.id.cl_purchase);
+        img_avatar = findView(R.id.img_avatar);
+        tv_person_name = findView(R.id.tv_person_name);
+        tv_person_price = findView(R.id.tv_person_price);
+
         ll_content.setDrawingCacheEnabled(true);
         ll_content.buildDrawingCache();
 
@@ -148,7 +196,40 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
         wbShareHandler = new WbShareHandler(this);
         wbShareHandler.registerApp();
 
-        tv_content.setText(Html.fromHtml(VerificationUtil.verifyDefault(getIntent().getStringExtra(KEY_CONTENT), "")));
+        tv_time.setText(DateUtils.DateToStr(new Date(), "yyyy-MM-dd HH:mm"));
+
+        //分享类型
+        type = getIntent().getIntExtra(KEY_TYPE, TYPE_POSTER_CONTENT);
+        String content = getIntent().getStringExtra(KEY_CONTENT);
+        if (TYPE_POSTER_CONTENT == type)
+        {
+            tv_content.setVisibility(View.VISIBLE);
+            tv_content.setText(Html.fromHtml(VerificationUtil.verifyDefault(content, "")));
+        } else if (TYPE_POSTER_GOODS == type)
+        {
+            cl_commodity.setVisibility(View.VISIBLE);
+            String[] values = content.split("==");
+            //索引顺序分别为：标题、时长、地点和价格
+            if (values != null && values.length == 4)
+            {
+                VerificationUtil.setViewValue(tv_commodity_title, values[0]);
+                VerificationUtil.setViewValue(tv_timelength, values[1]);
+                VerificationUtil.setViewValue(tv_place, values[2]);
+                VerificationUtil.setViewValue(tv_commodity_price, values[3]);
+            }
+            GlideLoad.load(img_commodity, getIntent().getStringExtra(KEY_IMG));
+        } else if (TYPE_POST_PURCHASE == type)
+        {
+            cl_purchase.setVisibility(View.VISIBLE);
+            String[] values = content.split("==");
+            //索引顺序分别为：姓名和价格
+            if (values != null && values.length == 2)
+            {
+                VerificationUtil.setViewValue(tv_person_name, values[0]);
+                VerificationUtil.setViewValue(tv_person_price, values[1]);
+            }
+            GlideLoad.load(img_avatar, getIntent().getStringExtra(KEY_IMG), true);
+        }
     }
 
     @Override
