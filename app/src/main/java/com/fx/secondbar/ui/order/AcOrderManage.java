@@ -52,7 +52,7 @@ public class AcOrderManage extends ActivitySupport
     {
         final List<FragmentViewPagerBase> list = new ArrayList<>();
         list.add(FOrderItem.newInstance(FOrderItem.TYPE_ALL));
-        list.add(FOrderItem.newInstance(FOrderItem.TYPE_WAIT_PAY));
+//        list.add(FOrderItem.newInstance(FOrderItem.TYPE_WAIT_PAY));
         list.add(FOrderItem.newInstance(FOrderItem.TYPE_PERFORMANCE));
         list.add(FOrderItem.newInstance(FOrderItem.TYPE_PERFORMANCING));
         list.add(FOrderItem.newInstance(FOrderItem.TYPE_REFUND));

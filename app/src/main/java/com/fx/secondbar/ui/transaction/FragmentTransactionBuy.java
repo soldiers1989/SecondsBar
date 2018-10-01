@@ -56,7 +56,7 @@ public class FragmentTransactionBuy extends FragmentTransactionItem
     private TextView tv_price_token;    //可用的代币数量
     private TextView tv_code;       //代币名称
     private TextView tv_price_ste;  //可用STE
-    private TextView tv_time;       //可买秒数
+    private TextView tv_time;       //可用时间
 
     /**
      * 最低价
@@ -269,6 +269,7 @@ public class FragmentTransactionBuy extends FragmentTransactionItem
             VerificationUtil.setViewValue(tv_code, "可用" + VerificationUtil.verifyDefault(bean.getZjm(), "-"));
             VerificationUtil.setViewValue(tv_can_num, String.valueOf(bean.getCanbuyseconds()));
             VerificationUtil.setViewValue(tv_price_ste, String.valueOf(bean.getBalanceamt()));
+            VerificationUtil.setViewValue(tv_time, String.valueOf(bean.getHaveseconds()));
 
             priceDown = bean.getPrice_DT();
             priceUp = bean.getPrice_ZT();

@@ -70,12 +70,10 @@ public class AcPurchaseOrderDetail extends ActivitySupport
     {
         if (myPurchaseBean != null)
         {
-            VerificationUtil.setViewValue(tv_status, myPurchaseBean.getStatusname());
-            String price = myPurchaseBean.getStartprice();
+            String price = myPurchaseBean.getPrice();
             VerificationUtil.setViewValue(tv_mondy, String.format(getString(R.string.order_detail_order_money), VerificationUtil.verifyDefault(price, "0")));
-            VerificationUtil.setViewValue(tv_seconds, String.format(getString(R.string.order_detail_order_seconds), VerificationUtil.verifyDefault(myPurchaseBean.getSecond(), "0")));
-            VerificationUtil.setViewValue(tv_pay_price, String.format(getString(R.string.order_detail_order_pay_price), VerificationUtil.verifyDefault(myPurchaseBean.getAmount(), "0")));
-            VerificationUtil.setViewValue(tv_order_num, String.format(getString(R.string.order_detail_order_num), VerificationUtil.verifyDefault(myPurchaseBean.getTransaction_ID(), "0")));
+            VerificationUtil.setViewValue(tv_seconds, String.format(getString(R.string.order_detail_order_seconds), VerificationUtil.verifyDefault(myPurchaseBean.getAmount(), "0")));
+            VerificationUtil.setViewValue(tv_pay_price, String.format(getString(R.string.order_detail_order_pay_price), VerificationUtil.verifyDefault(myPurchaseBean.getTotalmoney(), "0")));
             VerificationUtil.setViewValue(tv_order_time, String.format(getString(R.string.order_detail_order_time), VerificationUtil.verifyDefault(myPurchaseBean.getCreatetime(), "0")));
 
         }

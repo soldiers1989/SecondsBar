@@ -254,6 +254,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
             VerificationUtil.setViewValue(tv_code, "可用" + bean.getZjm());
             VerificationUtil.setViewValue(tv_can_num, String.valueOf(bean.getCanbuyseconds()));
             VerificationUtil.setViewValue(tv_price_ste, String.valueOf(bean.getBalanceamt()));
+            VerificationUtil.setViewValue(tv_time, String.valueOf(bean.getHaveseconds()));
 
             priceDown = bean.getPrice_DT();
             priceUp = bean.getPrice_ZT();

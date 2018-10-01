@@ -10,20 +10,25 @@ import android.os.Parcelable;
  */
 public class MyPurchaseBean implements Parcelable
 {
+    private String createtime;//创建时间
     private String memberid;//会员id
     private String peopleid;//名人id
     private String amount;//数量
-    private String typename;//类型名称
-    private String startprice;//发行价格
-    private String date;//日期
-    private String statusname;//状态描述
-    private String hours;//时间
-    private String second;//秒数
-    private String status;//状态
-    private String type;//类型
-    private String createtime;//创建时间
     private String price;//当前价格
-    private String transaction_ID;//交易id
+    private String zjm;//名人助记码
+    private String totalmoney;//总金额
+    private String peopleimg;//头像地址
+    private String peoplename;//名人姓名
+
+    public String getCreatetime()
+    {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime)
+    {
+        this.createtime = createtime;
+    }
 
     public String getMemberid()
     {
@@ -55,96 +60,6 @@ public class MyPurchaseBean implements Parcelable
         this.amount = amount;
     }
 
-    public String getTypename()
-    {
-        return typename;
-    }
-
-    public void setTypename(String typename)
-    {
-        this.typename = typename;
-    }
-
-    public String getStartprice()
-    {
-        return startprice;
-    }
-
-    public void setStartprice(String startprice)
-    {
-        this.startprice = startprice;
-    }
-
-    public String getDate()
-    {
-        return date;
-    }
-
-    public void setDate(String date)
-    {
-        this.date = date;
-    }
-
-    public String getStatusname()
-    {
-        return statusname;
-    }
-
-    public void setStatusname(String statusname)
-    {
-        this.statusname = statusname;
-    }
-
-    public String getHours()
-    {
-        return hours;
-    }
-
-    public void setHours(String hours)
-    {
-        this.hours = hours;
-    }
-
-    public String getSecond()
-    {
-        return second;
-    }
-
-    public void setSecond(String second)
-    {
-        this.second = second;
-    }
-
-    public String getStatus()
-    {
-        return status;
-    }
-
-    public void setStatus(String status)
-    {
-        this.status = status;
-    }
-
-    public String getType()
-    {
-        return type;
-    }
-
-    public void setType(String type)
-    {
-        this.type = type;
-    }
-
-    public String getCreatetime()
-    {
-        return createtime;
-    }
-
-    public void setCreatetime(String createtime)
-    {
-        this.createtime = createtime;
-    }
-
     public String getPrice()
     {
         return price;
@@ -155,15 +70,46 @@ public class MyPurchaseBean implements Parcelable
         this.price = price;
     }
 
-    public String getTransaction_ID()
+    public String getZjm()
     {
-        return transaction_ID;
+        return zjm;
     }
 
-    public void setTransaction_ID(String transaction_ID)
+    public void setZjm(String zjm)
     {
-        this.transaction_ID = transaction_ID;
+        this.zjm = zjm;
     }
+
+    public String getTotalmoney()
+    {
+        return totalmoney;
+    }
+
+    public void setTotalmoney(String totalmoney)
+    {
+        this.totalmoney = totalmoney;
+    }
+
+    public String getPeopleimg()
+    {
+        return peopleimg;
+    }
+
+    public void setPeopleimg(String peopleimg)
+    {
+        this.peopleimg = peopleimg;
+    }
+
+    public String getPeoplename()
+    {
+        return peoplename;
+    }
+
+    public void setPeoplename(String peoplename)
+    {
+        this.peoplename = peoplename;
+    }
+
 
     @Override
     public int describeContents()
@@ -174,20 +120,15 @@ public class MyPurchaseBean implements Parcelable
     @Override
     public void writeToParcel(Parcel dest, int flags)
     {
+        dest.writeString(this.createtime);
         dest.writeString(this.memberid);
         dest.writeString(this.peopleid);
         dest.writeString(this.amount);
-        dest.writeString(this.typename);
-        dest.writeString(this.startprice);
-        dest.writeString(this.date);
-        dest.writeString(this.statusname);
-        dest.writeString(this.hours);
-        dest.writeString(this.second);
-        dest.writeString(this.status);
-        dest.writeString(this.type);
-        dest.writeString(this.createtime);
         dest.writeString(this.price);
-        dest.writeString(this.transaction_ID);
+        dest.writeString(this.zjm);
+        dest.writeString(this.totalmoney);
+        dest.writeString(this.peopleimg);
+        dest.writeString(this.peoplename);
     }
 
     public MyPurchaseBean()
@@ -196,23 +137,18 @@ public class MyPurchaseBean implements Parcelable
 
     protected MyPurchaseBean(Parcel in)
     {
+        this.createtime = in.readString();
         this.memberid = in.readString();
         this.peopleid = in.readString();
         this.amount = in.readString();
-        this.typename = in.readString();
-        this.startprice = in.readString();
-        this.date = in.readString();
-        this.statusname = in.readString();
-        this.hours = in.readString();
-        this.second = in.readString();
-        this.status = in.readString();
-        this.type = in.readString();
-        this.createtime = in.readString();
         this.price = in.readString();
-        this.transaction_ID = in.readString();
+        this.zjm = in.readString();
+        this.totalmoney = in.readString();
+        this.peopleimg = in.readString();
+        this.peoplename = in.readString();
     }
 
-    public static final Parcelable.Creator<MyPurchaseBean> CREATOR = new Parcelable.Creator<MyPurchaseBean>()
+    public static final Creator<MyPurchaseBean> CREATOR = new Creator<MyPurchaseBean>()
     {
         @Override
         public MyPurchaseBean createFromParcel(Parcel source)

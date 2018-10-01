@@ -25,11 +25,9 @@ import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.http.HttpManager;
-import com.fx.secondbar.ui.AcWebBrowse;
+import com.fx.secondbar.ui.home.AcInformationDetail;
 import com.fx.secondbar.ui.home.item.adapter.AdInfomation;
 import com.fx.secondbar.ui.mall.AcMallDetail;
-import com.fx.secondbar.util.Constants;
-import com.fx.secondbar.util.DeviceUuidFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,15 +107,7 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
                 AdInfomation.InfomationEntity entity = FragmentInformationItem.this.adapter.getItem(position);
                 if (AdInfomation.InfomationEntity.TYPE_MULTI_IMG == entity.getItemType() || AdInfomation.InfomationEntity.TYPE_SINGLE_IMG == entity.getItemType())
                 {
-                    Bundle bundle = new Bundle();
-                    if (entity.getInfomationBean() != null)
-                    {
-                        String url = String.format(Constants.URL_INFORMATION, entity.getInfomationBean().getNews_ID(), new DeviceUuidFactory(getContext()).getDeviceUuid());
-                        bundle.putString(KEY, url);
-//                        bundle.putString(KEY, Constants.URL_INFORMATION + entity.getInfomationBean().getNews_ID());
-                    }
-                    bundle.putString(KEY_STR, "秒吧头条");
-                    jump(AcWebBrowse.class, bundle, false);
+                    jump(AcInformationDetail.class, entity.getInfomationBean().getNews_ID(), false);
                 } else if (AdInfomation.InfomationEntity.TYPE_COMMODITY == entity.getItemType())
                 {
                     CommodityBean commodityBean = entity.getCommodityBean();

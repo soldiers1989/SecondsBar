@@ -105,7 +105,7 @@ public class Constants
     /**
      * 我的申购列表接口
      */
-    public static final String API_MY_PURCHASE = "transaction/list";
+    public static final String API_MY_PURCHASE = "purchase/mylist";
     /**
      * 获取Q币活动接口
      */

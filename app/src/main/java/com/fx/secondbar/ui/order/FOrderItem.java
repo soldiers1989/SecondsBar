@@ -19,7 +19,6 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
-import com.fx.secondbar.ui.purchase.AcPurchaseOrderDetail;
 
 import java.util.List;
 

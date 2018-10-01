@@ -1,6 +1,7 @@
 package com.fx.secondbar.ui.purchase;
 
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,9 +40,14 @@ public class AdPurchase extends BaseQuickAdapter<MyPurchaseBean, BaseViewHolder>
         {
             tv_status.setTextColor(Color.parseColor("#e76e43"));
         }
-
-        VerificationUtil.setViewValue(tv_seconds, item.getSecond());
-        VerificationUtil.setViewValue(tv_status, item.getStatusname());
+        String name = item.getPeoplename();
+        if (!TextUtils.isEmpty(item.getZjm()))
+        {
+            name += "(" + item.getZjm() + ")";
+        }
+        VerificationUtil.setViewValue(tv_name, name);
+        VerificationUtil.setViewValue(tv_seconds, item.getAmount());
+//        VerificationUtil.setViewValue(tv_status, item.getStatusname());
         setCommodityMoney(tv_price, item.getPrice());
     }
 

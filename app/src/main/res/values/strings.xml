@@ -102,7 +102,7 @@
 
     <string-array name="order_manage_tabs">
         <item>全部</item>
-        <item>待支付</item>
+        <!--<item>待支付</item>-->
         <item>待履约</item>
         <item>履约中</item>
         <item>退款中</item>

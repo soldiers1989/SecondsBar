@@ -18,6 +18,7 @@ public class TransactionBean
     private Double price;   //现价
     private String people_ID;//1,
     private String zjm;//助记码
+    private Double haveseconds; //拥有的时间
     private List<CommissionBean> list_buy;  //最新买入
     private List<CommissionBean> list_sell; //最新卖出
     private List<CommissionBean> list_current;  //当前委托
@@ -76,7 +77,7 @@ public class TransactionBean
 
     public Double getPrice()
     {
-        return price==null?0:price;
+        return price == null ? 0 : price;
     }
 
     public void setPrice(Double price)
@@ -142,5 +143,15 @@ public class TransactionBean
     public void setList_history(List<CommissionBean> list_history)
     {
         this.list_history = list_history;
+    }
+
+    public Double getHaveseconds()
+    {
+        return haveseconds;
+    }
+
+    public void setHaveseconds(Double haveseconds)
+    {
+        this.haveseconds = haveseconds;
     }
 }

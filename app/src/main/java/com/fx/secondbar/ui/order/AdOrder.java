@@ -41,6 +41,19 @@ public class AdOrder extends BaseQuickAdapter<OrderBean, BaseViewHolder>
         setCommodityPlace(tv_place, item.getAddress());
         setCommodityTime(tv_time, item.getTimelength());
 
+        if (FOrderItem.TYPE_PERFORMANCE == item.getStatus())
+        {
+            tv_option.setText("取消订单，并退款");
+        } else if (FOrderItem.TYPE_PERFORMANCING == item.getStatus())
+        {
+            tv_option.setText("查看商品");
+        } else if (FOrderItem.TYPE_REFUND == item.getStatus())
+        {
+            tv_option.setText("取消退款");
+        } else
+        {
+            tv_option.setText("");
+        }
     }
 
     /**

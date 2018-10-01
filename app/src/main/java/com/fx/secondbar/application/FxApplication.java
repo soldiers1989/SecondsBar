@@ -35,6 +35,11 @@ public class FxApplication extends BtApplication
 
     private ResConfigInfo mConfigInfo;
 
+    /**
+     * 收益进度值
+     */
+    private int incomeProgress;
+
     @Override
     public void onCreate()
     {
@@ -168,6 +173,16 @@ public class FxApplication extends BtApplication
             this.mConfigInfo = mConfigInfo.clone();
         }
         DataCacheUtils.saveListCache(this, mConfigInfo, DataCacheUtils.FILE_CONFIG_INFO);
+    }
+
+    public int getIncomeProgress()
+    {
+        return incomeProgress;
+    }
+
+    public void setIncomeProgress(int incomeProgress)
+    {
+        this.incomeProgress = incomeProgress;
     }
 
     /**
