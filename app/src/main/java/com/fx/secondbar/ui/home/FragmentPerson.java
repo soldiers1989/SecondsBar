@@ -42,6 +42,7 @@ import com.fx.secondbar.ui.person.assets.AcIncomeRecord;
 import com.fx.secondbar.ui.purchase.AcMyPurchase;
 import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideLoad;
+import com.fx.secondbar.util.LevelUtils;
 import com.joooonho.SelectableRoundedImageView;
 
 import java.util.List;
@@ -67,6 +68,7 @@ public class FragmentPerson extends FragmentSupport
     private TextView tv_ste_value;
     private TextView tv_q_value;
     private TextView tv_today_q_value;
+    private TextView tv_level;
 
     private SelectableRoundedImageView img_get_q;
     private RecyclerView recyclerView;
@@ -95,6 +97,7 @@ public class FragmentPerson extends FragmentSupport
         tv_today_q_value = findView(R.id.tv_today_q_value);
         recyclerView = findView(R.id.recyclerView);
         img_get_q = findView(R.id.img_get_q);
+        tv_level = findView(R.id.tv_level);
         findView(R.id.tv_order).setOnClickListener(this);
         findView(R.id.tv_buy).setOnClickListener(this);
         findView(R.id.ib_set).setOnClickListener(this);
@@ -200,6 +203,8 @@ public class FragmentPerson extends FragmentSupport
         VerificationUtil.setViewValue(tv_ste_value, FxApplication.getInstance().getUserInfoBean().getAmt().toString());
         VerificationUtil.setViewValue(tv_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
         VerificationUtil.setViewValue(tv_today_q_value, FxApplication.getInstance().getUserInfoBean().getTodayqcoin().toString());
+        VerificationUtil.setViewValue(tv_level, "LV" + FxApplication.getInstance().getUserInfoBean().getLevel());
+        tv_level.setBackgroundResource(LevelUtils.getLevelIcons(FxApplication.getInstance().getUserInfoBean().getLevel()));
     }
 
 

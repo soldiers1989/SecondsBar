@@ -108,7 +108,7 @@
         android:background="@null"
         android:gravity="center_vertical"
         android:hint="可提现0.00"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:paddingLeft="6dip"
         android:paddingRight="18dip"
         android:singleLine="true"

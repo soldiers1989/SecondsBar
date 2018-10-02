@@ -116,4 +116,6 @@
     <string name="purchase_confirm_buy_available_tips">可预购（每人可申购%s秒）</string>
 
     <string name="recharge_pay_tips">%s%s元</string>
+
+    <string name="withdraw_fees_tips">%1$sSTE=1人民币 手续费：%2$sSTE；转账费率%3$s%%</string>
 </resources>

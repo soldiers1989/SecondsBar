@@ -5,17 +5,21 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.btten.bttenlibrary.util.ShowToast;
+import com.btten.bttenlibrary.util.VerificationUtil;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
-import com.fx.secondbar.bean.TransactionBean;
+import com.fx.secondbar.bean.CommissionBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.util.ProgressDialogUtil;
+
+import java.util.List;
 
 import rx.Subscriber;
 
@@ -44,6 +48,8 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
 
     private ProgressDialog dialog;
 
+    private int currPage = -1;
+
     public static FragmentCommission newInstance(int type)
     {
         Bundle bundle = new Bundle();
@@ -64,7 +70,11 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
     public void onStarShow()
     {
 
-
+        if (VerificationUtil.getSize(adapter.getData()) == 0)
+        {
+            swipeRefreshLayout.setRefreshing(true);
+            onRefresh();
+        }
     }
 
     @Override
@@ -85,6 +95,18 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
     {
         dialog = ProgressDialogUtil.getProgressDialog(getActivity(), getString(R.string.progress_tips), true);
         type = getArguments().getInt(KEY);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new AdCommission();
+        adapter.bindToRecyclerView(recyclerView);
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
+        {
+            @Override
+            public void onLoadMoreRequested()
+            {
+                refreshData(currPage + 1, String.valueOf(type));
+            }
+        }, recyclerView);
         //是否将要刷新数据
         if (isPrepareRefresh)
         {
@@ -126,13 +148,9 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
     /**
      * 刷新数据
      */
-    private void refreshData(String peopleId)
+    private void refreshData(final int page, final String type)
     {
-//        if (dialog != null)
-//        {
-//            dialog.show();
-//        }
-        HttpManager.getTransactionCenter(peopleId, new Subscriber<TransactionBean>()
+        HttpManager.getTradingCommission(page, PAGE_NUM, type, new Subscriber<List<CommissionBean>>()
         {
             @Override
             public void onCompleted()
@@ -148,10 +166,6 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
                     return;
                 }
                 e.printStackTrace();
-//                if (dialog != null)
-//                {
-//                    dialog.dismiss();
-//                }
                 if (swipeRefreshLayout.isRefreshing())
                 {
                     swipeRefreshLayout.setRefreshing(false);
@@ -160,33 +174,30 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
             }
 
             @Override
-            public void onNext(TransactionBean transactionBean)
+            public void onNext(List<CommissionBean> list)
             {
                 if (isNetworkCanReturn())
                 {
                     return;
                 }
-//                if (dialog != null)
-//                {
-//                    dialog.dismiss();
-//                }
                 if (swipeRefreshLayout.isRefreshing())
                 {
                     swipeRefreshLayout.setRefreshing(false);
                 }
-                String personName = transactionBean.getName();
-                if (!TextUtils.isEmpty(transactionBean.getZjm()))
+                currPage = page;
+                if (PAGE_START == page)
                 {
-                    personName += "(" + transactionBean.getZjm() + ")";
-                }
-                adapter = new AdCommission(personName);
-                adapter.bindToRecyclerView(recyclerView);
-                if (TYPE_CURR == type)
-                {
-                    adapter.setNewData(transactionBean.getList_current());
+                    adapter.setNewData(list);
                 } else
                 {
-                    adapter.setNewData(transactionBean.getList_history());
+                    adapter.addData(list);
+                }
+                if (VerificationUtil.getSize(list) >= PAGE_NUM)
+                {
+                    adapter.loadMoreComplete();
+                } else
+                {
+                    adapter.loadMoreEnd();
                 }
             }
         });
@@ -195,6 +206,6 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
     @Override
     public void onRefresh()
     {
-        refreshData(peopleId);
+        refreshData(PAGE_START, String.valueOf(type));
     }
 }

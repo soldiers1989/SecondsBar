@@ -1,7 +1,10 @@
 package com.fx.secondbar.ui.person.assets;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
@@ -16,6 +20,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.BankBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.util.ProgressDialogUtil;
 
 import java.util.List;
 
@@ -37,6 +42,8 @@ public class AcMyBankCard extends ActivitySupport implements SwipeRefreshLayout.
     private Button btn_add;
     private RecyclerView recyclerView;
     private AdMyBankCard adapter;
+
+    private ProgressDialog dialog;
 
     @Override
     protected int getLayoutResId()
@@ -65,6 +72,7 @@ public class AcMyBankCard extends ActivitySupport implements SwipeRefreshLayout.
     @Override
     protected void initData()
     {
+        dialog = ProgressDialogUtil.getProgressDialog(this, getString(R.string.progress_tips), true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(DensityUtil.dip2px(this, 1), false, false, false));
         adapter = new AdMyBankCard();
@@ -72,9 +80,18 @@ public class AcMyBankCard extends ActivitySupport implements SwipeRefreshLayout.
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener()
         {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position)
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position)
             {
                 //删除银行卡
+                AlertDialog.Builder builder = new AlertDialog.Builder(AcMyBankCard.this);
+                builder.setMessage("您确定要删除该银行卡吗？").setPositiveButton("确定", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        deleteBank(AcMyBankCard.this.adapter.getItem(position).getBank_ID());
+                    }
+                }).setNegativeButton("取消", null).show();
             }
         });
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener()
@@ -83,6 +100,10 @@ public class AcMyBankCard extends ActivitySupport implements SwipeRefreshLayout.
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
                 //点击选中返回上一个页面
+                Intent intent = new Intent();
+                intent.putExtra(KEY_STR, AcMyBankCard.this.adapter.getItem(position).getBankno());
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
         swipeRefreshLayout.setRefreshing(true);
@@ -129,6 +150,58 @@ public class AcMyBankCard extends ActivitySupport implements SwipeRefreshLayout.
                     swipeRefreshLayout.setRefreshing(false);
                 }
                 adapter.setNewData(bankBeans);
+            }
+        });
+    }
+
+    /**
+     * 删除银行卡
+     *
+     * @param bankId 银行卡id
+     */
+    private void deleteBank(String bankId)
+    {
+        if (dialog != null && !dialog.isShowing())
+        {
+            dialog.show();
+        }
+        HttpManager.deleteBank(bankId, new Subscriber<ResponseBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                e.printStackTrace();
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(ResponseBean responseBean)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                ShowToast.showToast("删除成功");
+                swipeRefreshLayout.setRefreshing(true);
+                onRefresh();
             }
         });
     }

@@ -4,7 +4,9 @@ package com.fx.secondbar.http.service;
 import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.BankBean;
+import com.fx.secondbar.bean.CommissionBean;
 import com.fx.secondbar.bean.CommodityBean;
+import com.fx.secondbar.bean.ConsumerBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.LevelBean;
@@ -22,6 +24,7 @@ import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBBean;
+import com.fx.secondbar.bean.WithdrawIntroBean;
 import com.fx.secondbar.util.Constants;
 
 import java.util.List;
@@ -293,8 +296,7 @@ public interface IService
      *
      * @return
      */
-    @FormUrlEncoded
-    @POST(Constants.API_LEVEL_LIST)
+    @GET(Constants.API_LEVEL_LIST)
     Observable<ResponseBean<List<LevelBean>>> getLevelList();
 
     /**
@@ -384,4 +386,63 @@ public interface IService
      */
     @GET(Constants.API_RECHARGE_RECORD)
     Observable<ResponseBean<List<RechargeRecordBean>>> getRechargeRecord(@Query("page") int page, @Query("count") int pageSize);
+
+
+    /**
+     * 获取交易中心委托列表
+     *
+     * @param page
+     * @param pageSize
+     * @param type     1表示当前委托，2表示历史委托
+     * @return
+     */
+    @GET(Constants.API_TRADING_CENTER_RECORD)
+    Observable<ResponseBean<List<CommissionBean>>> getTradingCommission(@Query("page") int page, @Query("count") int pageSize, @Query("type") String type);
+
+    /**
+     * 删除银行卡
+     *
+     * @param bankId 银行卡id
+     * @return
+     */
+    @GET(Constants.API_BANK_DELETE)
+    Observable<ResponseBean> deleteBank(@Query("bankid") String bankId);
+
+    /**
+     * 获取消费明细
+     *
+     * @param page
+     * @param pageSize
+     * @param type     0表示全部
+     *                 0	全部
+     *                 1	充值
+     *                 2	提现
+     *                 3	购买名人商品
+     *                 4	购买名人时间
+     *                 5	卖出名人时间
+     *                 6	购买名人申购
+     * @return
+     */
+    @GET(Constants.API_CONSUMER_DETAILS)
+    Observable<ResponseBean<List<ConsumerBean>>> getConsumerDetail(@Query("page") int page, @Query("count") int pageSize, @Query("type") String type);
+
+    /**
+     * 获取提现说明
+     *
+     * @return
+     */
+    @GET(Constants.API_WITHDRAW_INTRO)
+    Observable<ResponseBean<WithdrawIntroBean>> getWithdrawIntro();
+
+    /**
+     * 提现
+     *
+     * @param amount 提现STE数量
+     * @param bankno 银行卡号
+     * @return
+     */
+    @POST(Constants.API_WITHDRAW)
+    Observable<ResponseBean> withdraw(@Query("amount") String amount, @Query("bankno") String bankno);
+
+
 }

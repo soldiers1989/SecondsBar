@@ -21,12 +21,10 @@ import com.fx.secondbar.bean.CommissionBean;
  */
 public class AdCommission extends BaseQuickAdapter<CommissionBean, BaseViewHolder>
 {
-    private String peopleName;
 
-    public AdCommission(String peopleName)
+    public AdCommission()
     {
         super(R.layout.ad_commission);
-        this.peopleName = peopleName;
     }
 
     @Override
@@ -40,7 +38,6 @@ public class AdCommission extends BaseQuickAdapter<CommissionBean, BaseViewHolde
 
         calSize(tv_name, tv_seconds, tv_price, tv_status);
 
-        VerificationUtil.setViewValue(tv_name, peopleName);
         VerificationUtil.setViewValue(tv_price, item.getPrice());
         VerificationUtil.setViewValue(tv_seconds, item.getSecond());
         VerificationUtil.setViewValue(tv_status, item.getTypename());

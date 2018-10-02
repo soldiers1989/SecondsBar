@@ -195,4 +195,36 @@ public class Constants
      * 充值记录
      */
     public static final String API_RECHARGE_RECORD = "rechargerecord/list";
+    /**
+     * 交易中心-当前委托和历史委托接口
+     */
+    public static final String API_TRADING_CENTER_RECORD = "trading/center/intrust";
+
+    /**
+     * 删除银行卡接口
+     */
+    public static final String API_BANK_DELETE = "member/bank/del";
+
+    /**
+     * 消费明细
+     */
+    public static final String API_CONSUMER_DETAILS = "member/expensesrecord/list";
+
+    /**
+     * 提现说明
+     */
+    public static final String API_WITHDRAW_INTRO = "member/withdraw/explain";
+
+    /**
+     * 提现
+     */
+    public static final String API_WITHDRAW = "member/withdraw";
+    /**
+     * 提现列表
+     */
+    public static final String API_WITHDRAW_LIST = "member/withdraw/list";
+    /**
+     * 提现详情
+     */
+    public static final String API_WITHDRAW_INFO = "member/withdraw/info";
 }

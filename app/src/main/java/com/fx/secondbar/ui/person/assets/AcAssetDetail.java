@@ -11,6 +11,7 @@ import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.ConsumerBean;
 import com.fx.secondbar.bean.RechargeRecordBean;
 import com.fx.secondbar.http.HttpManager;
 
@@ -79,7 +80,7 @@ public class AcAssetDetail extends ActivitySupport implements SwipeRefreshLayout
      */
     private void getData(final int page)
     {
-        HttpManager.getRechargeRecord(page, PAGE_NUM, new Subscriber<List<RechargeRecordBean>>()
+        HttpManager.getConsumerDetail(page, PAGE_NUM, new Subscriber<List<ConsumerBean>>()
         {
             @Override
             public void onCompleted()
@@ -103,7 +104,7 @@ public class AcAssetDetail extends ActivitySupport implements SwipeRefreshLayout
             }
 
             @Override
-            public void onNext(List<RechargeRecordBean> rechargeRecordBeans)
+            public void onNext(List<ConsumerBean> list)
             {
                 if (isDestroy())
                 {
@@ -116,12 +117,12 @@ public class AcAssetDetail extends ActivitySupport implements SwipeRefreshLayout
                 }
                 if (PAGE_START == page)
                 {
-                    adapter.setNewData(rechargeRecordBeans);
+                    adapter.setNewData(list);
                 } else
                 {
-                    adapter.addData(rechargeRecordBeans);
+                    adapter.addData(list);
                 }
-                if (VerificationUtil.getSize(rechargeRecordBeans) >= PAGE_NUM)
+                if (VerificationUtil.getSize(list) >= PAGE_NUM)
                 {
                     adapter.loadMoreComplete();
                 } else

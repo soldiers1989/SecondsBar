@@ -5,7 +5,9 @@ import com.btten.bttenlibrary.http.HttpGetData;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.BankBean;
+import com.fx.secondbar.bean.CommissionBean;
 import com.fx.secondbar.bean.CommodityBean;
+import com.fx.secondbar.bean.ConsumerBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.LevelBean;
@@ -23,6 +25,7 @@ import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBBean;
+import com.fx.secondbar.bean.WithdrawIntroBean;
 import com.fx.secondbar.http.exception.ApiException;
 import com.fx.secondbar.http.service.IService;
 import com.google.gson.JsonSyntaxException;
@@ -532,6 +535,67 @@ public class HttpManager
     public static void getRechargeRecord(int page, int pageSize, Subscriber<List<RechargeRecordBean>> subscriber)
     {
         Observable<List<RechargeRecordBean>> observable = getInstance().mService.getRechargeRecord(page, pageSize).map(new HttpResultFun<List<RechargeRecordBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取交易中心委托列表
+     *
+     * @param page       页码
+     * @param pageSize   页数据大小
+     * @param type       类型，1表示当前委托；2表示历史委托
+     * @param subscriber
+     */
+    public static void getTradingCommission(int page, int pageSize, String type, Subscriber<List<CommissionBean>> subscriber)
+    {
+        Observable<List<CommissionBean>> observable = getInstance().mService.getTradingCommission(page, pageSize, type).map(new HttpResultFun<List<CommissionBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 删除银行卡
+     *
+     * @param bankId     银行卡id
+     * @param subscriber
+     */
+    public static void deleteBank(String bankId, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.deleteBank(bankId).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取消费明细列表
+     *
+     * @param page
+     * @param pageSize
+     * @param subscriber
+     */
+    public static void getConsumerDetail(int page, int pageSize, Subscriber<List<ConsumerBean>> subscriber)
+    {
+        Observable<List<ConsumerBean>> observable = getInstance().mService.getConsumerDetail(page, pageSize, "0").map(new HttpResultFun<List<ConsumerBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取提现说明
+     */
+    public static void getWithdrawIntro(Subscriber<WithdrawIntroBean> subscriber)
+    {
+        Observable<WithdrawIntroBean> observable = getInstance().mService.getWithdrawIntro().map(new HttpResultFun<WithdrawIntroBean>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 提现
+     *
+     * @param amount     提现数量
+     * @param bankNo     银行卡号
+     * @param subscriber
+     */
+    public static void withdraw(String amount, String bankNo, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.withdraw(amount, bankNo).map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

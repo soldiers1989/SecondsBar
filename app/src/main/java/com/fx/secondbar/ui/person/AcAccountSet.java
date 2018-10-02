@@ -323,6 +323,7 @@ public class AcAccountSet extends ActivitySupport
                 jump(AcSetNickName.class, bundleNickName, REQUEST_CODE_SET_NICKNAME);
                 break;
             case R.id.tv_level:
+                jump(AcLevelList.class);
                 break;
             case R.id.tv_phone:
                 if (TextUtils.isEmpty(FxApplication.getInstance().getUserInfoBean().getAccount()))
