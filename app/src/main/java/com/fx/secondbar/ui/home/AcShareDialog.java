@@ -3,6 +3,7 @@ package com.fx.secondbar.ui.home;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.constraint.ConstraintLayout;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.DateUtils;
+import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.LogUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
@@ -24,6 +26,7 @@ import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideLoad;
 import com.fx.secondbar.util.ShareUtils;
 import com.joooonho.SelectableRoundedImageView;
+import com.king.zxing.util.CodeUtils;
 import com.sina.weibo.sdk.WbSdk;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
 import com.sina.weibo.sdk.share.WbShareCallback;
@@ -67,9 +70,13 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
      */
     public static final int TYPE_POSTER_GOODS = 3;
     /**
+     * 当前分享类型-图片海报，邀请海报
+     */
+    public static final int TYPE_POSTER_INVITE = 4;
+    /**
      * 当前分享类型-文本
      */
-    public static final int TYPE_TEXT = 4;
+    public static final int TYPE_TEXT = 5;
 
     /**
      * 类型的key值
@@ -110,11 +117,15 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
     private TextView tv_commodity_price;    //商品价格
     private TextView tv_timelength;         //商品时长
     private TextView tv_place;              //商品地点
+    private ImageView img_code;             //二维码
 
     private ConstraintLayout cl_purchase;
     private SelectableRoundedImageView img_avatar;  //名人头像
     private TextView tv_person_name;        //名人姓名
     private TextView tv_person_price;       //名人价格
+
+    private ConstraintLayout cl_poster_share;
+    private ImageView img_poster_share_code;    //二维码
 
 
     @Override
@@ -133,6 +144,7 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
         tv_time = findView(R.id.tv_time);
         tv_content = findView(R.id.tv_content);
         ll_content = findView(R.id.ll_content);
+        img_code = findView(R.id.img_code);
 
         cl_commodity = findView(R.id.cl_commodity);
         img_commodity = findView(R.id.img_commodity);
@@ -146,15 +158,22 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
         tv_person_name = findView(R.id.tv_person_name);
         tv_person_price = findView(R.id.tv_person_price);
 
-        ll_content.setDrawingCacheEnabled(true);
-        ll_content.buildDrawingCache();
+        cl_poster_share = findView(R.id.cl_poster_share);
+        img_poster_share_code = findView(R.id.img_poster_share_code);
 
         View.OnClickListener onClickListener = new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Bitmap bitmap = ll_content.getDrawingCache();
+                Bitmap bitmap = null;
+                if (TYPE_POSTER_INVITE == type)
+                {
+                    bitmap = cl_poster_share.getDrawingCache();
+                } else
+                {
+                    bitmap = ll_content.getDrawingCache();
+                }
                 String path = saveBitmapToFile(bitmap);
                 if (R.id.img_qq == v.getId())
                 {
@@ -196,40 +215,57 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
         wbShareHandler = new WbShareHandler(this);
         wbShareHandler.registerApp();
 
-        tv_time.setText(DateUtils.DateToStr(new Date(), "yyyy-MM-dd HH:mm"));
 
         //分享类型
         type = getIntent().getIntExtra(KEY_TYPE, TYPE_POSTER_CONTENT);
         String content = getIntent().getStringExtra(KEY_CONTENT);
-        if (TYPE_POSTER_CONTENT == type)
+        if (TYPE_POSTER_INVITE != type)
         {
-            tv_content.setVisibility(View.VISIBLE);
-            tv_content.setText(Html.fromHtml(VerificationUtil.verifyDefault(content, "")));
-        } else if (TYPE_POSTER_GOODS == type)
-        {
-            cl_commodity.setVisibility(View.VISIBLE);
-            String[] values = content.split("==");
-            //索引顺序分别为：标题、时长、地点和价格
-            if (values != null && values.length == 4)
+            img_code.setImageBitmap(CodeUtils.createQRCode(String.format(Constants.URL_SHARE, FxApplication.getInstance().getUserInfoBean().getDeviceid()), DensityUtil.dip2px(this, 120), BitmapFactory.decodeResource(getResources(), R.mipmap.icons)));
+            tv_time.setText(DateUtils.DateToStr(new Date(), "yyyy-MM-dd HH:mm"));
+
+            ll_content.setVisibility(View.VISIBLE);
+            ll_content.setDrawingCacheEnabled(true);
+            ll_content.buildDrawingCache();
+
+            if (TYPE_POSTER_CONTENT == type)
             {
-                VerificationUtil.setViewValue(tv_commodity_title, values[0]);
-                VerificationUtil.setViewValue(tv_timelength, values[1]);
-                VerificationUtil.setViewValue(tv_place, values[2]);
-                VerificationUtil.setViewValue(tv_commodity_price, values[3]);
-            }
-            GlideLoad.load(img_commodity, getIntent().getStringExtra(KEY_IMG));
-        } else if (TYPE_POST_PURCHASE == type)
-        {
-            cl_purchase.setVisibility(View.VISIBLE);
-            String[] values = content.split("==");
-            //索引顺序分别为：姓名和价格
-            if (values != null && values.length == 2)
+                tv_content.setVisibility(View.VISIBLE);
+                tv_content.setText(Html.fromHtml(VerificationUtil.verifyDefault(content, "")));
+            } else if (TYPE_POSTER_GOODS == type)
             {
-                VerificationUtil.setViewValue(tv_person_name, values[0]);
-                VerificationUtil.setViewValue(tv_person_price, values[1]);
+                cl_commodity.setVisibility(View.VISIBLE);
+                String[] values = content.split("==");
+                //索引顺序分别为：标题、时长、地点和价格
+                if (values != null && values.length == 4)
+                {
+                    VerificationUtil.setViewValue(tv_commodity_title, values[0]);
+                    VerificationUtil.setViewValue(tv_timelength, values[1]);
+                    VerificationUtil.setViewValue(tv_place, values[2]);
+                    VerificationUtil.setViewValue(tv_commodity_price, values[3]);
+                }
+                GlideLoad.load(img_commodity, getIntent().getStringExtra(KEY_IMG));
+            } else if (TYPE_POST_PURCHASE == type)
+            {
+                cl_purchase.setVisibility(View.VISIBLE);
+                String[] values = content.split("==");
+                //索引顺序分别为：姓名和价格
+                if (values != null && values.length == 2)
+                {
+                    VerificationUtil.setViewValue(tv_person_name, values[0]);
+                    VerificationUtil.setViewValue(tv_person_price, values[1]);
+                }
+                GlideLoad.load(img_avatar, getIntent().getStringExtra(KEY_IMG), true);
             }
-            GlideLoad.load(img_avatar, getIntent().getStringExtra(KEY_IMG), true);
+        } else
+        {
+            ll_content.setVisibility(View.GONE);
+            cl_poster_share.setVisibility(View.VISIBLE);
+            cl_poster_share.setDrawingCacheEnabled(true);
+            cl_poster_share.buildDrawingCache();
+            img_poster_share_code.setImageBitmap(CodeUtils.createQRCode(String.format(Constants.URL_SHARE, FxApplication.getInstance().getUserInfoBean().getDeviceid()), DensityUtil.dip2px(this, 100), BitmapFactory.decodeResource(getResources(), R.mipmap.icons)));
         }
+
     }
 
     @Override

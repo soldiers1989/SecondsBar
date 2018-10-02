@@ -52,9 +52,10 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
     {
         if (convenientBanner != null)
         {
-//            if (!convenientBanner.isTurning()) {
-//                convenientBanner.startTurning();
-//            }
+            if (!convenientBanner.isTurning())
+            {
+                convenientBanner.startTurning(2000);
+            }
         }
         if (!VerificationUtil.noEmpty(adapter.getData()))
         {
@@ -89,57 +90,15 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
         adapter = new AdTime();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         adapter.bindToRecyclerView(recyclerView);
+        if (convenientBanner != null)
+        {
+            if (!convenientBanner.isTurning())
+            {
+                convenientBanner.startTurning(2000);
+            }
+        }
     }
 
-//    /**
-//     * 获取数据
-//     *
-//     * @return
-//     */
-//    private List<AdTime.TimeEntity> getDatas()
-//    {
-//        List<AdTime.TimeEntity> list = new ArrayList<>();
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_TITLE, "交易动态"));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_DYNAMIC, new DynamicBean(R.mipmap.test_dynamic_1, "了不起的盖茨比购买了 下午茶", "45分钟前")));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_DYNAMIC, new DynamicBean(R.mipmap.test_dynamic_2, "郭大侠购买了 粉丝见面会", "48分钟前")));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_DYNAMIC, new DynamicBean(R.mipmap.test_dynamic_3, "Tommy购买了 区块链", "1小时前")));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_TITLE, "名人申购"));
-//        List<PersonBean> personBeans = new ArrayList<>();
-//        personBeans.add(new PersonBean(R.mipmap.test_person_item1, "0.60STE/秒", "雷晓军"));
-//        personBeans.add(new PersonBean(R.mipmap.test_person_item2, "1.26STE/秒", "于大宝"));
-//        personBeans.add(new PersonBean(R.mipmap.test_person_item3, "0.86STE/秒", "劳伦斯"));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_PERSON, personBeans));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_TITLE, "名人商品"));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_COMMODITY, new CommodityBean(R.mipmap.test_time_commodity_1, "周杰伦 粉丝见面演唱会", "3600.00STE", "时长：120分钟", "地点：深圳")));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_COMMODITY, new CommodityBean(R.mipmap.test_time_commodity_2, "黄晓明 区块链的投资和投机", "980.00STE", "时长：90分钟", "地点：等待客服通知")));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_COMMODITY, new CommodityBean(R.mipmap.test_time_commodity_3, "李宝亮 比特币交易演讲", "28600.00STE", "时长：180分钟", "地点：香港")));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_TITLE, "名人资讯"));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_SINGLE_IMG, new InfomationBean(getImgList(R.mipmap.test_infomation_single_1), "中非合作论坛峰会开幕式宣传片《同心共筑  命运与共》", "央视新闻移动网", "128评")));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_MULTI_IMG, new InfomationBean(getImgList(R.mipmap.test_information_multi_1_1, R.mipmap.test_information_multi_1_2, R.mipmap.test_information_multi_1_3), "分别总是在九月，回忆是思念的愁。青春无悔！这是你见过的最美退伍写真", "新浪网", "66评")));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_SINGLE_IMG, new InfomationBean(getImgList(R.mipmap.test_infomation_single_3), "文在寅会前称赞金正恩：大胆又决断开启新时代即将来临", "央视新闻移动网", "128评")));
-//        list.add(new AdTime.TimeEntity(AdTime.TimeEntity.TYPE_MULTI_IMG, new InfomationBean(getImgList(R.mipmap.test_information_multi_2_1, R.mipmap.test_information_multi_2_2, R.mipmap.test_information_multi_2_3), "武汉今年年底再开通七号线和十一号线，市政府计划明年完成地铁规划新布局", "央视新闻移动网", "128评")));
-//
-//        return list;
-//    }
-
-//    private List<Integer> getImgList(Integer... imgs)
-//    {
-//        return Arrays.asList(imgs);
-//    }
-
-//    /**
-//     * 获取图片链接
-//     *
-//     * @return
-//     */
-//    private List<Integer> getBanners()
-//    {
-//        List<Integer> list = new ArrayList<>();
-//        list.add(R.mipmap.test_banner_1);
-//        list.add(R.mipmap.test_bannner_2);
-//        list.add(R.mipmap.test_banner_3);
-//        return list;
-//    }
 
     /**
      * 获取数据
@@ -277,6 +236,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
                 return R.layout.layout_banner;
             }
         }, bannerBeans).setPageIndicator(new int[]{R.mipmap.ic_indicator, R.mipmap.ic_indicator_sel});
+        convenientBanner.startTurning(2000);
         return view;
     }
 
@@ -286,9 +246,29 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
         super.onResume();
         if (!isHidden())
         {
-//            if (convenientBanner != null) {
-//                convenientBanner.startTurning();
-//            }
+            if (convenientBanner != null)
+            {
+                if (!convenientBanner.isTurning())
+                {
+                    convenientBanner.startTurning(2000);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden)
+    {
+        super.onHiddenChanged(hidden);
+        if (isHidden())
+        {
+            if (convenientBanner != null)
+            {
+                if (convenientBanner.isTurning())
+                {
+                    convenientBanner.stopTurning();
+                }
+            }
         }
     }
 
@@ -296,9 +276,13 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
     public void onPause()
     {
         super.onPause();
-//        if (convenientBanner != null) {
-//            convenientBanner.stopTurning();
-//        }
+        if (convenientBanner != null)
+        {
+            if (convenientBanner.isTurning())
+            {
+                convenientBanner.stopTurning();
+            }
+        }
     }
 
     @Override

@@ -21,6 +21,7 @@ import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
 import com.fx.secondbar.bean.SigninBean;
+import com.fx.secondbar.bean.TodayIncomeBean;
 import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
@@ -596,6 +597,17 @@ public class HttpManager
     public static void withdraw(String amount, String bankNo, Subscriber<ResponseBean> subscriber)
     {
         Observable<ResponseBean> observable = getInstance().mService.withdraw(amount, bankNo).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取今日阅读收益说明
+     *
+     * @param subscriber
+     */
+    public static void getTodayReadIncome(Subscriber<TodayIncomeBean> subscriber)
+    {
+        Observable<TodayIncomeBean> observable = getInstance().mService.getDayIncomeIntro("4").map(new HttpResultFun<TodayIncomeBean>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

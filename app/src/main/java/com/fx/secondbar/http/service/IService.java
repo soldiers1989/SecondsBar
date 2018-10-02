@@ -20,6 +20,7 @@ import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
 import com.fx.secondbar.bean.SigninBean;
+import com.fx.secondbar.bean.TodayIncomeBean;
 import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
@@ -444,5 +445,13 @@ public interface IService
     @POST(Constants.API_WITHDRAW)
     Observable<ResponseBean> withdraw(@Query("amount") String amount, @Query("bankno") String bankno);
 
+    /**
+     * 获取今日阅读收益说明
+     *
+     * @param type 4表示阅读收益
+     * @return
+     */
+    @GET(Constants.API_TODAY_INCOME)
+    Observable<ResponseBean<TodayIncomeBean>> getDayIncomeIntro(@Query("type") String type);
 
 }

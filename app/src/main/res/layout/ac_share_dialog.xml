@@ -350,12 +350,37 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/img_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_share_bottom_logo"
                 app:layout_constraintBottom_toBottomOf="@+id/ll_content"
                 app:layout_constraintEnd_toEndOf="@+id/ll_content"/>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/cl_poster_share"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/img_poster_share"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_poster_share"/>
+
+                <ImageView
+                    android:id="@+id/img_poster_share_code"
+                    android:layout_width="100dip"
+                    android:layout_height="100dip"
+                    android:layout_marginRight="6dip"
+                    android:layout_marginBottom="6dip"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_poster_share"
+                    app:layout_constraintEnd_toEndOf="@+id/img_poster_share"/>
+            </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
 
 

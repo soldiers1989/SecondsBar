@@ -14,6 +14,7 @@ public class UserInfoBean implements Serializable, Cloneable
     private String img;// 头像地址
     private String actualname;// 名字
     private Integer level;// 等级
+    private String levelname;   //等级名称
     private Double balance;// 余额
     private String deviceid;// 设备号
     private String account;// 用户账号
@@ -185,6 +186,16 @@ public class UserInfoBean implements Serializable, Cloneable
     public void setTodayqcoin(Double todayqcoin)
     {
         this.todayqcoin = todayqcoin;
+    }
+
+    public String getLevelname()
+    {
+        return levelname;
+    }
+
+    public void setLevelname(String levelname)
+    {
+        this.levelname = levelname;
     }
 
     @Override

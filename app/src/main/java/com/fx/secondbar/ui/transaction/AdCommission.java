@@ -1,6 +1,7 @@
 package com.fx.secondbar.ui.transaction;
 
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,6 +39,12 @@ public class AdCommission extends BaseQuickAdapter<CommissionBean, BaseViewHolde
 
         calSize(tv_name, tv_seconds, tv_price, tv_status);
 
+        String name = item.getPeoplename();
+        if (!TextUtils.isEmpty(item.getZjm()))
+        {
+            name += "(" + item.getZjm() + ")";
+        }
+        VerificationUtil.setViewValue(tv_name, name);
         VerificationUtil.setViewValue(tv_price, item.getPrice());
         VerificationUtil.setViewValue(tv_seconds, item.getSecond());
         VerificationUtil.setViewValue(tv_status, item.getTypename());

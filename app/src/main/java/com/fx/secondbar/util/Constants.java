@@ -23,6 +23,11 @@ public class Constants
     public static final String URL_INFORMATION = ROOT_URL + "/static/mb-front/news.html?id=%s&deviceid=%s";
 
     /**
+     * 分享链接
+     */
+    public static final String URL_SHARE = ROOT_URL + "/static/mb-front/getAward.html?id=%s";
+
+    /**
      * 更新用户数据
      */
     public static final String ACTION_REFRESH_USERINFO = "action_refresh_userinfo";
@@ -227,4 +232,9 @@ public class Constants
      * 提现详情
      */
     public static final String API_WITHDRAW_INFO = "member/withdraw/info";
+
+    /**
+     * 每日Q币收益记录
+     */
+    public static final String API_TODAY_INCOME = "member/qcoin/total";
 }

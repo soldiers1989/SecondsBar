@@ -36,6 +36,7 @@
             android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 
         <LinearLayout
+            android:id="@+id/ll_today"
             android:layout_width="60dip"
             android:layout_height="60dip"
             android:layout_gravity="bottom|left"
@@ -45,14 +46,17 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_today_q"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="16sp"
+                android:autoSizeTextType="uniform"
                 android:singleLine="true"
                 android:text=""
                 android:textColor="@android:color/white"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                app:autoSizeMinTextSize="13sp"/>
 
             <TextView
                 android:layout_width="wrap_content"

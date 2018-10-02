@@ -69,6 +69,13 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
             swipeRefreshLayout.setRefreshing(true);
             onRefresh();
         }
+        if (convenientBanner != null)
+        {
+            if (!convenientBanner.isTurning())
+            {
+                convenientBanner.startTurning(2000);
+            }
+        }
     }
 
     @Nullable
@@ -132,6 +139,58 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
             swipeRefreshLayout.setRefreshing(true);
             onRefresh();
         }
+        if (convenientBanner != null)
+        {
+            if (!convenientBanner.isTurning())
+            {
+                convenientBanner.startTurning(2000);
+            }
+        }
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if (!isHidden())
+        {
+            if (convenientBanner != null)
+            {
+                if (!convenientBanner.isTurning())
+                {
+                    convenientBanner.startTurning(2000);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden)
+    {
+        super.onHiddenChanged(hidden);
+        if (isHidden())
+        {
+            if (convenientBanner != null)
+            {
+                if (convenientBanner.isTurning())
+                {
+                    convenientBanner.stopTurning();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        if (convenientBanner != null)
+        {
+            if (convenientBanner.isTurning())
+            {
+                convenientBanner.stopTurning();
+            }
+        }
     }
 
     /**
@@ -161,6 +220,7 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
                 return R.layout.layout_banner;
             }
         }, bannerBeans).setPageIndicator(new int[]{R.mipmap.ic_indicator, R.mipmap.ic_indicator_sel});
+        convenientBanner.startTurning(2000);
         return view;
     }
 

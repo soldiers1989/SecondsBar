@@ -130,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="购买总价"
+            android:text="转让总价"
             android:textColor="#a5a6aa"
             android:textSize="15sp"/>
 

@@ -110,6 +110,17 @@ public class FragmentHome extends FragmentSupport
         });
     }
 
+    /**
+     * 显示微博的界面
+     */
+    public void showWb()
+    {
+        if (viewPager != null)
+        {
+            viewPager.setCurrentItem(2);
+        }
+    }
+
     @Override
     public void onClick(View v)
     {

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#313842"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/mall_tool_pl"
+                android:text="邀请好友"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dip">
+
+            <ImageView
+                android:id="@+id/img_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_invite_top"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_generate_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="30dip"
+                android:text="生成海报：生成带有我分享二维码海报"
+                android:textColor="#c0c0c0"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_top"/>
+
+            <TextView
+                android:id="@+id/tv_generate_url_tips"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="20dip"
+                android:layout_marginRight="6dip"
+                android:text="@string/invite_generate_url"
+                android:textColor="#c0c0c0"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_copy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_generate_tips"/>
+
+            <TextView
+                android:id="@+id/tv_generate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dip"
+                android:text="点击生成"
+                android:textColor="@color/font_yellow_color"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_generate_tips"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_copy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dip"
+                android:text="复制链接"
+                android:textColor="@color/font_yellow_color"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_generate_url_tips"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_invite_record_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="48dip"
+                android:text="邀请记录"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_copy"
+                />
+
+            <TextView
+                android:id="@+id/tv_total_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dip"
+                android:text="邀请总人数："
+                android:textColor="#a1a1a1"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_invite_record_tips"
+                app:layout_constraintTop_toBottomOf="@+id/tv_invite_record_tips"/>
+
+            <TextView
+                android:id="@+id/tv_total_get"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dip"
+                android:text="累计获得：0Q价值积分"
+                android:textColor="#a1a1a1"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_invite_record_tips"
+                app:layout_constraintTop_toBottomOf="@+id/tv_total_person"/>
+
+            <TextView
+                android:id="@+id/tv_invite_rule_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="80dip"
+                android:text="邀请规则"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_invite_record_tips"
+                />
+
+            <TextView
+                android:id="@+id/tv_rule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="20dip"
+                android:layout_marginRight="20dip"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@string/invite_friends_rule_text"
+                android:textColor="#a1a1a1"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_invite_rule_tips"/>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

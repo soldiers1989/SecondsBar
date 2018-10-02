@@ -147,7 +147,7 @@ public class TransactionBean
 
     public Double getHaveseconds()
     {
-        return haveseconds;
+        return haveseconds == null ? 0 : haveseconds;
     }
 
     public void setHaveseconds(Double haveseconds)

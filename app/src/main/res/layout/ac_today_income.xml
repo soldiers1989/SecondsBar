@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/mall_tool_pl"
+                android:text="收益说明"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tv_today_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dip"
+        android:layout_marginTop="44dip"
+        android:text="今日收益"
+        android:textColor="#2C2C2C"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+
+    <TextView
+        android:id="@+id/tv_today_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dip"
+        android:text="阅读时长"
+        android:textColor="#2c2c2c"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_today_tips"
+        app:layout_constraintTop_toBottomOf="@+id/tv_today_tips"/>
+
+
+    <TextView
+        android:id="@+id/tv_yesterday_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dip"
+        android:layout_marginTop="55dip"
+        android:text="昨日收益"
+        android:textColor="#2C2C2C"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_today_tips"/>
+
+    <TextView
+        android:id="@+id/tv_yesterday_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dip"
+        android:text="阅读时长"
+        android:textColor="#2c2c2c"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_yesterday_tips"
+        app:layout_constraintTop_toBottomOf="@+id/tv_yesterday_tips"/>
+
+    <TextView
+        android:id="@+id/tv_read_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dip"
+        android:text="新闻赚收益说明"
+        android:textColor="#2c2c2c"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_today_tips"
+        app:layout_constraintTop_toBottomOf="@+id/tv_yesterday_tips"/>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dip"
+        android:layout_marginTop="16dip"
+        android:layout_marginRight="26dip"
+        android:textColor="#7D7D7D"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_read_tips"/>
+</android.support.constraint.ConstraintLayout>

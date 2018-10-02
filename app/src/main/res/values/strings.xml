@@ -118,4 +118,8 @@
     <string name="recharge_pay_tips">%s%s元</string>
 
     <string name="withdraw_fees_tips">%1$sSTE=1人民币 手续费：%2$sSTE；转账费率%3$s%%</string>
+
+    <string name="invite_friends_rule_text">1.将你的专属二维码、链接分享至社交网络;\n2.邀请好友通过你的二维码、链接下载激活秒吧APP;\n3.好友在秒吧绑定手机号后，即可立即获得Q奖励。</string>
+    <string name="invite_generate_url">生成链接：%s</string>
+    <string name="invite_total_get_q">累计获得：<font color='#ffb528'>%s</font>>Q价值积分</string>
 </resources>

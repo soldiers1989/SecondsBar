@@ -359,6 +359,16 @@ public class MainActivity extends ActivitySupport
         switchItem(tv_home);
     }
 
+    /**
+     * 跳转至首页互动列表
+     */
+    public void jumpToHomeWb()
+    {
+        switchItem(tv_home);
+        FragmentHome fragment = (FragmentHome) fragments[INDEX_HOME];
+        fragment.showWb();
+    }
+
 
     @Override
     public void onClick(View v)

@@ -23,6 +23,9 @@ public class CommissionBean
     private String ispart;//
     private String typename;//买入,
     private String transaction_ID;//交易id
+    private String peoplename;  //名人姓名
+    private String zjm;         //名人助记码
+    private String peopleimg;   //名人头像
 
     public String getStatus()
     {
@@ -182,5 +185,35 @@ public class CommissionBean
     public void setTransaction_ID(String transaction_ID)
     {
         this.transaction_ID = transaction_ID;
+    }
+
+    public String getPeoplename()
+    {
+        return peoplename;
+    }
+
+    public void setPeoplename(String peoplename)
+    {
+        this.peoplename = peoplename;
+    }
+
+    public String getZjm()
+    {
+        return zjm;
+    }
+
+    public void setZjm(String zjm)
+    {
+        this.zjm = zjm;
+    }
+
+    public String getPeopleimg()
+    {
+        return peopleimg;
+    }
+
+    public void setPeopleimg(String peopleimg)
+    {
+        this.peopleimg = peopleimg;
     }
 }

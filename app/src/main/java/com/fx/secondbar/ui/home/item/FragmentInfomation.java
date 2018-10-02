@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.util.LogUtil;
@@ -20,6 +21,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.CategoryBean;
+import com.fx.secondbar.ui.home.AcTodayIncome;
 import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
 import com.fx.secondbar.util.Constants;
 
@@ -38,6 +40,7 @@ public class FragmentInfomation extends FragmentViewPagerBase
     private ViewPager viewPager;
     private AdHomeItem adapter;
     private TextView tv_today_q;
+    private LinearLayout ll_today;
 
     @Override
     public void onStarShow()
@@ -59,12 +62,20 @@ public class FragmentInfomation extends FragmentViewPagerBase
         tabs = findView(R.id.tabs);
         viewPager = findView(R.id.viewPager);
         tv_today_q = findView(R.id.tv_today_q);
+        ll_today = findView(R.id.ll_today);
     }
 
     @Override
     protected void initListener()
     {
-
+        ll_today.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                jump(AcTodayIncome.class);
+            }
+        });
     }
 
     @Override

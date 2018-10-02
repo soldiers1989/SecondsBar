@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/home_wb_ptb"
     android:paddingLeft="@dimen/home_wb_plr"
+    android:paddingTop="@dimen/home_wb_ptb"
     android:paddingRight="@dimen/home_wb_plr"
-    android:paddingTop="@dimen/home_wb_ptb">
+    android:paddingBottom="@dimen/home_wb_ptb">
 
     <com.joooonho.SelectableRoundedImageView
         android:id="@+id/img"
@@ -24,9 +24,8 @@
         android:layout_width="@dimen/home_wb_share_size"
         android:layout_height="@dimen/home_wb_share_size"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:scaleType="centerCrop"
+        android:scaleType="center"
         android:src="@mipmap/ic_share"
-        app:layout_constraintBottom_toBottomOf="@id/tv_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_name"/>
 
@@ -61,8 +60,8 @@
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/home_wb_content_ptb"
         android:paddingTop="@dimen/home_wb_content_ptb"
+        android:paddingBottom="@dimen/home_wb_content_ptb"
         android:text="半年损失27亿美元 区块链成了30万黑客的提款机？《2018上半年区块链安全报告》显示，分别为12.5亿、14.2亿和0.56亿美元，共计高达27亿美元。"
         android:textColor="@color/home_wb_content"
         android:textSize="@dimen/home_wb_content"

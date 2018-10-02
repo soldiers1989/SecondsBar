@@ -1,6 +1,7 @@
 package com.fx.secondbar.ui.purchase;
 
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -71,6 +72,12 @@ public class AcPurchaseOrderDetail extends ActivitySupport
         if (myPurchaseBean != null)
         {
             String price = myPurchaseBean.getPrice();
+            String name = myPurchaseBean.getPeoplename();
+            if (!TextUtils.isEmpty(myPurchaseBean.getZjm()))
+            {
+                name += "(" + myPurchaseBean.getZjm() + ")";
+            }
+            VerificationUtil.setViewValue(tv_person_name, String.format(getString(R.string.order_detail_person_name), name));
             VerificationUtil.setViewValue(tv_mondy, String.format(getString(R.string.order_detail_order_money), VerificationUtil.verifyDefault(price, "0")));
             VerificationUtil.setViewValue(tv_seconds, String.format(getString(R.string.order_detail_order_seconds), VerificationUtil.verifyDefault(myPurchaseBean.getAmount(), "0")));
             VerificationUtil.setViewValue(tv_pay_price, String.format(getString(R.string.order_detail_order_pay_price), VerificationUtil.verifyDefault(myPurchaseBean.getTotalmoney(), "0")));

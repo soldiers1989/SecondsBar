@@ -133,7 +133,7 @@
     <dimen name="home_wb_plr">15dip</dimen>
     <dimen name="home_wb_ptb">10dip</dimen>
     <dimen name="home_wb_avatar">40dip</dimen>
-    <dimen name="home_wb_share_size">16dip</dimen>
+    <dimen name="home_wb_share_size">20dip</dimen>
     <dimen name="home_wb_person_name">15sp</dimen>
     <dimen name="home_wb_person_name_mlr">12dip</dimen>
     <dimen name="home_wb_person_time">12sp</dimen>

@@ -37,6 +37,7 @@ import com.fx.secondbar.ui.home.adapter.AdPerson;
 import com.fx.secondbar.ui.order.AcOrderManage;
 import com.fx.secondbar.ui.person.AcAccountSet;
 import com.fx.secondbar.ui.person.AcBindPhone;
+import com.fx.secondbar.ui.person.AcInviteFriends;
 import com.fx.secondbar.ui.person.assets.AcAssets;
 import com.fx.secondbar.ui.person.assets.AcIncomeRecord;
 import com.fx.secondbar.ui.purchase.AcMyPurchase;
@@ -131,11 +132,11 @@ public class FragmentPerson extends FragmentSupport
                     new DialogSign(getContext()).show();
                 } else if (String.valueOf(ActiveBean.TYPE_INVITE).equals(bean.getType()))
                 {//邀请好友
-
+                    jump(AcInviteFriends.class);
                 } else if (String.valueOf(ActiveBean.TYPE_SHARE).equals(bean.getType()))
                 {//分享
                     //跳转至首页
-                    ((MainActivity) getActivity()).jumpToHome();
+                    ((MainActivity) getActivity()).jumpToHomeWb();
                 } else if (String.valueOf(ActiveBean.TYPE_BROWE).equals(bean.getType()))
                 {//看新闻
                     //跳转至首页
@@ -203,7 +204,7 @@ public class FragmentPerson extends FragmentSupport
         VerificationUtil.setViewValue(tv_ste_value, FxApplication.getInstance().getUserInfoBean().getAmt().toString());
         VerificationUtil.setViewValue(tv_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
         VerificationUtil.setViewValue(tv_today_q_value, FxApplication.getInstance().getUserInfoBean().getTodayqcoin().toString());
-        VerificationUtil.setViewValue(tv_level, "LV" + FxApplication.getInstance().getUserInfoBean().getLevel());
+        VerificationUtil.setViewValue(tv_level, "LV" + FxApplication.getInstance().getUserInfoBean().getLevel() + " " + FxApplication.getInstance().getUserInfoBean().getLevelname());
         tv_level.setBackgroundResource(LevelUtils.getLevelIcons(FxApplication.getInstance().getUserInfoBean().getLevel()));
     }
 
