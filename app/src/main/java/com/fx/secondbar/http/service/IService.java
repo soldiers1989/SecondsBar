@@ -23,6 +23,7 @@ import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
 import com.fx.secondbar.bean.SigninBean;
 import com.fx.secondbar.bean.TodayIncomeBean;
+import com.fx.secondbar.bean.TradingBuyedBean;
 import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
@@ -480,4 +481,12 @@ public interface IService
      */
     @GET(Constants.API_INVITE_INFO)
     Observable<ResponseBean<InviteInfoBean>> getInviteInfo();
+
+    /**
+     * 获取交易中心已购数据
+     *
+     * @return
+     */
+    @GET(Constants.API_TRADING_BUYED)
+    Observable<ResponseBean<TradingBuyedBean>> getBuyed(@Query("page") int page, @Query("count") int pageSize);
 }

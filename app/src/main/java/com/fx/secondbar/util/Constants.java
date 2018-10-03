@@ -252,4 +252,9 @@ public class Constants
      * 邀请信息
      */
     public static final String API_INVITE_INFO = "member/invite/info";
+
+    /**
+     * 行情已购接口
+     */
+    public static final String API_TRADING_BUYED="trading/center/buyed";
 }

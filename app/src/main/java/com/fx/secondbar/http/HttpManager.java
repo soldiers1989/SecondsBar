@@ -24,6 +24,7 @@ import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
 import com.fx.secondbar.bean.SigninBean;
 import com.fx.secondbar.bean.TodayIncomeBean;
+import com.fx.secondbar.bean.TradingBuyedBean;
 import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
@@ -645,6 +646,19 @@ public class HttpManager
     public static void getInviteInfo(Subscriber<InviteInfoBean> subscriber)
     {
         Observable<InviteInfoBean> observable = getInstance().mService.getInviteInfo().map(new HttpResultFun<InviteInfoBean>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取已购数据
+     *
+     * @param page       页码
+     * @param pageSize   页数据大小
+     * @param subscriber
+     */
+    public static void getBuyed(int page, int pageSize, Subscriber<TradingBuyedBean> subscriber)
+    {
+        Observable<TradingBuyedBean> observable = getInstance().mService.getBuyed(page, pageSize).map(new HttpResultFun<TradingBuyedBean>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

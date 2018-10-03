@@ -1,22 +1,25 @@
 package com.fx.secondbar.ui.transaction;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.DisplayUtil;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.TradingBuyedBean;
 
 /**
  * function:已购列表适配器
  * author: frj
  * modify date: 2018/9/28
  */
-public class AdBuyed extends BaseQuickAdapter<String, BaseViewHolder>
+public class AdBuyed extends BaseQuickAdapter<TradingBuyedBean.EntityBean, BaseViewHolder>
 {
     public AdBuyed()
     {
@@ -24,7 +27,7 @@ public class AdBuyed extends BaseQuickAdapter<String, BaseViewHolder>
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item)
+    protected void convert(BaseViewHolder helper, TradingBuyedBean.EntityBean item)
     {
         TextView tv_name = helper.getView(R.id.tv_name);
         TextView tv_seconds = helper.getView(R.id.tv_seconds);
@@ -32,6 +35,35 @@ public class AdBuyed extends BaseQuickAdapter<String, BaseViewHolder>
         TextView tv_profit_loss = helper.getView(R.id.tv_profit_loss);
         View v_bottom = helper.getView(R.id.v_bottom);
         calSize(tv_name, tv_seconds, tv_price, tv_profit_loss);
+
+        String name = item.getName();
+        if (!TextUtils.isEmpty(item.getZjm()))
+        {
+            name += "(" + item.getZjm() + ")";
+        }
+        VerificationUtil.setViewValue(tv_name, name);
+
+        StringBuilder sbPrice = new StringBuilder();
+        sbPrice.append(VerificationUtil.verifyDefault(item.getNewprice(), "0"));
+        sbPrice.append("/");
+        sbPrice.append(VerificationUtil.verifyDefault(item.getPrice(), "0"));
+
+        VerificationUtil.setViewValue(tv_price, sbPrice.toString());
+
+        if (TextUtils.isEmpty(item.getSpreadprice()))
+        {
+            tv_profit_loss.setText("0");
+        } else
+        {
+            if (item.getSpreadprice().indexOf("-") == 0)
+            {
+                tv_profit_loss.setText(item.getSpreadprice());
+            } else
+            {
+                tv_profit_loss.setText("+" + item.getSpreadprice());
+            }
+        }
+
         if (helper.getLayoutPosition() == getData().size() - 1)
         {
             v_bottom.setVisibility(View.GONE);

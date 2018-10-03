@@ -103,8 +103,13 @@ public class AcInviteFriends extends ActivitySupport
                     return;
                 }
                 VerificationUtil.setViewValue(tv_total_person, "邀请总人数：" + VerificationUtil.verifyDefault(inviteInfoBean.getTotals(), "0"));
-                String getQTips = String.format(getString(R.string.invite_total_get_q), VerificationUtil.verifyDefault(inviteInfoBean.getQcointotal(), "0"));
-                tv_total_get.setText(Html.fromHtml(getQTips));
+
+                StringBuilder sb = new StringBuilder();
+                sb.append("累计获得：<font color='#ffb528'><big>");
+                sb.append(VerificationUtil.verifyDefault(inviteInfoBean.getQcointotal(), "0"));
+                sb.append("</big></font>Q价值积分");
+//                String getQTips = String.format(getString(R.string.invite_total_get_q), VerificationUtil.verifyDefault(inviteInfoBean.getQcointotal(), "0"));
+                tv_total_get.setText(Html.fromHtml(sb.toString()));
                 VerificationUtil.setViewValue(tv_rule, inviteInfoBean.getDescription());
             }
         });

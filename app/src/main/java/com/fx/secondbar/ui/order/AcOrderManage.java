@@ -59,6 +59,7 @@ public class AcOrderManage extends ActivitySupport
         adapter = new AdHomeItem(getSupportFragmentManager(), list, getResources().getStringArray(R.array.order_manage_tabs));
         viewPager.setAdapter(adapter);
         tabs.setViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(list.size());
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
             @Override

@@ -9,8 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.btten.bttenlibrary.util.VerificationUtil;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.TradingBuyedBean;
+import com.fx.secondbar.http.HttpManager;
+
+import rx.Subscriber;
 
 /**
  * function:已购
@@ -28,7 +35,10 @@ public class FragmentTransactionBuyed extends FragmentTransactionItem implements
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
+    private TextView tv_money;
+    private TextView tv_price;
     private AdBuyed adapter;
+    private int currPage = -1;
 
     @Nullable
     @Override
@@ -63,13 +73,21 @@ public class FragmentTransactionBuyed extends FragmentTransactionItem implements
         adapter = new AdBuyed();
         adapter.bindToRecyclerView(recyclerView);
         adapter.addHeaderView(createHeadView());
-        //是否将要刷新数据
-        if (isPrepareRefresh)
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
         {
-            swipeRefreshLayout.setRefreshing(true);
-            onRefresh();
-            isPrepareRefresh = false;
-        }
+            @Override
+            public void onLoadMoreRequested()
+            {
+                getData(currPage + 1);
+            }
+        }, recyclerView);
+        //是否将要刷新数据
+//        if (isPrepareRefresh)
+//        {
+        swipeRefreshLayout.setRefreshing(true);
+        onRefresh();
+        isPrepareRefresh = false;
+//        }
     }
 
     @Override
@@ -94,7 +112,6 @@ public class FragmentTransactionBuyed extends FragmentTransactionItem implements
             //是否将要刷新数据
             if (isPrepareRefresh)
             {
-//                swipeRefreshLayout.setRefreshing(true);
                 onRefresh();
                 isPrepareRefresh = false;
             }
@@ -109,12 +126,75 @@ public class FragmentTransactionBuyed extends FragmentTransactionItem implements
     private View createHeadView()
     {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_transaction_buyed_head, null);
+        tv_money = view.findViewById(R.id.tv_money);
+        tv_price = view.findViewById(R.id.tv_price);
         return view;
+    }
+
+    /**
+     * 获取已购数据
+     *
+     * @param page
+     */
+    private void getData(final int page)
+    {
+        HttpManager.getBuyed(page, PAGE_NUM, new Subscriber<TradingBuyedBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            }
+
+            @Override
+            public void onNext(TradingBuyedBean tradingBuyedBean)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                currPage = page;
+                VerificationUtil.setViewValue(tv_money, tradingBuyedBean.getBalance().toString());
+                VerificationUtil.setViewValue(tv_price, tradingBuyedBean.getMarketcapamount().toString());
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                if (PAGE_START == page)
+                {
+                    adapter.setNewData(tradingBuyedBean.getListTransactionInfo());
+                } else
+                {
+                    adapter.addData(tradingBuyedBean.getListTransactionInfo());
+                }
+                if (VerificationUtil.getSize(tradingBuyedBean.getListTransactionInfo()) > PAGE_NUM)
+                {
+                    adapter.loadMoreComplete();
+                } else
+                {
+                    adapter.loadMoreEnd();
+                }
+            }
+        });
     }
 
     @Override
     public void onRefresh()
     {
-
+        getData(PAGE_START);
     }
 }
