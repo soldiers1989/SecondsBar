@@ -9,6 +9,7 @@ import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.ConsumerBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
+import com.fx.secondbar.bean.InviteInfoBean;
 import com.fx.secondbar.bean.LevelBean;
 import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.OrderBean;
@@ -471,4 +472,12 @@ public interface IService
      */
     @GET(Constants.API_QCOIN_RANGE)
     Observable<ResponseBean<QCoinRangeBean>> getQcoinRank();
+
+    /**
+     * 获取邀请信息
+     *
+     * @return
+     */
+    @GET(Constants.API_INVITE_INFO)
+    Observable<ResponseBean<InviteInfoBean>> getInviteInfo();
 }

@@ -19,6 +19,7 @@ import com.btten.bttenlibrary.util.Arithmetic;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.WithdrawIntroBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.util.CashierInputFilter;
@@ -312,7 +313,9 @@ public class AcWithdraw extends ActivitySupport
                 {
                     dialog.dismiss();
                 }
+                FxApplication.refreshUserInfoBroadCast();
                 ShowToast.showToast("提现申请成功");
+                ed_input.setText("");
                 getIntro();
             }
         });

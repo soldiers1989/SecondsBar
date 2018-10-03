@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -14,8 +15,12 @@ import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.InviteInfoBean;
+import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.AcShareDialog;
 import com.fx.secondbar.util.Constants;
+
+import rx.Subscriber;
 
 /**
  * function:邀请好友
@@ -60,9 +65,49 @@ public class AcInviteFriends extends ActivitySupport
     @Override
     protected void initData()
     {
-        String url = String.format(Constants.URL_SHARE, FxApplication.getInstance().getUserInfoBean().getDeviceid());
+        String url = String.format(Constants.URL_SHARE, FxApplication.getInstance().getUserInfoBean().getMemberid());
         VerificationUtil.setViewValue(tv_generate_url_tips, String.format(getString(R.string.invite_generate_url), url));
         tv_generate_url_tips.setTag(url);
+
+        getData();
+    }
+
+    /**
+     * 获取邀请信息
+     */
+    private void getData()
+    {
+        HttpManager.getInviteInfo(new Subscriber<InviteInfoBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onNext(InviteInfoBean inviteInfoBean)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                VerificationUtil.setViewValue(tv_total_person, "邀请总人数：" + VerificationUtil.verifyDefault(inviteInfoBean.getTotals(), "0"));
+                String getQTips = String.format(getString(R.string.invite_total_get_q), VerificationUtil.verifyDefault(inviteInfoBean.getQcointotal(), "0"));
+                tv_total_get.setText(Html.fromHtml(getQTips));
+                VerificationUtil.setViewValue(tv_rule, inviteInfoBean.getDescription());
+            }
+        });
     }
 
     @Override

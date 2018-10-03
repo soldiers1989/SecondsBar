@@ -252,13 +252,14 @@ public class FragmentTransactionSales extends FragmentTransactionItem
 
             VerificationUtil.setViewValue(tv_new_price, String.format(getString(R.string.transaction_head_new_price), String.valueOf(bean.getPrice())));
             VerificationUtil.setViewValue(tv_code, "可用" + bean.getZjm());
-            VerificationUtil.setViewValue(tv_can_num, String.valueOf(bean.getCanbuyseconds()));
+            VerificationUtil.setViewValue(tv_can_num, Arithmetic.doubleToStr(bean.getHaveseconds()));
             VerificationUtil.setViewValue(tv_price_ste, String.valueOf(bean.getBalanceamt()));
             VerificationUtil.setViewValue(tv_time, String.valueOf(bean.getHaveseconds()));
 
             priceDown = bean.getPrice_DT();
             priceUp = bean.getPrice_ZT();
-            canSaleSeconds = bean.getCanbuyseconds().intValue();
+//            canSaleSeconds = bean.getCanbuyseconds().intValue();
+            canSaleSeconds = bean.getHaveseconds().intValue();
 
             addAdapterData(bean.getList_buy(), adBuy, list_bottom);
             addAdapterData(bean.getList_sell(), adSale, list_top);
@@ -422,7 +423,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
                             ShowToast.showToast("您卖出的秒数不能大于您可卖出的秒数");
                             return;
                         }
-                        float price = Float.parseFloat(getTextView(ed_input));
+                        double price = Double.parseDouble(getTextView(ed_input));
                         if (price > priceUp)
                         {
                             ShowToast.showToast("您卖出的价格不能大于涨停价格");

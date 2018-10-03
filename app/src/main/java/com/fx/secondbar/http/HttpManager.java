@@ -10,6 +10,7 @@ import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.ConsumerBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
+import com.fx.secondbar.bean.InviteInfoBean;
 import com.fx.secondbar.bean.LevelBean;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
@@ -636,6 +637,16 @@ public class HttpManager
         getInstance().bindSubscriber(observable, subscriber);
     }
 
+    /**
+     * 获取邀请信息
+     *
+     * @param subscriber
+     */
+    public static void getInviteInfo(Subscriber<InviteInfoBean> subscriber)
+    {
+        Observable<InviteInfoBean> observable = getInstance().mService.getInviteInfo().map(new HttpResultFun<InviteInfoBean>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
 
     /**
      * 绑定订购者

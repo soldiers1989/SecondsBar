@@ -303,7 +303,7 @@ public class ShareUtils
         WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
         ImageObject imgObj = new ImageObject();
         imgObj.setImageObject(bitmap);
-        bitmap.recycle();
+//        bitmap.recycle();
         weiboMessage.imageObject = imgObj;
         return weiboMessage;
     }
@@ -326,7 +326,7 @@ public class ShareUtils
         {
             bytes = BitmapUtil.Bitmap2Bytes(bmp);
         }
-        bmp.recycle();
+//        bmp.recycle();
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title = title;
         msg.description = intro;
@@ -348,7 +348,7 @@ public class ShareUtils
         WXImageObject imgObj = new WXImageObject(bitmap);
         WXMediaMessage msg = new WXMediaMessage();
         Bitmap thumbBitmap = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
-        bitmap.recycle();
+//        bitmap.recycle();
         msg.mediaObject = imgObj;
         msg.thumbData = BitmapUtil.Bitmap2Bytes(thumbBitmap);
         thumbBitmap.recycle();

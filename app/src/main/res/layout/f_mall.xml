@@ -34,7 +34,8 @@
                 android:layout_height="@dimen/toolbar_height"
                 android:layout_alignParentRight="true"
                 android:scaleType="centerInside"
-                android:src="@mipmap/ic_tool_search"/>
+                android:src="@mipmap/ic_tool_search"
+                android:visibility="invisible"/>
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>

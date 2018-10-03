@@ -27,6 +27,7 @@ public class UserInfoBean implements Serializable, Cloneable
     private Integer isCheckin;  //是否签到 1表示已签到
     private Integer checkinDays;    //签到天数
     private List<QCoinBean> listQcoin; //今日收益记录
+    private String memberid;    //会员id
 
     public String getPaymentpassword()
     {
@@ -196,6 +197,16 @@ public class UserInfoBean implements Serializable, Cloneable
     public void setLevelname(String levelname)
     {
         this.levelname = levelname;
+    }
+
+    public String getMemberid()
+    {
+        return memberid;
+    }
+
+    public void setMemberid(String memberid)
+    {
+        this.memberid = memberid;
     }
 
     @Override

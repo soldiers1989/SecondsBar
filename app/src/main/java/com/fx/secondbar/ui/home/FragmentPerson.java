@@ -286,6 +286,19 @@ public class FragmentPerson extends FragmentSupport
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden)
+    {
+        super.onHiddenChanged(hidden);
+        if (!isHidden())
+        {
+            if (VerificationUtil.getSize(adapter.getData()) == 0)
+            {
+                getData(0);
+            }
+        }
+    }
+
+    @Override
     public void onClick(View v)
     {
         super.onClick(v);

@@ -247,4 +247,9 @@ public class Constants
      * 会员夺宝排行榜
      */
     public static final String API_QCOIN_RANGE = "member/qcoin/rank";
+
+    /**
+     * 邀请信息
+     */
+    public static final String API_INVITE_INFO = "member/invite/info";
 }

@@ -107,13 +107,8 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
                 refreshData(currPage + 1, String.valueOf(type));
             }
         }, recyclerView);
-        //是否将要刷新数据
-        if (isPrepareRefresh)
-        {
-            swipeRefreshLayout.setRefreshing(true);
-            onRefresh();
-            isPrepareRefresh = false;
-        }
+        swipeRefreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override

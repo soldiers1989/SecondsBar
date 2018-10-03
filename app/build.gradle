@@ -26,7 +26,7 @@ android {
         debug {
             keyAlias 'fx'
             keyPassword '123456'
-            storeFile file('D:/developer/android_studio_workspace/SecondsBar/seconds.jks')
+            storeFile file('D:/developer/android_studio_workspace/MiaoBa/SecondsBar/seconds.jks')
             storePassword '123456'
         }
     }
@@ -65,9 +65,9 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     //    implementation 'com.sina.weibo.sdk:core:4.3.0:openDefaultRelease@aar'
     implementation(name: 'core-4.3.1-openDefaultRelease', ext: 'aar')
-
-    implementation 'cn.jiguang.sdk:jpush:3.1.6'  // 此处以JPush 3.1.6 版本为例。
-    implementation 'cn.jiguang.sdk:jcore:1.2.5'  // 此处以JCore 1.2.5 版本为例。
-
+    implementation 'cn.jiguang.sdk:jpush:3.1.6'
+    // 此处以JPush 3.1.6 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:1.2.5'
+    // 此处以JCore 1.2.5 版本为例。
     implementation 'com.king.zxing:zxing-lite:1.0.2'
 }
