@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fdb73c">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/mall_tool_pl"
+                android:text="Q夺宝"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        android:id="@+id/v_person_range"
+        android:layout_width="match_parent"
+        android:layout_height="80dip"
+        android:background="#ff9900"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/img_avatar"
+        android:layout_width="55dip"
+        android:layout_height="55dip"
+        android:layout_marginLeft="20dip"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/v_person_range"
+        app:layout_constraintStart_toStartOf="@+id/v_person_range"
+        app:layout_constraintTop_toTopOf="@+id/v_person_range"/>
+
+    <TextView
+        android:id="@+id/tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="9dip"
+        android:text="昵称"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/img_avatar"
+        app:layout_constraintTop_toTopOf="@+id/v_person_range"/>
+
+
+    <TextView
+        android:id="@+id/tv_invite_friends"
+        android:layout_width="150dip"
+        android:layout_height="40dip"
+        android:layout_marginRight="20dip"
+        android:background="@drawable/leader_board_invite_bg"
+        android:gravity="center"
+        android:text="邀请好友赚钱冲榜"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/v_person_range"
+        app:layout_constraintEnd_toEndOf="@+id/v_person_range"
+        app:layout_constraintTop_toTopOf="@+id/v_person_range"/>
+
+    <TextView
+        android:id="@+id/tv_today_income"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:text="今日收益："
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/v_person_range"
+        app:layout_constraintEnd_toStartOf="@+id/tv_invite_friends"
+        app:layout_constraintStart_toStartOf="@+id/tv_nickname"
+        app:layout_constraintTop_toTopOf="@+id/v_person_range"/>
+
+    <TextView
+        android:id="@+id/tv_today_range"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:text="今日排名："
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_invite_friends"
+        app:layout_constraintStart_toStartOf="@+id/tv_nickname"
+        app:layout_constraintTop_toBottomOf="@+id/tv_today_income"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        app:layout_constraintBottom_toTopOf="@+id/v_person_range"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dip"
+                android:text="活动奖励规则"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_reward_intro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dip"
+                android:layout_marginTop="15dip"
+                android:layout_marginRight="40dip"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@string/qcoin_rank_rule_text"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="48dip"
+                android:text="收益排行榜"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"/>
+
+            <LinearLayout
+                android:layout_width="250dip"
+                android:layout_height="45dip"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dip"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_today_tab"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/leader_board_today_bg"
+                    android:gravity="center"
+                    android:text="今日收益榜"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/tv_yesterday_tab"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/leader_board_yesterday_bg"
+                    android:gravity="center"
+                    android:text="昨日收益榜"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewToday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:nestedScrollingEnabled="false">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewYesterday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.constraint.ConstraintLayout>

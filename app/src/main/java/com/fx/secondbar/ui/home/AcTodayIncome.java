@@ -40,6 +40,7 @@ public class AcTodayIncome extends ActivitySupport
 
         tv_today_details = findView(R.id.tv_today_details);
         tv_yesterday_details = findView(R.id.tv_yesterday_details);
+        tv_content = findView(R.id.tv_content);
     }
 
     @Override

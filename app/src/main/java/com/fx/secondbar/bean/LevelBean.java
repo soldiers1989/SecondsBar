@@ -13,6 +13,7 @@ public class LevelBean
     private String endnum;//   //Q币金额结束范围
     private String description;//等级描述
     private String levelrule_ID;//等级id
+    private String prizeqcoin;  //先锋奖励Q
 
     public String getName()
     {
@@ -72,5 +73,15 @@ public class LevelBean
     public void setLevelrule_ID(String levelrule_ID)
     {
         this.levelrule_ID = levelrule_ID;
+    }
+
+    public String getPrizeqcoin()
+    {
+        return prizeqcoin;
+    }
+
+    public void setPrizeqcoin(String prizeqcoin)
+    {
+        this.prizeqcoin = prizeqcoin;
     }
 }

@@ -16,6 +16,7 @@ import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.PurchaseDetailBean;
 import com.fx.secondbar.bean.QCoinBean;
+import com.fx.secondbar.bean.QCoinRangeBean;
 import com.fx.secondbar.bean.RechargeRecordBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
@@ -608,6 +609,30 @@ public class HttpManager
     public static void getTodayReadIncome(Subscriber<TodayIncomeBean> subscriber)
     {
         Observable<TodayIncomeBean> observable = getInstance().mService.getDayIncomeIntro("4").map(new HttpResultFun<TodayIncomeBean>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 实名认证
+     *
+     * @param idCard     身份证号
+     * @param name       姓名
+     * @param subscriber
+     */
+    public static void verifyName(String idCard, String name, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.verifyName(idCard, name).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取Q夺宝排行榜
+     *
+     * @param subscriber
+     */
+    public static void getCoinRank(Subscriber<QCoinRangeBean> subscriber)
+    {
+        Observable<QCoinRangeBean> observable = getInstance().mService.getQcoinRank().map(new HttpResultFun<QCoinRangeBean>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

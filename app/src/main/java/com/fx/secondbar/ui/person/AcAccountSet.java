@@ -26,6 +26,7 @@ import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.person.aboutus.AcAboutUs;
+import com.fx.secondbar.ui.person.assets.AcVerified;
 import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideCacheUtil;
 import com.fx.secondbar.util.GlideLoad;
@@ -67,6 +68,10 @@ public class AcAccountSet extends ActivitySupport
      * 设置支付密码
      */
     private static final int REQUEST_CODE_SET_PAYPWD = 13;
+    /**
+     * 实名认证请求码
+     */
+    private static final int REQUEST_CODE_AUTH = 14;
 
     private SelectableRoundedImageView img_avatar;
     private TextView tv_nickname;
@@ -76,6 +81,7 @@ public class AcAccountSet extends ActivitySupport
     private TextView tv_cache_size;
     private TextView tv_aboutus_tips;
     private Button btn_logout;
+    private TextView tv_verify;
 
     private Subscription subscriptionCacheSize;
     private Subscription subscriptionClear;
@@ -98,6 +104,7 @@ public class AcAccountSet extends ActivitySupport
         tv_cache_size = findView(R.id.tv_cache_size);
         tv_aboutus_tips = findView(R.id.tv_aboutus_tips);
         btn_logout = findView(R.id.btn_logout);
+        tv_verify = findView(R.id.tv_verify);
         findView(R.id.ib_back).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -114,6 +121,7 @@ public class AcAccountSet extends ActivitySupport
         tv_cache_size.setOnClickListener(this);
         tv_aboutus_tips.setOnClickListener(this);
         btn_logout.setOnClickListener(this);
+        tv_verify.setOnClickListener(this);
     }
 
     @Override
@@ -134,6 +142,7 @@ public class AcAccountSet extends ActivitySupport
         VerificationUtil.setViewValue(tv_phone, FxApplication.getInstance().getUserInfoBean().getAccount(), "去绑定");
         //判断是否设置支付密码，1表示已设置。
         VerificationUtil.setViewValue(tv_pay_pwd, "1".equals(FxApplication.getInstance().getUserInfoBean().getPaymentpassword()) ? "已设置" : "去设置");
+        VerificationUtil.setViewValue(tv_verify, TextUtils.isEmpty(FxApplication.getInstance().getUserInfoBean().getActualname()) ? "去认证" : "已认证");
     }
 
     @Override
@@ -364,6 +373,12 @@ public class AcAccountSet extends ActivitySupport
             case R.id.ib_back:
                 finish();
                 break;
+            case R.id.tv_verify:
+                if (TextUtils.isEmpty(FxApplication.getInstance().getUserInfoBean().getActualname()))
+                {
+                    jump(AcVerified.class, REQUEST_CODE_AUTH);
+                }
+                break;
         }
     }
 
@@ -528,6 +543,12 @@ public class AcAccountSet extends ActivitySupport
             {
 
                 VerificationUtil.setViewValue(tv_pay_pwd, "已设置");
+            }
+        } else if (REQUEST_CODE_AUTH == requestCode)
+        {
+            if (RESULT_OK == resultCode)
+            {
+                VerificationUtil.setViewValue(tv_verify, TextUtils.isEmpty(FxApplication.getInstance().getUserInfoBean().getActualname()) ? "去认证" : "已认证");
             }
         }
     }

@@ -15,6 +15,7 @@ import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.PurchaseDetailBean;
 import com.fx.secondbar.bean.QCoinBean;
+import com.fx.secondbar.bean.QCoinRangeBean;
 import com.fx.secondbar.bean.RechargeRecordBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
@@ -454,4 +455,20 @@ public interface IService
     @GET(Constants.API_TODAY_INCOME)
     Observable<ResponseBean<TodayIncomeBean>> getDayIncomeIntro(@Query("type") String type);
 
+    /**
+     * 实名认证
+     *
+     * @param idcard 身份证号
+     * @param name   姓名
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.API_NAME_AUTH)
+    Observable<ResponseBean> verifyName(@Field("idcard") String idcard, @Field("actualname") String name);
+
+    /**
+     * 获取Q夺宝排行
+     */
+    @GET(Constants.API_QCOIN_RANGE)
+    Observable<ResponseBean<QCoinRangeBean>> getQcoinRank();
 }

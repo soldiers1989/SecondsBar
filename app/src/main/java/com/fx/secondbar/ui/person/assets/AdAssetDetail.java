@@ -33,12 +33,5 @@ public class AdAssetDetail extends BaseQuickAdapter<ConsumerBean, BaseViewHolder
         VerificationUtil.setViewValue(tv_time, item.getCreatetime());
         VerificationUtil.setViewValue(tv_money, item.getAmount());
 
-//        if (helper.getLayoutPosition() == getData().size() - 1)
-//        {
-//            v_bottom.setVisibility(View.GONE);
-//        } else
-//        {
-//            v_bottom.setVisibility(View.VISIBLE);
-//        }
     }
 }

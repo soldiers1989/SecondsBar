@@ -237,4 +237,14 @@ public class Constants
      * 每日Q币收益记录
      */
     public static final String API_TODAY_INCOME = "member/qcoin/total";
+
+    /**
+     * 实名认证
+     */
+    public static final String API_NAME_AUTH = "member/auth";
+
+    /**
+     * 会员夺宝排行榜
+     */
+    public static final String API_QCOIN_RANGE = "member/qcoin/rank";
 }

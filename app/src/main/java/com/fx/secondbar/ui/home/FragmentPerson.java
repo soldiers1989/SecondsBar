@@ -38,6 +38,7 @@ import com.fx.secondbar.ui.order.AcOrderManage;
 import com.fx.secondbar.ui.person.AcAccountSet;
 import com.fx.secondbar.ui.person.AcBindPhone;
 import com.fx.secondbar.ui.person.AcInviteFriends;
+import com.fx.secondbar.ui.person.AcLeaderboard;
 import com.fx.secondbar.ui.person.assets.AcAssets;
 import com.fx.secondbar.ui.person.assets.AcIncomeRecord;
 import com.fx.secondbar.ui.purchase.AcMyPurchase;
@@ -147,6 +148,9 @@ public class FragmentPerson extends FragmentSupport
                 } else if (String.valueOf(ActiveBean.TYPE_WEB).equals(bean.getType()))
                 {//网页
 
+                } else if (String.valueOf(ActiveBean.TYPE_RANK).equals(bean.getType()))
+                {
+                    jump(AcLeaderboard.class);
                 }
             }
         });

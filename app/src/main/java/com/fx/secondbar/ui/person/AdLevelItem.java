@@ -38,7 +38,7 @@ public class AdLevelItem extends BaseQuickAdapter<LevelBean, BaseViewHolder>
         tv_level.setText("LV." + item.getLevel());
         VerificationUtil.setViewValue(tv_name, "LV" + item.getLevel() + " " + item.getName());
         VerificationUtil.setViewValue(tv_q, item.getEndnum());
-        VerificationUtil.setViewValue(tv_reward, "0");
+        VerificationUtil.setViewValue(tv_reward, VerificationUtil.verifyDefault(item.getPrizeqcoin(), "0"));
         try
         {
             tv_name.setBackgroundResource(LevelUtils.getLevelIcons(Integer.parseInt(item.getLevel())));

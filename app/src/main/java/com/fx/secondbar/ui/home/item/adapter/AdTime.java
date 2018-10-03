@@ -25,7 +25,6 @@ import com.fx.secondbar.ui.purchase.AcPurchaseDetail;
 import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -93,13 +92,12 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
         TextView tv_dynamic = helper.getView(R.id.tv_dynamic);
         if (item.getDynamicBean() != null)
         {
-//            GlideApp.with(img).asBitmap().load(item.getDynamicBean().getAvatar()).centerCrop().into(img);
-            GlideLoad.load(img, item.getDynamicBean().getImg(), true);
+            GlideLoad.load(img, item.getDynamicBean().getImg(), true, R.mipmap.default_avatar, R.mipmap.default_avatar);
             VerificationUtil.setViewValue(tv_time, getTimeDes(item.getDynamicBean().getMinutes()));
             VerificationUtil.setViewValue(tv_dynamic, item.getDynamicBean().getGoodsname());
         } else
         {
-            GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
+            GlideLoad.load(img, "", true, R.mipmap.default_avatar, R.mipmap.default_avatar);
             VerificationUtil.setViewValue(tv_time, "");
             VerificationUtil.setViewValue(tv_dynamic, "");
         }

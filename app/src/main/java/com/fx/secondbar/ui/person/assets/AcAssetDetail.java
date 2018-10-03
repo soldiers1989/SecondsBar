@@ -12,7 +12,6 @@ import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.ConsumerBean;
-import com.fx.secondbar.bean.RechargeRecordBean;
 import com.fx.secondbar.http.HttpManager;
 
 import java.util.List;

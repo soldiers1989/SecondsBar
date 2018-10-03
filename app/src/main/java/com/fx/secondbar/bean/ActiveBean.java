@@ -31,6 +31,10 @@ public class ActiveBean
      * Web
      */
     public static final int TYPE_WEB = 6;
+    /**
+     * Q 夺宝
+     */
+    public static final int TYPE_RANK = 7;
 
 
     private String name;//活动名称

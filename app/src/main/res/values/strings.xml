@@ -122,4 +122,10 @@
     <string name="invite_friends_rule_text">1.将你的专属二维码、链接分享至社交网络;\n2.邀请好友通过你的二维码、链接下载激活秒吧APP;\n3.好友在秒吧绑定手机号后，即可立即获得Q奖励。</string>
     <string name="invite_generate_url">生成链接：%s</string>
     <string name="invite_total_get_q">累计获得：<font color='#ffb528'>%s</font>>Q价值积分</string>
+    <string name="qcoin_rank_rule_text">每天我们将对所有人的当日获取Q价值积分进行排名，每小时更新一次，在24点时对最终榜单快照，进入榜单前100名的用户，将会自动获得对应的夺宝奖励，当日进入榜单的用户，奖励将发放到秒吧钱包。
+\n\n赠送规则如下：
+\n【第1名】获得2888Q价值积分奖励
+\n【第2-5名】每人获得888Q价值积分奖励
+\n【第6-10名】每人获得388Q价值积分奖励
+\n【第11-100名】每人获得38Q价值积分奖励</string>
 </resources>

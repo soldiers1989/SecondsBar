@@ -121,7 +121,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/mall_detail_buy_h"
         android:background="@color/home_tabs_mark_color"
-        android:text="下一步"
+        android:text="认证"
         android:textColor="@android:color/white"
         android:textSize="@dimen/mall_detail_buy_text"
         app:layout_constraintBottom_toBottomOf="parent"/>

@@ -123,6 +123,9 @@
         <activity
             android:name=".ui.person.AcInviteFriends"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.person.AcLeaderboard"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name="com.tencent.connect.common.AssistActivity"

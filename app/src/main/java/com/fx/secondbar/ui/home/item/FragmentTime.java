@@ -18,6 +18,7 @@ import com.bigkoo.convenientbanner.holder.Holder;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.BannerBean;
 import com.fx.secondbar.bean.CommodityBean;
@@ -25,7 +26,9 @@ import com.fx.secondbar.bean.DynamicBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.home.AcInformationDetail;
 import com.fx.secondbar.ui.home.item.adapter.AdTime;
+import com.fx.secondbar.ui.mall.AcMallDetail;
 import com.fx.secondbar.util.GlideLoad;
 
 import java.util.ArrayList;
@@ -90,6 +93,26 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
         adapter = new AdTime();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         adapter.bindToRecyclerView(recyclerView);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position)
+            {
+                AdTime adTime = (AdTime) adapter;
+                AdTime.TimeEntity entity = adTime.getItem(position);
+                if (AdTime.TimeEntity.TYPE_COMMODITY == entity.getItemType())
+                {   //商品
+                    CommodityBean commodityBean = entity.getCommodityBean();
+                    if (commodityBean != null)
+                    {
+                        jump(AcMallDetail.class, commodityBean.getMerchandise_ID());
+                    }
+                } else if (AdTime.TimeEntity.TYPE_MULTI_IMG == entity.getItemType() || AdTime.TimeEntity.TYPE_SINGLE_IMG == entity.getItemType())
+                {
+                    jump(AcInformationDetail.class, entity.getInfomationBean().getNews_ID(), false);
+                }
+            }
+        });
         if (convenientBanner != null)
         {
             if (!convenientBanner.isTurning())
