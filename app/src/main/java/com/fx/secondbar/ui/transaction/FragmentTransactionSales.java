@@ -251,7 +251,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
             tv_price_up.setText(spUp);
 
             VerificationUtil.setViewValue(tv_new_price, String.format(getString(R.string.transaction_head_new_price), String.valueOf(bean.getPrice())));
-            VerificationUtil.setViewValue(tv_code, "可用" + bean.getZjm());
+            VerificationUtil.setViewValue(tv_code, "可用" + VerificationUtil.verifyDefault(bean.getZjm(), "-"));
             VerificationUtil.setViewValue(tv_can_num, Arithmetic.doubleToStr(bean.getHaveseconds()));
             VerificationUtil.setViewValue(tv_price_ste, String.valueOf(bean.getBalanceamt()));
             VerificationUtil.setViewValue(tv_time, String.valueOf(bean.getHaveseconds()));

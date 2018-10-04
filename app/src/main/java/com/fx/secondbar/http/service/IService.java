@@ -489,4 +489,13 @@ public interface IService
      */
     @GET(Constants.API_TRADING_BUYED)
     Observable<ResponseBean<TradingBuyedBean>> getBuyed(@Query("page") int page, @Query("count") int pageSize);
+
+    /**
+     * 订单申诉
+     *
+     * @param orderId 订单id
+     * @return
+     */
+    @GET(Constants.API_ORDER_APPEAL)
+    Observable<ResponseBean> orderAppeal(@Query("orderid") String orderId);
 }

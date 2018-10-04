@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_tips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/customer_tips_text_mt"
+            android:background="@android:color/white"
+            android:padding="@dimen/customer_tips_p"
+            android:text="@string/customer_tips_text"
+            android:textColor="@color/customer_tips_text"
+            android:textSize="@dimen/customer_tips_text"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/customer_item_mlr"
+            android:layout_marginTop="@dimen/customer_item_first_mt"
+            android:layout_marginRight="@dimen/customer_item_mlr"
+            android:background="@drawable/drawable_customer_item"
+            android:orientation="vertical"
+            android:padding="@dimen/customer_item_p">
+
+            <TextView
+                android:id="@+id/tv_title_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_customer_phone"
+                android:drawablePadding="@dimen/customer_second_title_dp"
+                android:gravity="center_vertical"
+                android:text="@string/customer_title_phone"
+                android:textColor="@color/customer_tips_text"
+                android:textSize="@dimen/customer_second_title_text"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/customer_item_mlr"
+            android:layout_marginRight="@dimen/customer_item_mlr"
+            android:paddingTop="@dimen/customer_item_mt"
+            android:paddingBottom="@dimen/customer_item_mt"
+            android:text="@string/customer_notes"
+            android:textColor="@color/customer_notes_text"
+            android:textSize="@dimen/customer_notes_text"/>
+    </LinearLayout>
+</ScrollView>

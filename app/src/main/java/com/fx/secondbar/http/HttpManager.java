@@ -663,6 +663,18 @@ public class HttpManager
     }
 
     /**
+     * 订单申诉
+     *
+     * @param orderId    订单id
+     * @param subscriber
+     */
+    public static void orderAppeal(String orderId, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.orderAppeal(orderId).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
      * 绑定订购者
      *
      * @param observable 可被观察者

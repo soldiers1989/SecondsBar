@@ -1,15 +1,19 @@
 package com.fx.secondbar.ui.order;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
@@ -19,6 +23,7 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
+import com.fx.secondbar.util.ProgressDialogUtil;
 
 import java.util.List;
 
@@ -60,6 +65,8 @@ public class FOrderItem extends FragmentViewPagerBase implements SwipeRefreshLay
     private int currPage = -1;
     //当前页状态值
     private int status = 0;
+
+    private ProgressDialog dialog;
 
     public static FOrderItem newInstance(int type)
     {
@@ -103,6 +110,7 @@ public class FOrderItem extends FragmentViewPagerBase implements SwipeRefreshLay
     @Override
     protected void initData()
     {
+        dialog = ProgressDialogUtil.getProgressDialog(getActivity(), getString(R.string.progress_tips), true);
         status = getArguments().getInt(KEY, TYPE_ALL);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(DensityUtil.dip2px(getContext(), 15), true, false, true));
@@ -118,6 +126,25 @@ public class FOrderItem extends FragmentViewPagerBase implements SwipeRefreshLay
 //                jump(AcPurchaseOrderDetail.class, bundle, false);
             }
         });
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener()
+        {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position)
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("您确定要发起申诉吗？");
+                builder.setCancelable(false);
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        orderAppeal(FOrderItem.this.adapter.getItem(position).getOrder_ID());
+                    }
+                });
+                builder.show();
+            }
+        });
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
         {
             @Override
@@ -131,6 +158,62 @@ public class FOrderItem extends FragmentViewPagerBase implements SwipeRefreshLay
             swipeRefreshLayout.setRefreshing(true);
             onRefresh();
         }
+    }
+
+    /**
+     * 订单申诉
+     *
+     * @param orderId 订单id
+     */
+    private void orderAppeal(String orderId)
+    {
+        if (dialog != null)
+        {
+            dialog.show();
+        }
+        HttpManager.orderAppeal(orderId, new Subscriber<ResponseBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(ResponseBean responseBean)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("您的申诉已提交，客服将会在一个工作日内通过您绑定的手机号与您联系，请您耐心等候~");
+                builder.setCancelable(false);
+                builder.setPositiveButton("确定", null);
+                builder.show();
+                swipeRefreshLayout.setRefreshing(true);
+                onRefresh();
+            }
+        });
     }
 
 

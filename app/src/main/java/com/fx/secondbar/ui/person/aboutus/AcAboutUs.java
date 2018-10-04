@@ -25,6 +25,7 @@ public class AcAboutUs extends ActivitySupport
         findView(R.id.ib_back).setOnClickListener(this);
         findView(R.id.tv_protocol).setOnClickListener(this);
         findView(R.id.tv_privacy).setOnClickListener(this);
+        findView(R.id.tv_customer).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -44,7 +45,10 @@ public class AcAboutUs extends ActivitySupport
     @Override
     public void onClick(View v)
     {
-        super.onClick(v);
+        if (isFastDoubleClick(v))
+        {
+            return;
+        }
         switch (v.getId())
         {
             case R.id.ib_back:
@@ -54,6 +58,8 @@ public class AcAboutUs extends ActivitySupport
                 jump(AcProtocol.class);
                 break;
             case R.id.tv_privacy:
+                break;
+            case R.id.tv_customer:
                 break;
         }
     }

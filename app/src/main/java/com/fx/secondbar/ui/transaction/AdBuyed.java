@@ -50,6 +50,8 @@ public class AdBuyed extends BaseQuickAdapter<TradingBuyedBean.EntityBean, BaseV
 
         VerificationUtil.setViewValue(tv_price, sbPrice.toString());
 
+        VerificationUtil.setViewValue(tv_seconds, item.getSecond());
+
         if (TextUtils.isEmpty(item.getSpreadprice()))
         {
             tv_profit_loss.setText("0");

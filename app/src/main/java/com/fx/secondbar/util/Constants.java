@@ -256,5 +256,10 @@ public class Constants
     /**
      * 行情已购接口
      */
-    public static final String API_TRADING_BUYED="trading/center/buyed";
+    public static final String API_TRADING_BUYED = "trading/center/buyed";
+
+    /**
+     * 订单申诉
+     */
+    public static final String API_ORDER_APPEAL = "order/appeal";
 }

@@ -43,17 +43,21 @@ public class AdOrder extends BaseQuickAdapter<OrderBean, BaseViewHolder>
 
         if (FOrderItem.TYPE_PERFORMANCE == item.getStatus())
         {
-            tv_option.setText("取消订单，并退款");
+//            tv_option.setText("取消订单，并退款");
+            tv_option.setText("申诉");
         } else if (FOrderItem.TYPE_PERFORMANCING == item.getStatus())
         {
-            tv_option.setText("查看商品");
+//            tv_option.setText("查看商品");
+            tv_option.setText("申诉");
         } else if (FOrderItem.TYPE_REFUND == item.getStatus())
         {
-            tv_option.setText("取消退款");
+//            tv_option.setText("取消退款");
+            tv_option.setText("申诉");
         } else
         {
-            tv_option.setText("");
+            tv_option.setText("申诉");
         }
+        helper.addOnClickListener(R.id.tv_option);
     }
 
     /**
