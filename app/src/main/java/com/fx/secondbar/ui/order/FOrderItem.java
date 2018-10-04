@@ -146,6 +146,7 @@ public class FOrderItem extends FragmentViewPagerBase implements SwipeRefreshLay
                         orderAppeal(FOrderItem.this.adapter.getItem(position).getOrder_ID());
                     }
                 });
+                builder.setNegativeButton("取消", null);
                 builder.show();
             }
         });

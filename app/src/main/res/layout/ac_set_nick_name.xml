@@ -58,6 +58,7 @@
         android:layout_marginRight="36dip"
         android:background="@null"
         android:hint="请输入昵称(最多13个字符)"
+        android:maxLength="13"
         android:singleLine="true"
         android:textColor="#111111"
         android:textColorHint="#a9a9a9"
