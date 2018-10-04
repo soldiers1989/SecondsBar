@@ -1,7 +1,6 @@
 package com.fx.secondbar.ui.home.item.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -17,7 +16,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.WBBean;
-import com.fx.secondbar.ui.home.AcShareDialog;
 import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
@@ -59,37 +57,27 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
         img_recycler.addItemDecoration(SpaceDecorationUtil.getDecoration(img.getContext().getResources().getDimensionPixelSize(R.dimen.home_wb_img_space), false, false, false));
         img_recycler.setVisibility(size == 0 ? View.GONE : View.VISIBLE);
 
-//        if (helper.getLayoutPosition() == 0)
-//        {
-//            GlideApp.with(img).asBitmap().load(R.mipmap.test_dynamic_1).centerCrop().into(img);
-//        } else if (helper.getLayoutPosition() == 1)
-//        {
-//            GlideApp.with(img).asBitmap().load(R.mipmap.test_dynamic_2).centerCrop().into(img);
-//        } else
-//        {
-//            GlideApp.with(img).asBitmap().load(R.mipmap.test_dynamic_3).centerCrop().into(img);
-//        }
         GlideLoad.load(img, item.getAvatar(), true);
         VerificationUtil.setViewValue(tv_name, item.getUsername());
         VerificationUtil.setViewValue(tv_content, item.getContent());
         tv_content.setText(Html.fromHtml(item.getContent()));
-//        VerificationUtil.setViewValue(tv_content, item.getContent());
-        img_share.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                if (activity != null)
-                {
-                    Intent intent = new Intent(activity, AcShareDialog.class);
-                    intent.putExtra(AcShareDialog.KEY_TYPE, AcShareDialog.TYPE_POSTER_CONTENT);
-                    intent.putExtra(AcShareDialog.KEY_TITLE, item.getTitle());
-                    intent.putExtra(AcShareDialog.KEY_CONTENT, item.getContent());
-                    intent.putExtra(AcShareDialog.KEY_URL, "");
-                    activity.startActivity(intent);
-                }
-            }
-        });
+//        img_share.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                if (activity != null)
+//                {
+//                    Intent intent = new Intent(activity, AcShareDialog.class);
+//                    intent.putExtra(AcShareDialog.KEY_TYPE, AcShareDialog.TYPE_POSTER_CONTENT);
+//                    intent.putExtra(AcShareDialog.KEY_TITLE, item.getTitle());
+//                    intent.putExtra(AcShareDialog.KEY_CONTENT, item.getContent());
+//                    intent.putExtra(AcShareDialog.KEY_URL, "");
+//                    activity.startActivity(intent);
+//                }
+//            }
+//        });
+        helper.addOnClickListener(R.id.img_share);
     }
 
     /**

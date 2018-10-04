@@ -69,16 +69,6 @@ public class FragmentQuotes extends FragmentSupport
     @Override
     protected void initData()
     {
-//        String[] tabTitles = getResources().getStringArray(R.array.quote_tabs);
-//        List<FragmentViewPagerBase> fragmengs = new ArrayList<>();
-//        for (int i = 0; i < tabTitles.length; i++) {
-//            fragmengs.add(FragmentQuoteItem.newInstance());
-//        }
-//        adapter = new AdHomeItem(getChildFragmentManager(), fragmengs, tabTitles);
-//        viewPager.setAdapter(adapter);
-//        viewPager.setOffscreenPageLimit(tabTitles.length);
-//        tabs.setViewPager(viewPager);
-
         List<CategoryBean> categoryBeans = FxApplication.getInstance().getConfigInfo().getListCategoryStar();
         //第一项默认为全部，未在栏目集合中返回，此处单独处理
         int size = categoryBeans.size() + 1;
@@ -106,7 +96,10 @@ public class FragmentQuotes extends FragmentSupport
     @Override
     public void onClick(View v)
     {
-        super.onClick(v);
+        if (isFastDoubleClick(v))
+        {
+            return;
+        }
         switch (v.getId())
         {
             case R.id.img_toolbar_right:

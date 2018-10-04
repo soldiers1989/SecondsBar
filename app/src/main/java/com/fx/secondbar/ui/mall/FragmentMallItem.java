@@ -82,6 +82,10 @@ public class FragmentMallItem extends FragmentViewPagerBase implements SwipeRefr
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
+                if (isFastDoubleClick(view))
+                {
+                    return;
+                }
                 jump(AcMallDetail.class, FragmentMallItem.this.adapter.getData().get(position).getMerchandise_ID());
             }
         });
@@ -92,23 +96,13 @@ public class FragmentMallItem extends FragmentViewPagerBase implements SwipeRefr
             {
                 getData(currPage + 1, type);
             }
-        });
+        }, recyclerView);
         if (TextUtils.isEmpty(type))
         {
             swipeRefreshLayout.setRefreshing(true);
             onRefresh();
         }
     }
-
-//    private List<CommodityBean> getDatas()
-//    {
-//        List<CommodityBean> list = new ArrayList<>();
-//        list.add(new CommodityBean(R.mipmap.test_mall_1, "周杰伦粉丝见面演唱会", "26000.00STE", "", ""));
-//        list.add(new CommodityBean(R.mipmap.test_mall_2, "张勇新零售讲座", "8800.00STE", "", ""));
-//        list.add(new CommodityBean(R.mipmap.test_mall_3, "网红陈一发儿歌友会", "1820.00STE", "", ""));
-//        list.add(new CommodityBean(R.mipmap.test_mall_4, "郭德纲专场演出", "360.00STE", "", ""));
-//        return list;
-//    }
 
     @Override
     public void onRefresh()

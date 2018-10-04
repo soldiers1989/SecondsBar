@@ -373,6 +373,10 @@ public class MainActivity extends ActivitySupport
     @Override
     public void onClick(View v)
     {
+        if (isFastDoubleClick(v))
+        {
+            return;
+        }
         switch (v.getId())
         {
             case R.id.tv_home:

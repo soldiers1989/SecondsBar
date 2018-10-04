@@ -228,7 +228,10 @@ public class AcQuoteBuyConfirm extends ActivitySupport
     @Override
     public void onClick(View v)
     {
-        super.onClick(v);
+        if (isFastDoubleClick(v))
+        {
+            return;
+        }
         switch (v.getId())
         {
             case R.id.ib_back:

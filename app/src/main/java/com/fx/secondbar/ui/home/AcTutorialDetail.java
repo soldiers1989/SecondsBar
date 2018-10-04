@@ -65,7 +65,7 @@ public class AcTutorialDetail extends ActivitySupport
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             {
 //                tv_content.setText(Html.fromHtml(bean.getContent(), Html.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH | Html.FROM_HTML_SEPARATOR_LINE_BREAK_HEADING | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST_ITEM | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST | Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV | Html.FROM_HTML_SEPARATOR_LINE_BREAK_BLOCKQUOTE | Html.FROM_HTML_OPTION_USE_CSS_COLORS, new CustomImageGetter(tv_content), null));
-                tv_content.setText(Html.fromHtml(bean.getContent(),Html.FROM_HTML_OPTION_USE_CSS_COLORS, new CustomImageGetter(tv_content), null));
+                tv_content.setText(Html.fromHtml(bean.getContent(), Html.FROM_HTML_OPTION_USE_CSS_COLORS, new CustomImageGetter(tv_content), null));
             } else
             {
                 tv_content.setText(Html.fromHtml(bean.getContent(), new CustomImageGetter(tv_content), null));
@@ -88,7 +88,10 @@ public class AcTutorialDetail extends ActivitySupport
     @Override
     public void onClick(View v)
     {
-        super.onClick(v);
+        if (isFastDoubleClick(v))
+        {
+            return;
+        }
         switch (v.getId())
         {
             case R.id.ib_back:

@@ -90,6 +90,10 @@ public class FragmentMessage extends FragmentViewPagerBase implements SwipeRefre
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position)
             {
+                if (isFastDoubleClick(view))
+                {
+                    return;
+                }
                 jump(AcMessageDetail.class);
             }
         });

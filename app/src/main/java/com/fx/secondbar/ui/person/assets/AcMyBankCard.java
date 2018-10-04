@@ -82,6 +82,10 @@ public class AcMyBankCard extends ActivitySupport implements SwipeRefreshLayout.
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position)
             {
+                if (isFastDoubleClick(view))
+                {
+                    return;
+                }
                 //删除银行卡
                 AlertDialog.Builder builder = new AlertDialog.Builder(AcMyBankCard.this);
                 builder.setMessage("您确定要删除该银行卡吗？").setPositiveButton("确定", new DialogInterface.OnClickListener()
@@ -99,6 +103,10 @@ public class AcMyBankCard extends ActivitySupport implements SwipeRefreshLayout.
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
+                if (isFastDoubleClick(view))
+                {
+                    return;
+                }
                 //点击选中返回上一个页面
                 Intent intent = new Intent();
                 intent.putExtra(KEY_STR, AcMyBankCard.this.adapter.getItem(position).getBankno());
@@ -209,7 +217,10 @@ public class AcMyBankCard extends ActivitySupport implements SwipeRefreshLayout.
     @Override
     public void onClick(View v)
     {
-        super.onClick(v);
+        if (isFastDoubleClick(v))
+        {
+            return;
+        }
         switch (v.getId())
         {
             case R.id.ib_back:

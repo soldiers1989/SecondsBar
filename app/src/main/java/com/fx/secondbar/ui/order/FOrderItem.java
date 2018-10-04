@@ -131,6 +131,10 @@ public class FOrderItem extends FragmentViewPagerBase implements SwipeRefreshLay
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position)
             {
+                if (isFastDoubleClick(view))
+                {
+                    return;
+                }
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setMessage("您确定要发起申诉吗？");
                 builder.setCancelable(false);

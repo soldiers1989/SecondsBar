@@ -95,6 +95,10 @@ public class FragmentQuoteItem extends FragmentViewPagerBase implements SwipeRef
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
+                if (isFastDoubleClick(view))
+                {
+                    return;
+                }
                 Bundle bundle = new Bundle();
                 String title = FragmentQuoteItem.this.adapter.getItem(position).getName();
                 if (!TextUtils.isEmpty(FragmentQuoteItem.this.adapter.getItem(position).getZjm()))
@@ -118,20 +122,6 @@ public class FragmentQuoteItem extends FragmentViewPagerBase implements SwipeRef
         swipeRefreshLayout.setRefreshing(false);
         onRefresh();
     }
-
-//    private List<QuoteBean> getDatas()
-//    {
-//        List<QuoteBean> list = new ArrayList<>();
-//        list.add(new QuoteBean(R.mipmap.test_quoto_1, "李优生\nLYS", "2.363", "+0.08", "+2.53%", true));
-//        list.add(new QuoteBean(R.mipmap.test_quoto_2, "陈浩\nCHH", "1.260", "-0.26", "-2.53%", false));
-//        list.add(new QuoteBean(R.mipmap.test_quoto_3, "李小二\nLXE", "0.685", "-0.26", "-2.53%", false));
-//        list.add(new QuoteBean(R.mipmap.test_quoto_4, "于大宝\nYDB", "3.689", "+0.08", "+2.53%", true));
-//        list.add(new QuoteBean(R.mipmap.test_quoto_1, "王思明\nWSM", "2.363", "+0.08", "+2.53%", true));
-//        list.add(new QuoteBean(R.mipmap.test_quoto_2, "李小二\nLXE", "2.363", "+0.08", "+2.53%", true));
-//        list.add(new QuoteBean(R.mipmap.test_quoto_3, "陈浩\nCHH", "1.260", "-0.26", "-2.53%", false));
-//        list.add(new QuoteBean(R.mipmap.test_quoto_4, "于大宝\nYDB", "3.689", "+0.08", "+2.53%", true));
-//        return list;
-//    }
 
     /**
      * 获取数据

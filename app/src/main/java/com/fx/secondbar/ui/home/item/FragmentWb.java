@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.home.item;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.WBBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.home.AcShareDialog;
 import com.fx.secondbar.ui.home.item.adapter.AdWb;
 
 import java.util.List;
@@ -88,6 +90,24 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
                 getData(currPage + 1);
             }
         }, recyclerView);
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener()
+        {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position)
+            {
+                if (isFastDoubleClick(view))
+                {
+                    return;
+                }
+                WBBean item = FragmentWb.this.adapter.getData().get(position);
+                Bundle bundle = new Bundle();
+                bundle.putInt(AcShareDialog.KEY_TYPE, AcShareDialog.TYPE_POSTER_CONTENT);
+                bundle.putString(AcShareDialog.KEY_TITLE, item.getTitle());
+                bundle.putString(AcShareDialog.KEY_CONTENT, item.getContent());
+                bundle.putString(AcShareDialog.KEY_URL, "");
+                jump(AcShareDialog.class, bundle, false);
+            }
+        });
     }
 
     /**

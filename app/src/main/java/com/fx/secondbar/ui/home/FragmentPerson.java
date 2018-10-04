@@ -126,6 +126,10 @@ public class FragmentPerson extends FragmentSupport
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position)
             {
+                if (isFastDoubleClick(view))
+                {
+                    return;
+                }
                 ActiveBean bean = FragmentPerson.this.adapter.getItem(position);
                 //签到
                 if (String.valueOf(ActiveBean.TYPE_SIGN).equals(bean.getType()))
@@ -301,7 +305,10 @@ public class FragmentPerson extends FragmentSupport
     @Override
     public void onClick(View v)
     {
-        super.onClick(v);
+        if (isFastDoubleClick(v))
+        {
+            return;
+        }
         switch (v.getId())
         {
             case R.id.ib_set:

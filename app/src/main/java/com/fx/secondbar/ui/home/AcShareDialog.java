@@ -166,6 +166,10 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
             @Override
             public void onClick(View v)
             {
+                if (isFastDoubleClick(v))
+                {
+                    return;
+                }
                 Bitmap bitmap = null;
                 if (TYPE_POSTER_INVITE == type)
                 {
@@ -435,14 +439,6 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
     {
         LogUtil.e("wb share", "share fail");
     }
-
-//    private Bitmap drawBitmap(String content)
-//    {
-//        int contentWidth = DisplayUtil.getRealScreenSize(this).widthPixels - DensityUtil.dip2px(this, 15) * 2;
-//        TextPaint textPaint = new TextPaint();
-//        textPaint.setTextSize(DensityUtil.sp2px(this, 15));
-//        textPaint.setColor(Color.BLACK);
-//    }
 
     /**
      * QQ分享监听

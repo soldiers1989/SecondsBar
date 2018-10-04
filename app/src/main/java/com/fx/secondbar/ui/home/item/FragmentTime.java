@@ -98,6 +98,10 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
+                if (isFastDoubleClick(view))
+                {
+                    return;
+                }
                 AdTime adTime = (AdTime) adapter;
                 AdTime.TimeEntity entity = adTime.getItem(position);
                 if (AdTime.TimeEntity.TYPE_COMMODITY == entity.getItemType())

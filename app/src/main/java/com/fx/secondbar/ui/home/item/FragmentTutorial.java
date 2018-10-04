@@ -84,6 +84,10 @@ public class FragmentTutorial extends FragmentViewPagerBase
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
+                if (isFastDoubleClick(view))
+                {
+                    return;
+                }
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(KEY, FragmentTutorial.this.adapter.getItem(position));
                 jump(AcTutorialDetail.class, bundle, false);
@@ -141,20 +145,5 @@ public class FragmentTutorial extends FragmentViewPagerBase
             }
         });
     }
-
-//    /**
-//     * 获取图片链接
-//     *
-//     * @return
-//     */
-//    private List<Integer> getDatas()
-//    {
-//        List<Integer> list = new ArrayList<>();
-//        list.add(R.mipmap.test_turial_1);
-//        list.add(R.mipmap.test_turial_2);
-//        list.add(R.mipmap.test_turial_3);
-//        list.add(R.mipmap.test_turial_4);
-//        return list;
-//    }
 
 }

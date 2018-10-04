@@ -111,6 +111,10 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
+                if (isFastDoubleClick(view))
+                {
+                    return;
+                }
                 AdInfomation.InfomationEntity entity = FragmentInformationItem.this.adapter.getItem(position);
                 if (AdInfomation.InfomationEntity.TYPE_MULTI_IMG == entity.getItemType() || AdInfomation.InfomationEntity.TYPE_SINGLE_IMG == entity.getItemType())
                 {

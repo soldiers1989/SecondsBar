@@ -65,6 +65,10 @@ public class AcMyPurchase extends ActivitySupport implements SwipeRefreshLayout.
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
+                if (isFastDoubleClick(view))
+                {
+                    return;
+                }
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(KEY, AcMyPurchase.this.adapter.getItem(position));
                 jump(AcPurchaseOrderDetail.class, bundle, false);
@@ -85,7 +89,10 @@ public class AcMyPurchase extends ActivitySupport implements SwipeRefreshLayout.
     @Override
     public void onClick(View v)
     {
-        super.onClick(v);
+        if (isFastDoubleClick(v))
+        {
+            return;
+        }
         switch (v.getId())
         {
             case R.id.ib_back:
