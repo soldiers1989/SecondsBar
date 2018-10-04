@@ -60,6 +60,7 @@ public class AcAboutUs extends ActivitySupport
             case R.id.tv_privacy:
                 break;
             case R.id.tv_customer:
+                jump(AcCustomer.class);
                 break;
         }
     }

@@ -262,4 +262,9 @@ public class Constants
      * 订单申诉
      */
     public static final String API_ORDER_APPEAL = "order/appeal";
+
+    /**
+     * 获取客服信息
+     */
+    public static final String API_GET_CUSTOMER = "index/customerserver";
 }

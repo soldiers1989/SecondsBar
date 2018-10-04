@@ -7,6 +7,7 @@ import com.fx.secondbar.bean.BankBean;
 import com.fx.secondbar.bean.CommissionBean;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.ConsumerBean;
+import com.fx.secondbar.bean.CustomerBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.InviteInfoBean;
@@ -498,4 +499,13 @@ public interface IService
      */
     @GET(Constants.API_ORDER_APPEAL)
     Observable<ResponseBean> orderAppeal(@Query("orderid") String orderId);
+
+    /**
+     * 获取客服信息
+     *
+     * @return
+     */
+    @GET(Constants.API_GET_CUSTOMER)
+    Observable<ResponseBean<List<CustomerBean>>> getCustomerInfo();
+
 }

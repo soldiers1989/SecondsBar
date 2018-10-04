@@ -1,60 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#ebebeb"
+              android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
 
-        <TextView
-            android:id="@+id/tv_tips"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/customer_tips_text_mt"
-            android:background="@android:color/white"
-            android:padding="@dimen/customer_tips_p"
-            android:text="@string/customer_tips_text"
-            android:textColor="@color/customer_tips_text"
-            android:textSize="@dimen/customer_tips_text"
-            />
-
-        <LinearLayout
-            android:id="@+id/ll_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/customer_item_mlr"
-            android:layout_marginTop="@dimen/customer_item_first_mt"
-            android:layout_marginRight="@dimen/customer_item_mlr"
-            android:background="@drawable/drawable_customer_item"
-            android:orientation="vertical"
-            android:padding="@dimen/customer_item_p">
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_title_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/mall_tool_pl"
+                android:text="联系客服"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_tips"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@mipmap/ic_customer_phone"
-                android:drawablePadding="@dimen/customer_second_title_dp"
-                android:gravity="center_vertical"
-                android:text="@string/customer_title_phone"
-                android:textColor="@color/customer_tips_text"
-                android:textSize="@dimen/customer_second_title_text"/>
+                android:layout_marginTop="12dip"
+                android:background="@android:color/white"
+                android:padding="16dip"
+                android:text="客服上班时间为：9:00-18:00"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                />
+
+            <LinearLayout
+                android:id="@+id/ll_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="24dip"
+                android:layout_marginRight="15dip"
+                android:background="@drawable/drawable_customer_item"
+                android:orientation="vertical"
+                android:padding="16dip">
+
+                <TextView
+                    android:id="@+id/tv_title_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ic_customer_phone"
+                    android:drawablePadding="5dip"
+                    android:gravity="center_vertical"
+                    android:text="电话客服"
+                    android:textColor="#333333"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:paddingTop="10dip"
+                android:paddingBottom="10dip"
+                android:text="温馨提示:\n电话点击即可拨号。"
+                android:textColor="#2D82C5"
+                android:textSize="13sp"/>
         </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/tv_notes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/customer_item_mlr"
-            android:layout_marginRight="@dimen/customer_item_mlr"
-            android:paddingTop="@dimen/customer_item_mt"
-            android:paddingBottom="@dimen/customer_item_mt"
-            android:text="@string/customer_notes"
-            android:textColor="@color/customer_notes_text"
-            android:textSize="@dimen/customer_notes_text"/>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

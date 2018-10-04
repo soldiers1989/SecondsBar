@@ -8,6 +8,7 @@ import com.fx.secondbar.bean.BankBean;
 import com.fx.secondbar.bean.CommissionBean;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.ConsumerBean;
+import com.fx.secondbar.bean.CustomerBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.InviteInfoBean;
@@ -671,6 +672,17 @@ public class HttpManager
     public static void orderAppeal(String orderId, Subscriber<ResponseBean> subscriber)
     {
         Observable<ResponseBean> observable = getInstance().mService.orderAppeal(orderId).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取客服信息
+     *
+     * @param subscriber
+     */
+    public static void getCustomerInfo(Subscriber<List<CustomerBean>> subscriber)
+    {
+        Observable<List<CustomerBean>> observable = getInstance().mService.getCustomerInfo().map(new HttpResultFun<List<CustomerBean>>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
