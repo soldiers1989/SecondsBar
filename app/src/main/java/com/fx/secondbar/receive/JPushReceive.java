@@ -60,6 +60,7 @@ public class JPushReceive extends BroadcastReceiver
             } else
             {
                 String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+                LogUtil.e("receive", extras);
                 Bundle b = new Bundle();
 
 //                /*

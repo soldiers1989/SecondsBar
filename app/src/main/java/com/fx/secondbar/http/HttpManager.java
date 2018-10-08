@@ -11,6 +11,7 @@ import com.fx.secondbar.bean.ConsumerBean;
 import com.fx.secondbar.bean.CustomerBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
+import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.bean.InviteInfoBean;
 import com.fx.secondbar.bean.LevelBean;
 import com.fx.secondbar.bean.MessageBean;
@@ -741,6 +742,20 @@ public class HttpManager
         Observable<List<MessageBean>> observable = getInstance().mService.getMessageList(type, page, pageSize).map(new HttpResultFun<List<MessageBean>>());
         getInstance().bindSubscriber(observable, subscriber);
 
+    }
+
+    /**
+     * 资讯搜索
+     *
+     * @param name       关键字
+     * @param page       页码
+     * @param pageSize   页大小
+     * @param subscriber
+     */
+    public static void searchInformation(String name, int page, int pageSize, Subscriber<List<InfomationBean>> subscriber)
+    {
+        Observable<List<InfomationBean>> observable = getInstance().mService.searchInformation(name, page, pageSize).map(new HttpResultFun<List<InfomationBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
     }
 
     /**

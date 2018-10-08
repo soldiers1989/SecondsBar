@@ -23,6 +23,7 @@ import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
 import com.fx.secondbar.ui.home.item.FragmentWb;
 import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
 import com.fx.secondbar.ui.notify.AcNotifyManager;
+import com.fx.secondbar.ui.search.AcSearch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,6 +138,7 @@ public class FragmentHome extends FragmentSupport
                 jump(AcNotifyManager.class);
                 break;
             case R.id.fl_search:
+                jump(AcSearch.class, AcSearch.TYPE_INFORMATION, false);
                 break;
         }
     }

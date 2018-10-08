@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -24,13 +25,17 @@ import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.CommodityBean;
+import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.bean.QuoteBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.home.AcInformationDetail;
 import com.fx.secondbar.ui.home.adapter.AdQuote;
+import com.fx.secondbar.ui.home.item.adapter.AdInfomation;
 import com.fx.secondbar.ui.mall.AcMallDetail;
 import com.fx.secondbar.ui.mall.AdMall;
 import com.fx.secondbar.ui.quote.AcQuoteDetail;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscriber;
@@ -53,6 +58,10 @@ public class AcSearch extends ActivitySupport
      * 搜索行情
      */
     public static final int TYPE_QUOTES = 2;
+    /**
+     * 搜索资讯
+     */
+    public static final int TYPE_INFORMATION = 3;
 
     private ConstraintLayout content;
     private Toolbar toolbar;
@@ -193,7 +202,69 @@ public class AcSearch extends ActivitySupport
                 }
             }, recyclerView);
             content.setBackgroundColor(Color.parseColor("#292d32"));
+        } else if (TYPE_INFORMATION == type)
+        {
+            ll_title.setVisibility(View.GONE);
+            recyclerView.setPadding(0, getResources().getDimensionPixelOffset(R.dimen.search_content_plr), 0, 0);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(1, false, false, false));
+            adapter = new AdInfomation();
+            adapter.bindToRecyclerView(recyclerView);
+            adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position)
+                {
+                    if (isFastDoubleClick(view))
+                    {
+                        return;
+                    }
+                    AdInfomation adInfomation = (AdInfomation) adapter;
+                    if (adInfomation == null)
+                    {
+                        return;
+                    }
+                    AdInfomation.InfomationEntity entity = adInfomation.getItem(position);
+                    if (AdInfomation.InfomationEntity.TYPE_MULTI_IMG == entity.getItemType() || AdInfomation.InfomationEntity.TYPE_SINGLE_IMG == entity.getItemType())
+                    {
+                        jump(AcInformationDetail.class, entity.getInfomationBean().getNews_ID(), false);
+                    } else if (AdInfomation.InfomationEntity.TYPE_COMMODITY == entity.getItemType())
+                    {
+                        CommodityBean commodityBean = entity.getCommodityBean();
+                        if (commodityBean != null)
+                        {
+                            jump(AcMallDetail.class, commodityBean.getMerchandise_ID());
+                        }
+                    }
+                }
+            });
+            adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
+            {
+                @Override
+                public void onLoadMoreRequested()
+                {
+                    search(currSearch, currPage + 1);
+                }
+            }, recyclerView);
+            content.setBackgroundColor(Color.parseColor("#f2f2f2"));
         }
+        if (adapter != null)
+        {
+            adapter.setEmptyView(createEmpty());
+        }
+    }
+
+    /**
+     * 创建空页面
+     *
+     * @return
+     */
+    private View createEmpty()
+    {
+        View view = LayoutInflater.from(this).inflate(R.layout.layout_empty, recyclerView, false);
+        TextView tv_empty_data = view.findViewById(R.id.tv_empty_data);
+        tv_empty_data.setText("未搜索到数据");
+        return view;
     }
 
 
@@ -233,6 +304,9 @@ public class AcSearch extends ActivitySupport
         } else if (TYPE_QUOTES == type)
         {
             searchQuote(name, page);
+        } else if (TYPE_INFORMATION == type)
+        {
+            searchInformation(name, page);
         }
     }
 
@@ -259,6 +333,7 @@ public class AcSearch extends ActivitySupport
                 {
                     return;
                 }
+                e.printStackTrace();
                 ShowToast.showToast(HttpManager.checkLoadError(e));
             }
 
@@ -316,6 +391,7 @@ public class AcSearch extends ActivitySupport
                 {
                     return;
                 }
+                e.printStackTrace();
                 ShowToast.showToast(HttpManager.checkLoadError(e));
             }
 
@@ -348,6 +424,91 @@ public class AcSearch extends ActivitySupport
                 }
             }
         });
+    }
+
+    /**
+     * 搜索资讯
+     *
+     * @param name 关键字
+     * @param page 页码
+     */
+    private void searchInformation(final String name, final int page)
+    {
+        HttpManager.searchInformation(name, page, PAGE_NUM, new Subscriber<List<InfomationBean>>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(List<InfomationBean> infomationBeans)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                currPage = page;
+                currSearch = name;
+                if (page == PAGE_START)
+                {
+                    adapter.setNewData(handlerInformationData(infomationBeans));
+                    if (VerificationUtil.getSize(infomationBeans) == 0)
+                    {
+                        ShowToast.showToast("暂无相关结果");
+                    }
+                } else
+                {
+                    adapter.addData(handlerInformationData(infomationBeans));
+                }
+                if (VerificationUtil.getSize(infomationBeans) >= PAGE_NUM)
+                {
+                    adapter.loadMoreComplete();
+                } else
+                {
+                    adapter.loadMoreEnd();
+                }
+            }
+        });
+    }
+
+    /**
+     * 数据处理
+     *
+     * @param infomationBeans
+     * @return
+     */
+    private List<AdInfomation.InfomationEntity> handlerInformationData(List<InfomationBean> infomationBeans)
+    {
+        List<AdInfomation.InfomationEntity> list = new ArrayList<>();
+        if (infomationBeans != null)
+        {
+            for (int i = 0; i < infomationBeans.size(); i++)
+            {
+
+                String pictures = infomationBeans.get(i).getPictures();
+                String[] picture = null;
+                if (!TextUtils.isEmpty(pictures))
+                {
+                    picture = pictures.split(",");
+                }
+                AdInfomation.InfomationEntity infomationEntity = new AdInfomation.InfomationEntity((picture != null && picture.length != 1) ? AdInfomation.InfomationEntity.TYPE_MULTI_IMG : AdInfomation.InfomationEntity.TYPE_SINGLE_IMG, infomationBeans.get(i));
+                list.add(infomationEntity);
+            }
+        }
+        return list;
     }
 
     @Override

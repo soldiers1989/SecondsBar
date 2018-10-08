@@ -2,6 +2,7 @@ package com.fx.secondbar.http.service;
 
 
 import com.btten.bttenlibrary.base.bean.ResponseBean;
+import com.btten.bttenlibrary.view.photoview.Info;
 import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.BankBean;
 import com.fx.secondbar.bean.CommissionBean;
@@ -10,6 +11,7 @@ import com.fx.secondbar.bean.ConsumerBean;
 import com.fx.secondbar.bean.CustomerBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
+import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.bean.InviteInfoBean;
 import com.fx.secondbar.bean.LevelBean;
 import com.fx.secondbar.bean.MessageBean;
@@ -551,5 +553,16 @@ public interface IService
      */
     @GET(Constants.API_MESSAGE_LIST)
     Observable<ResponseBean<List<MessageBean>>> getMessageList(@Query("type") String type, @Query("page") int page, @Query("count") int pageSize);
+
+    /**
+     * 资讯搜索
+     *
+     * @param name     关键字
+     * @param page     页码
+     * @param pageSize 页大小
+     * @return
+     */
+    @GET(Constants.API_SEARCH_INFORMATION)
+    Observable<ResponseBean<List<InfomationBean>>> searchInformation(@Query("name") String name, @Query("page") int page, @Query("count") int pageSize);
 
 }

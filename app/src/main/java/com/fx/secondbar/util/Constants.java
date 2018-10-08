@@ -285,4 +285,9 @@ public class Constants
      * 消息列表
      */
     public static final String API_MESSAGE_LIST = "index/messgae";
+
+    /**
+     * 资讯搜索
+     */
+    public static final String API_SEARCH_INFORMATION = "index/news/search";
 }

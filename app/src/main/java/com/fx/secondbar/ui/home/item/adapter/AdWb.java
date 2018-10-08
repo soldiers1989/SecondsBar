@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.fx.secondbar.util.GlideLoad;
 import com.joooonho.SelectableRoundedImageView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -110,7 +112,19 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
         {
             if (VerificationUtil.noEmpty(bean.getPictures()))
             {
-                return bean.getPictures();
+                String pictures = bean.getPictures();
+                String[] picture = null;
+                if (!TextUtils.isEmpty(pictures))
+                {
+                    picture = pictures.split(",");
+                }
+                if (picture == null)
+                {
+                    return new ArrayList<>();
+                } else
+                {
+                    return Arrays.asList(picture);
+                }
             } else
             {
                 List<String> list = new ArrayList<>();

@@ -1,7 +1,5 @@
 package com.fx.secondbar.bean;
 
-import java.util.List;
-
 /**
  * function:微博信息实体
  * author: frj
@@ -11,7 +9,7 @@ public class WBBean
 {
 
     private String username;//用户名
-    private List<String> pictures;// 图片集
+    private String pictures;// 图片集
     private String content;// 内容，html文本
     private String share_COPY;// 来源
     private String picture;// 单图片
@@ -33,12 +31,12 @@ public class WBBean
         this.username = username;
     }
 
-    public List<String> getPictures()
+    public String getPictures()
     {
         return pictures;
     }
 
-    public void setPictures(List<String> pictures)
+    public void setPictures(String pictures)
     {
         this.pictures = pictures;
     }
