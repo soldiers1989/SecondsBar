@@ -225,7 +225,7 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
         String content = getIntent().getStringExtra(KEY_CONTENT);
         if (TYPE_POSTER_INVITE != type)
         {
-            img_code.setImageBitmap(CodeUtils.createQRCode(String.format(Constants.URL_SHARE, FxApplication.getInstance().getUserInfoBean().getMemberid()), DensityUtil.dip2px(this, 120), BitmapFactory.decodeResource(getResources(), R.mipmap.icons)));
+            img_code.setImageBitmap(CodeUtils.createQRCode(String.format(Constants.URL_SHARE, FxApplication.getInstance().getUserInfoBean().getMemberid(), String.valueOf(Math.random())), DensityUtil.dip2px(this, 120), BitmapFactory.decodeResource(getResources(), R.mipmap.icons)));
             tv_time.setText(DateUtils.DateToStr(new Date(), "yyyy-MM-dd HH:mm"));
 
             ll_content.setVisibility(View.VISIBLE);
@@ -267,7 +267,7 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
             cl_poster_share.setVisibility(View.VISIBLE);
             cl_poster_share.setDrawingCacheEnabled(true);
             cl_poster_share.buildDrawingCache();
-            img_poster_share_code.setImageBitmap(CodeUtils.createQRCode(String.format(Constants.URL_SHARE, FxApplication.getInstance().getUserInfoBean().getMemberid()), DensityUtil.dip2px(this, 100), BitmapFactory.decodeResource(getResources(), R.mipmap.icons)));
+            img_poster_share_code.setImageBitmap(CodeUtils.createQRCode(String.format(Constants.URL_SHARE, FxApplication.getInstance().getUserInfoBean().getMemberid(), String.valueOf(Math.random())), DensityUtil.dip2px(this, 100), BitmapFactory.decodeResource(getResources(), R.mipmap.icons)));
         }
 
     }

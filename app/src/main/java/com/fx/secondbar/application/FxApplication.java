@@ -21,6 +21,8 @@ import com.tencent.smtt.sdk.QbSdk;
 
 import java.util.ArrayList;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * function:
  * author: frj
@@ -64,6 +66,7 @@ public class FxApplication extends BtApplication
         QbSdk.initX5Environment(getApplicationContext(), cb);
         //初始化微博sdk
         WbSdk.install(this, new AuthInfo(this, ShareUtils.SINA_APPKEY, ShareUtils.REDIRECT_URL, ShareUtils.SCOPE));
+        JPushInterface.init(this);
     }
 
     @Override

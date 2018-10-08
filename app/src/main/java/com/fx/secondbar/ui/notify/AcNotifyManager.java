@@ -46,7 +46,8 @@ public class AcNotifyManager extends ActivitySupport
     @Override
     protected void initData()
     {
-
+        tv_unread_system.setVisibility(View.GONE);
+        tv_unread_anno.setVisibility(View.GONE);
     }
 
     @Override
@@ -62,10 +63,10 @@ public class AcNotifyManager extends ActivitySupport
                 finish();
                 break;
             case R.id.v_system:
-                jump(AcMessageList.class, AcMessageList.TYPE_SYSTEM, false);
+                jump(AcMessageListItem.class, AcMessageListItem.TYPE_SYSTEM, false);
                 break;
             case R.id.v_notify:
-                jump(AcMessageList.class, AcMessageList.TYPE_ANNO, false);
+                jump(AcMessageListItem.class, AcMessageListItem.TYPE_ANNO, false);
                 break;
         }
     }

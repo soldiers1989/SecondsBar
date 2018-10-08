@@ -13,6 +13,7 @@ import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.util.DeviceUuidFactory;
 
+import cn.jpush.android.api.JPushInterface;
 import rx.Subscriber;
 
 /**
@@ -63,10 +64,17 @@ public class AcTransilate extends ActivitySupport
                 }
             }
         }, 2 * 1000);
-        //用于生成设备id
+
         new DeviceUuidFactory(FxApplication.getInstance());
         openAppActive();
         getConfigInfo();
+        //用于生成设备id
+        String deviceId = new DeviceUuidFactory(FxApplication.getInstance()).getDeviceUuid().toString();
+        if (deviceId.contains("-"))
+        {
+            deviceId = deviceId.replace("-", "");
+        }
+        setAlias(deviceId);
     }
 
     /**
@@ -135,6 +143,14 @@ public class AcTransilate extends ActivitySupport
                 }
             }
         });
+    }
+
+    /**
+     * 设置别名
+     */
+    private void setAlias(String deviceId)
+    {
+        JPushInterface.setAlias(this, 1, deviceId);
     }
 
     @Override

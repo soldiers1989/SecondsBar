@@ -18,6 +18,7 @@ import java.util.List;
  * author: frj
  * modify date: 2018/9/26
  */
+@Deprecated
 public class AcMessageList extends ActivitySupport
 {
     /**
@@ -33,6 +34,7 @@ public class AcMessageList extends ActivitySupport
     private ViewPager viewPager;
 
     private AdHomeItem adapter;
+
 
     @Override
     protected int getLayoutResId()

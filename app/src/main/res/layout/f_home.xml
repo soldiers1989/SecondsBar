@@ -34,7 +34,7 @@
                 android:layout_alignParentRight="true"
                 android:scaleType="centerInside"
                 android:src="@mipmap/ic_msg"
-                android:visibility="invisible"/>
+                android:visibility="visible"/>
 
             <FrameLayout
                 android:id="@+id/fl_search"

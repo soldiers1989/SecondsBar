@@ -5,7 +5,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.MessageBean;
 
 /**
  * function:消息详情
@@ -17,6 +19,7 @@ public class AcMessageDetail extends ActivitySupport
 
     private TextView tv_time;
     private TextView tv_content;
+    private TextView tv_title;
 
     @Override
     protected int getLayoutResId()
@@ -29,6 +32,7 @@ public class AcMessageDetail extends ActivitySupport
     {
         tv_time = findView(R.id.tv_time);
         tv_content = findView(R.id.tv_content);
+        tv_title = findView(R.id.tv_title);
         findView(R.id.ib_back).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,7 +47,13 @@ public class AcMessageDetail extends ActivitySupport
     @Override
     protected void initData()
     {
-
+        MessageBean bean = getIntent().getParcelableExtra(KEY);
+        if (bean != null)
+        {
+            VerificationUtil.setViewValue(tv_content, bean.getContent());
+            VerificationUtil.setViewValue(tv_time, bean.getCreatetime());
+            VerificationUtil.setViewValue(tv_title, bean.getTitle());
+        }
     }
 
     @Override

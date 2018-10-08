@@ -12,12 +12,14 @@ import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.InviteInfoBean;
 import com.fx.secondbar.bean.LevelBean;
+import com.fx.secondbar.bean.MessageBean;
 import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
 import com.fx.secondbar.bean.PurchaseDetailBean;
 import com.fx.secondbar.bean.QCoinBean;
 import com.fx.secondbar.bean.QCoinRangeBean;
+import com.fx.secondbar.bean.QuoteBean;
 import com.fx.secondbar.bean.RechargeRecordBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
@@ -507,5 +509,47 @@ public interface IService
      */
     @GET(Constants.API_GET_CUSTOMER)
     Observable<ResponseBean<List<CustomerBean>>> getCustomerInfo();
+
+    /**
+     * 搜索行情名人
+     *
+     * @param name     关键字
+     * @param page     页码
+     * @param pageSize 页大小
+     * @return
+     */
+    @GET(Constants.API_SEARCH_PEOPLE)
+    Observable<ResponseBean<List<QuoteBean>>> searchQuotePerson(@Query("name") String name, @Query("page") int page, @Query("count") int pageSize);
+
+    /**
+     * 商城-商品搜索
+     *
+     * @param name     关键字
+     * @param page     页码
+     * @param pageSize 页大小
+     * @return
+     */
+    @GET(Constants.API_SEARCH_MALL)
+    Observable<ResponseBean<List<CommodityBean>>> searchMall(@Query("name") String name, @Query("page") int page, @Query("count") int pageSize);
+
+    /**
+     * 交易订单id
+     *
+     * @param id 订单id
+     * @return
+     */
+    @GET(Constants.API_CANCEL_ORDER)
+    Observable<ResponseBean> cancelOrder(@Query("transactionid") String id);
+
+    /**
+     * 获取消息列表
+     *
+     * @param type     1表示系统消息；2表示公告消息
+     * @param page     页码
+     * @param pageSize 页大小
+     * @return
+     */
+    @GET(Constants.API_MESSAGE_LIST)
+    Observable<ResponseBean<List<MessageBean>>> getMessageList(@Query("type") String type, @Query("page") int page, @Query("count") int pageSize);
 
 }

@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,8 +17,10 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.CategoryBean;
+import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
 import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
+import com.fx.secondbar.ui.quote.AcQuoteDetail;
 import com.fx.secondbar.ui.quote.FragmentQuoteItem;
 import com.fx.secondbar.ui.search.AcSearch;
 
@@ -31,6 +34,8 @@ import java.util.List;
  */
 public class FragmentQuotes extends FragmentSupport
 {
+
+    private static final int REQUEST_CODE_SEARCH = 10;
 
     private ImageView img_toolbar_right;
     private SlidingTabLayout tabs;
@@ -103,8 +108,37 @@ public class FragmentQuotes extends FragmentSupport
         switch (v.getId())
         {
             case R.id.img_toolbar_right:
-                jump(AcSearch.class, AcSearch.TYPE_QUOTES, false);
+                Bundle bundle = new Bundle();
+                bundle.putInt(KEY, AcSearch.TYPE_QUOTES);
+                jump(AcSearch.class, bundle, REQUEST_CODE_SEARCH);
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (REQUEST_CODE_SEARCH == requestCode)
+        {
+            if (ActivitySupport.RESULT_OK == resultCode)
+            {
+                FragmentQuoteItem fragmentQuoteItem = (FragmentQuoteItem) adapter.getItem(viewPager.getCurrentItem());
+                if (fragmentQuoteItem != null)
+                {
+                    fragmentQuoteItem.refresh();
+                }
+
+            } else if (AcQuoteDetail.RESULT_CODE_TRANSACTION == resultCode)
+            {
+                if (data == null)
+                {
+                    return;
+                }
+                String name = data.getStringExtra(KEY_STR);
+                String peopleId = data.getStringExtra(KEY);
+                ((MainActivity) getActivity()).jumpToTransaction(peopleId, name);
+            }
         }
     }
 }

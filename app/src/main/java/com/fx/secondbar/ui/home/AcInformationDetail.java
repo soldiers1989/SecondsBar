@@ -130,7 +130,7 @@ public class AcInformationDetail extends ActivitySupport
         //设置起始进度值
         incomeProgressView.setStartProgress(FxApplication.getInstance().getIncomeProgress());
         initWebView();
-        String url = String.format(Constants.URL_INFORMATION, getIntent().getStringExtra(KEY_STR), new DeviceUuidFactory(this).getDeviceUuid());
+        String url = String.format(Constants.URL_INFORMATION, getIntent().getStringExtra(KEY_STR), new DeviceUuidFactory(this).getDeviceUuid().toString(), String.valueOf(Math.random()));
         LogUtil.e(url);
         webView.loadUrl(url);
     }

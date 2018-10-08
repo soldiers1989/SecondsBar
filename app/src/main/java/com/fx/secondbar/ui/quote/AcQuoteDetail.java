@@ -38,7 +38,7 @@ import rx.Subscriber;
 public class AcQuoteDetail extends ActivitySupport
 {
 
-    private static final String URL = Constants.ROOT_URL + "/static/mb-front/market.html?id=%s&deviceid=%s";
+    private static final String URL = Constants.ROOT_URL + "/static/mb-front/market.html?id=%s&deviceid=%s&random=%s";
 
     /**
      * 跳转至交易中心界面
@@ -94,7 +94,7 @@ public class AcQuoteDetail extends ActivitySupport
         peopleId = getIntent().getStringExtra("id");
 
 
-        webView.loadUrl(String.format(URL, peopleId, new DeviceUuidFactory(this).getDeviceUuid()));
+        webView.loadUrl(String.format(URL, peopleId, new DeviceUuidFactory(this).getDeviceUuid().toString(), String.valueOf(Math.random())));
 
         //获取是否自选值
         type = getIntent().getIntExtra(KEY, 0);
@@ -138,12 +138,12 @@ public class AcQuoteDetail extends ActivitySupport
         webSetting.setBuiltInZoomControls(false);
         webSetting.setUseWideViewPort(true);
         webSetting.setSupportMultipleWindows(false);
-        webSetting.setAppCacheEnabled(true);
+//        webSetting.setAppCacheEnabled(true);
         webSetting.setDomStorageEnabled(true);
         webSetting.setJavaScriptEnabled(true);
         webSetting.setGeolocationEnabled(true);
-        webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
-        webSetting.setAppCachePath(this.getDir("appcache", 0).getPath());
+//        webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
+//        webSetting.setAppCachePath(this.getDir("appcache", 0).getPath());
         webSetting.setDatabasePath(this.getDir("databases", 0).getPath());
         webSetting.setGeolocationDatabasePath(this.getDir("geolocation", 0)
                 .getPath());
@@ -253,7 +253,7 @@ public class AcQuoteDetail extends ActivitySupport
         {
             progressDialog.show();
         }
-        HttpManager.addCustomPerson(peopleId, new Subscriber<ResponseBean>()
+        HttpManager.removeCustomPerson(peopleId, new Subscriber<ResponseBean>()
         {
             @Override
             public void onCompleted()

@@ -65,7 +65,7 @@ public class AcInviteFriends extends ActivitySupport
     @Override
     protected void initData()
     {
-        String url = String.format(Constants.URL_SHARE, FxApplication.getInstance().getUserInfoBean().getMemberid());
+        String url = String.format(Constants.URL_SHARE, FxApplication.getInstance().getUserInfoBean().getMemberid(), String.valueOf(Math.random()));
         VerificationUtil.setViewValue(tv_generate_url_tips, String.format(getString(R.string.invite_generate_url), url));
         tv_generate_url_tips.setTag(url);
 

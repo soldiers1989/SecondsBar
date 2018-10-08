@@ -35,7 +35,7 @@
                 android:layout_alignParentRight="true"
                 android:scaleType="centerInside"
                 android:src="@mipmap/ic_tool_search"
-                android:visibility="invisible"/>
+                android:visibility="visible"/>
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>

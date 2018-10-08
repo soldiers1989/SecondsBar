@@ -1,9 +1,14 @@
 package com.fx.secondbar.ui.search;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -13,14 +18,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
-import com.fx.secondbar.ui.mall.AdMall;
+import com.fx.secondbar.bean.CommodityBean;
+import com.fx.secondbar.bean.QuoteBean;
+import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.adapter.AdQuote;
+import com.fx.secondbar.ui.mall.AcMallDetail;
+import com.fx.secondbar.ui.mall.AdMall;
+import com.fx.secondbar.ui.quote.AcQuoteDetail;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * function:搜索页
@@ -29,6 +42,8 @@ import java.util.List;
  */
 public class AcSearch extends ActivitySupport
 {
+
+    private static final int REQUEST_CODE_DETAIL = 1;
 
     /**
      * 搜索商品
@@ -39,6 +54,7 @@ public class AcSearch extends ActivitySupport
      */
     public static final int TYPE_QUOTES = 2;
 
+    private ConstraintLayout content;
     private Toolbar toolbar;
     private EditText ed_search;
     private ImageView img_toolbar_left;
@@ -47,6 +63,14 @@ public class AcSearch extends ActivitySupport
     private RecyclerView recyclerView;
 
     private BaseQuickAdapter adapter;
+    //当前搜索页面的类型
+    private int type;
+    /**
+     * 当前页码
+     */
+    private int currPage = PAGE_START;
+    //当前搜索的关键字
+    private String currSearch;
 
     @Override
     protected int getLayoutResId()
@@ -57,6 +81,7 @@ public class AcSearch extends ActivitySupport
     @Override
     protected void initView()
     {
+        content = findView(R.id.content);
         toolbar = findView(R.id.toolbar);
         ed_search = findView(R.id.ed_search);
         img_toolbar_left = findView(R.id.img_toolbar_left);
@@ -77,7 +102,7 @@ public class AcSearch extends ActivitySupport
                 {
                     if (adapter != null)
                     {
-                        adapter.setNewData(getDatas());
+                        search(getTextView(ed_search), PAGE_START);
                         hideSoftInput(ed_search.getWindowToken());
                     }
                 }
@@ -92,7 +117,7 @@ public class AcSearch extends ActivitySupport
     protected void initData()
     {
         setSupportActionBar(toolbar);
-        int type = getIntent().getIntExtra(KEY, TYPE_COMMODITY);
+        type = getIntent().getIntExtra(KEY, TYPE_COMMODITY);
         if (TYPE_COMMODITY == type)
         {
             ll_title.setVisibility(View.GONE);
@@ -100,6 +125,31 @@ public class AcSearch extends ActivitySupport
             recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(getResources().getDimensionPixelSize(R.dimen.mall_item_space), false, false, false));
             adapter = new AdMall();
             adapter.bindToRecyclerView(recyclerView);
+            adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position)
+                {
+                    if (isFastDoubleClick(view))
+                    {
+                        return;
+                    }
+                    AdMall adMall = (AdMall) adapter;
+                    if (adMall != null)
+                    {
+                        jump(AcMallDetail.class, adMall.getData().get(position).getMerchandise_ID());
+                    }
+                }
+            });
+            adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
+            {
+                @Override
+                public void onLoadMoreRequested()
+                {
+                    search(currSearch, currPage + 1);
+                }
+            }, recyclerView);
+            content.setBackgroundColor(Color.parseColor("#f2f2f2"));
         } else if (TYPE_QUOTES == type)
         {
             ll_title.setVisibility(View.VISIBLE);
@@ -108,21 +158,44 @@ public class AcSearch extends ActivitySupport
             recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(getResources().getDimensionPixelSize(R.dimen.mall_item_space), false, false, false));
             adapter = new AdQuote();
             adapter.bindToRecyclerView(recyclerView);
+            adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position)
+                {
+                    if (isFastDoubleClick(view))
+                    {
+                        return;
+                    }
+                    AdQuote adQuote = (AdQuote) adapter;
+                    if (adQuote == null)
+                    {
+                        return;
+                    }
+                    Bundle bundle = new Bundle();
+                    String title = adQuote.getItem(position).getName();
+                    if (!TextUtils.isEmpty(adQuote.getItem(position).getZjm()))
+                    {
+                        title = title + "(" + adQuote.getItem(position).getZjm() + ")";
+                    }
+                    bundle.putString(KEY_STR, title);
+                    bundle.putInt(KEY, adQuote.getItem(position).getIscollection());
+                    bundle.putString("id", adQuote.getItem(position).getPeopleid());
+                    jump(AcQuoteDetail.class, bundle, REQUEST_CODE_DETAIL);
+                }
+            });
+            adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
+            {
+                @Override
+                public void onLoadMoreRequested()
+                {
+                    search(currSearch, currPage + 1);
+                }
+            }, recyclerView);
+            content.setBackgroundColor(Color.parseColor("#292d32"));
         }
     }
 
-    private List<String> getDatas()
-    {
-        List<String> list = new ArrayList<>();
-        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536514197209&di=fd7806ccccb9f675e081158a168d217c&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20140408%2FImg397875444.jpg");
-        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536514197209&di=4a1d55696d17cc5ac675b325682949f3&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D5022a7eab8119313d34ef7f30d5166a2%2Fb17eca8065380cd79242cbc5ab44ad34598281bd.jpg");
-        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536514197208&di=da96e93ec963b3ebaa1a5366b6374ad5&imgtype=0&src=http%3A%2F%2Fimg6.blog.eastmoney.com%2Fte%2Ftealemon%2F201404%2F20140409174203840.jpg");
-        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536514197208&di=abc69a266d646a83c8a39e2738650be9&imgtype=0&src=http%3A%2F%2Fs1.sinaimg.cn%2Fmw690%2F006wmg2Hzy73dot1Fug80");
-        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536514197207&di=b9d08210a7d4e15e75132cfedadfedd9&imgtype=0&src=http%3A%2F%2Fimg.mp.sohu.com%2Fupload%2F20170815%2Fc31de52066b745e49c1e789a92148798_th.png");
-        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536514197207&di=b906894d2fbf9e2d40d6b5cc487efb7d&imgtype=0&src=http%3A%2F%2Fs4.sinaimg.cn%2Fmw690%2F006wmg2Hzy73WumZF2X13%26690");
-        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536514197207&di=d75ed4eb065a4fee99e6bd7c5f43eac3&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160921%2F0b12ece25105493db41a01b3aa33e5d4_th.jpg");
-        return list;
-    }
 
     @Override
     public void onClick(View v)
@@ -136,7 +209,7 @@ public class AcSearch extends ActivitySupport
             case R.id.img_toolbar_right:
                 if (adapter != null)
                 {
-                    adapter.setNewData(getDatas());
+                    search(getTextView(ed_search), PAGE_START);
                     hideSoftInput(ed_search.getWindowToken());
                 }
                 break;
@@ -144,6 +217,137 @@ public class AcSearch extends ActivitySupport
                 finish();
                 break;
         }
+    }
+
+    /**
+     * 搜索
+     *
+     * @param name 关键字
+     * @param page 页码
+     */
+    private void search(String name, int page)
+    {
+        if (TYPE_COMMODITY == type)
+        {
+            searchMall(name, page);
+        } else if (TYPE_QUOTES == type)
+        {
+            searchQuote(name, page);
+        }
+    }
+
+    /**
+     * 搜索行情
+     *
+     * @param name
+     * @param page
+     */
+    private void searchQuote(final String name, final int page)
+    {
+        HttpManager.searchQuote(name, page, PAGE_NUM, new Subscriber<List<QuoteBean>>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(List<QuoteBean> quoteBeans)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                currPage = page;
+                currSearch = name;
+                if (page == PAGE_START)
+                {
+                    adapter.setNewData(quoteBeans);
+                    if (VerificationUtil.getSize(quoteBeans) == 0)
+                    {
+                        ShowToast.showToast("暂无相关结果");
+                    }
+                } else
+                {
+                    adapter.addData(quoteBeans);
+                }
+                if (VerificationUtil.getSize(quoteBeans) >= PAGE_NUM)
+                {
+                    adapter.loadMoreComplete();
+                } else
+                {
+                    adapter.loadMoreEnd();
+                }
+            }
+        });
+    }
+
+    /**
+     * 搜索商品
+     *
+     * @param name 关键字
+     * @param page 页码
+     */
+    private void searchMall(final String name, final int page)
+    {
+        HttpManager.searchMall(name, page, PAGE_NUM, new Subscriber<List<CommodityBean>>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(List<CommodityBean> commodityBeans)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                currPage = page;
+                currSearch = name;
+                if (page == PAGE_START)
+                {
+                    adapter.setNewData(commodityBeans);
+                    if (VerificationUtil.getSize(commodityBeans) == 0)
+                    {
+                        ShowToast.showToast("暂无相关结果");
+                    }
+                } else
+                {
+                    adapter.addData(commodityBeans);
+                }
+                if (VerificationUtil.getSize(commodityBeans) >= PAGE_NUM)
+                {
+                    adapter.loadMoreComplete();
+                } else
+                {
+                    adapter.loadMoreEnd();
+                }
+            }
+        });
     }
 
     @Override
@@ -156,5 +360,17 @@ public class AcSearch extends ActivitySupport
     protected int[] getPermissionInfoTips()
     {
         return new int[0];
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (REQUEST_CODE_DETAIL == requestCode && (RESULT_OK == resultCode || AcQuoteDetail.RESULT_CODE_TRANSACTION == resultCode))
+        {
+
+            setResult(resultCode, data);
+            finish();
+        }
     }
 }

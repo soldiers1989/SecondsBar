@@ -95,12 +95,12 @@ public class AcWebBrowse extends ActivitySupport
         webSetting.setBuiltInZoomControls(false);
         webSetting.setUseWideViewPort(true);
         webSetting.setSupportMultipleWindows(false);
-        webSetting.setAppCacheEnabled(true);
+//        webSetting.setAppCacheEnabled(true);
         webSetting.setDomStorageEnabled(true);
         webSetting.setJavaScriptEnabled(true);
         webSetting.setGeolocationEnabled(true);
-        webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
-        webSetting.setAppCachePath(this.getDir("appcache", 0).getPath());
+//        webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
+//        webSetting.setAppCachePath(this.getDir("appcache", 0).getPath());
         webSetting.setDatabasePath(this.getDir("databases", 0).getPath());
         webSetting.setGeolocationDatabasePath(this.getDir("geolocation", 0)
                 .getPath());

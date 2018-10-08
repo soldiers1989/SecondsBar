@@ -20,12 +20,12 @@ public class Constants
     /**
      * 资讯详情访问地址
      */
-    public static final String URL_INFORMATION = ROOT_URL + "/static/mb-front/news.html?id=%s&deviceid=%s";
+    public static final String URL_INFORMATION = ROOT_URL + "/static/mb-front/news.html?id=%s&deviceid=%s&random=%s";
 
     /**
      * 分享链接
      */
-    public static final String URL_SHARE = ROOT_URL + "/static/mb-front/getAward.html?id=%s";
+    public static final String URL_SHARE = ROOT_URL + "/static/mb-front/getAward.html?id=%s&random=%s";
 
     /**
      * 更新用户数据
@@ -267,4 +267,22 @@ public class Constants
      * 获取客服信息
      */
     public static final String API_GET_CUSTOMER = "index/customerserver";
+
+    /**
+     * 行情-名人搜索接口
+     */
+    public static final String API_SEARCH_PEOPLE = "people/search";
+    /**
+     * 商城-商品搜索接口
+     */
+    public static final String API_SEARCH_MALL = "mall/search";
+    /**
+     * 交易撤单
+     */
+    public static final String API_CANCEL_ORDER = "transaction/reback";
+
+    /**
+     * 消息列表
+     */
+    public static final String API_MESSAGE_LIST = "index/messgae";
 }

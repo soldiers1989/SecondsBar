@@ -189,6 +189,15 @@ public class FragmentQuoteItem extends FragmentViewPagerBase implements SwipeRef
         getData(PAGE_START, categoryId);
     }
 
+    /**
+     * 刷新数据
+     */
+    public void refresh()
+    {
+        swipeRefreshLayout.setRefreshing(true);
+        onRefresh();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {

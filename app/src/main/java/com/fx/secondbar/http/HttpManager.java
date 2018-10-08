@@ -13,12 +13,14 @@ import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.InviteInfoBean;
 import com.fx.secondbar.bean.LevelBean;
+import com.fx.secondbar.bean.MessageBean;
+import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
-import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.PurchaseDetailBean;
 import com.fx.secondbar.bean.QCoinBean;
 import com.fx.secondbar.bean.QCoinRangeBean;
+import com.fx.secondbar.bean.QuoteBean;
 import com.fx.secondbar.bean.RechargeRecordBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
@@ -684,6 +686,61 @@ public class HttpManager
     {
         Observable<List<CustomerBean>> observable = getInstance().mService.getCustomerInfo().map(new HttpResultFun<List<CustomerBean>>());
         getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 搜索行情-名人
+     *
+     * @param name       关键字
+     * @param page       页码
+     * @param pageSize   页大小
+     * @param subscriber
+     */
+    public static void searchQuote(String name, int page, int pageSize, Subscriber<List<QuoteBean>> subscriber)
+    {
+        Observable<List<QuoteBean>> observable = getInstance().mService.searchQuotePerson(name, page, pageSize).map(new HttpResultFun<List<QuoteBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 搜索商城-商品
+     *
+     * @param name
+     * @param page
+     * @param pageSize
+     * @param subscriber
+     */
+    public static void searchMall(String name, int page, int pageSize, Subscriber<List<CommodityBean>> subscriber)
+    {
+        Observable<List<CommodityBean>> observable = getInstance().mService.searchMall(name, page, pageSize).map(new HttpResultFun<List<CommodityBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 取消订单
+     *
+     * @param id         订单id
+     * @param subscriber
+     */
+    public static void cancelOrder(String id, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.cancelOrder(id).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取消息列表
+     *
+     * @param type       1表示系统消息；2表示公告消息
+     * @param page       页码
+     * @param pageSize   页大小
+     * @param subscriber
+     */
+    public static void getMessageList(String type, int page, int pageSize, Subscriber<List<MessageBean>> subscriber)
+    {
+        Observable<List<MessageBean>> observable = getInstance().mService.getMessageList(type, page, pageSize).map(new HttpResultFun<List<MessageBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+
     }
 
     /**
