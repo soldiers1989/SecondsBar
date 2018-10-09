@@ -46,6 +46,10 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
     {
         if (currPage == -1)
         {
+            if (swipeRefreshLayout == null)
+            {
+                return;
+            }
             swipeRefreshLayout.setRefreshing(true);
             onRefresh();
         }

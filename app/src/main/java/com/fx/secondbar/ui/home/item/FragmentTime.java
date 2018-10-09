@@ -60,7 +60,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
                 convenientBanner.startTurning(2000);
             }
         }
-        if (!VerificationUtil.noEmpty(adapter.getData()))
+        if (adapter != null && !VerificationUtil.noEmpty(adapter.getData()))
         {
             getDatas();
         }

@@ -50,6 +50,21 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
+            <TextView
+                android:id="@+id/tv_online"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dip"
+                android:background="@android:color/white"
+                android:drawableRight="@mipmap/ic_arrow_right_gray"
+                android:gravity="center_vertical"
+                android:padding="16dip"
+                android:text="在线客服"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                />
+
             <TextView
                 android:id="@+id/tv_tips"
                 android:layout_width="match_parent"

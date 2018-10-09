@@ -130,6 +130,9 @@
         <activity
             android:name=".ui.person.aboutus.AcCustomer"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.person.aboutus.AcProtocol"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name="com.tencent.connect.common.AssistActivity"

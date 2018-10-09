@@ -89,8 +89,11 @@ public class FOrderItem extends FragmentViewPagerBase implements SwipeRefreshLay
     {
         if (currPage == -1)
         {
-            swipeRefreshLayout.setRefreshing(true);
-            onRefresh();
+            if (swipeRefreshLayout != null)
+            {
+                swipeRefreshLayout.setRefreshing(true);
+                onRefresh();
+            }
         }
     }
 

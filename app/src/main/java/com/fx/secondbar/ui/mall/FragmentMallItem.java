@@ -115,8 +115,11 @@ public class FragmentMallItem extends FragmentViewPagerBase implements SwipeRefr
     {
         if (currPage == -1)
         {
-            swipeRefreshLayout.setRefreshing(true);
-            onRefresh();
+            if (swipeRefreshLayout != null)
+            {
+                swipeRefreshLayout.setRefreshing(true);
+                onRefresh();
+            }
         }
     }
 

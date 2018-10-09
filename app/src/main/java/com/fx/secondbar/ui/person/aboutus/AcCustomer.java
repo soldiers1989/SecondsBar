@@ -32,6 +32,7 @@ public class AcCustomer extends ActivitySupport
 
     private static final String URI_PHONE_FORMAT = "tel:%1$s";
 
+    private TextView tv_online;
     private TextView tv_tips;
     private LinearLayout ll_phone;
 
@@ -44,6 +45,7 @@ public class AcCustomer extends ActivitySupport
     @Override
     protected void initView()
     {
+        tv_online = findView(R.id.tv_online);
         tv_tips = findView(R.id.tv_tips);
         ll_phone = findView(R.id.ll_phone);
         findView(R.id.ib_back).setOnClickListener(this);
@@ -54,7 +56,7 @@ public class AcCustomer extends ActivitySupport
     @Override
     protected void initListener()
     {
-
+        tv_online.setOnClickListener(this);
     }
 
     @Override
@@ -205,6 +207,35 @@ public class AcCustomer extends ActivitySupport
             }
         }
     };
+
+    @Override
+    public void onClick(View v)
+    {
+        if (isFastDoubleClick(v))
+        {
+            return;
+        }
+        switch (v.getId())
+        {
+            case R.id.ib_back:
+                finish();
+                break;
+            case R.id.tv_online:
+                try
+                {
+                    //可以跳转到添加好友，如果qq号是好友了，直接聊天
+                    String url = "mqqwpa://im/chat?chat_type=wpa&uin=173681320";//uin是发送过去的qq号码
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } catch (Exception e)
+                {
+                    e.printStackTrace();
+                    ShowToast.showToast("请检查是否安装QQ");
+                }
+                break;
+        }
+    }
 
     @Override
     protected String[] getPermissionArrays()

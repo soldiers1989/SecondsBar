@@ -40,6 +40,12 @@ public class FragmentTutorial extends FragmentViewPagerBase
     {
         if (currPage == -1)
         {
+            if (adapter == null)
+            {
+                initView();
+                initListener();
+                initData();
+            }
             getData(PAGE_START);
         }
     }

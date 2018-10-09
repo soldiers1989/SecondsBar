@@ -73,7 +73,7 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
     public void onStarShow()
     {
 
-        if (VerificationUtil.getSize(adapter.getData()) == 0)
+        if (adapter != null && VerificationUtil.getSize(adapter.getData()) == 0)
         {
             swipeRefreshLayout.setRefreshing(true);
             onRefresh();

@@ -57,6 +57,10 @@ public class FragmentQuoteItem extends FragmentViewPagerBase implements SwipeRef
     {
         if (currPage == -1)
         {
+            if (swipeRefreshLayout == null)
+            {
+                return;
+            }
             swipeRefreshLayout.setRefreshing(true);
             onRefresh();
         }

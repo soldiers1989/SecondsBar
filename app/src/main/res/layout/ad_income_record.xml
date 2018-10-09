@@ -10,6 +10,18 @@
 
 
     <TextView
+        android:id="@+id/tv_money"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text=""
+        android:textColor="@color/font_yellow_color"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,8 +29,7 @@
         android:textColor="#a9a9a9"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_money"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
@@ -34,17 +45,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/tv_money"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@color/font_yellow_color"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <View

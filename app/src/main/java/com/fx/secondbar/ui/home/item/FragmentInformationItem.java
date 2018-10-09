@@ -64,7 +64,7 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
     @Override
     public void onStarShow()
     {
-        if (!VerificationUtil.noEmpty(adapter.getData()))
+        if (adapter != null && !VerificationUtil.noEmpty(adapter.getData()))
         {
             swipeRefreshLayout.setRefreshing(true);
             onRefresh();

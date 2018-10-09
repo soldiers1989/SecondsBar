@@ -121,14 +121,22 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
         } else
         {
             int hours = minues / 60;
-            if (hours <= 31)
+            if (hours < 24)
             {
-                return hours + "天前";
+                return hours + "小时前";
             } else
             {
-                int month = hours / 31;
-                return month + "月前";
+                int days = hours / 24;
+                if (days <= 31)
+                {
+                    return days + "天前";
+                } else
+                {
+                    int month = days / 31;
+                    return month + "月前";
+                }
             }
+
         }
     }
 
