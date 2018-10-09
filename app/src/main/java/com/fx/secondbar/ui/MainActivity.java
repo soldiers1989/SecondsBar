@@ -109,7 +109,20 @@ public class MainActivity extends ActivitySupport
     {
         initFragments();
         initItems();
-        switchItem(tv_home);
+        if (currIndex == INVALID)
+        {
+            switchItem(tv_home);
+        } else
+        {
+            textViews[currIndex].setSelected(true);
+            for (int i = 0; i < SIZE; i++)
+            {
+                if (i != currIndex && i != currIndex)
+                {
+                    textViews[i].setSelected(false);
+                }
+            }
+        }
         login(0);
 
         IntentFilter filter = new IntentFilter(Constants.ACTION_REFRESH_USERINFO);
@@ -172,6 +185,7 @@ public class MainActivity extends ActivitySupport
             {
                 fragments[INDEX_PERSON] = FragmentPerson.newInstance();
             }
+            currIndex = savedInstanceState.getInt(KEY, INVALID);
         } else
         {
             fragments[INDEX_HOME] = FragmentHome.newInstance();
@@ -369,6 +383,16 @@ public class MainActivity extends ActivitySupport
         fragment.showWb();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        if (outState != null)
+        {
+            //保存当前索引值
+            outState.putInt(KEY, currIndex);
+        }
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public void onClick(View v)
