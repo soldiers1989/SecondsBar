@@ -98,6 +98,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.notify.AcNotifyManager"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.notify.AcMessageListItem"

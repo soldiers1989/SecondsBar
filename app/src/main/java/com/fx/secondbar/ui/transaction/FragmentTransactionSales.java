@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
@@ -83,7 +84,10 @@ public class FragmentTransactionSales extends FragmentTransactionItem
     @Override
     public void onStarShow()
     {
-
+        if (!TextUtils.isEmpty(peopleId))
+        {
+            refreshData(peopleId, false);
+        }
     }
 
     @Nullable
@@ -135,7 +139,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
         //是否将要刷新数据
         if (isPrepareRefresh)
         {
-            refreshData(peopleId);
+            refreshData(peopleId, true);
             isPrepareRefresh = false;
         } else
         {
@@ -150,7 +154,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
         //是否将要刷新数据
         if (isPrepareRefresh)
         {
-            refreshData(peopleId);
+            refreshData(peopleId, true);
             isPrepareRefresh = false;
         }
     }
@@ -164,7 +168,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
             //是否将要刷新数据
             if (isPrepareRefresh)
             {
-                refreshData(peopleId);
+                refreshData(peopleId, true);
                 isPrepareRefresh = false;
             }
         }
@@ -301,9 +305,9 @@ public class FragmentTransactionSales extends FragmentTransactionItem
     /**
      * 刷新数据
      */
-    private void refreshData(String peopleId)
+    private void refreshData(String peopleId, boolean isShowDialog)
     {
-        if (dialog != null)
+        if (isShowDialog && dialog != null)
         {
             dialog.show();
         }
@@ -400,7 +404,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
                     dialog.dismiss();
                 }
                 ShowToast.showToast("卖出成功");
-                refreshData(peopleId);
+                refreshData(peopleId, false);
                 clearInputValue();
             }
         });

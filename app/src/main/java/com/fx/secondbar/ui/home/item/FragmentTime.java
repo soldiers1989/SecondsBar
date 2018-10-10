@@ -321,7 +321,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
     /**
      * 加载图片Holder
      */
-    static class LoadImageHolder extends Holder<BannerBean>
+    public static class LoadImageHolder extends Holder<BannerBean>
     {
 
         private ImageView img;

@@ -15,6 +15,7 @@ import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.bean.InviteInfoBean;
 import com.fx.secondbar.bean.LevelBean;
 import com.fx.secondbar.bean.MessageBean;
+import com.fx.secondbar.bean.MineData;
 import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
@@ -33,6 +34,7 @@ import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBBean;
+import com.fx.secondbar.bean.WBData;
 import com.fx.secondbar.bean.WithdrawIntroBean;
 import com.fx.secondbar.util.Constants;
 
@@ -97,7 +99,7 @@ public interface IService
      * @return
      */
     @GET(Constants.API_INDEX_WB)
-    Observable<ResponseBean<List<WBBean>>> getWbs(@Query("page") int page, @Query("count") int pageSize);
+    Observable<ResponseBean<WBData>> getWbs(@Query("page") int page, @Query("count") int pageSize);
 
     /**
      * 获取教程信息
@@ -185,7 +187,7 @@ public interface IService
      * @return
      */
     @GET(Constants.API_GET_ACTIVITY_Q)
-    Observable<ResponseBean<List<ActiveBean>>> getActives();
+    Observable<ResponseBean<MineData>> getActives();
 
     /**
      * 完成活动

@@ -73,7 +73,7 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
     public void onStarShow()
     {
 
-        if (adapter != null && VerificationUtil.getSize(adapter.getData()) == 0)
+        if(swipeRefreshLayout!=null)
         {
             swipeRefreshLayout.setRefreshing(true);
             onRefresh();
@@ -100,7 +100,7 @@ public class FragmentCommission extends FragmentTransactionItem implements Swipe
         type = getArguments().getInt(KEY);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new AdCommission();
+        adapter = new AdCommission(type);
         adapter.bindToRecyclerView(recyclerView);
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
         {

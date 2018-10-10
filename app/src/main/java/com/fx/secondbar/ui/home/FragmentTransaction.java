@@ -91,6 +91,29 @@ public class FragmentTransaction extends FragmentSupport
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(tabTitles.length);
         tabs.setViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
+
+            }
+
+            @Override
+            public void onPageSelected(int position)
+            {
+                if (fragmengs != null)
+                {
+                    fragmengs.get(position).onStarShow();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state)
+            {
+
+            }
+        });
         //刷新数据
         if (isPrepareRefresh)
         {

@@ -36,6 +36,16 @@
                 android:src="@mipmap/ic_msg"
                 android:visibility="visible"/>
 
+            <View
+                android:id="@+id/v_notify"
+                android:layout_width="8dip"
+                android:layout_height="8dip"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="8dip"
+                android:layout_marginRight="8dip"
+                android:background="@drawable/notify_unread_bg"/>
+
             <FrameLayout
                 android:id="@+id/fl_search"
                 android:layout_width="match_parent"

@@ -191,4 +191,40 @@ public class SharePreferenceUtils
         }
         return new String[]{username, password};
     }
+
+    /**
+     * 设置有系统消息
+     */
+    public static void setSystemMsg(boolean value)
+    {
+        SharePreferenceUtils.savePreferences("msg_system", value);
+    }
+
+    /**
+     * 设置有公告消息
+     */
+    public static void setAnnoMsg(boolean value)
+    {
+        SharePreferenceUtils.savePreferences("msg_anno", value);
+    }
+
+    /**
+     * 获取是否有系统消息
+     *
+     * @return true表示有
+     */
+    public static boolean getSystemMsg()
+    {
+        return SharePreferenceUtils.getValueByBoolean("msg_system", false);
+    }
+
+    /**
+     * 获取是否有公告消息
+     *
+     * @return true表示有
+     */
+    public static boolean getAnnoMsg()
+    {
+        return SharePreferenceUtils.getValueByBoolean("msg_anno", false);
+    }
 }

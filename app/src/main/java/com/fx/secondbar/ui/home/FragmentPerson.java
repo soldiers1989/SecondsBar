@@ -19,6 +19,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.holder.Holder;
 import com.btten.bttenlibrary.application.BtApplication;
 import com.btten.bttenlibrary.base.FragmentSupport;
 import com.btten.bttenlibrary.glide.GlideApp;
@@ -30,10 +33,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.ActiveBean;
+import com.fx.secondbar.bean.BannerBean;
+import com.fx.secondbar.bean.MineData;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.DialogSign;
 import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.home.adapter.AdPerson;
+import com.fx.secondbar.ui.home.item.FragmentTime;
 import com.fx.secondbar.ui.order.AcOrderManage;
 import com.fx.secondbar.ui.person.AcAccountSet;
 import com.fx.secondbar.ui.person.AcBindPhone;
@@ -46,8 +52,6 @@ import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideLoad;
 import com.fx.secondbar.util.LevelUtils;
 import com.joooonho.SelectableRoundedImageView;
-
-import java.util.List;
 
 import rx.Subscriber;
 
@@ -76,6 +80,8 @@ public class FragmentPerson extends FragmentSupport
     private RecyclerView recyclerView;
     private AdPerson adapter;
 
+    private ConvenientBanner<BannerBean> convenientBanner;
+
     public static FragmentPerson newInstance()
     {
         return new FragmentPerson();
@@ -100,6 +106,7 @@ public class FragmentPerson extends FragmentSupport
         recyclerView = findView(R.id.recyclerView);
         img_get_q = findView(R.id.img_get_q);
         tv_level = findView(R.id.tv_level);
+        convenientBanner = findView(R.id.convenientBanner);
         findView(R.id.tv_order).setOnClickListener(this);
         findView(R.id.tv_buy).setOnClickListener(this);
         findView(R.id.ib_set).setOnClickListener(this);
@@ -174,6 +181,7 @@ public class FragmentPerson extends FragmentSupport
 
         IntentFilter filter = new IntentFilter(Constants.ACTION_REFRESH_PERSON_SHOW);
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, filter);
+
     }
 
     /**
@@ -255,7 +263,7 @@ public class FragmentPerson extends FragmentSupport
      */
     private void getData(final int retry)
     {
-        HttpManager.getActives(new Subscriber<List<ActiveBean>>()
+        HttpManager.getActives(new Subscriber<MineData>()
         {
             @Override
             public void onCompleted()
@@ -278,13 +286,30 @@ public class FragmentPerson extends FragmentSupport
             }
 
             @Override
-            public void onNext(List<ActiveBean> activeBeans)
+            public void onNext(MineData mineData)
             {
                 if (isNetworkCanReturn())
                 {
                     return;
                 }
-                adapter.setNewData(activeBeans);
+                adapter.setNewData(mineData.getListActivity());
+                if (VerificationUtil.getSize(mineData.getListBanner()) > 0)
+                {
+                    convenientBanner.setPages(new CBViewHolderCreator()
+                    {
+                        @Override
+                        public Holder createHolder(View itemView)
+                        {
+                            return new FragmentTime.LoadImageHolder(itemView);
+                        }
+
+                        @Override
+                        public int getLayoutId()
+                        {
+                            return R.layout.layout_banner;
+                        }
+                    }, mineData.getListBanner()).setPageIndicator(new int[]{R.mipmap.ic_indicator, R.mipmap.ic_indicator_sel});
+                }
             }
         });
     }
@@ -299,8 +324,55 @@ public class FragmentPerson extends FragmentSupport
             {
                 getData(0);
             }
+
+            if (convenientBanner != null)
+            {
+                if (!convenientBanner.isTurning())
+                {
+                    convenientBanner.startTurning(2000);
+                }
+            }
+        } else
+        {
+            if (convenientBanner != null)
+            {
+                if (convenientBanner.isTurning())
+                {
+                    convenientBanner.stopTurning();
+                }
+            }
         }
     }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if (!isHidden())
+        {
+            if (convenientBanner != null)
+            {
+                if (!convenientBanner.isTurning())
+                {
+                    convenientBanner.startTurning(2000);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        if (convenientBanner != null)
+        {
+            if (convenientBanner.isTurning())
+            {
+                convenientBanner.stopTurning();
+            }
+        }
+    }
+
 
     @Override
     public void onClick(View v)

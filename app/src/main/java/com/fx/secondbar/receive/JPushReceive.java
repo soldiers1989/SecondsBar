@@ -3,12 +3,16 @@ package com.fx.secondbar.receive;
 import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.btten.bttenlibrary.util.LogUtil;
+import com.btten.bttenlibrary.util.SharePreferenceUtils;
+import com.fx.secondbar.ui.notify.AcNotifyManager;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -44,12 +48,15 @@ public class JPushReceive extends BroadcastReceiver
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction()))
         {
             LogUtil.d(TAG, "接受到推送下来的自定义消息");
+            String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            handlerMsg(extras);
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction()))
         {
             LogUtil.d(TAG, "接受到推送下来的通知");
-
+            String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
             receivingNotification(context, bundle);
+            handlerMsg(extras);
 
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction()))
         {
@@ -61,22 +68,14 @@ public class JPushReceive extends BroadcastReceiver
             {
                 String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
                 LogUtil.e("receive", extras);
-                Bundle b = new Bundle();
 
-//                /*
-//                    4.20修改，推送点击不再传递资讯实体信息值
-//                 */
-////                b.putParcelable("activity_num", advisoryBean);
-//                b.putInt("activity_num", advisoryBean.getId());
-//                b.putInt("activity_str", advisoryBean.getType_id());
-//                //跳转至主界面，再在主界面做判断
-//                Intent i = new Intent(Intent.ACTION_MAIN);
-//                i.addCategory(Intent.CATEGORY_LAUNCHER);
-//                i.putExtras(b);
-//                ComponentName cn = new ComponentName(context.getPackageName(), context.getPackageName() + ".ui.transition.AcTransition");
-//                i.setComponent(cn);
-//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                context.startActivity(i);
+                //跳转至主界面，再在主界面做判断
+                Intent i = new Intent(Intent.ACTION_MAIN);
+                i.addCategory(Intent.CATEGORY_LAUNCHER);
+                ComponentName cn = new ComponentName(context.getPackageName(), context.getPackageName() + ".ui.AcTransilate");
+                i.setComponent(cn);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
 
 
             }
@@ -100,11 +99,6 @@ public class JPushReceive extends BroadcastReceiver
         LogUtil.d(TAG, "message : " + message);
         String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
         LogUtil.d(TAG, "extras : " + extras);
-
-//        AdvisoryBean advisoryBean = buildAdvisory(extras);
-//        Intent intent = new Intent(Constants.FILTER_ADVISORY_MSG);
-//        intent.putExtra("bean", advisoryBean);
-//        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
     /**
@@ -123,60 +117,41 @@ public class JPushReceive extends BroadcastReceiver
         LogUtil.i(TAG, "openNotification,extra:" + extras);
         if (!TextUtils.isEmpty(extras))
         {
-//            String[] account = SharePreferenceUtils.getAccount();
-//            if (account == null)
-//            {
-//                Intent intent = new Intent(context, AcLogin.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                context.startActivity(intent);
-//                return;
-//            }
-//            AdvisoryBean advisoryBean = buildAdvisory(extras);
-//            if (advisoryBean != null)
-//            {
-//                Intent intent;
-//                if (Constants.TYPE_SUGGEST == advisoryBean.getType_id() || Constants.TYPE_COMPLAINTS == advisoryBean.getType_id())
-//                {
-//                    intent = new Intent(context, AcSuggestDetail.class);
-//                } else
-//                {
-////                    intent = new Intent(context, AcAdvisoryDetail.class);
-//                    intent = new Intent(context, AcNewAdvisoryDetail.class);
-//                }
-//                Bundle b = new Bundle();
-////                b.putParcelable("activity_num", advisoryBean);
-//                b.putInt("activity_num", advisoryBean.getId());
-//                b.putInt("activity_str", advisoryBean.getType_id());
-//                intent.putExtras(b);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                context.startActivity(intent);
-//                LogUtil.i(TAG, "jump to detail");
-//            } else
-//            {
-//                LogUtil.i(TAG, "advisoryBean is   null");
-//            }
+
+
+            Intent intent;
+
+            intent = new Intent(context, AcNotifyManager.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            LogUtil.i(TAG, "jump to detail");
+        } else
+        {
+            LogUtil.i(TAG, "advisoryBean is   null");
         }
     }
 
-//    /**
-//     * 通过附加信息，构建资讯信息实体
-//     *
-//     * @param extras 附加信息
-//     * @return
-//     */
-//    private AdvisoryBean buildAdvisory(String extras)
-//    {
-//        try
-//        {
-//            Gson gson = new Gson();
-//            AdvisoryBean advisoryBean = gson.fromJson(extras, AdvisoryBean.class);
-//            return advisoryBean;
-//        } catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+    /**
+     * 处理消息
+     *
+     * @param extras 附加消息内容
+     */
+    private void handlerMsg(String extras)
+    {
+        Gson gson = new Gson();
+        MsgExtraData data = gson.fromJson(extras, MsgExtraData.class);
+        if (data != null)
+        {
+            if (MsgExtraData.TYPE_SYSTEM.equals(data.getType()))
+            {
+                SharePreferenceUtils.setSystemMsg(true);
+            } else if (MsgExtraData.TYPE_ANNO.equals(data.getType()))
+            {
+                SharePreferenceUtils.setAnnoMsg(true);
+            }
+        }
+    }
+
 
     /**
      * 判断应用是否在运行
@@ -202,4 +177,30 @@ public class JPushReceive extends BroadcastReceiver
         return false;
     }
 
+    /**
+     * 附加消息
+     */
+    public static class MsgExtraData
+    {
+        /**
+         * 系统消息
+         */
+        public static final String TYPE_SYSTEM = "1";
+        /**
+         * 公告消息
+         */
+        public static final String TYPE_ANNO = "2";
+
+        private String type;
+
+        public String getType()
+        {
+            return type;
+        }
+
+        public void setType(String type)
+        {
+            this.type = type;
+        }
+    }
 }

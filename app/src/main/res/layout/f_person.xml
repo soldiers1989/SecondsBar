@@ -302,10 +302,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dip"
+                android:visibility="gone"
                 app:sriv_left_bottom_corner_radius="10dip"
                 app:sriv_left_top_corner_radius="10dip"
                 app:sriv_right_bottom_corner_radius="10dip"
                 app:sriv_right_top_corner_radius="10dip"/>
+
+            <com.bigkoo.convenientbanner.ConvenientBanner
+                android:id="@+id/convenientBanner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/home_time_head_h"
+                android:layout_marginTop="12dip"
+                app:canLoop="true">
+
+            </com.bigkoo.convenientbanner.ConvenientBanner>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"

@@ -22,10 +22,13 @@ import com.fx.secondbar.bean.CommissionBean;
  */
 public class AdCommission extends BaseQuickAdapter<CommissionBean, BaseViewHolder>
 {
+    //委托类型
+    private int type;
 
-    public AdCommission()
+    public AdCommission(int type)
     {
         super(R.layout.ad_commission);
+        this.type = type;
     }
 
     @Override
@@ -47,7 +50,13 @@ public class AdCommission extends BaseQuickAdapter<CommissionBean, BaseViewHolde
         VerificationUtil.setViewValue(tv_name, name);
         VerificationUtil.setViewValue(tv_price, item.getPrice());
         VerificationUtil.setViewValue(tv_seconds, item.getSecond());
-        VerificationUtil.setViewValue(tv_status, item.getTypename());
+        if (FragmentCommission.TYPE_CURR == type)
+        {
+            VerificationUtil.setViewValue(tv_status, item.getTypename() + "中");
+        } else
+        {
+            VerificationUtil.setViewValue(tv_status, item.getTypename());
+        }
 
         //1表示卖出，2表示买入
         if ("1".equals(item.getType()))

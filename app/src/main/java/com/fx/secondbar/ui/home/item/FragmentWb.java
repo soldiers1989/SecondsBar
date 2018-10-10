@@ -1,6 +1,5 @@
 package com.fx.secondbar.ui.home.item;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,11 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.holder.Holder;
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.ShowToast;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.BannerBean;
 import com.fx.secondbar.bean.WBBean;
+import com.fx.secondbar.bean.WBData;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.AcShareDialog;
 import com.fx.secondbar.ui.home.item.adapter.AdWb;
@@ -39,6 +45,8 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
     private RecyclerView recyclerView;
     private AdWb adapter;
 
+    private ConvenientBanner<BannerBean> convenientBanner;
+
     private int currPage = -1;
 
     @Override
@@ -52,6 +60,14 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
             }
             swipeRefreshLayout.setRefreshing(true);
             onRefresh();
+        }
+
+        if (convenientBanner != null)
+        {
+            if (!convenientBanner.isTurning())
+            {
+                convenientBanner.startTurning(2000);
+            }
         }
     }
 
@@ -112,6 +128,91 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
                 jump(AcShareDialog.class, bundle, false);
             }
         });
+
+        if (convenientBanner != null)
+        {
+            if (!convenientBanner.isTurning())
+            {
+                convenientBanner.startTurning(2000);
+            }
+        }
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if (!isHidden())
+        {
+            if (convenientBanner != null)
+            {
+                if (!convenientBanner.isTurning())
+                {
+                    convenientBanner.startTurning(2000);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden)
+    {
+        super.onHiddenChanged(hidden);
+        if (isHidden())
+        {
+            if (convenientBanner != null)
+            {
+                if (convenientBanner.isTurning())
+                {
+                    convenientBanner.stopTurning();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        if (convenientBanner != null)
+        {
+            if (convenientBanner.isTurning())
+            {
+                convenientBanner.stopTurning();
+            }
+        }
+    }
+
+
+    /**
+     * 创建头部控件
+     *
+     * @return
+     */
+    private View createHeadView(List<BannerBean> bannerBeans)
+    {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_time_head, recyclerView, false);
+        RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
+        //宽高比为25:12
+        params.height = DisplayUtil.getScreenSize(getContext()).widthPixels * 12 / 25;
+        view.setLayoutParams(params);
+        convenientBanner = view.findViewById(R.id.convenientBanner);
+        convenientBanner.setPages(new CBViewHolderCreator()
+        {
+            @Override
+            public Holder createHolder(View itemView)
+            {
+                return new FragmentTime.LoadImageHolder(itemView);
+            }
+
+            @Override
+            public int getLayoutId()
+            {
+                return R.layout.layout_banner;
+            }
+        }, bannerBeans).setPageIndicator(new int[]{R.mipmap.ic_indicator, R.mipmap.ic_indicator_sel});
+        convenientBanner.startTurning(2000);
+        return view;
     }
 
     /**
@@ -121,7 +222,7 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
      */
     private void getData(final int page)
     {
-        HttpManager.getWbs(page, PAGE_NUM, new Subscriber<List<WBBean>>()
+        HttpManager.getWbs(page, PAGE_NUM, new Subscriber<WBData>()
         {
             @Override
             public void onCompleted()
@@ -144,7 +245,7 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
             }
 
             @Override
-            public void onNext(List<WBBean> wbBeans)
+            public void onNext(WBData wbData)
             {
                 if (isNetworkCanReturn())
                 {
@@ -157,12 +258,17 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
                 currPage = page;
                 if (PAGE_START == page)
                 {
-                    adapter.setNewData(wbBeans);
+                    adapter.removeAllHeaderView();
+                    if (VerificationUtil.getSize(wbData.getListBanner()) > 0)
+                    {
+                        adapter.addHeaderView(createHeadView(wbData.getListBanner()));
+                    }
+                    adapter.setNewData(wbData.getListNews());
                 } else
                 {
-                    adapter.addData(wbBeans);
+                    adapter.addData(wbData.getListNews());
                 }
-                if (wbBeans.size() >= PAGE_NUM)
+                if (VerificationUtil.getSize(wbData.getListNews()) >= PAGE_NUM)
                 {
                     adapter.loadMoreComplete();
                 } else

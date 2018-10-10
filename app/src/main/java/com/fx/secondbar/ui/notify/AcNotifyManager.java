@@ -1,10 +1,12 @@
 package com.fx.secondbar.ui.notify;
 
+import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.util.SharePreferenceUtils;
 import com.fx.secondbar.R;
 
 /**
@@ -46,8 +48,41 @@ public class AcNotifyManager extends ActivitySupport
     @Override
     protected void initData()
     {
-        tv_unread_system.setVisibility(View.GONE);
-        tv_unread_anno.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent)
+    {
+        super.onNewIntent(intent);
+        updateStatus();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        updateStatus();
+    }
+
+    /**
+     * 更新小红点状态
+     */
+    private void updateStatus()
+    {
+        if (SharePreferenceUtils.getSystemMsg())
+        {
+            tv_unread_system.setVisibility(View.VISIBLE);
+        } else
+        {
+            tv_unread_system.setVisibility(View.GONE);
+        }
+        if (SharePreferenceUtils.getAnnoMsg())
+        {
+            tv_unread_anno.setVisibility(View.VISIBLE);
+        } else
+        {
+            tv_unread_anno.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -63,9 +98,11 @@ public class AcNotifyManager extends ActivitySupport
                 finish();
                 break;
             case R.id.v_system:
+                SharePreferenceUtils.setSystemMsg(false);
                 jump(AcMessageListItem.class, AcMessageListItem.TYPE_SYSTEM, false);
                 break;
             case R.id.v_notify:
+                SharePreferenceUtils.setAnnoMsg(false);
                 jump(AcMessageListItem.class, AcMessageListItem.TYPE_ANNO, false);
                 break;
         }

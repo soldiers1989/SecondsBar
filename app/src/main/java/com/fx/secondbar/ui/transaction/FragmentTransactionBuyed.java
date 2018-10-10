@@ -50,7 +50,11 @@ public class FragmentTransactionBuyed extends FragmentTransactionItem implements
     @Override
     public void onStarShow()
     {
-
+        if(swipeRefreshLayout!=null)
+        {
+            swipeRefreshLayout.setRefreshing(true);
+            onRefresh();
+        }
     }
 
     @Override

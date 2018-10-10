@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.base.FragmentSupport;
+import com.btten.bttenlibrary.util.SharePreferenceUtils;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.fx.secondbar.R;
 import com.fx.secondbar.ui.DialogSign;
@@ -38,6 +39,7 @@ public class FragmentHome extends FragmentSupport
 
     private ImageView img_toolbar_left;
     private ImageView img_toolbar_right;
+    private View v_notify;
     private FrameLayout fl_search;
     private SlidingTabLayout tabs;
     private ViewPager viewPager;
@@ -61,6 +63,7 @@ public class FragmentHome extends FragmentSupport
     {
         img_toolbar_left = findView(R.id.img_toolbar_left);
         img_toolbar_right = findView(R.id.img_toolbar_right);
+        v_notify = findView(R.id.v_notify);
         fl_search = findView(R.id.fl_search);
         tabs = findView(R.id.tabs);
         viewPager = findView(R.id.viewPager);
@@ -119,6 +122,37 @@ public class FragmentHome extends FragmentSupport
         if (viewPager != null)
         {
             viewPager.setCurrentItem(2);
+        }
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        updateStatus();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden)
+    {
+        super.onHiddenChanged(hidden);
+        if (!hidden)
+        {
+            updateStatus();
+        }
+    }
+
+    /**
+     * 更新小红点状态
+     */
+    private void updateStatus()
+    {
+        if (SharePreferenceUtils.getSystemMsg() || SharePreferenceUtils.getAnnoMsg())
+        {
+            v_notify.setVisibility(View.VISIBLE);
+        } else
+        {
+            v_notify.setVisibility(View.GONE);
         }
     }
 

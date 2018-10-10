@@ -15,6 +15,7 @@ import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.bean.InviteInfoBean;
 import com.fx.secondbar.bean.LevelBean;
 import com.fx.secondbar.bean.MessageBean;
+import com.fx.secondbar.bean.MineData;
 import com.fx.secondbar.bean.MyPurchaseBean;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.bean.PersonBean;
@@ -33,6 +34,7 @@ import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBBean;
+import com.fx.secondbar.bean.WBData;
 import com.fx.secondbar.bean.WithdrawIntroBean;
 import com.fx.secondbar.http.exception.ApiException;
 import com.fx.secondbar.http.service.IService;
@@ -146,9 +148,9 @@ public class HttpManager
      * @param pageSize
      * @param subscriber
      */
-    public static void getWbs(int page, int pageSize, Subscriber<List<WBBean>> subscriber)
+    public static void getWbs(int page, int pageSize, Subscriber<WBData> subscriber)
     {
-        Observable<List<WBBean>> observable = getInstance().mService.getWbs(page, pageSize).map(new HttpResultFun<List<WBBean>>());
+        Observable<WBData> observable = getInstance().mService.getWbs(page, pageSize).map(new HttpResultFun<WBData>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
@@ -261,9 +263,9 @@ public class HttpManager
      *
      * @param subscriber
      */
-    public static void getActives(Subscriber<List<ActiveBean>> subscriber)
+    public static void getActives(Subscriber<MineData> subscriber)
     {
-        Observable<List<ActiveBean>> observable = getInstance().mService.getActives().map(new HttpResultFun<List<ActiveBean>>());
+        Observable<MineData> observable = getInstance().mService.getActives().map(new HttpResultFun<MineData>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
