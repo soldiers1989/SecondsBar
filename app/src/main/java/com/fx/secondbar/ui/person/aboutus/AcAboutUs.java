@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.fx.secondbar.R;
+import com.fx.secondbar.ui.person.AcOnlineCustomer;
 
 /**
  * function:关于我们
@@ -60,7 +61,8 @@ public class AcAboutUs extends ActivitySupport
             case R.id.tv_privacy:
                 break;
             case R.id.tv_customer:
-                jump(AcCustomer.class);
+//                jump(AcCustomer.class);
+                jump(AcOnlineCustomer.class);
                 break;
         }
     }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:paddingLeft="15dip"
+              android:paddingTop="20dip"
+              android:paddingRight="15dip"
+              android:paddingBottom="15dip">
+
+    <TextView
+        android:id="@+id/tv_des"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingMultiplier="1.1"
+        android:textColor="#9f9f9f"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tv_service_time_tips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dip"
+        android:lineSpacingMultiplier="1.1"
+        android:text="客服服务时间：9:00-18:00"
+        android:textColor="#9f9f9f"
+        android:textSize="12sp"/>
+</LinearLayout>

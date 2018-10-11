@@ -52,7 +52,7 @@
             <View
                 android:id="@+id/v_person_info"
                 android:layout_width="match_parent"
-                android:layout_height="204dip"
+                android:layout_height="252dip"
                 android:layout_marginTop="5dip"
                 android:background="@android:color/white"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -62,10 +62,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dip"
-                android:layout_marginTop="21dip"
+                android:layout_marginTop="27dip"
                 android:text="用户资料"
                 android:textColor="#2c2c2c"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/v_person_info"
                 app:layout_constraintTop_toTopOf="@+id/v_person_info"/>
 
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:text="头像"
                 android:textColor="#2c2c2c"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="@+id/img_avatar"
                 app:layout_constraintStart_toStartOf="@+id/tv_person_info_tips"
                 app:layout_constraintTop_toTopOf="@+id/img_avatar"/>
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:text="昵称"
                 android:textColor="#2c2c2c"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/v_nickname_line"
                 app:layout_constraintStart_toStartOf="@+id/tv_person_info_tips"
                 app:layout_constraintTop_toBottomOf="@+id/v_avatar_line"/>
@@ -132,7 +132,7 @@
                 android:gravity="right|center_vertical"
                 android:singleLine="true"
                 android:textColor="#a9a9a9"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/v_nickname_line"
                 app:layout_constraintEnd_toEndOf="@+id/v_nickname_line"
                 app:layout_constraintStart_toEndOf="@+id/tv_nickname_tips"
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:text="等级"
                 android:textColor="#2c2c2c"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="@+id/v_person_info"
                 app:layout_constraintStart_toStartOf="@+id/tv_person_info_tips"
                 app:layout_constraintTop_toBottomOf="@+id/v_nickname_line"/>
@@ -158,7 +158,7 @@
                 android:gravity="right|center_vertical"
                 android:singleLine="true"
                 android:textColor="#a9a9a9"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="@+id/v_person_info"
                 app:layout_constraintEnd_toEndOf="@+id/v_nickname_line"
                 app:layout_constraintStart_toEndOf="@+id/tv_level_tips"
@@ -167,7 +167,7 @@
             <View
                 android:id="@+id/v_account_info"
                 android:layout_width="match_parent"
-                android:layout_height="270dip"
+                android:layout_height="336dip"
                 android:layout_marginTop="5dip"
                 android:background="@android:color/white"
                 app:layout_constraintTop_toBottomOf="@+id/v_person_info"/>
@@ -177,10 +177,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dip"
-                android:layout_marginTop="21dip"
+                android:layout_marginTop="27dip"
                 android:text="账户安全"
                 android:textColor="#2c2c2c"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/v_account_info"
                 app:layout_constraintTop_toTopOf="@+id/v_account_info"/>
 
@@ -236,7 +236,7 @@
                 android:layout_height="wrap_content"
                 android:text="手机号"
                 android:textColor="#2c2c2c"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/v_phone_line"
                 app:layout_constraintStart_toStartOf="@+id/tv_account_info_tips"
                 app:layout_constraintTop_toBottomOf="@+id/v_bind_tips_line"/>
@@ -251,7 +251,7 @@
                 android:singleLine="true"
                 android:text="去绑定"
                 android:textColor="#a9a9a9"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/v_phone_line"
                 app:layout_constraintEnd_toEndOf="@+id/v_bind_tips_line"
                 app:layout_constraintStart_toEndOf="@+id/tv_phone_tips"
@@ -263,7 +263,7 @@
                 android:layout_height="wrap_content"
                 android:text="支付密码"
                 android:textColor="#2c2c2c"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/v_paypwd_line"
                 app:layout_constraintStart_toStartOf="@+id/tv_account_info_tips"
                 app:layout_constraintTop_toBottomOf="@+id/v_phone_line"/>
@@ -278,7 +278,7 @@
                 android:singleLine="true"
                 android:text="去设置"
                 android:textColor="#a9a9a9"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/v_paypwd_line"
                 app:layout_constraintEnd_toEndOf="@+id/v_bind_tips_line"
                 app:layout_constraintStart_toEndOf="@+id/tv_pay_pwd_tips"
@@ -290,7 +290,7 @@
                 android:layout_height="wrap_content"
                 android:text="实名认证"
                 android:textColor="#2c2c2c"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="@+id/v_account_info"
                 app:layout_constraintStart_toStartOf="@+id/tv_account_info_tips"
                 app:layout_constraintTop_toBottomOf="@+id/v_paypwd_line"/>
@@ -305,11 +305,100 @@
                 android:singleLine="true"
                 android:text="去认证"
                 android:textColor="#a9a9a9"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="@+id/v_account_info"
                 app:layout_constraintEnd_toEndOf="@+id/v_bind_tips_line"
                 app:layout_constraintStart_toEndOf="@+id/tv_pay_pwd_tips"
                 app:layout_constraintTop_toBottomOf="@+id/v_paypwd_line"/>
+
+
+            <View
+                android:id="@+id/v_service_help"
+                android:layout_width="match_parent"
+                android:layout_height="252dip"
+                android:layout_marginTop="5dip"
+                android:background="@android:color/white"
+                app:layout_constraintTop_toBottomOf="@+id/v_account_info"/>
+
+            <TextView
+                android:id="@+id/tv_service_help_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="27dip"
+                android:text="服务帮助"
+                android:textColor="#2c2c2c"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/v_service_help"
+                app:layout_constraintTop_toTopOf="@+id/v_service_help"/>
+
+            <TextView
+                android:id="@+id/tv_help_tips"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:drawableRight="@mipmap/ic_arrow_right_gray"
+                android:drawablePadding="15dip"
+                android:gravity="center_vertical"
+                android:text="帮助"
+                android:textColor="#2c2c2c"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@+id/v_help_line"
+                app:layout_constraintEnd_toEndOf="@+id/v_help_line"
+                app:layout_constraintStart_toStartOf="@+id/v_help_line"
+                app:layout_constraintTop_toBottomOf="@+id/tv_service_help_tips"/>
+
+
+            <View
+                android:id="@+id/v_help_line"
+                android:layout_width="0dip"
+                android:layout_height="1dip"
+                android:layout_marginRight="15dip"
+                android:background="#ebebeb"
+                app:layout_constraintBottom_toTopOf="@+id/v_transaction_rule_line"
+                app:layout_constraintEnd_toEndOf="@+id/v_service_help"
+                app:layout_constraintStart_toStartOf="@+id/tv_service_help_tips"
+                app:layout_constraintTop_toBottomOf="@+id/tv_service_help_tips"/>
+
+            <TextView
+                android:id="@+id/tv_transaction_rule_tips"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:drawableRight="@mipmap/ic_arrow_right_gray"
+                android:drawablePadding="15dip"
+                android:gravity="center_vertical"
+                android:text="交易规则"
+                android:textColor="#2c2c2c"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@+id/v_transaction_rule_line"
+                app:layout_constraintEnd_toEndOf="@+id/v_transaction_rule_line"
+                app:layout_constraintStart_toStartOf="@+id/v_transaction_rule_line"
+                app:layout_constraintTop_toBottomOf="@+id/v_help_line"/>
+
+            <View
+                android:id="@+id/v_transaction_rule_line"
+                android:layout_width="0dip"
+                android:layout_height="1dip"
+                android:layout_marginRight="15dip"
+                android:background="#ebebeb"
+                app:layout_constraintBottom_toBottomOf="@+id/v_service_help"
+                app:layout_constraintEnd_toEndOf="@+id/v_service_help"
+                app:layout_constraintStart_toStartOf="@+id/tv_service_help_tips"
+                app:layout_constraintTop_toBottomOf="@+id/v_help_line"/>
+
+            <TextView
+                android:id="@+id/tv_turial_tips"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:drawableRight="@mipmap/ic_arrow_right_gray"
+                android:drawablePadding="15dip"
+                android:gravity="center_vertical"
+                android:text="教程中心"
+                android:textColor="#2c2c2c"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/v_service_help"
+                app:layout_constraintEnd_toEndOf="@+id/v_transaction_rule_line"
+                app:layout_constraintStart_toStartOf="@+id/v_transaction_rule_line"
+                app:layout_constraintTop_toBottomOf="@+id/v_transaction_rule_line"/>
 
             <View
                 android:id="@+id/v_set_info"
@@ -317,17 +406,17 @@
                 android:layout_height="188dip"
                 android:layout_marginTop="5dip"
                 android:background="@android:color/white"
-                app:layout_constraintTop_toBottomOf="@+id/v_account_info"/>
+                app:layout_constraintTop_toBottomOf="@+id/v_service_help"/>
 
             <TextView
                 android:id="@+id/tv_set_info_tips"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dip"
-                android:layout_marginTop="21dip"
+                android:layout_marginTop="27dip"
                 android:text="通用设置"
                 android:textColor="#2c2c2c"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/v_set_info"
                 app:layout_constraintTop_toTopOf="@+id/v_set_info"/>
 
@@ -348,7 +437,7 @@
                 android:layout_height="wrap_content"
                 android:text="清理缓存"
                 android:textColor="#2c2c2c"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/v_clear_cache_line"
                 app:layout_constraintStart_toStartOf="@+id/v_clear_cache_line"
                 app:layout_constraintTop_toBottomOf="@+id/tv_set_info_tips"/>
@@ -361,9 +450,8 @@
                 android:drawablePadding="15dip"
                 android:gravity="right|center_vertical"
                 android:singleLine="true"
-                android:text="12.58M"
                 android:textColor="#a9a9a9"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/v_clear_cache_line"
                 app:layout_constraintEnd_toEndOf="@+id/v_clear_cache_line"
                 app:layout_constraintStart_toEndOf="@+id/tv_clear_cache_tips"
@@ -378,7 +466,7 @@
                 android:gravity="center_vertical"
                 android:text="关于秒吧"
                 android:textColor="#2c2c2c"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="@+id/v_set_info"
                 app:layout_constraintEnd_toEndOf="@+id/v_clear_cache_line"
                 app:layout_constraintStart_toStartOf="@+id/v_clear_cache_line"

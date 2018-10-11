@@ -45,6 +45,8 @@ import com.fx.secondbar.ui.person.AcAccountSet;
 import com.fx.secondbar.ui.person.AcBindPhone;
 import com.fx.secondbar.ui.person.AcInviteFriends;
 import com.fx.secondbar.ui.person.AcLeaderboard;
+import com.fx.secondbar.ui.person.AcOnlineCustomer;
+import com.fx.secondbar.ui.person.aboutus.AcCustomer;
 import com.fx.secondbar.ui.person.assets.AcAssets;
 import com.fx.secondbar.ui.person.assets.AcIncomeRecord;
 import com.fx.secondbar.ui.purchase.AcMyPurchase;
@@ -112,6 +114,8 @@ public class FragmentPerson extends FragmentSupport
         findView(R.id.ib_set).setOnClickListener(this);
         findView(R.id.v_assets).setOnClickListener(this);
         findView(R.id.v_get_q).setOnClickListener(this);
+        findView(R.id.ib_customer).setOnClickListener(this);
+
     }
 
     @Override
@@ -397,6 +401,10 @@ public class FragmentPerson extends FragmentSupport
                 break;
             case R.id.v_get_q:
                 jump(AcIncomeRecord.class);
+                break;
+            case R.id.ib_customer:
+                jump(AcOnlineCustomer.class);
+//                jump(AcCustomer.class);
                 break;
         }
     }

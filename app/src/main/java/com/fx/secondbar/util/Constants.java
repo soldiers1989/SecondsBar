@@ -290,4 +290,14 @@ public class Constants
      * 资讯搜索
      */
     public static final String API_SEARCH_INFORMATION = "index/news/search";
+
+    /**
+     * Html字符串拼接成完整的Html文本
+     */
+    public static final String START_TAGS = "<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\"><meta http-equlv=\"Content-Type\" content=\"text/html;charset=utf-8\"></head><body>";
+    /**
+     * 结束标签
+     */
+    public static final String END_TAGS = "</body></html>";
+
 }

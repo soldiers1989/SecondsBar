@@ -53,7 +53,8 @@
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/img_toolbar_right"
                 android:layout_toRightOf="@id/img_toolbar_left"
-                android:background="@drawable/home_title_search">
+                android:background="@drawable/home_title_search"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -68,6 +69,13 @@
                     android:textColor="@color/home_search_text"
                     android:textSize="@dimen/home_search_text"/>
             </FrameLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_home_logo"/>
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>

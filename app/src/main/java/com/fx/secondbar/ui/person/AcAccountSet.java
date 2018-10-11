@@ -105,6 +105,9 @@ public class AcAccountSet extends ActivitySupport
         tv_aboutus_tips = findView(R.id.tv_aboutus_tips);
         btn_logout = findView(R.id.btn_logout);
         tv_verify = findView(R.id.tv_verify);
+        findView(R.id.tv_help_tips).setOnClickListener(this);
+        findView(R.id.tv_transaction_rule_tips).setOnClickListener(this);
+        findView(R.id.tv_turial_tips).setOnClickListener(this);
         findView(R.id.ib_back).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -141,7 +144,7 @@ public class AcAccountSet extends ActivitySupport
         VerificationUtil.setViewValue(tv_level, "LV" + FxApplication.getInstance().getUserInfoBean().getLevel());
         VerificationUtil.setViewValue(tv_phone, FxApplication.getInstance().getUserInfoBean().getAccount(), "去绑定");
         //判断是否设置支付密码，1表示已设置。
-        VerificationUtil.setViewValue(tv_pay_pwd, "1".equals(FxApplication.getInstance().getUserInfoBean().getPaymentpassword()) ? "已设置" : "去设置");
+        VerificationUtil.setViewValue(tv_pay_pwd, "1".equals(FxApplication.getInstance().getUserInfoBean().getPaymentpassword()) ? "去修改" : "去设置");
         VerificationUtil.setViewValue(tv_verify, TextUtils.isEmpty(FxApplication.getInstance().getUserInfoBean().getActualname()) ? "去认证" : "已认证");
     }
 
@@ -381,6 +384,15 @@ public class AcAccountSet extends ActivitySupport
                 {
                     jump(AcVerified.class, REQUEST_CODE_AUTH);
                 }
+                break;
+            case R.id.tv_help_tips: //帮助
+                jump(AcHelpList.class);
+                break;
+            case R.id.tv_transaction_rule_tips: //交易规则
+                jump(AcTransactionRule.class);
+                break;
+            case R.id.tv_turial_tips:   //教程中心
+                jump(AcTurialList.class);
                 break;
         }
     }
