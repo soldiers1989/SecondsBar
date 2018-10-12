@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alipay.sdk.app.PayTask;
@@ -39,6 +40,7 @@ public class AcRecharge extends ActivitySupport
     private TextView tv_wechat;
     private TextView tv_alipay;
     private Button btn_pay;
+    private LinearLayout ll_fixed_amount;
 
     @Override
     protected int getLayoutResId()
@@ -53,6 +55,7 @@ public class AcRecharge extends ActivitySupport
         tv_wechat = findView(R.id.tv_wechat);
         tv_alipay = findView(R.id.tv_alipay);
         btn_pay = findView(R.id.btn_pay);
+        ll_fixed_amount = findView(R.id.ll_fixed_amount);
         findView(R.id.ib_back).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -102,6 +105,7 @@ public class AcRecharge extends ActivitySupport
         tv_wechat.setSelected(true);
         tv_alipay.setSelected(false);
         addFilter(ed_input, new CashierInputFilter());
+        bindFixedAmountClick();
     }
 
     /**
@@ -138,6 +142,42 @@ public class AcRecharge extends ActivitySupport
     private String setPayTips()
     {
         return String.format(getString(R.string.recharge_pay_tips), tv_wechat.isSelected() ? getTextView(tv_wechat) : getTextView(tv_alipay), getTextView(ed_input));
+    }
+
+    /**
+     * 固定充值金额的点击事件
+     */
+    private View.OnClickListener onClickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            if (isFastDoubleClick(v))
+            {
+                return;
+            }
+            if (v instanceof TextView)
+            {
+                TextView textView = (TextView) v;
+                ed_input.setText(textView.getText().toString().replace("￥", ""));
+            }
+        }
+    };
+
+    /**
+     * 绑定固定充值金额点击
+     */
+    private void bindFixedAmountClick()
+    {
+        int count = ll_fixed_amount.getChildCount();
+        for (int i = 0; i < count; i++)
+        {
+            LinearLayout linearLayout = (LinearLayout) ll_fixed_amount.getChildAt(i);
+            for (int j = 0; j < linearLayout.getChildCount(); j++)
+            {
+                linearLayout.getChildAt(j).setOnClickListener(onClickListener);
+            }
+        }
     }
 
     @Override

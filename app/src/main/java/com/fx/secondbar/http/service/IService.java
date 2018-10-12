@@ -28,6 +28,7 @@ import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
 import com.fx.secondbar.bean.SigninBean;
+import com.fx.secondbar.bean.SystemIntroBean;
 import com.fx.secondbar.bean.TodayIncomeBean;
 import com.fx.secondbar.bean.TradingBuyedBean;
 import com.fx.secondbar.bean.TransactionBean;
@@ -566,5 +567,16 @@ public interface IService
      */
     @GET(Constants.API_SEARCH_INFORMATION)
     Observable<ResponseBean<List<InfomationBean>>> searchInformation(@Query("name") String name, @Query("page") int page, @Query("count") int pageSize);
+
+    /**
+     * 获取帮助、充值说明和交易规则说明接口
+     *
+     * @param type     2：帮助；3：交易规则；4：充值说明
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @GET(Constants.API_SYSTEM_INTRO)
+    Observable<ResponseBean<List<SystemIntroBean>>> getSystemIntro(@Query("type") String type, @Query("page") int page, @Query("count") int pageSize);
 
 }

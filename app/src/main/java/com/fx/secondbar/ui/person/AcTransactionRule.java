@@ -8,9 +8,17 @@ import android.view.View;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.DensityUtil;
+import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.SystemIntroBean;
+import com.fx.secondbar.http.HttpManager;
+
+import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * function:交易规则
@@ -23,6 +31,8 @@ public class AcTransactionRule extends ActivitySupport implements SwipeRefreshLa
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private AdTransactionRule adapter;
+
+    private int currPage = -1;
 
     @Override
     protected int getLayoutResId()
@@ -61,6 +71,76 @@ public class AcTransactionRule extends ActivitySupport implements SwipeRefreshLa
                 jump(AcHtmlTextDetail.class);
             }
         });
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
+        {
+            @Override
+            public void onLoadMoreRequested()
+            {
+                getData(currPage + 1);
+            }
+        }, recyclerView);
+        swipeRefreshLayout.setRefreshing(true);
+        onRefresh();
+    }
+
+    /**
+     * 获取数据
+     *
+     * @param page
+     */
+    private void getData(final int page)
+    {
+        HttpManager.getSystemIntro("3", page, PAGE_NUM, new Subscriber<List<SystemIntroBean>>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(List<SystemIntroBean> systemIntroBeans)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                currPage = page;
+                if (PAGE_START == page)
+                {
+                    adapter.setNewData(systemIntroBeans);
+                } else
+                {
+                    adapter.addData(systemIntroBeans);
+                }
+                if (VerificationUtil.getSize(systemIntroBeans) >= PAGE_NUM)
+                {
+                    adapter.loadMoreComplete();
+                } else
+                {
+                    adapter.loadMoreEnd();
+                }
+            }
+        });
     }
 
     @Override
@@ -93,6 +173,6 @@ public class AcTransactionRule extends ActivitySupport implements SwipeRefreshLa
     @Override
     public void onRefresh()
     {
-
+        getData(PAGE_START);
     }
 }

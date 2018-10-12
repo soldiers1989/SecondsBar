@@ -108,48 +108,48 @@ public class FragmentTutorial extends FragmentViewPagerBase
      */
     private void getData(final int page)
     {
-        HttpManager.getTurials(page, PAGE_NUM, new Subscriber<List<TurialBean>>()
-        {
-            @Override
-            public void onCompleted()
-            {
-
-            }
-
-            @Override
-            public void onError(Throwable e)
-            {
-                if (isNetworkCanReturn())
-                {
-                    return;
-                }
-                ShowToast.showToast(HttpManager.checkLoadError(e));
-            }
-
-            @Override
-            public void onNext(List<TurialBean> turialBeans)
-            {
-                if (isNetworkCanReturn())
-                {
-                    return;
-                }
-                currPage = page;
-                if (PAGE_START == page)
-                {
-                    adapter.setNewData(turialBeans);
-                } else
-                {
-                    adapter.addData(turialBeans);
-                }
-                if (turialBeans.size() >= PAGE_NUM)
-                {
-                    adapter.loadMoreComplete();
-                } else
-                {
-                    adapter.loadMoreEnd();
-                }
-            }
-        });
+//        HttpManager.getTurials(page, PAGE_NUM, new Subscriber<List<TurialBean>>()
+//        {
+//            @Override
+//            public void onCompleted()
+//            {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e)
+//            {
+//                if (isNetworkCanReturn())
+//                {
+//                    return;
+//                }
+//                ShowToast.showToast(HttpManager.checkLoadError(e));
+//            }
+//
+//            @Override
+//            public void onNext(List<TurialBean> turialBeans)
+//            {
+//                if (isNetworkCanReturn())
+//                {
+//                    return;
+//                }
+//                currPage = page;
+//                if (PAGE_START == page)
+//                {
+//                    adapter.setNewData(turialBeans);
+//                } else
+//                {
+//                    adapter.addData(turialBeans);
+//                }
+//                if (turialBeans.size() >= PAGE_NUM)
+//                {
+//                    adapter.loadMoreComplete();
+//                } else
+//                {
+//                    adapter.loadMoreEnd();
+//                }
+//            }
+//        });
     }
 
 }

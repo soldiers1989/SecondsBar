@@ -28,6 +28,7 @@ import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.bean.ResQuote;
 import com.fx.secondbar.bean.SigninBean;
+import com.fx.secondbar.bean.SystemIntroBean;
 import com.fx.secondbar.bean.TodayIncomeBean;
 import com.fx.secondbar.bean.TradingBuyedBean;
 import com.fx.secondbar.bean.TransactionBean;
@@ -757,6 +758,20 @@ public class HttpManager
     public static void searchInformation(String name, int page, int pageSize, Subscriber<List<InfomationBean>> subscriber)
     {
         Observable<List<InfomationBean>> observable = getInstance().mService.searchInformation(name, page, pageSize).map(new HttpResultFun<List<InfomationBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取系统说明
+     *
+     * @param type       类型 2：帮助；3：交易规则；4：充值说明
+     * @param page
+     * @param pageSize
+     * @param subscriber
+     */
+    public static void getSystemIntro(String type, int page, int pageSize, Subscriber<List<SystemIntroBean>> subscriber)
+    {
+        Observable<List<SystemIntroBean>> observable = getInstance().mService.getSystemIntro(type, page, pageSize).map(new HttpResultFun<List<SystemIntroBean>>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
