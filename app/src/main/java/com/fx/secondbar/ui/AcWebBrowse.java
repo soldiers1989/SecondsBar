@@ -9,10 +9,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.util.LogUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.http.HttpManager;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
@@ -20,6 +22,8 @@ import com.tencent.smtt.sdk.WebViewClient;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import rx.Subscriber;
 
 /**
  * function:
@@ -81,6 +85,7 @@ public class AcWebBrowse extends ActivitySupport
                 if (i == 100)
                 {
                     progressBar1.setVisibility(View.GONE);//加载完网页进度条消失
+                    completeTask(0, getIntent().getStringExtra("type"));
                 } else
                 {
                     progressBar1.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
@@ -125,6 +130,37 @@ public class AcWebBrowse extends ActivitySupport
             super.onPageFinished(webView, s);
         }
     };
+
+    /**
+     * 完成任务
+     */
+    private void completeTask(final int retry, final String type)
+    {
+        HttpManager.finishActive(type, new Subscriber<ResponseBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (retry < 3)
+                {
+                    completeTask(retry + 1, type);
+                }
+
+            }
+
+            @Override
+            public void onNext(ResponseBean responseBean)
+            {
+
+            }
+        });
+    }
 
     @Override
     protected void onResume()

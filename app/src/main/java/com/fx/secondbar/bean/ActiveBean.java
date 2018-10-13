@@ -45,6 +45,7 @@ public class ActiveBean
     private String starttime;//开始时间
     private String description;//按钮描述
     private String activity_ID;//活动id
+    private String path;    //链接
 
     public String getName()
     {
@@ -124,5 +125,15 @@ public class ActiveBean
     public void setActivity_ID(String activity_ID)
     {
         this.activity_ID = activity_ID;
+    }
+
+    public String getPath()
+    {
+        return path;
+    }
+
+    public void setPath(String path)
+    {
+        this.path = path;
     }
 }

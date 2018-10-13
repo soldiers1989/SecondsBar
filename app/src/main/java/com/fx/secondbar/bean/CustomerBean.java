@@ -11,6 +11,7 @@ public class CustomerBean
     private String mobile;//手机号
     private String name;//名称
     private String description;//秒数
+    private String qq;  //客服QQ
 
     public String getPhone()
     {
@@ -50,5 +51,15 @@ public class CustomerBean
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    public String getQq()
+    {
+        return qq;
+    }
+
+    public void setQq(String qq)
+    {
+        this.qq = qq;
     }
 }

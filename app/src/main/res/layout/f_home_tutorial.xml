@@ -3,6 +3,7 @@
                                         android:id="@+id/recyclerView"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
+                                        android:background="@mipmap/test_yueta"
                                         android:paddingLeft="@dimen/home_tutorial_plr"
                                         android:paddingRight="@dimen/home_tutorial_plr">
 

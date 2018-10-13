@@ -81,7 +81,7 @@ public class AcAssets extends ActivitySupport
      */
     private void setPersonInfo()
     {
-        VerificationUtil.setViewValue(tv_balance, FxApplication.getInstance().getUserInfoBean().getAmt().toString());
+        VerificationUtil.setViewValue(tv_balance, FxApplication.getInstance().getUserInfoBean().getBalance().toString());
         VerificationUtil.setViewValue(tv_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
     }
 

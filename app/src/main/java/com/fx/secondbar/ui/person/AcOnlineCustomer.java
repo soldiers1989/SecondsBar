@@ -13,8 +13,15 @@ import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
+import com.fx.secondbar.bean.CustomerBean;
+import com.fx.secondbar.http.HttpManager;
+
+import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * function:在线客服
@@ -67,7 +74,7 @@ public class AcOnlineCustomer extends ActivitySupport implements SwipeRefreshLay
                 try
                 {
                     //可以跳转到添加好友，如果qq号是好友了，直接聊天
-                    String url = "mqqwpa://im/chat?chat_type=wpa&uin=173681320";//uin是发送过去的qq号码
+                    String url = "mqqwpa://im/chat?chat_type=wpa&uin=" + AcOnlineCustomer.this.adapter.getItem(position).getQq();//uin是发送过去的qq号码
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 //                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
@@ -75,6 +82,54 @@ public class AcOnlineCustomer extends ActivitySupport implements SwipeRefreshLay
                 {
                     e.printStackTrace();
                     ShowToast.showToast("请检查是否安装QQ");
+                }
+            }
+        });
+        swipeRefreshLayout.setRefreshing(true);
+        onRefresh();
+    }
+
+    /**
+     * 获取客服数据
+     */
+    private void getData()
+    {
+        HttpManager.getCustomerInfo(new Subscriber<List<CustomerBean>>()
+        {
+            @Override
+            public void onCompleted()
+            {
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            }
+
+            @Override
+            public void onNext(List<CustomerBean> customerBeans)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                if (VerificationUtil.getSize(customerBeans) > 0)
+                {
+                    adapter.setNewData(customerBeans);
                 }
             }
         });
@@ -121,6 +176,6 @@ public class AcOnlineCustomer extends ActivitySupport implements SwipeRefreshLay
     @Override
     public void onRefresh()
     {
-
+        getData();
     }
 }

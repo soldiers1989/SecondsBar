@@ -24,7 +24,6 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.btten.bttenlibrary.application.BtApplication;
 import com.btten.bttenlibrary.base.FragmentSupport;
-import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
@@ -36,6 +35,7 @@ import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.BannerBean;
 import com.fx.secondbar.bean.MineData;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.AcWebBrowse;
 import com.fx.secondbar.ui.DialogSign;
 import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.home.adapter.AdPerson;
@@ -46,7 +46,6 @@ import com.fx.secondbar.ui.person.AcBindPhone;
 import com.fx.secondbar.ui.person.AcInviteFriends;
 import com.fx.secondbar.ui.person.AcLeaderboard;
 import com.fx.secondbar.ui.person.AcOnlineCustomer;
-import com.fx.secondbar.ui.person.aboutus.AcCustomer;
 import com.fx.secondbar.ui.person.assets.AcAssets;
 import com.fx.secondbar.ui.person.assets.AcIncomeRecord;
 import com.fx.secondbar.ui.purchase.AcMyPurchase;
@@ -162,10 +161,22 @@ public class FragmentPerson extends FragmentSupport
 
                 } else if (String.valueOf(ActiveBean.TYPE_WEB).equals(bean.getType()))
                 {//网页
-
+                    Bundle bundle = new Bundle();
+                    bundle.putString(KEY_STR, bean.getName());
+                    bundle.putString(KEY, bean.getPath());
+                    bundle.putString("type", bean.getType());
+                    jump(AcWebBrowse.class, bundle, false);
                 } else if (String.valueOf(ActiveBean.TYPE_RANK).equals(bean.getType()))
                 {
                     jump(AcLeaderboard.class);
+                } else
+                {
+                    //网页
+                    Bundle bundle = new Bundle();
+                    bundle.putString(KEY_STR, bean.getName());
+                    bundle.putString(KEY, bean.getPath());
+                    bundle.putString("type", bean.getType());
+                    jump(AcWebBrowse.class, bundle, false);
                 }
             }
         });
@@ -194,7 +205,7 @@ public class FragmentPerson extends FragmentSupport
     private void setPersonInfo()
     {
 //        GlideApp.with(img_get_q).asBitmap().load(R.mipmap.ic_get_q_img).centerCrop().into(img_get_q);
-        GlideApp.with(img_get_q).asBitmap().load(R.mipmap.test_turial_1).centerCrop().into(img_get_q);
+//        GlideApp.with(img_get_q).asBitmap().load(R.mipmap.test_turial_1).centerCrop().into(img_get_q);
 
         GlideLoad.load(img_avatar, FxApplication.getInstance().getUserInfoBean().getImg(), true, R.mipmap.default_avatar, R.mipmap.default_avatar);
         VerificationUtil.setViewValue(tv_name, FxApplication.getInstance().getUserInfoBean().getNickname());
@@ -221,7 +232,7 @@ public class FragmentPerson extends FragmentSupport
                 tv_account.setTextColor(Color.WHITE);
             }
         }
-        VerificationUtil.setViewValue(tv_ste_value, FxApplication.getInstance().getUserInfoBean().getAmt().toString());
+        VerificationUtil.setViewValue(tv_ste_value, FxApplication.getInstance().getUserInfoBean().getBalance().toString());
         VerificationUtil.setViewValue(tv_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
         VerificationUtil.setViewValue(tv_today_q_value, FxApplication.getInstance().getUserInfoBean().getTodayqcoin().toString());
         VerificationUtil.setViewValue(tv_level, "LV" + FxApplication.getInstance().getUserInfoBean().getLevel() + " " + FxApplication.getInstance().getUserInfoBean().getLevelname());

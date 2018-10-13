@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.person;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -68,7 +69,10 @@ public class AcTransactionRule extends ActivitySupport implements SwipeRefreshLa
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position)
             {
-                jump(AcHtmlTextDetail.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(KEY_STR, AcTransactionRule.this.adapter.getItem(position).getTitle());
+                bundle.putString(KEY, AcTransactionRule.this.adapter.getItem(position).getContent());
+                jump(AcHtmlTextDetail.class, bundle, false);
             }
         });
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()

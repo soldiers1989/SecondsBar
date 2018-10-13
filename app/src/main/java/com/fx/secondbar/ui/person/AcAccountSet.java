@@ -144,7 +144,7 @@ public class AcAccountSet extends ActivitySupport
         VerificationUtil.setViewValue(tv_level, "LV" + FxApplication.getInstance().getUserInfoBean().getLevel());
         VerificationUtil.setViewValue(tv_phone, FxApplication.getInstance().getUserInfoBean().getAccount(), "去绑定");
         //判断是否设置支付密码，1表示已设置。
-        VerificationUtil.setViewValue(tv_pay_pwd, "1".equals(FxApplication.getInstance().getUserInfoBean().getPaymentpassword()) ? "去修改" : "去设置");
+        VerificationUtil.setViewValue(tv_pay_pwd, !TextUtils.isEmpty(FxApplication.getInstance().getUserInfoBean().getPaymentpassword()) ? "去修改" : "去设置");
         VerificationUtil.setViewValue(tv_verify, TextUtils.isEmpty(FxApplication.getInstance().getUserInfoBean().getActualname()) ? "去认证" : "已认证");
     }
 
@@ -557,7 +557,7 @@ public class AcAccountSet extends ActivitySupport
             if (RESULT_OK == resultCode)
             {
 
-                VerificationUtil.setViewValue(tv_pay_pwd, "已设置");
+                VerificationUtil.setViewValue(tv_pay_pwd, "去修改");
             }
         } else if (REQUEST_CODE_AUTH == requestCode)
         {
