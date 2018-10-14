@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                                        android:id="@+id/recyclerView"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@mipmap/test_yueta"
-                                        android:paddingLeft="@dimen/home_tutorial_plr"
-                                        android:paddingRight="@dimen/home_tutorial_plr">
 
-</android.support.v7.widget.RecyclerView>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/test_yueta"
+            android:scaleType="center"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/home_tutorial_plr"
+            android:paddingRight="@dimen/home_tutorial_plr">
+
+        </android.support.v7.widget.RecyclerView>
+    </FrameLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -48,6 +48,7 @@ import com.fx.secondbar.ui.person.AcLeaderboard;
 import com.fx.secondbar.ui.person.AcOnlineCustomer;
 import com.fx.secondbar.ui.person.assets.AcAssets;
 import com.fx.secondbar.ui.person.assets.AcIncomeRecord;
+import com.fx.secondbar.ui.person.assets.AcRecharge;
 import com.fx.secondbar.ui.purchase.AcMyPurchase;
 import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideLoad;
@@ -169,6 +170,9 @@ public class FragmentPerson extends FragmentSupport
                 } else if (String.valueOf(ActiveBean.TYPE_RANK).equals(bean.getType()))
                 {
                     jump(AcLeaderboard.class);
+                } else if (String.valueOf(ActiveBean.TYPE_RECHARGE).equals(bean.getType()))
+                {   //充值
+                    jump(AcRecharge.class);
                 } else
                 {
                     //网页

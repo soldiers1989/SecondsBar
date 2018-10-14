@@ -35,6 +35,10 @@ public class ActiveBean
      * Q 夺宝
      */
     public static final int TYPE_RANK = 7;
+    /**
+     * 充值
+     */
+    public static final int TYPE_RECHARGE=9;
 
 
     private String name;//活动名称
