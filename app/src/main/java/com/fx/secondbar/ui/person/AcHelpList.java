@@ -31,7 +31,8 @@ public class AcHelpList extends ActivitySupport implements SwipeRefreshLayout.On
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private AdHelpList adapter;
+    //    private AdHelpList adapter;
+    private AdTransactionRule adapter;
 
     private int currPage = -1;
 
@@ -62,7 +63,7 @@ public class AcHelpList extends ActivitySupport implements SwipeRefreshLayout.On
     {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(DensityUtil.dip2px(this, 9), false, false, false));
-        adapter = new AdHelpList();
+        adapter = new AdTransactionRule();
         adapter.bindToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener()
         {

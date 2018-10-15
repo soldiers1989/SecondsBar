@@ -14,6 +14,7 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.QCoinBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.person.AcQIntro;
 
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
         swipeRefreshLayout = findView(R.id.swipeRefreshLayout);
         recyclerView = findView(R.id.recyclerView);
         findView(R.id.ib_back).setOnClickListener(this);
+        findView(R.id.tv_q_intro).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -82,6 +84,9 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
         {
             case R.id.ib_back:
                 finish();
+                break;
+            case R.id.tv_q_intro:
+                jump(AcQIntro.class);
                 break;
         }
     }

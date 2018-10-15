@@ -1,7 +1,9 @@
 package com.fx.secondbar.ui.person.aboutus;
 
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.fx.secondbar.R;
@@ -56,9 +58,16 @@ public class AcAboutUs extends ActivitySupport
                 finish();
                 break;
             case R.id.tv_protocol:
-                jump(AcProtocol.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(KEY_STR, ((TextView) v).getText().toString());
+                bundle.putInt(KEY, AcProtocol.TYPE_USER);
+                jump(AcProtocol.class, bundle, false);
                 break;
             case R.id.tv_privacy:
+                Bundle bundlePrivacy = new Bundle();
+                bundlePrivacy.putString(KEY_STR, ((TextView) v).getText().toString());
+                bundlePrivacy.putInt(KEY, AcProtocol.TYPE_PRIVACY);
+                jump(AcProtocol.class, bundlePrivacy, false);
                 break;
             case R.id.tv_customer:
 //                jump(AcCustomer.class);

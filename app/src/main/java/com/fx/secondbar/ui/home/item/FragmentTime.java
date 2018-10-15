@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.home.item;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ import com.fx.secondbar.bean.DynamicBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.AcWebBrowse;
 import com.fx.secondbar.ui.home.AcInformationDetail;
 import com.fx.secondbar.ui.home.item.adapter.AdTime;
 import com.fx.secondbar.ui.mall.AcMallDetail;
@@ -325,6 +327,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
     {
 
         private ImageView img;
+        private BannerBean bean;
 
         public LoadImageHolder(View itemView)
         {
@@ -335,11 +338,29 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
         protected void initView(View itemView)
         {
             img = (ImageView) itemView;
+            if (img != null)
+            {
+                img.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        if (bean != null)
+                        {
+                            Intent intent = new Intent(img.getContext(), AcWebBrowse.class);
+                            intent.putExtra("activity_str", bean.getName());
+                            intent.putExtra("activity_num", bean.getUrl());
+                            img.getContext().startActivity(intent);
+                        }
+                    }
+                });
+            }
         }
 
         @Override
         public void updateUI(BannerBean data)
         {
+            this.bean = data;
             if (img != null)
             {
                 GlideLoad.load(img, data.getImg());

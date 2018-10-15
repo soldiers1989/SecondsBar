@@ -37,6 +37,17 @@
                 android:scaleType="centerInside"
                 android:src="@mipmap/ic_back"/>
 
+            <TextView
+                android:id="@+id/tv_q_intro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="8dip"
+                android:text="Q说明"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"/>
+
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
