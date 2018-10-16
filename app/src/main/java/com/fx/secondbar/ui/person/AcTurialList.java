@@ -15,8 +15,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.http.HttpManager;
-import com.fx.secondbar.ui.home.AcTutorialDetail;
-import com.fx.secondbar.ui.home.item.FragmentTutorial;
 import com.fx.secondbar.ui.home.item.adapter.AdTutorial;
 
 import java.util.List;
@@ -63,7 +61,7 @@ public class AcTurialList extends ActivitySupport implements SwipeRefreshLayout.
     protected void initData()
     {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(DensityUtil.dip2px(this, 9), false, false, false));
+        recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(DensityUtil.dip2px(this, 9), false, false, true));
         adapter = new AdTutorial(R.layout.ad_tutorial);
         adapter.bindToRecyclerView(recyclerView);
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()

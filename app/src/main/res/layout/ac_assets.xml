@@ -189,4 +189,16 @@
             android:textSize="15sp"/>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_q_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dip"
+        android:padding="12dip"
+        android:text="Q是什么？"
+        android:textColor="#666666"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 </android.support.constraint.ConstraintLayout>

@@ -87,25 +87,35 @@
         app:layout_constraintStart_toStartOf="@+id/tv_yesterday_tips"
         app:layout_constraintTop_toBottomOf="@+id/tv_yesterday_tips"/>
 
-    <TextView
-        android:id="@+id/tv_read_tips"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dip"
-        android:text="新闻赚收益说明"
-        android:textColor="#2c2c2c"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_today_tips"
-        app:layout_constraintTop_toBottomOf="@+id/tv_yesterday_tips"/>
-
-    <TextView
-        android:id="@+id/tv_content"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="26dip"
-        android:layout_marginTop="16dip"
-        android:layout_marginRight="26dip"
-        android:textColor="#7D7D7D"
-        android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_read_tips"/>
+        android:layout_marginTop="96dip"
+        android:background="#f8f8f8"
+        android:orientation="vertical"
+        android:paddingLeft="26dip"
+        android:paddingTop="20dip"
+        android:paddingRight="26dip"
+        android:paddingBottom="20dip"
+        app:layout_constraintStart_toStartOf="@+id/tv_today_tips"
+        app:layout_constraintTop_toBottomOf="@+id/tv_yesterday_tips">
+
+        <TextView
+            android:id="@+id/tv_read_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="新闻赚收益说明"
+            android:textColor="#2c2c2c"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dip"
+            android:textColor="#7D7D7D"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+
 </android.support.constraint.ConstraintLayout>

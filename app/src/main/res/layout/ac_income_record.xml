@@ -46,7 +46,8 @@
                 android:padding="8dip"
                 android:text="Q说明"
                 android:textColor="@android:color/white"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:visibility="gone"/>
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>

@@ -175,6 +175,11 @@ public class FragmentPerson extends FragmentSupport
                     jump(AcRecharge.class);
                 } else
                 {
+                    //链接为空 则什么也不做
+                    if (TextUtils.isEmpty(bean.getPath()))
+                    {
+                        return;
+                    }
                     //网页
                     Bundle bundle = new Bundle();
                     bundle.putString(KEY_STR, bean.getName());

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Paint;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.ui.person.AcQIntro;
 import com.fx.secondbar.util.Constants;
 
 /**
@@ -26,6 +28,7 @@ public class AcAssets extends ActivitySupport
 
     private TextView tv_balance;
     private TextView tv_q_value;
+    private TextView tv_q_intro;
 
     @Override
     protected int getLayoutResId()
@@ -38,6 +41,7 @@ public class AcAssets extends ActivitySupport
     {
         tv_balance = findView(R.id.tv_balance);
         tv_q_value = findView(R.id.tv_q_value);
+        tv_q_intro = findView(R.id.tv_q_intro);
         findView(R.id.ib_back).setOnClickListener(this);
         findView(R.id.tv_detail).setOnClickListener(this);
         findView(R.id.tv_recharge).setOnClickListener(this);
@@ -50,7 +54,7 @@ public class AcAssets extends ActivitySupport
     @Override
     protected void initListener()
     {
-
+        tv_q_intro.setOnClickListener(this);
     }
 
     @Override
@@ -59,6 +63,7 @@ public class AcAssets extends ActivitySupport
         IntentFilter filter = new IntentFilter(Constants.ACTION_REFRESH_PERSON_SHOW);
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
         setPersonInfo();
+        tv_q_intro.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver()
@@ -108,6 +113,9 @@ public class AcAssets extends ActivitySupport
                 break;
             case R.id.ll_conversion:
                 ShowToast.showToast("暂未开放");
+                break;
+            case R.id.tv_q_intro:
+                jump(AcQIntro.class);
                 break;
         }
     }

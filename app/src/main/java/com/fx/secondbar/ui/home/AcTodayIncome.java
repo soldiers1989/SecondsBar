@@ -111,7 +111,7 @@ public class AcTodayIncome extends ActivitySupport
                 sbYesterday.append("</font>");
                 tv_yesterday_details.setText(Html.fromHtml(sbYesterday.toString()));
 
-                tv_content.setText(VerificationUtil.verifyDefault(todayIncomeBean.getDescription(), "暂无说明"));
+                tv_content.setText(VerificationUtil.verifyDefault(todayIncomeBean.getDescription(), getString(R.string.today_income_intro)));
             }
         });
     }

@@ -374,7 +374,26 @@ public class AcAccountSet extends ActivitySupport
                 jump(AcAboutUs.class);
                 break;
             case R.id.btn_logout:
-                logout();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setCancelable(false);
+                if (TextUtils.isEmpty(FxApplication.getInstance().getUserInfoBean().getAccount()))
+                {
+                    builder.setMessage("您还未绑定手机号，退出登录将会清除您现有的数据，确定要退出登录嘛？");
+                } else
+                {
+                    builder.setMessage("您确定要退出登录嘛？");
+                }
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        logout();
+                    }
+                });
+                builder.setNegativeButton("取消", null);
+                builder.show();
+
                 break;
             case R.id.ib_back:
                 finish();
