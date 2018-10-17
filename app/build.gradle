@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.fx.secondbar"
@@ -14,23 +13,21 @@ android {
             //设置支持的SO库架构
             abiFilters 'armeabi'//'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
-
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "17ac2f836f693481d1d75f55", //JPush 上注册的包名对应的 Appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
+        signingConfig signingConfigs.debug
     }
-
     signingConfigs {
         debug {
             keyAlias 'fx'
             keyPassword '123456'
-            storeFile file('D:/developer/android_studio_workspace/MiaoBa/SecondsBar/seconds.jks')
+            storeFile file('../seconds.jks')
             storePassword '123456'
         }
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -45,6 +42,8 @@ android {
         flatDir {
             dirs 'libs'
         }
+    }
+    productFlavors {
     }
 }
 

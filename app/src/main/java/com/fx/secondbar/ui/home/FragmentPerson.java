@@ -151,12 +151,12 @@ public class FragmentPerson extends FragmentSupport
                     jump(AcInviteFriends.class);
                 } else if (String.valueOf(ActiveBean.TYPE_SHARE).equals(bean.getType()))
                 {//分享
-                    //跳转至首页
+                    //跳转至首页-微博页
                     ((MainActivity) getActivity()).jumpToHomeWb();
                 } else if (String.valueOf(ActiveBean.TYPE_BROWE).equals(bean.getType()))
                 {//看新闻
-                    //跳转至首页
-                    ((MainActivity) getActivity()).jumpToHome();
+                    //跳转至首页-资讯页
+                    ((MainActivity) getActivity()).jumpToInformation();
                 } else if (String.valueOf(ActiveBean.TYPE_OPEN_APP).equals(bean.getType()))
                 {//打开App
 
@@ -168,7 +168,7 @@ public class FragmentPerson extends FragmentSupport
                     bundle.putString("type", bean.getType());
                     jump(AcWebBrowse.class, bundle, false);
                 } else if (String.valueOf(ActiveBean.TYPE_RANK).equals(bean.getType()))
-                {
+                {//Q夺宝
                     jump(AcLeaderboard.class);
                 } else if (String.valueOf(ActiveBean.TYPE_RECHARGE).equals(bean.getType()))
                 {   //充值

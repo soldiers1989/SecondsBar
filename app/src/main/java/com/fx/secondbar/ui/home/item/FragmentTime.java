@@ -347,6 +347,10 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
                     {
                         if (bean != null)
                         {
+                            if (TextUtils.isEmpty(bean.getUrl()))
+                            {
+                                return;
+                            }
                             Intent intent = new Intent(img.getContext(), AcWebBrowse.class);
                             intent.putExtra("activity_str", bean.getName());
                             intent.putExtra("activity_num", bean.getUrl());

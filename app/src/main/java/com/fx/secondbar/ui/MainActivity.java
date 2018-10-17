@@ -374,6 +374,16 @@ public class MainActivity extends ActivitySupport
     }
 
     /**
+     * 跳转至首页资讯列表
+     */
+    public void jumpToInformation()
+    {
+        switchItem(tv_home);
+        FragmentHome fragment = (FragmentHome) fragments[INDEX_HOME];
+        fragment.showInformation();
+    }
+
+    /**
      * 跳转至首页互动列表
      */
     public void jumpToHomeWb()

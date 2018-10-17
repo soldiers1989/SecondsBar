@@ -125,6 +125,17 @@ public class FragmentHome extends FragmentSupport
         }
     }
 
+    /**
+     * 显示资讯的页面
+     */
+    public void showInformation()
+    {
+        if (viewPager != null)
+        {
+            viewPager.setCurrentItem(0);
+        }
+    }
+
     @Override
     public void onResume()
     {
