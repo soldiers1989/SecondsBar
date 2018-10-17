@@ -119,6 +119,17 @@ public class AcInviteFriends extends ActivitySupport
 //                String getQTips = String.format(getString(R.string.invite_total_get_q), VerificationUtil.verifyDefault(inviteInfoBean.getQcointotal(), "0"));
                 tv_total_get.setText(Html.fromHtml(sb.toString()));
                 VerificationUtil.setViewValue(tv_rule, inviteInfoBean.getDescription());
+
+                if (inviteInfoBean.getOneInviteInfo() != null)
+                {
+                    tv_value_m1.setText(inviteInfoBean.getOneInviteInfo().getAmount());
+                    tv_person_m1.setText(inviteInfoBean.getOneInviteInfo().getTotals());
+                }
+                if (inviteInfoBean.getTwoInviteInfo() != null)
+                {
+                    tv_value_m2.setText(inviteInfoBean.getTwoInviteInfo().getAmount());
+                    tv_person_m2.setText(inviteInfoBean.getTwoInviteInfo().getTotals());
+                }
             }
         });
     }

@@ -11,6 +11,8 @@ public class InviteInfoBean
     private String memberid;//会员id
     private String qcointotal;   //邀请总Q币
     private String totals;       //邀请人数
+    private LevelIncomeBean oneInviteInfo;  //一级收益说明
+    private LevelIncomeBean twoInviteInfo;  //二级收益说明
 
     public String getDescription()
     {
@@ -50,5 +52,76 @@ public class InviteInfoBean
     public void setTotals(String totals)
     {
         this.totals = totals;
+    }
+
+    public LevelIncomeBean getOneInviteInfo()
+    {
+        return oneInviteInfo;
+    }
+
+    public void setOneInviteInfo(LevelIncomeBean oneInviteInfo)
+    {
+        this.oneInviteInfo = oneInviteInfo;
+    }
+
+    public LevelIncomeBean getTwoInviteInfo()
+    {
+        return twoInviteInfo;
+    }
+
+    public void setTwoInviteInfo(LevelIncomeBean twoInviteInfo)
+    {
+        this.twoInviteInfo = twoInviteInfo;
+    }
+
+    /**
+     * 级别收益说明
+     */
+    public static class LevelIncomeBean
+    {
+        private String amount;  //一级奖励值
+        private String memberid;
+        private String totals;    //一级邀请人数
+        private String qcointotal;   //一级奖励总和
+
+        public String getAmount()
+        {
+            return amount;
+        }
+
+        public void setAmount(String amount)
+        {
+            this.amount = amount;
+        }
+
+        public String getMemberid()
+        {
+            return memberid;
+        }
+
+        public void setMemberid(String memberid)
+        {
+            this.memberid = memberid;
+        }
+
+        public String getTotals()
+        {
+            return totals;
+        }
+
+        public void setTotals(String totals)
+        {
+            this.totals = totals;
+        }
+
+        public String getQcointotal()
+        {
+            return qcointotal;
+        }
+
+        public void setQcointotal(String qcointotal)
+        {
+            this.qcointotal = qcointotal;
+        }
     }
 }

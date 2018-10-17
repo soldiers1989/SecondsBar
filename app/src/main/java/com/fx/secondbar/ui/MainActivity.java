@@ -347,7 +347,7 @@ public class MainActivity extends ActivitySupport
             @Override
             public void onNext(ResponseBean responseBean)
             {
-
+                FxApplication.refreshUserInfoBroadCast();
             }
         });
     }
