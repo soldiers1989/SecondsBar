@@ -329,7 +329,7 @@
                         android:id="@+id/tv_reward"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="188"
+                        android:text="888"
                         android:textColor="@color/font_yellow_color"
                         android:textSize="36sp"
                         app:layout_constraintBottom_toBottomOf="@+id/img_code"

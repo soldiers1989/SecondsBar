@@ -22,7 +22,6 @@ import android.widget.TextView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
-import com.btten.bttenlibrary.application.BtApplication;
 import com.btten.bttenlibrary.base.FragmentSupport;
 import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.DisplayUtil;
@@ -127,6 +126,11 @@ public class FragmentPerson extends FragmentSupport
     @Override
     protected void initData()
     {
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) convenientBanner.getLayoutParams();
+        int width = DisplayUtil.getScreenSize(getContext()).widthPixels - DensityUtil.dip2px(getContext(), 15) * 2;
+        //宽高比为25:12
+        params.height = width * 12 / 25;
+        convenientBanner.setLayoutParams(params);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(DensityUtil.dip2px(getContext(), 15), true, false, false));
         adapter = new AdPerson();
@@ -190,16 +194,16 @@ public class FragmentPerson extends FragmentSupport
             }
         });
 
-        int width = DisplayUtil.getScreenSize(BtApplication.getApplication()).widthPixels;
-        width -= (BtApplication.getApplication().getResources().getDimensionPixelSize(R.dimen.home_tutorial_plr) * 2);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) img_get_q.getLayoutParams();
-        if (params.width != width)
-        {
-            params.width = width;
-            //宽高比例为23：8
-            params.height = width * 8 / 23;
-            img_get_q.setLayoutParams(params);
-        }
+//        int width = DisplayUtil.getScreenSize(BtApplication.getApplication()).widthPixels;
+//        width -= (BtApplication.getApplication().getResources().getDimensionPixelSize(R.dimen.home_tutorial_plr) * 2);
+//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) img_get_q.getLayoutParams();
+//        if (params.width != width)
+//        {
+//            params.width = width;
+//            //宽高比例为23：8
+//            params.height = width * 8 / 23;
+//            img_get_q.setLayoutParams(params);
+//        }
         setPersonInfo();
         getData(0);
 
@@ -353,7 +357,7 @@ public class FragmentPerson extends FragmentSupport
             {
                 if (!convenientBanner.isTurning())
                 {
-                    convenientBanner.startTurning(2000);
+                    convenientBanner.startTurning(Constants.DURATION);
                 }
             }
         } else
@@ -378,7 +382,7 @@ public class FragmentPerson extends FragmentSupport
             {
                 if (!convenientBanner.isTurning())
                 {
-                    convenientBanner.startTurning(2000);
+                    convenientBanner.startTurning(Constants.DURATION);
                 }
             }
         }

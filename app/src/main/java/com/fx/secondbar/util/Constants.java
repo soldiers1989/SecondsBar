@@ -18,6 +18,11 @@ public class Constants
     public static final String ROOT_DIR = "FxSecondsBar";
 
     /**
+     * 轮播图时间
+     */
+    public static final int DURATION = 5000;
+
+    /**
      * 资讯详情访问地址
      */
     public static final String URL_INFORMATION = ROOT_URL + "/static/mb-front/news.html?id=%s&deviceid=%s&random=%s";

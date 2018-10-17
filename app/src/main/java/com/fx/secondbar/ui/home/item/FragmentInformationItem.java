@@ -28,6 +28,7 @@ import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.AcInformationDetail;
 import com.fx.secondbar.ui.home.item.adapter.AdInfomation;
 import com.fx.secondbar.ui.mall.AcMallDetail;
+import com.fx.secondbar.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
         {
             if (!convenientBanner.isTurning())
             {
-                convenientBanner.startTurning(2000);
+                convenientBanner.startTurning(Constants.DURATION);
             }
         }
     }
@@ -147,7 +148,7 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
         {
             if (!convenientBanner.isTurning())
             {
-                convenientBanner.startTurning(2000);
+                convenientBanner.startTurning(Constants.DURATION);
             }
         }
     }
@@ -162,7 +163,7 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
             {
                 if (!convenientBanner.isTurning())
                 {
-                    convenientBanner.startTurning(2000);
+                    convenientBanner.startTurning(Constants.DURATION);
                 }
             }
         }
@@ -224,7 +225,7 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
                 return R.layout.layout_banner;
             }
         }, bannerBeans).setPageIndicator(new int[]{R.mipmap.ic_indicator, R.mipmap.ic_indicator_sel});
-        convenientBanner.startTurning(2000);
+        convenientBanner.startTurning(Constants.DURATION);
         return view;
     }
 

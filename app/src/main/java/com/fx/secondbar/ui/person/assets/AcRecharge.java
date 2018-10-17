@@ -306,6 +306,7 @@ public class AcRecharge extends ActivitySupport
         });
     }
 
+
     @Override
     protected String[] getPermissionArrays()
     {

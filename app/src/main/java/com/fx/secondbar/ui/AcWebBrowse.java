@@ -35,6 +35,8 @@ public class AcWebBrowse extends ActivitySupport
     private TextView tv_title;
     private ProgressBar progressBar1;
     private WebView webView;
+    //表示是否在完成任务中
+    private boolean isCompleting;
 
     @Override
     protected int getLayoutResId()
@@ -86,6 +88,7 @@ public class AcWebBrowse extends ActivitySupport
                 {
                     progressBar1.setVisibility(View.GONE);//加载完网页进度条消失
                     completeTask(0, getIntent().getStringExtra("type"));
+                    LogUtil.e("i == 100");
                 } else
                 {
                     progressBar1.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
@@ -136,6 +139,11 @@ public class AcWebBrowse extends ActivitySupport
      */
     private void completeTask(final int retry, final String type)
     {
+        if (isCompleting)
+        {
+            return;
+        }
+        isCompleting = true;
         HttpManager.finishActive(type, new Subscriber<ResponseBean>()
         {
             @Override
@@ -149,15 +157,15 @@ public class AcWebBrowse extends ActivitySupport
             {
                 if (retry < 3)
                 {
+                    isCompleting = false;
                     completeTask(retry + 1, type);
                 }
-
             }
 
             @Override
             public void onNext(ResponseBean responseBean)
             {
-
+                isCompleting = false;
             }
         });
     }

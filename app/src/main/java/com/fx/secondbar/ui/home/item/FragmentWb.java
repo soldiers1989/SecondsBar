@@ -26,6 +26,7 @@ import com.fx.secondbar.bean.WBData;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.AcShareDialog;
 import com.fx.secondbar.ui.home.item.adapter.AdWb;
+import com.fx.secondbar.util.Constants;
 
 import java.util.List;
 
@@ -66,7 +67,7 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
         {
             if (!convenientBanner.isTurning())
             {
-                convenientBanner.startTurning(2000);
+                convenientBanner.startTurning(Constants.DURATION);
             }
         }
     }
@@ -133,7 +134,7 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
         {
             if (!convenientBanner.isTurning())
             {
-                convenientBanner.startTurning(2000);
+                convenientBanner.startTurning(Constants.DURATION);
             }
         }
     }
@@ -148,7 +149,7 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
             {
                 if (!convenientBanner.isTurning())
                 {
-                    convenientBanner.startTurning(2000);
+                    convenientBanner.startTurning(Constants.DURATION);
                 }
             }
         }
@@ -211,7 +212,7 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
                 return R.layout.layout_banner;
             }
         }, bannerBeans).setPageIndicator(new int[]{R.mipmap.ic_indicator, R.mipmap.ic_indicator_sel});
-        convenientBanner.startTurning(2000);
+        convenientBanner.startTurning(Constants.DURATION);
         return view;
     }
 

@@ -31,6 +31,7 @@ import com.fx.secondbar.ui.AcWebBrowse;
 import com.fx.secondbar.ui.home.AcInformationDetail;
 import com.fx.secondbar.ui.home.item.adapter.AdTime;
 import com.fx.secondbar.ui.mall.AcMallDetail;
+import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideLoad;
 
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
         {
             if (!convenientBanner.isTurning())
             {
-                convenientBanner.startTurning(2000);
+                convenientBanner.startTurning(Constants.DURATION);
             }
         }
         if (adapter != null && !VerificationUtil.noEmpty(adapter.getData()))
@@ -123,7 +124,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
         {
             if (!convenientBanner.isTurning())
             {
-                convenientBanner.startTurning(2000);
+                convenientBanner.startTurning(Constants.DURATION);
             }
         }
     }
@@ -265,7 +266,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
                 return R.layout.layout_banner;
             }
         }, bannerBeans).setPageIndicator(new int[]{R.mipmap.ic_indicator, R.mipmap.ic_indicator_sel});
-        convenientBanner.startTurning(2000);
+        convenientBanner.startTurning(Constants.DURATION);
         return view;
     }
 
@@ -279,7 +280,7 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
             {
                 if (!convenientBanner.isTurning())
                 {
-                    convenientBanner.startTurning(2000);
+                    convenientBanner.startTurning(Constants.DURATION);
                 }
             }
         }

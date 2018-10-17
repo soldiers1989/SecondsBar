@@ -24,7 +24,7 @@
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/mall_tool_pl"
-                android:text="帮助"
+                android:text="常见问题"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/toolbar_title_font"/>
 

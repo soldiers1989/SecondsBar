@@ -45,9 +45,9 @@ public class ShareUtils
     public static final String WECHAT_APPID = "wxa60ff63820e06c8b";
 
     /**
-     * 新浪开放平台AppId
+     * 新浪开放平台AppKey
      */
-    public static final String SINA_APPKEY = "2628714932";
+    public static final String SINA_APPKEY = "1028693876";
 
     /**
      * 默认回调页

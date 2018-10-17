@@ -1,9 +1,13 @@
 package com.fx.secondbar.ui.person;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -132,6 +136,8 @@ public class AcAccountSet extends ActivitySupport
     {
         dialog = ProgressDialogUtil.getProgressDialog(this, getString(R.string.progress_tips), true);
         setData();
+        IntentFilter filter = new IntentFilter(Constants.ACTION_REFRESH_PERSON_SHOW);
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
     }
 
     /**
@@ -317,6 +323,21 @@ public class AcAccountSet extends ActivitySupport
             }
         });
     }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver()
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            if (intent != null)
+            {
+                if (Constants.ACTION_REFRESH_PERSON_SHOW.equals(intent.getAction()))
+                {
+                    setData();
+                }
+            }
+        }
+    };
 
     @Override
     public void onClick(View v)
@@ -610,6 +631,7 @@ public class AcAccountSet extends ActivitySupport
         {
             subscriptionCacheSize.unsubscribe();
         }
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
         super.onDestroy();
     }
 }

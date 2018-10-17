@@ -50,7 +50,7 @@
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lineSpacingMultiplier="1.2"
+            android:lineSpacingMultiplier="1.4"
             android:padding="15dip"
             android:textColor="#444444"
             android:textSize="15sp"/>

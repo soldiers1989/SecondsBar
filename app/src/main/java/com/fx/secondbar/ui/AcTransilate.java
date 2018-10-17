@@ -1,8 +1,11 @@
 package com.fx.secondbar.ui;
 
 import android.Manifest;
+import android.os.Handler;
+import android.os.Message;
 import android.view.KeyEvent;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.base.bean.ResponseBean;
@@ -24,9 +27,13 @@ import rx.Subscriber;
 public class AcTransilate extends ActivitySupport
 {
 
+    private TextView tv_jump;
     private ImageView img;
     //计数器，表示场景任务是否处理完，当前共两个任务
     private int count = 0;
+
+    //倒计时5秒
+    private int duration = 5;
 
     @Override
     protected int getLayoutResId()
@@ -38,7 +45,7 @@ public class AcTransilate extends ActivitySupport
     protected void initView()
     {
         img = findView(R.id.img);
-
+        tv_jump = findView(R.id.tv_jump);
     }
 
     @Override
@@ -51,20 +58,20 @@ public class AcTransilate extends ActivitySupport
     protected void initData()
     {
 //        GlideApp.with(img).load(R.mipmap.startup).centerCrop().load(img);
-        img.postDelayed(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                //计数+1，表示一个任务完成
-                count++;
-                if (count >= 2)
-                {
-                    jump(MainActivity.class, true);
-                }
-            }
-        }, 2 * 1000);
-
+//        img.postDelayed(new Runnable()
+//        {
+//            @Override
+//            public void run()
+//            {
+//                //计数+1，表示一个任务完成
+//                count++;
+//                if (count >= 2)
+//                {
+//                    jump(MainActivity.class, true);
+//                }
+//            }
+//        }, 5 * 1000);
+        tv_jump.setText(duration + "s");
         new DeviceUuidFactory(FxApplication.getInstance());
         openAppActive();
         getConfigInfo();
@@ -75,7 +82,38 @@ public class AcTransilate extends ActivitySupport
             deviceId = deviceId.replace("-", "");
         }
         setAlias(deviceId);
+        handler.sendEmptyMessageDelayed(1, 1000);
     }
+
+    private Handler handler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg)
+        {
+            super.handleMessage(msg);
+            switch (msg.what)
+            {
+                //倒计时
+                case 1:
+                    if (duration == 0)
+                    {
+                        //计数+1，表示一个任务完成
+                        count++;
+                        if (count >= 2)
+                        {
+                            jump(MainActivity.class, true);
+                        }
+                        return;
+                    } else
+                    {
+                        duration -= 1;
+                        tv_jump.setText(duration + "s");
+                        handler.sendEmptyMessageDelayed(1, 1000);
+                    }
+                    break;
+            }
+        }
+    };
 
     /**
      * 完成打开App的任务

@@ -34,6 +34,10 @@ public class AcInviteFriends extends ActivitySupport
     private TextView tv_total_get;
     private TextView tv_total_person;
     private TextView tv_rule;
+    private TextView tv_value_m1;
+    private TextView tv_person_m1;
+    private TextView tv_value_m2;
+    private TextView tv_person_m2;
 
     @Override
     protected int getLayoutResId()
@@ -54,6 +58,10 @@ public class AcInviteFriends extends ActivitySupport
         tv_total_get = findView(R.id.tv_total_get);
         tv_total_person = findView(R.id.tv_total_person);
         tv_rule = findView(R.id.tv_rule);
+        tv_value_m1 = findView(R.id.tv_value_m1);
+        tv_person_m1 = findView(R.id.tv_person_m1);
+        tv_value_m2 = findView(R.id.tv_value_m2);
+        tv_person_m2 = findView(R.id.tv_person_m2);
     }
 
     @Override

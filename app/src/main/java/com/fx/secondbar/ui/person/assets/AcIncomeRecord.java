@@ -11,7 +11,6 @@ import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
-import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.QCoinBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.person.AcQIntro;
@@ -134,7 +133,7 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
                 currPage = page;
                 if (PAGE_START == page)
                 {
-                    adapter.setNewData(FxApplication.getInstance().getUserInfoBean().getListQcoin());
+                    adapter.setNewData(list);
                 } else
                 {
                     adapter.addData(list);
