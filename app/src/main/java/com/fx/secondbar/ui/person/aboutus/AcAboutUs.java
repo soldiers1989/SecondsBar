@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.util.ShowToast;
 import com.fx.secondbar.R;
 import com.fx.secondbar.ui.person.AcOnlineCustomer;
 
@@ -29,6 +30,7 @@ public class AcAboutUs extends ActivitySupport
         findView(R.id.tv_protocol).setOnClickListener(this);
         findView(R.id.tv_privacy).setOnClickListener(this);
         findView(R.id.tv_customer).setOnClickListener(this);
+        findView(R.id.tv_evaluation).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -72,6 +74,9 @@ public class AcAboutUs extends ActivitySupport
             case R.id.tv_customer:
 //                jump(AcCustomer.class);
                 jump(AcOnlineCustomer.class);
+                break;
+            case R.id.tv_evaluation:
+                ShowToast.showToast("敬请期待");
                 break;
         }
     }

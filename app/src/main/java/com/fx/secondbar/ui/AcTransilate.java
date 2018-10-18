@@ -4,11 +4,13 @@ import android.Manifest;
 import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.base.bean.ResponseBean;
+import com.btten.bttenlibrary.util.SharePreferenceUtils;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.ActiveBean;
@@ -51,7 +53,7 @@ public class AcTransilate extends ActivitySupport
     @Override
     protected void initListener()
     {
-
+        tv_jump.setOnClickListener(this);
     }
 
     @Override
@@ -71,7 +73,14 @@ public class AcTransilate extends ActivitySupport
 //                }
 //            }
 //        }, 5 * 1000);
-        tv_jump.setText(duration + "s");
+        if (SharePreferenceUtils.getValueByBoolean("isFirst", true))
+        {
+            tv_jump.setVisibility(View.GONE);
+        } else
+        {
+            tv_jump.setVisibility(View.VISIBLE);
+        }
+        tv_jump.setText(duration + "s | 跳过");
         new DeviceUuidFactory(FxApplication.getInstance());
         openAppActive();
         getConfigInfo();
@@ -101,13 +110,14 @@ public class AcTransilate extends ActivitySupport
                         count++;
                         if (count >= 2)
                         {
+                            SharePreferenceUtils.savePreferences("isFirst", false);
                             jump(MainActivity.class, true);
                         }
                         return;
                     } else
                     {
                         duration -= 1;
-                        tv_jump.setText(duration + "s");
+                        tv_jump.setText(duration + "s | 跳过");
                         handler.sendEmptyMessageDelayed(1, 1000);
                     }
                     break;
@@ -177,6 +187,7 @@ public class AcTransilate extends ActivitySupport
                 }
                 if (count >= 2)
                 {
+                    SharePreferenceUtils.savePreferences("isFirst", false);
                     jump(MainActivity.class, true);
                 }
             }
@@ -211,5 +222,22 @@ public class AcTransilate extends ActivitySupport
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        if (isFastDoubleClick(v))
+        {
+            return;
+        }
+        switch (v.getId())
+        {
+            case R.id.tv_jump:
+                handler.removeMessages(1);
+                count = 0;
+                jump(MainActivity.class, true);
+                break;
+        }
     }
 }

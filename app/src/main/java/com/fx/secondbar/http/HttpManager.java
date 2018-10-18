@@ -219,6 +219,19 @@ public class HttpManager
     }
 
     /**
+     * 购买商品接口
+     *
+     * @param goodsId    商品id
+     * @param subscriber
+     */
+    public static void buyQCommodity(String goodsId, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.commodityQBuy(goodsId).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+
+    /**
      * 获取行情列表
      *
      * @param page

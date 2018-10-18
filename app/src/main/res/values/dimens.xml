@@ -170,11 +170,11 @@
     <dimen name="mall_detail_info_place_mt">4dip</dimen>
     <dimen name="mall_detail_intro_mt">14dip</dimen>
 
-    <dimen name="dialog_mall_buy_h">342dip</dimen>
+    <dimen name="dialog_mall_buy_h">415dip</dimen>
     <dimen name="dialog_mall_buy_tips_mt">18dip</dimen>
     <dimen name="dialog_mall_buy_tips">18sp</dimen>
     <dimen name="dialog_mall_buy_price_mt">20dip</dimen>
-    <dimen name="dialog_mall_buy_price">24sp</dimen>
+    <dimen name="dialog_mall_buy_price">18sp</dimen>
     <dimen name="dialog_mall_buy_des_item_ptb">6dip</dimen>
     <dimen name="dialog_mall_buy_des_item_mt">30dip</dimen>
     <dimen name="dialog_mall_buy_des_item_mlr">15dip</dimen>

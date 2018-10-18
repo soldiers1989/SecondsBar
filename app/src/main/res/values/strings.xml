@@ -64,6 +64,7 @@
     <string name="mall_detail_info_time">时长：%s</string>
     <string name="mall_detail_info_place">地点：%s</string>
     <string name="mall_detail_info_price">%sSTE</string>
+    <string name="mall_detail_info_q_price">%sQ</string>
     <string name="mall_detail_info_position">职位：%s</string>
     <string name="mall_detail_info_school">毕业院校：%s</string>
 
@@ -71,7 +72,7 @@
     <string name="dialog_mall_buy_btn">立即支付</string>
     <string name="dialog_mall_buy_item_name">商品名称</string>
     <string name="dialog_mall_buy_item_time">商品时间</string>
-    <string name="dialog_mall_buy_protocol_tips">本人已同意%s</string>
+    <string name="dialog_mall_buy_protocol_tips">本人已同意</string>
     <string name="dialog_mall_buy_protocol_content">《秒吧支付说明协议》</string>
 
     <string name="quote_item_title_name">名人</string>

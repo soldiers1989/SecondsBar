@@ -85,6 +85,10 @@ public class Constants
      */
     public static final String API_MALL_BUY = "mall/buy";
     /**
+     * 商品Q支付接口
+     */
+    public static final String API_MALL_Q_BUY="mall/qbuy";
+    /**
      * 行情列表接口
      */
     public static final String API_QUOTE_LIST = "people/list";

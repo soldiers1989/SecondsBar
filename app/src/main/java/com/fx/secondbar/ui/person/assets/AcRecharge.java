@@ -102,8 +102,8 @@ public class AcRecharge extends ActivitySupport
     protected void initData()
     {
         btn_pay.setEnabled(false);
-        tv_wechat.setSelected(true);
-        tv_alipay.setSelected(false);
+        tv_wechat.setSelected(false);
+        tv_alipay.setSelected(true);
         addFilter(ed_input, new CashierInputFilter());
         bindFixedAmountClick();
     }
@@ -190,12 +190,13 @@ public class AcRecharge extends ActivitySupport
         switch (v.getId())
         {
             case R.id.tv_wechat:
-                if (tv_alipay.isSelected())
-                {
-                    tv_alipay.setSelected(false);
-                }
-                tv_wechat.setSelected(true);
-                btn_pay.setText(setPayTips());
+                ShowToast.showToast("暂未开通");
+//                if (tv_alipay.isSelected())
+//                {
+//                    tv_alipay.setSelected(false);
+//                }
+//                tv_wechat.setSelected(true);
+//                btn_pay.setText(setPayTips());
                 break;
             case R.id.tv_alipay:
                 if (tv_wechat.isSelected())

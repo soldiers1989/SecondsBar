@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.btten.bttenlibrary.util.Arithmetic;
 import com.btten.bttenlibrary.util.LogUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -152,7 +153,7 @@ public class FragmentInfomation extends FragmentViewPagerBase
     {
         if (tv_today_q != null)
         {
-            tv_today_q.setText(VerificationUtil.verifyDefault(String.valueOf(FxApplication.getInstance().getUserInfoBean().getTodayqcoin()), "0"));
+            tv_today_q.setText(VerificationUtil.verifyDefault(Arithmetic.doubleToStr(FxApplication.getInstance().getUserInfoBean().getTodayqcoin()), "0"));
         }
     }
 

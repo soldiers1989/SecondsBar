@@ -14,6 +14,7 @@ public class CommodityBean
     private String type;//类型
     private String createtime;//创建时间
     private String price;//价格
+    private String qcoin;   //Q价格
     private String address;//地点
     private String categoryid;//栏目id
     private String timelength;//时长
@@ -138,5 +139,15 @@ public class CommodityBean
     public void setMerchandise_ID(String merchandise_ID)
     {
         this.merchandise_ID = merchandise_ID;
+    }
+
+    public String getQcoin()
+    {
+        return qcoin;
+    }
+
+    public void setQcoin(String qcoin)
+    {
+        this.qcoin = qcoin;
     }
 }

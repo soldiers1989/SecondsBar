@@ -22,7 +22,7 @@
         android:gravity="center"
         android:paddingLeft="12dip"
         android:paddingRight="12dip"
-        android:text="5s"
+        android:text="5s | 跳过"
         android:textColor="@android:color/white"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"

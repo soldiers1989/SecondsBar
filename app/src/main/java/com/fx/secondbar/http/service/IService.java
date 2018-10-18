@@ -151,6 +151,14 @@ public interface IService
     Observable<ResponseBean> commodityBuy(@Query("goodsid") String id);
 
     /**
+     * 购买商品Q支付接口
+     * @param id
+     * @return
+     */
+    @GET(Constants.API_MALL_Q_BUY)
+    Observable<ResponseBean> commodityQBuy(@Query("goodsid") String id);
+
+    /**
      * 获取行情列表
      *
      * @param page

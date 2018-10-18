@@ -181,9 +181,9 @@ public class AcMallDetail extends ActivitySupport
             dialogBuy.setOnBuyListener(new DialogBuy.OnBuyListener()
             {
                 @Override
-                public void onBuy(String goodsId)
+                public void onBuy(String goodsId, boolean isSTEPay)
                 {
-                    buyGoods(goodsId);
+                    buyGoods(goodsId, isSTEPay);
                 }
             });
         }
@@ -216,13 +216,13 @@ public class AcMallDetail extends ActivitySupport
     /**
      * 购买商品
      */
-    private void buyGoods(String goodsId)
+    private void buyGoods(String goodsId, boolean isSTEPay)
     {
         if (dialog != null)
         {
             dialog.show();
         }
-        HttpManager.buyCommodity(goodsId, new Subscriber<ResponseBean>()
+        Subscriber<ResponseBean> subscriber = new Subscriber<ResponseBean>()
         {
             @Override
             public void onCompleted()
@@ -280,7 +280,15 @@ public class AcMallDetail extends ActivitySupport
                 FxApplication.refreshUserInfoBroadCast();
                 jump(AcOrderManage.class);
             }
-        });
+        };
+        if (isSTEPay)
+        {
+            HttpManager.buyCommodity(goodsId, subscriber);
+        } else
+        {
+            HttpManager.buyQCommodity(goodsId, subscriber);
+        }
+
     }
 
     @Override

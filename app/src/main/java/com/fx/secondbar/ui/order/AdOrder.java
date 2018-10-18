@@ -37,7 +37,8 @@ public class AdOrder extends BaseQuickAdapter<OrderBean, BaseViewHolder>
         VerificationUtil.setViewValue(tv_status, item.getStatusname());
         VerificationUtil.setViewValue(tv_name, item.getName());
 
-        setCommodityMoney(tv_price, item.getPrice());
+        //type=1表示STE支付
+        setCommodityMoney(tv_price, item.getType() == 1 ? item.getPrice() : item.getQcoin(), item.getType() == 1);
         setCommodityPlace(tv_place, item.getAddress());
         setCommodityTime(tv_time, item.getTimelength());
 
@@ -66,11 +67,18 @@ public class AdOrder extends BaseQuickAdapter<OrderBean, BaseViewHolder>
      * @param tv
      * @param price
      */
-    private void setCommodityMoney(TextView tv, String price)
+    private void setCommodityMoney(TextView tv, String price, boolean isSTE)
     {
         if (tv != null)
         {
-            String money = tv.getContext().getString(R.string.mall_detail_info_price);
+            String money = "";
+            if (isSTE)
+            {
+                money = tv.getContext().getString(R.string.mall_detail_info_price);
+            } else
+            {
+                money = tv.getContext().getString(R.string.mall_detail_info_q_price);
+            }
             tv.setText(String.format(money, VerificationUtil.verifyDefault(price, "0")));
         }
     }

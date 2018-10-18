@@ -2,10 +2,8 @@ package com.fx.secondbar.ui.mall;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +16,7 @@ import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.CommodityBean;
+import com.fx.secondbar.ui.AcWebBrowse;
 
 /**
  * function:立即购买对话框
@@ -61,27 +60,32 @@ public class DialogBuy
      * @param context
      * @return
      */
-    private View createView(Context context)
+    private View createView(final Context context)
     {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_buy, null);
-        TextView tv_price = view.findViewById(R.id.tv_price);
+        final TextView tv_price = view.findViewById(R.id.tv_price);
+        final TextView tv_q_price = view.findViewById(R.id.tv_q_price);
         TextView tv_name = view.findViewById(R.id.tv_name);
         TextView tv_time = view.findViewById(R.id.tv_time);
         final TextView tv_protocol = view.findViewById(R.id.tv_protocol);
+        TextView tv_pay_intro = view.findViewById(R.id.tv_pay_intro);
         Button btn_buy = view.findViewById(R.id.btn_buy);
 
-        String protocol = context.getString(R.string.dialog_mall_buy_protocol_content);
-        String tips = String.format(context.getString(R.string.dialog_mall_buy_protocol_tips), protocol);
-        SpannableString spannableString = new SpannableString(tips);
-        spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.home_tabs_mark_color)), tips.indexOf(protocol), spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tv_protocol.setText(spannableString);
+//        String protocol = context.getString(R.string.dialog_mall_buy_protocol_content);
+//        String tips = String.format(context.getString(R.string.dialog_mall_buy_protocol_tips), protocol);
+//        SpannableString spannableString = new SpannableString(tips);
+//        spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.home_tabs_mark_color)), tips.indexOf(protocol), spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        tv_protocol.setText(spannableString);
 
         if (commodityBean != null)
         {
             VerificationUtil.setViewValue(tv_price, String.format(context.getString(R.string.mall_detail_info_price), commodityBean.getPrice()));
             VerificationUtil.setViewValue(tv_name, commodityBean.getName());
             VerificationUtil.setViewValue(tv_time, commodityBean.getTimelength() + "分钟");
+            VerificationUtil.setViewValue(tv_q_price, String.format(context.getString(R.string.mall_detail_info_q_price), commodityBean.getQcoin()));
         }
+
+        tv_price.setSelected(true);
 
         tv_protocol.setOnClickListener(new View.OnClickListener()
         {
@@ -90,6 +94,35 @@ public class DialogBuy
             {
                 TextView tv = (TextView) v;
                 tv.setSelected(!tv.isSelected());
+            }
+        });
+        tv_pay_intro.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(context, AcWebBrowse.class);
+                intent.putExtra("activity_str", "秒吧支付说明协议");
+                intent.putExtra("activity_num", "http://www.feixingtech.com:8080/static/mb-front/getText.html?type=13");
+                context.startActivity(intent);
+            }
+        });
+        tv_price.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                tv_q_price.setSelected(false);
+                tv_price.setSelected(true);
+            }
+        });
+        tv_q_price.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                tv_q_price.setSelected(true);
+                tv_price.setSelected(false);
             }
         });
         btn_buy.setOnClickListener(new View.OnClickListener()
@@ -104,10 +137,11 @@ public class DialogBuy
                 }
                 if (onBuyListener != null && commodityBean != null)
                 {
-                    onBuyListener.onBuy(commodityBean.getMerchandise_ID());
+                    onBuyListener.onBuy(commodityBean.getMerchandise_ID(), tv_price.isSelected());
                 }
             }
         });
+
         return view;
     }
 
@@ -146,9 +180,10 @@ public class DialogBuy
         /**
          * 立即购买
          *
-         * @param goodsId 商品id
+         * @param goodsId  商品id
+         * @param isStePay 是否是STE支付，true表示是，false表示Q支付
          */
-        void onBuy(String goodsId);
+        void onBuy(String goodsId, boolean isStePay);
     }
 
 }

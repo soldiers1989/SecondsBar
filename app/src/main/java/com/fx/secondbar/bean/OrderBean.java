@@ -26,6 +26,8 @@ public class OrderBean implements Parcelable
     private String timelength;// 时长
     private String price;// 价格
     private String merchandiseid;// 商品id
+    private String qcoin;//Q金额
+    private Integer type;//支付类型 2：Q支付，1：STE支付
 
     public String getMemberid()
     {
@@ -177,6 +179,27 @@ public class OrderBean implements Parcelable
         this.merchandiseid = merchandiseid;
     }
 
+    public String getQcoin()
+    {
+        return qcoin;
+    }
+
+    public void setQcoin(String qcoin)
+    {
+        this.qcoin = qcoin;
+    }
+
+    public Integer getType()
+    {
+        return type == null ? 1 : type;
+    }
+
+    public void setType(Integer type)
+    {
+        this.type = type;
+    }
+
+
     @Override
     public int describeContents()
     {
@@ -201,6 +224,8 @@ public class OrderBean implements Parcelable
         dest.writeString(this.timelength);
         dest.writeString(this.price);
         dest.writeString(this.merchandiseid);
+        dest.writeString(this.qcoin);
+        dest.writeValue(this.type);
     }
 
     public OrderBean()
@@ -224,6 +249,8 @@ public class OrderBean implements Parcelable
         this.timelength = in.readString();
         this.price = in.readString();
         this.merchandiseid = in.readString();
+        this.qcoin = in.readString();
+        this.type = (Integer) in.readValue(Integer.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<OrderBean> CREATOR = new Parcelable.Creator<OrderBean>()

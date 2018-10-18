@@ -30,7 +30,7 @@
         android:singleLine="true"
         android:text="每充值100STE返100Q"
         android:textColor="#787878"
-        android:textSize="12sp"/>
+        android:textSize="10sp"/>
 
     <Button
         android:id="@+id/tv_option"

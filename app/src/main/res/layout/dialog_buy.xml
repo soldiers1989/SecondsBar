@@ -21,8 +21,12 @@
 
     <TextView
         android:id="@+id/tv_price"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dialog_mall_buy_des_item_mlr"
+        android:layout_marginTop="40dip"
+        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
+        android:drawableRight="@drawable/recharge_pay_method_mark"
         android:text=""
         android:textColor="@color/home_tabs_mark_color"
         android:textSize="@dimen/dialog_mall_buy_price"
@@ -30,16 +34,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_tips"/>
 
+    <TextView
+        android:id="@+id/tv_q_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dialog_mall_buy_des_item_mlr"
+        android:layout_marginTop="24dip"
+        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
+        android:drawableRight="@drawable/recharge_pay_method_mark"
+        android:text=""
+        android:textColor="@color/home_tabs_mark_color"
+        android:textSize="@dimen/dialog_mall_buy_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_price"/>
+
     <RelativeLayout
         android:id="@+id/rl_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dialog_mall_buy_des_item_mlr"
-        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
         android:layout_marginTop="@dimen/dialog_mall_buy_des_item_mt"
-        android:paddingBottom="@dimen/dialog_mall_buy_des_item_ptb"
+        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
         android:paddingTop="@dimen/dialog_mall_buy_des_item_ptb"
-        app:layout_constraintTop_toBottomOf="@id/tv_price">
+        android:paddingBottom="@dimen/dialog_mall_buy_des_item_ptb"
+        app:layout_constraintTop_toBottomOf="@id/tv_q_price">
 
         <TextView
             android:id="@+id/tv_name_tips"
@@ -77,10 +96,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dialog_mall_buy_des_item_mlr"
-        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
         android:layout_marginTop="@dimen/dialog_mall_buy_des_item_space"
-        android:paddingBottom="@dimen/dialog_mall_buy_des_item_ptb"
+        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
         android:paddingTop="@dimen/dialog_mall_buy_des_item_ptb"
+        android:paddingBottom="@dimen/dialog_mall_buy_des_item_ptb"
         app:layout_constraintTop_toBottomOf="@id/v_name">
 
         <TextView
@@ -114,20 +133,36 @@
         android:background="@color/dialog_mall_buy_line"
         app:layout_constraintTop_toBottomOf="@id/rl_time"/>
 
-    <TextView
-        android:id="@+id/tv_protocol"
+    <LinearLayout
+        android:id="@+id/ll_protocol"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dialog_mall_buy_des_item_mlr"
-        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
         android:layout_marginTop="@dimen/dialog_mall_buy_des_item_space"
-        android:drawableLeft="@drawable/dialog_mall_buy_protocol"
-        android:drawablePadding="@dimen/dialog_mall_buy_protocol_dp"
-        android:gravity="center_vertical"
-        android:text="@string/dialog_mall_buy_protocol_tips"
-        android:textColor="@color/dialog_mall_buy_protocol"
-        android:textSize="@dimen/dialog_mall_buy_protocol"
-        app:layout_constraintTop_toBottomOf="@id/v_time"/>
+        android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/v_time">
+
+        <TextView
+            android:id="@+id/tv_protocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/dialog_mall_buy_protocol"
+            android:drawablePadding="@dimen/dialog_mall_buy_protocol_dp"
+            android:gravity="center_vertical"
+            android:text="@string/dialog_mall_buy_protocol_tips"
+            android:textColor="@color/dialog_mall_buy_protocol"
+            android:textSize="@dimen/dialog_mall_buy_protocol"/>
+
+        <TextView
+            android:id="@+id/tv_pay_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_mall_buy_protocol_content"
+            android:textColor="@color/home_tabs_mark_color"
+            android:textSize="@dimen/dialog_mall_buy_protocol"/>
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_buy"

@@ -27,15 +27,15 @@ import java.util.concurrent.Executors;
 public class IncomeProgressView extends View
 {
     //进度条颜色#00ffff
-    private int progressColor = Color.parseColor("#00ffff");
+    private int progressColor = Color.parseColor("#FDD20A");
     //外圆背景颜色，默认#353C4C
-    private int outsideBgColor = Color.parseColor("#353C4C");
+    private int outsideBgColor = Color.parseColor("#FFEBBB");
     //内圆背景颜色，默认#747474
-    private int innerBgColor = Color.parseColor("#747474");
+    private int innerBgColor = Color.parseColor("#FFFFFF");
     //提示文本值
     private String tipText = "收益\n累计中";
     //提示文本颜色，默认颜色#00ffff
-    private int tipTextColor = Color.parseColor("#00ffff");
+    private int tipTextColor = Color.parseColor("#FDD20A");
     //提示文本字体大小
     private int tipTextSize = DensityUtil.sp2px(FxApplication.getInstance(), 12);
     //最大进度，默认6000（单位为时间）

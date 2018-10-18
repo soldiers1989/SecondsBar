@@ -48,15 +48,18 @@
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_today_q"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="16sp"
-                android:autoSizeTextType="uniform"
+                android:gravity="center_horizontal"
+                android:paddingLeft="6dip"
+                android:paddingRight="6dip"
                 android:singleLine="true"
                 android:text=""
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
-                app:autoSizeMinTextSize="13sp"/>
+                app:autoSizeMaxTextSize="16sp"
+                app:autoSizeMinTextSize="13sp"
+                app:autoSizeTextType="uniform"/>
 
             <TextView
                 android:layout_width="wrap_content"
