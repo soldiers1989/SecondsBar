@@ -60,6 +60,9 @@ public class GlideLoad
             if (url.startsWith("http://") || url.startsWith("https://"))
             {
                 loadUrl = url;
+            } else if (url.startsWith("//"))
+            {
+                loadUrl = "http:" + url;
             } else
             {
                 loadUrl = Constants.ROOT_URL + url;

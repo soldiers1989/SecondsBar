@@ -194,11 +194,11 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
                         GlideLoad.load(img1, picture[0], true);
                         if (picture.length > 1)
                         {
-                            GlideLoad.load(img1, picture[1], true);
+                            GlideLoad.load(img2, picture[1], true);
                         }
                         if (picture.length > 2)
                         {
-                            GlideLoad.load(img1, picture[2], true);
+                            GlideLoad.load(img3, picture[2], true);
                         }
                     } else
                     {
