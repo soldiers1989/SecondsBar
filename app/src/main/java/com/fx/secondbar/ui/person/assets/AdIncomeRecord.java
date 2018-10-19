@@ -31,7 +31,7 @@ public class AdIncomeRecord extends BaseQuickAdapter<QCoinBean, BaseViewHolder>
 
         VerificationUtil.setViewValue(tv_content, item.getDescription());
         VerificationUtil.setViewValue(tv_time, item.getDaily());
-        VerificationUtil.setViewValue(tv_money, "+" + item.getPrice());
+        VerificationUtil.setViewValue(tv_money, "+" + VerificationUtil.verifyDefault(item.getPrice(), "0"));
 
         if (helper.getLayoutPosition() == getData().size() - 1)
         {

@@ -9,29 +9,29 @@ import java.io.Serializable;
  */
 public class QCoinBean implements Serializable
 {
-    private Integer type;//类型
-    private Integer price;//获得的金币数量
+    private String type;//类型
+    private String price;//获得的金币数量
     private String memberid;//会员id
     private String daily;//日期
-    private Integer status;//状态
+    private String status;//状态
     private String description;//描述
 
-    public Integer getType()
+    public String getType()
     {
-        return type == null ? 0 : type;
+        return type;
     }
 
-    public void setType(Integer type)
+    public void setType(String type)
     {
         this.type = type;
     }
 
-    public Integer getPrice()
+    public String getPrice()
     {
-        return price == null ? 0 : price;
+        return price;
     }
 
-    public void setPrice(Integer price)
+    public void setPrice(String price)
     {
         this.price = price;
     }
@@ -56,12 +56,12 @@ public class QCoinBean implements Serializable
         this.daily = daily;
     }
 
-    public Integer getStatus()
+    public String getStatus()
     {
-        return status == null ? 0 : status;
+        return status;
     }
 
-    public void setStatus(Integer status)
+    public void setStatus(String status)
     {
         this.status = status;
     }
