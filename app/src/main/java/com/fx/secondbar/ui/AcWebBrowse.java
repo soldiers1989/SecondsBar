@@ -2,6 +2,7 @@ package com.fx.secondbar.ui;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -26,7 +27,7 @@ import java.util.TimerTask;
 import rx.Subscriber;
 
 /**
- * function:
+ * function:网页访问界面，如果是活动，需要传值type;基础参数两个，KEY_STR 对应页面标题；KEY对应URL
  * author: frj
  * modify date: 2018/9/24
  */
@@ -139,6 +140,11 @@ public class AcWebBrowse extends ActivitySupport
      */
     private void completeTask(final int retry, final String type)
     {
+        //如果完成任务为空，不发起请求
+        if (TextUtils.isEmpty(type))
+        {
+            return;
+        }
         if (isCompleting)
         {
             return;
