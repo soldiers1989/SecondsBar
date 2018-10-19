@@ -1,8 +1,13 @@
 package com.fx.secondbar.ui.home;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -25,6 +30,7 @@ import com.fx.secondbar.ui.home.item.FragmentWb;
 import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
 import com.fx.secondbar.ui.notify.AcNotifyManager;
 import com.fx.secondbar.ui.search.AcSearch;
+import com.fx.secondbar.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +118,25 @@ public class FragmentHome extends FragmentSupport
 
             }
         });
+        IntentFilter filter = new IntentFilter(Constants.ACTION_REFRESH_NOTIFY_TIPS);
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, filter);
     }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver()
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            if (intent == null)
+            {
+                return;
+            }
+            if (Constants.ACTION_REFRESH_NOTIFY_TIPS.equals(intent.getAction()))
+            {
+                updateStatus();
+            }
+        }
+    };
 
     /**
      * 显示微博的界面
@@ -158,6 +182,10 @@ public class FragmentHome extends FragmentSupport
      */
     private void updateStatus()
     {
+        if (v_notify == null)
+        {
+            return;
+        }
         if (SharePreferenceUtils.getSystemMsg() || SharePreferenceUtils.getAnnoMsg())
         {
             v_notify.setVisibility(View.VISIBLE);
@@ -186,5 +214,12 @@ public class FragmentHome extends FragmentSupport
                 jump(AcSearch.class, AcSearch.TYPE_INFORMATION, false);
                 break;
         }
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(receiver);
+        super.onDestroy();
     }
 }

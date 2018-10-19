@@ -46,6 +46,10 @@ public class Constants
      * 分享成功广播Action
      */
     public static final String ACTION_SHARE_SUCCESS = "action_share_success";
+    /**
+     * 收到推送，发出刷新广播红点提示Action
+     */
+    public static final String ACTION_REFRESH_NOTIFY_TIPS = "action_refresh_notify_tips";
 
     /**
      * 登录接口
@@ -87,7 +91,7 @@ public class Constants
     /**
      * 商品Q支付接口
      */
-    public static final String API_MALL_Q_BUY="mall/qbuy";
+    public static final String API_MALL_Q_BUY = "mall/qbuy";
     /**
      * 行情列表接口
      */

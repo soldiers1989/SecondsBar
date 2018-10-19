@@ -214,4 +214,13 @@ public class FxApplication extends BtApplication
         boolean isSendSuccess = LocalBroadcastManager.getInstance(getInstance()).sendBroadcast(new Intent(Constants.ACTION_SHARE_SUCCESS));
         LogUtil.e("refreshPersonShowBroadCast", isSendSuccess ? "发送成功" : "发送失败");
     }
+
+    /**
+     * 发送刷新通知提示广播
+     */
+    public static void refreshNotifyTipsBroadCast()
+    {
+        boolean isSendSuccess = LocalBroadcastManager.getInstance(getInstance()).sendBroadcast(new Intent(Constants.ACTION_REFRESH_NOTIFY_TIPS));
+        LogUtil.e("refreshPersonShowBroadCast", isSendSuccess ? "发送成功" : "发送失败");
+    }
 }

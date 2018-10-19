@@ -11,6 +11,7 @@ import android.text.TextUtils;
 
 import com.btten.bttenlibrary.util.LogUtil;
 import com.btten.bttenlibrary.util.SharePreferenceUtils;
+import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.ui.notify.AcNotifyManager;
 import com.google.gson.Gson;
 
@@ -149,6 +150,7 @@ public class JPushReceive extends BroadcastReceiver
             {
                 SharePreferenceUtils.setAnnoMsg(true);
             }
+            FxApplication.refreshNotifyTipsBroadCast();
         }
     }
 

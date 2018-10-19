@@ -1,6 +1,10 @@
 package com.fx.secondbar.ui.notify;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +12,7 @@ import android.widget.TextView;
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.SharePreferenceUtils;
 import com.fx.secondbar.R;
+import com.fx.secondbar.util.Constants;
 
 /**
  * function:消息管理
@@ -48,6 +53,8 @@ public class AcNotifyManager extends ActivitySupport
     @Override
     protected void initData()
     {
+        IntentFilter filter = new IntentFilter(Constants.ACTION_REFRESH_NOTIFY_TIPS);
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
     }
 
     @Override
@@ -64,24 +71,46 @@ public class AcNotifyManager extends ActivitySupport
         updateStatus();
     }
 
+    private BroadcastReceiver receiver = new BroadcastReceiver()
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            if (intent == null)
+            {
+                return;
+            }
+            if (Constants.ACTION_REFRESH_NOTIFY_TIPS.equals(intent.getAction()))
+            {
+                updateStatus();
+            }
+        }
+    };
+
     /**
      * 更新小红点状态
      */
     private void updateStatus()
     {
-        if (SharePreferenceUtils.getSystemMsg())
+        if (tv_unread_system != null)
         {
-            tv_unread_system.setVisibility(View.VISIBLE);
-        } else
-        {
-            tv_unread_system.setVisibility(View.GONE);
+            if (SharePreferenceUtils.getSystemMsg())
+            {
+                tv_unread_system.setVisibility(View.VISIBLE);
+            } else
+            {
+                tv_unread_system.setVisibility(View.GONE);
+            }
         }
-        if (SharePreferenceUtils.getAnnoMsg())
+        if (tv_unread_anno != null)
         {
-            tv_unread_anno.setVisibility(View.VISIBLE);
-        } else
-        {
-            tv_unread_anno.setVisibility(View.GONE);
+            if (SharePreferenceUtils.getAnnoMsg())
+            {
+                tv_unread_anno.setVisibility(View.VISIBLE);
+            } else
+            {
+                tv_unread_anno.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -118,5 +147,12 @@ public class AcNotifyManager extends ActivitySupport
     protected int[] getPermissionInfoTips()
     {
         return new int[0];
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+        super.onDestroy();
     }
 }
