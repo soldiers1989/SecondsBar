@@ -17,6 +17,7 @@ import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.util.DeviceUuidFactory;
+import com.tencent.bugly.Bugly;
 
 import cn.jpush.android.api.JPushInterface;
 import rx.Subscriber;
@@ -81,6 +82,7 @@ public class AcTransilate extends ActivitySupport
             tv_jump.setVisibility(View.VISIBLE);
         }
         tv_jump.setText(duration + "s | 跳过");
+        Bugly.init(getApplicationContext(), "642e9767d3", FxApplication.getInstance().isDebug());
         new DeviceUuidFactory(FxApplication.getInstance());
         openAppActive();
         getConfigInfo();

@@ -22,6 +22,7 @@ import com.joooonho.SelectableRoundedImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -53,32 +54,21 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
         img_recycler.requestFocus();
         List<String> imgs = getImgs(item);
         int size = imgs.size();
-        img_recycler.setLayoutManager(new GridLayoutManager(img_recycler.getContext(), getRow(size)));
+//        img_recycler.setLayoutManager(new GridLayoutManager(img_recycler.getContext(), getRow(size)));
+        img_recycler.setLayoutManager(new GridLayoutManager(img_recycler.getContext(), 3));
         AdWbImg adapter = new AdWbImg(getWidth(img_recycler.getContext(), size), imgs);
         adapter.bindToRecyclerView(img_recycler);
-        img_recycler.addItemDecoration(SpaceDecorationUtil.getDecoration(img.getContext().getResources().getDimensionPixelSize(R.dimen.home_wb_img_space), false, false, false));
+        if (img_recycler.getItemDecorationCount() == 0)
+        {
+            img_recycler.addItemDecoration(SpaceDecorationUtil.getDecoration(img.getContext().getResources().getDimensionPixelSize(R.dimen.home_wb_img_space), false, false, false));
+        }
         img_recycler.setVisibility(size == 0 ? View.GONE : View.VISIBLE);
 
         GlideLoad.load(img, item.getAvatar(), true);
         VerificationUtil.setViewValue(tv_name, item.getUsername());
         VerificationUtil.setViewValue(tv_content, item.getContent());
         tv_content.setText(Html.fromHtml(item.getContent()));
-//        img_share.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                if (activity != null)
-//                {
-//                    Intent intent = new Intent(activity, AcShareDialog.class);
-//                    intent.putExtra(AcShareDialog.KEY_TYPE, AcShareDialog.TYPE_POSTER_CONTENT);
-//                    intent.putExtra(AcShareDialog.KEY_TITLE, item.getTitle());
-//                    intent.putExtra(AcShareDialog.KEY_CONTENT, item.getContent());
-//                    intent.putExtra(AcShareDialog.KEY_URL, "");
-//                    activity.startActivity(intent);
-//                }
-//            }
-//        });
+        VerificationUtil.setViewValue(tv_time, item.getCreatedate());
         helper.addOnClickListener(R.id.img_share);
     }
 
@@ -107,7 +97,6 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
      */
     private List<String> getImgs(WBBean bean)
     {
-
         if (bean != null)
         {
             if (VerificationUtil.noEmpty(bean.getPictures()))
@@ -120,19 +109,23 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
                 }
                 if (picture == null)
                 {
-                    return new ArrayList<>();
+                    return Collections.emptyList();
                 } else
                 {
                     return Arrays.asList(picture);
                 }
             } else
             {
+                if (TextUtils.isEmpty(bean.getPicture()))
+                {
+                    return Collections.emptyList();
+                }
                 List<String> list = new ArrayList<>();
                 list.add(bean.getPicture());
                 return list;
             }
         }
-        return null;
+        return Collections.emptyList();
     }
 
     /**
@@ -145,9 +138,10 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
     {
         if (size == 0)
         {
-            return 0;
+            return 1;
         }
         int row = size < 3 ? size : 3;
         return row;
     }
+
 }

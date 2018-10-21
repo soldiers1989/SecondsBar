@@ -20,6 +20,8 @@ public class WBBean
     private String sorts;// 排序
     private String type;// 类别
     private String share_TOTAL;// 分享数
+    private String createdate;//创建时间
+    private String commentnum;//评论数量
 
     public String getUsername()
     {
@@ -139,5 +141,25 @@ public class WBBean
     public void setShare_TOTAL(String share_TOTAL)
     {
         this.share_TOTAL = share_TOTAL;
+    }
+
+    public String getCreatedate()
+    {
+        return createdate;
+    }
+
+    public void setCreatedate(String createdate)
+    {
+        this.createdate = createdate;
+    }
+
+    public String getCommentnum()
+    {
+        return commentnum;
+    }
+
+    public void setCommentnum(String commentnum)
+    {
+        this.commentnum = commentnum;
     }
 }
