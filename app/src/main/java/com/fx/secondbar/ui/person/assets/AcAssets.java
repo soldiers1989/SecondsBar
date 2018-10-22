@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,7 +16,7 @@ import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
-import com.fx.secondbar.ui.person.AcQIntro;
+import com.fx.secondbar.ui.AcWebBrowse;
 import com.fx.secondbar.util.Constants;
 
 /**
@@ -115,7 +116,11 @@ public class AcAssets extends ActivitySupport
                 ShowToast.showToast("暂未开放");
                 break;
             case R.id.tv_q_intro:
-                jump(AcQIntro.class);
+//                jump(AcQIntro.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(KEY_STR, "Q说明");
+                bundle.putString(KEY, "http://www.feixingtech.com:8080/static/mb-front/getText.html?type=17");
+                jump(AcWebBrowse.class, bundle, false);
                 break;
         }
     }

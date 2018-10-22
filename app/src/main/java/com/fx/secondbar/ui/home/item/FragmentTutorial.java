@@ -1,26 +1,23 @@
 package com.fx.secondbar.ui.home.item;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.btten.bttenlibrary.util.ShowToast;
-import com.btten.bttenlibrary.util.SpaceDecorationUtil;
+import com.btten.bttenlibrary.util.DisplayUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
-import com.fx.secondbar.bean.TurialBean;
-import com.fx.secondbar.http.HttpManager;
-import com.fx.secondbar.ui.home.AcTutorialDetail;
-import com.fx.secondbar.ui.home.item.adapter.AdTutorial;
+import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.ui.home.item.adapter.AdDateTa;
+import com.fx.secondbar.view.ViewPagerLayoutManager;
 
-import java.util.List;
-
-import rx.Subscriber;
+import java.util.ArrayList;
 
 /**
  * function:教程
@@ -31,7 +28,7 @@ public class FragmentTutorial extends FragmentViewPagerBase
 {
 
     private RecyclerView recyclerView;
-    private AdTutorial adapter;
+    private AdDateTa adapter;
     //当前页码
     private int currPage = -1;
 
@@ -72,11 +69,51 @@ public class FragmentTutorial extends FragmentViewPagerBase
     @Override
     protected void initData()
     {
-        adapter = new AdTutorial(R.layout.ad_tutorial);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(getResources().getDimensionPixelSize(R.dimen.home_tutorial_item_space), false, true, true));
+        int height = DisplayUtil.getScreenSize(FxApplication.getInstance()).heightPixels;
+        height -= FxApplication.getInstance().getResources().getDimensionPixelSize(R.dimen.toolbar_height);
+        height -= FxApplication.getInstance().getResources().getDimensionPixelSize(R.dimen.home_tabs_h);
+        height -= FxApplication.getInstance().getResources().getDimensionPixelSize(R.dimen.main_bottom_h);
+        height -= FxApplication.getInstance().getResources().getDimensionPixelSize(R.dimen.main_bottom_line);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+        {
+            height -= DisplayUtil.getStatusBarHeight(FxApplication.getInstance());
+        }
+        adapter = new AdDateTa(height);
+        recyclerView.getLayoutParams().height = height;
+        ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(), OrientationHelper.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+//        recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(getResources().getDimensionPixelSize(R.dimen.home_tutorial_item_space), false, true, true));
         adapter.bindToRecyclerView(recyclerView);
-//        adapter.setNewData(getDatas());
+        ArrayList<String> list = new ArrayList<>();
+        list.add("");
+        list.add("");
+        list.add("");
+        list.add("");
+        list.add("");
+        adapter.setNewData(list);
+
+        layoutManager.setOnViewPagerListener(new ViewPagerLayoutManager.OnViewPagerListener()
+        {
+            @Override
+            public void onInitComplete()
+            {
+
+            }
+
+            @Override
+            public void onPageRelease(boolean b, int i)
+            {
+
+            }
+
+            @Override
+            public void onPageSelected(int i, boolean b)
+            {
+
+            }
+        });
+
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
         {
             @Override
@@ -94,9 +131,6 @@ public class FragmentTutorial extends FragmentViewPagerBase
                 {
                     return;
                 }
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(KEY, FragmentTutorial.this.adapter.getItem(position));
-                jump(AcTutorialDetail.class, bundle, false);
             }
         });
     }
