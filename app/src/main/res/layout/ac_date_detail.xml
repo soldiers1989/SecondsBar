@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/mall_tool_pl"
+                android:text="约TA详情"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <Button
+        android:id="@+id/btn_buy"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mall_detail_buy_h"
+        android:background="@color/home_tabs_mark_color"
+        android:text="@string/date_detail_buy_tips"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/mall_detail_buy_text"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        app:layout_constraintBottom_toTopOf="@+id/btn_buy"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip">
+
+            <ImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="45dip"
+                android:layout_height="45dip"
+                android:layout_marginTop="36dip"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dip"
+                android:layout_marginTop="5dip"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="#2c2c2c"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_avatar"
+                app:layout_constraintTop_toTopOf="@+id/img_avatar"/>
+
+            <TextView
+                android:id="@+id/tv_account"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dip"
+                android:singleLine="true"
+                android:textColor="#9f9f9f"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_name"
+                app:layout_constraintStart_toStartOf="@+id/tv_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name"/>
+
+            <TextView
+                android:id="@+id/tv_date_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dip"
+                android:singleLine="true"
+                android:textColor="#2c2c2c"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@+id/img_avatar"/>
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dip"
+                android:drawableLeft="@mipmap/ic_location"
+                android:drawablePadding="10dip"
+                android:textColor="#7f7f7f"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date_title"/>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:drawableLeft="@mipmap/ic_time"
+                android:drawablePadding="10dip"
+                android:textColor="#7f7f7f"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_location"/>
+
+            <TextView
+                android:id="@+id/tv_timelength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:textColor="@color/font_yellow_color"
+                android:textSize="15sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_time"
+                app:layout_constraintStart_toEndOf="@+id/tv_time"/>
+
+            <TextView
+                android:id="@+id/tv_content_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dip"
+                android:text="图文详情"
+                android:textColor="#2c2c2c"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_time"/>
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:textColor="#2c2c2c"
+                android:textSize="13sp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_content_tips"/>
+
+            <TextView
+                android:id="@+id/tv_notice_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dip"
+                android:text="购买须知"
+                android:textColor="#2c2c2c"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_content"/>
+
+            <TextView
+                android:id="@+id/tv_notice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:background="@drawable/date_detail_notice_bg"
+                android:padding="15dip"
+                android:textColor="#2c2c2c"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_notice_tips"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dip"
+                app:layout_constraintTop_toBottomOf="@+id/tv_notice"/>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.constraint.ConstraintLayout>

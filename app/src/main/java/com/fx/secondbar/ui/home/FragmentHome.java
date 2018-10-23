@@ -22,6 +22,7 @@ import com.btten.bttenlibrary.util.SharePreferenceUtils;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.fx.secondbar.R;
 import com.fx.secondbar.ui.DialogSign;
+import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.home.item.FragmentInfomation;
 import com.fx.secondbar.ui.home.item.FragmentTime;
 import com.fx.secondbar.ui.home.item.FragmentTutorial;
@@ -31,6 +32,7 @@ import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
 import com.fx.secondbar.ui.notify.AcNotifyManager;
 import com.fx.secondbar.ui.search.AcSearch;
 import com.fx.secondbar.util.Constants;
+import com.fx.secondbar.util.RequestCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -221,5 +223,15 @@ public class FragmentHome extends FragmentSupport
     {
         LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(receiver);
         super.onDestroy();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (RequestCode.REQUEST_CODE_TO_MALL_DETAIL == requestCode && ActivitySupport.RESULT_OK == resultCode)
+        {
+            ((MainActivity) getActivity()).jumpToPersonal();
+        }
     }
 }

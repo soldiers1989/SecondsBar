@@ -14,6 +14,7 @@ import com.btten.bttenlibrary.util.DisplayUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.ui.date.AcDateDetail;
 import com.fx.secondbar.ui.home.item.adapter.AdDateTa;
 import com.fx.secondbar.view.ViewPagerLayoutManager;
 
@@ -58,6 +59,7 @@ public class FragmentTutorial extends FragmentViewPagerBase
     protected void initView()
     {
         recyclerView = findView(R.id.recyclerView);
+        findView(R.id.ib_send).setOnClickListener(this);
     }
 
     @Override
@@ -186,4 +188,18 @@ public class FragmentTutorial extends FragmentViewPagerBase
 //        });
     }
 
+    @Override
+    public void onClick(View v)
+    {
+        if (isFastDoubleClick(v))
+        {
+            return;
+        }
+        switch (v.getId())
+        {
+            case R.id.ib_send:
+                jump(AcDateDetail.class);
+                break;
+        }
+    }
 }

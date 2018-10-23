@@ -34,6 +34,7 @@ import com.fx.secondbar.ui.home.item.adapter.AdInfomation;
 import com.fx.secondbar.ui.mall.AcMallDetail;
 import com.fx.secondbar.ui.mall.AdMall;
 import com.fx.secondbar.ui.quote.AcQuoteDetail;
+import com.fx.secondbar.util.RequestCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -146,7 +147,9 @@ public class AcSearch extends ActivitySupport
                     AdMall adMall = (AdMall) adapter;
                     if (adMall != null)
                     {
-                        jump(AcMallDetail.class, adMall.getData().get(position).getMerchandise_ID());
+                        Bundle bundle = new Bundle();
+                        bundle.putString(KEY_STR, adMall.getData().get(position).getMerchandise_ID());
+                        jump(AcMallDetail.class, bundle, RequestCode.REQUEST_CODE_TO_MALL_DETAIL);
                     }
                 }
             });
@@ -233,7 +236,9 @@ public class AcSearch extends ActivitySupport
                         CommodityBean commodityBean = entity.getCommodityBean();
                         if (commodityBean != null)
                         {
-                            jump(AcMallDetail.class, commodityBean.getMerchandise_ID());
+                            Bundle bundle = new Bundle();
+                            bundle.putString(KEY_STR, commodityBean.getMerchandise_ID());
+                            jump(AcMallDetail.class, bundle, RequestCode.REQUEST_CODE_TO_MALL_DETAIL);
                         }
                     }
                 }
@@ -530,6 +535,10 @@ public class AcSearch extends ActivitySupport
         if (REQUEST_CODE_DETAIL == requestCode && (RESULT_OK == resultCode || AcQuoteDetail.RESULT_CODE_TRANSACTION == resultCode))
         {
 
+            setResult(resultCode, data);
+            finish();
+        } else if (RequestCode.REQUEST_CODE_TO_MALL_DETAIL == requestCode && ActivitySupport.RESULT_OK == resultCode)
+        {
             setResult(resultCode, data);
             finish();
         }

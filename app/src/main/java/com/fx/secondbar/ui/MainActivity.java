@@ -393,6 +393,14 @@ public class MainActivity extends ActivitySupport
         fragment.showWb();
     }
 
+    /**
+     * 跳转至个人中心
+     */
+    public void jumpToPersonal()
+    {
+        switchItem(tv_person);
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState)
     {

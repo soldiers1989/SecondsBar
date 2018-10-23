@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,10 +17,12 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.CategoryBean;
-import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
+import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
+import com.fx.secondbar.ui.home.item.adapter.AdHomeItem;
 import com.fx.secondbar.ui.mall.FragmentMallItem;
 import com.fx.secondbar.ui.search.AcSearch;
+import com.fx.secondbar.util.RequestCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,8 +129,20 @@ public class FragmentMall extends FragmentSupport
         switch (v.getId())
         {
             case R.id.img_toolbar_right:
-                jump(AcSearch.class, AcSearch.TYPE_COMMODITY, false);
+                Bundle bundle = new Bundle();
+                bundle.putInt(KEY, AcSearch.TYPE_COMMODITY);
+                jump(AcSearch.class, bundle, RequestCode.REQUEST_CODE_TO_MALL_DETAIL);
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (RequestCode.REQUEST_CODE_TO_MALL_DETAIL == requestCode && ActivitySupport.RESULT_OK == resultCode)
+        {
+            ((MainActivity) getActivity()).jumpToPersonal();
         }
     }
 }

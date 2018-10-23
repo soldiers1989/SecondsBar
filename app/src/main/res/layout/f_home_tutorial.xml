@@ -15,5 +15,15 @@
             android:layout_height="match_parent">
 
         </android.support.v7.widget.RecyclerView>
+
+        <ImageButton
+            android:id="@+id/ib_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="15dip"
+            android:layout_marginBottom="15dip"
+            android:background="?attr/selectableItemBackground"
+            android:src="@mipmap/ic_send"/>
     </FrameLayout>
 </android.support.v4.widget.NestedScrollView>

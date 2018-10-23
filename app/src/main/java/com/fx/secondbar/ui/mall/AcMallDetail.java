@@ -192,12 +192,12 @@ public class AcMallDetail extends ActivitySupport
     /**
      * 余额不足，去充值的提示
      */
-    private void rechargeTips()
+    private void rechargeTips(final boolean isSTEPay)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setMessage("您的余额不足，请前往充值");
-        builder.setPositiveButton("去充值", new DialogInterface.OnClickListener()
+        builder.setMessage(isSTEPay ? "您的余额不足，请前往充值" : "您的q不足，请多做任务吧！");
+        builder.setPositiveButton(isSTEPay ? "去充值" : "做任务", new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick(DialogInterface dialog, int which)
@@ -206,7 +206,14 @@ public class AcMallDetail extends ActivitySupport
                 {
                     dialogBuy.dismiss();
                 }
-                jump(AcRecharge.class);
+                if (isSTEPay)
+                {
+                    jump(AcRecharge.class);
+                } else
+                {
+                    setResult(RESULT_OK);
+                    finish();
+                }
             }
         });
         builder.setNegativeButton("取消", null);
@@ -216,7 +223,7 @@ public class AcMallDetail extends ActivitySupport
     /**
      * 购买商品
      */
-    private void buyGoods(String goodsId, boolean isSTEPay)
+    private void buyGoods(String goodsId, final boolean isSTEPay)
     {
         if (dialog != null)
         {
@@ -249,7 +256,7 @@ public class AcMallDetail extends ActivitySupport
                         //表示余额不足，请前往充值
                         if ("3".equals(exception.getErrorCode()))
                         {
-                            rechargeTips();
+                            rechargeTips(isSTEPay);
                             return;
                         }
                     }

@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.mall;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
@@ -18,7 +20,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.ResMall;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
+import com.fx.secondbar.util.RequestCode;
 
 import rx.Subscriber;
 
@@ -86,7 +90,9 @@ public class FragmentMallItem extends FragmentViewPagerBase implements SwipeRefr
                 {
                     return;
                 }
-                jump(AcMallDetail.class, FragmentMallItem.this.adapter.getData().get(position).getMerchandise_ID());
+                Bundle bundle = new Bundle();
+                bundle.putString(KEY_STR, FragmentMallItem.this.adapter.getData().get(position).getMerchandise_ID());
+                jump(AcMallDetail.class, bundle, RequestCode.REQUEST_CODE_TO_MALL_DETAIL);
             }
         });
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
@@ -182,5 +188,15 @@ public class FragmentMallItem extends FragmentViewPagerBase implements SwipeRefr
                 }
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (RequestCode.REQUEST_CODE_TO_MALL_DETAIL == requestCode && ActivitySupport.RESULT_OK == resultCode)
+        {
+            ((MainActivity) getActivity()).jumpToPersonal();
+        }
     }
 }

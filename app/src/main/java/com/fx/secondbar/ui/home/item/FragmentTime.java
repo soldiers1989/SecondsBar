@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
+import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
@@ -28,11 +29,13 @@ import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.AcWebBrowse;
+import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.home.AcInformationDetail;
 import com.fx.secondbar.ui.home.item.adapter.AdTime;
 import com.fx.secondbar.ui.mall.AcMallDetail;
 import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideLoad;
+import com.fx.secondbar.util.RequestCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +115,9 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
                     CommodityBean commodityBean = entity.getCommodityBean();
                     if (commodityBean != null)
                     {
-                        jump(AcMallDetail.class, commodityBean.getMerchandise_ID());
+                        Bundle bundle = new Bundle();
+                        bundle.putString(KEY_STR, commodityBean.getMerchandise_ID());
+                        jump(AcMallDetail.class, bundle, RequestCode.REQUEST_CODE_TO_MALL_DETAIL);
                     }
                 } else if (AdTime.TimeEntity.TYPE_MULTI_IMG == entity.getItemType() || AdTime.TimeEntity.TYPE_SINGLE_IMG == entity.getItemType())
                 {
@@ -370,6 +375,16 @@ public class FragmentTime extends FragmentViewPagerBase implements SwipeRefreshL
             {
                 GlideLoad.load(img, data.getImg());
             }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (RequestCode.REQUEST_CODE_TO_MALL_DETAIL == requestCode && ActivitySupport.RESULT_OK == resultCode)
+        {
+            ((MainActivity) getActivity()).jumpToPersonal();
         }
     }
 }

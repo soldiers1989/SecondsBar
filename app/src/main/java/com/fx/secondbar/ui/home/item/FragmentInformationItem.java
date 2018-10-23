@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.home.item;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
+import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
@@ -25,10 +27,12 @@ import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.home.AcInformationDetail;
 import com.fx.secondbar.ui.home.item.adapter.AdInfomation;
 import com.fx.secondbar.ui.mall.AcMallDetail;
 import com.fx.secondbar.util.Constants;
+import com.fx.secondbar.util.RequestCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,7 +129,9 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
                     CommodityBean commodityBean = entity.getCommodityBean();
                     if (commodityBean != null)
                     {
-                        jump(AcMallDetail.class, commodityBean.getMerchandise_ID());
+                        Bundle bundle = new Bundle();
+                        bundle.putString(KEY_STR, commodityBean.getMerchandise_ID());
+                        jump(AcMallDetail.class, bundle, RequestCode.REQUEST_CODE_TO_MALL_DETAIL);
                     }
                 }
             }
@@ -399,6 +405,16 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
     public void onRefresh()
     {
         getData(PAGE_START, getArguments().getString(KEY_STR));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (RequestCode.REQUEST_CODE_TO_MALL_DETAIL == requestCode && ActivitySupport.RESULT_OK == resultCode)
+        {
+            ((MainActivity) getActivity()).jumpToPersonal();
+        }
     }
 
 }
