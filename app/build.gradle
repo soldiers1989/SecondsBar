@@ -71,5 +71,7 @@ dependencies {
     implementation 'com.king.zxing:zxing-lite:1.0.2'
     //包含版本更新的bugly
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    //标签云
+    implementation 'com.github.kingideayou:tagcloudview:1.0.2'
 
 }

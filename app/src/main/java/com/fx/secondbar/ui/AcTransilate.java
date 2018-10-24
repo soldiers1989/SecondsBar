@@ -9,13 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
-import com.btten.bttenlibrary.base.bean.ResponseBean;
+import com.btten.bttenlibrary.util.Arithmetic;
 import com.btten.bttenlibrary.util.SharePreferenceUtils;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.home.AcIncomeDialog;
 import com.fx.secondbar.util.DeviceUuidFactory;
 import com.tencent.bugly.Bugly;
 
@@ -132,7 +133,7 @@ public class AcTransilate extends ActivitySupport
      */
     private void openAppActive()
     {
-        HttpManager.finishActive(String.valueOf(ActiveBean.TYPE_OPEN_APP), new Subscriber<ResponseBean>()
+        HttpManager.finishActive(String.valueOf(ActiveBean.TYPE_OPEN_APP), new Subscriber<Double>()
         {
             @Override
             public void onCompleted()
@@ -147,9 +148,12 @@ public class AcTransilate extends ActivitySupport
             }
 
             @Override
-            public void onNext(ResponseBean responseBean)
+            public void onNext(Double value)
             {
-
+                if (value != null)
+                {
+                    jump(AcIncomeDialog.class, Arithmetic.doubleToStr(value));
+                }
             }
         });
     }
@@ -207,13 +211,17 @@ public class AcTransilate extends ActivitySupport
     @Override
     protected String[] getPermissionArrays()
     {
-        return new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE};
+        return new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.ACCESS_FINE_LOCATION};
     }
 
     @Override
     protected int[] getPermissionInfoTips()
     {
-        return new int[]{R.string.permission_write_external_storage_tips, R.string.permission_read_phone_state_tips};
+        return new int[]{R.string.permission_write_external_storage_tips,
+                R.string.permission_read_phone_state_tips,
+                R.string.permission_fine_location_tips};
     }
 
     @Override

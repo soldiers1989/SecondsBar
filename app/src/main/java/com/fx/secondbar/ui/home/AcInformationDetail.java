@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.base.bean.ResponseBean;
+import com.btten.bttenlibrary.util.Arithmetic;
 import com.btten.bttenlibrary.util.LogUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
@@ -330,7 +331,7 @@ public class AcInformationDetail extends ActivitySupport
      */
     private void finishIncomeTask()
     {
-        HttpManager.finishActive(String.valueOf(ActiveBean.TYPE_BROWE), new Subscriber<ResponseBean>()
+        HttpManager.finishActive(String.valueOf(ActiveBean.TYPE_BROWE), new Subscriber<Double>()
         {
             @Override
             public void onCompleted()
@@ -345,9 +346,13 @@ public class AcInformationDetail extends ActivitySupport
             }
 
             @Override
-            public void onNext(ResponseBean responseBean)
+            public void onNext(Double value)
             {
-
+                FxApplication.refreshUserInfoBroadCast();
+                if (value != null)
+                {
+                    jump(AcIncomeDialog.class, Arithmetic.doubleToStr(value));
+                }
             }
         });
     }

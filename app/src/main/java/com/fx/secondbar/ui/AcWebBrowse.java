@@ -11,11 +11,13 @@ import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.base.bean.ResponseBean;
+import com.btten.bttenlibrary.util.Arithmetic;
 import com.btten.bttenlibrary.util.LogUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.home.AcIncomeDialog;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
@@ -150,7 +152,7 @@ public class AcWebBrowse extends ActivitySupport
             return;
         }
         isCompleting = true;
-        HttpManager.finishActive(type, new Subscriber<ResponseBean>()
+        HttpManager.finishActive(type, new Subscriber<Double>()
         {
             @Override
             public void onCompleted()
@@ -169,9 +171,14 @@ public class AcWebBrowse extends ActivitySupport
             }
 
             @Override
-            public void onNext(ResponseBean responseBean)
+            public void onNext(Double value)
             {
                 isCompleting = false;
+                FxApplication.refreshUserInfoBroadCast();
+                if (value != null)
+                {
+                    jump(AcIncomeDialog.class, Arithmetic.doubleToStr(value));
+                }
             }
         });
     }

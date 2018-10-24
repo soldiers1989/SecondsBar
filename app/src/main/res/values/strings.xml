@@ -63,7 +63,7 @@
     <string name="mall_detail_buy_text">立即购买</string>
     <string name="mall_detail_info_time">时长：%s</string>
     <string name="mall_detail_info_place">地点：%s</string>
-    <string name="mall_detail_info_price">%sSTE</string>
+    <string name="mall_detail_info_price">￥%s</string>
     <string name="mall_detail_info_q_price">%sQ</string>
     <string name="mall_detail_info_position">职位：%s</string>
     <string name="mall_detail_info_school">毕业院校：%s</string>
@@ -83,7 +83,7 @@
     <string name="transaction_head_buy">买入</string>
     <string name="transaction_head_sale">卖出</string>
     <string name="transaction_head_seconds_value">%s秒</string>
-    <string name="transaction_head_price_value">STE</string>
+    <string name="transaction_head_price_value">￥</string>
     <string name="transaction_head_price_up">涨停：%s</string>
     <string name="transaction_head_price_down">跌停：%s</string>
     <string name="transaction_head_price_down_tips">跌停：</string>
@@ -91,13 +91,13 @@
     <string name="transaction_head_new_price">最新价：%s</string>
 
     <string name="order_detail_person_name">申购名人：%s</string>
-    <string name="order_detail_order_money">申购价格：%sSTE/秒</string>
+    <string name="order_detail_order_money">申购价格：￥%s/秒</string>
     <string name="order_detail_order_seconds">申购秒数：%s秒</string>
-    <string name="order_detail_order_pay_price">支付金额：%sSTE</string>
+    <string name="order_detail_order_pay_price">支付金额：￥%s</string>
     <string name="order_detail_order_num">订单编号：%s</string>
     <string name="order_detail_order_time">创建时间：%s</string>
 
-    <string name="purchase_money_text">%sSTE/秒</string>
+    <string name="purchase_money_text">￥%s/秒</string>
 
     <string name="aboutus_copyright">Copyrigh©2018-2019 \n 秒吧（湖北）科技有限公司 版权所有</string>
 
@@ -118,7 +118,7 @@
 
     <string name="recharge_pay_tips">%s%s元</string>
 
-    <string name="withdraw_fees_tips">%1$sSTE=1人民币 手续费：%2$sSTE；转账费率%3$s%%</string>
+    <string name="withdraw_fees_tips">手续费：￥%1$s；转账费率%2$s%%</string>
 
     <string name="invite_friends_rule_text">1.将你的专属二维码、链接分享至社交网络;\n2.邀请好友通过你的二维码、链接下载激活秒吧APP;\n3.好友在秒吧绑定手机号后，即可立即获得Q奖励。</string>
     <string name="invite_generate_url">生成链接：%s</string>
@@ -132,5 +132,6 @@
 
     <string name="today_income_intro">1.阅读新闻每60秒，可获得1Q的奖励。\n2.看新闻赚Q有严格的防作弊机制，发现异常操作，系统将自动封停帐号！</string>
 
-    <string name="date_detail_buy_tips">%s STE购买</string>
+    <string name="date_detail_buy_tips">￥%s 购买</string>
+    <string name="date_detail_person_count">人数：%s人</string>
 </resources>

@@ -96,4 +96,42 @@
         app:layout_constraintEnd_toEndOf="@+id/v_person_info"
         app:layout_constraintStart_toStartOf="@+id/v_person_info"
         app:layout_constraintTop_toBottomOf="@+id/v_person_info"/>
+
+    <me.next.tagview.TagCloudView
+        android:id="@+id/tag_cloud_view"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dip"
+        android:layout_marginRight="12dip"
+        android:layout_marginBottom="15dip"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/img"
+        app:layout_constraintEnd_toEndOf="@+id/img"
+        app:layout_constraintStart_toStartOf="@+id/img"
+        app:tcvBackground="@android:color/transparent"
+        app:tcvBorder="8dip"
+        app:tcvCanTagClick="false"
+        app:tcvItemBorderHorizontal="0dip"
+        app:tcvItemBorderVertical="0dip"
+        app:tcvTagResId="@layout/date_ta_tag"
+        app:tcvTextColor="@android:color/white"
+        app:tcvTextSize="12px"
+        />
+
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="wrap_content"
+        android:layout_height="22dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginBottom="12dip"
+        android:background="@drawable/date_ta_tag_bg"
+        android:drawableLeft="@mipmap/ic_location_small"
+        android:drawablePadding="6dip"
+        android:gravity="center"
+        android:paddingLeft="9dip"
+        android:paddingRight="9dip"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tag_cloud_view"
+        app:layout_constraintStart_toStartOf="@+id/img"/>
 </android.support.constraint.ConstraintLayout>

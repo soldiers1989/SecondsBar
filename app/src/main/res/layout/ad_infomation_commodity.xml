@@ -50,7 +50,7 @@
         android:id="@+id/tv_price"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
-        android:text="980.00STE"
+        android:text="￥980.00"
         android:textColor="@color/home_tabs_mark_color"
         android:textSize="@dimen/home_infomation_item_sing_title_text"
         app:layout_constraintBottom_toBottomOf="@id/img"

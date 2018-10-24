@@ -9,6 +9,7 @@ import com.btten.bttenlibrary.application.BtApplication;
 import com.btten.bttenlibrary.util.LogUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.BuildConfig;
+import com.fx.secondbar.bean.LocationBean;
 import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.config.BaseConfig;
@@ -36,6 +37,8 @@ public class FxApplication extends BtApplication
     private UserInfoBean mUserInfoBean;
 
     private ResConfigInfo mConfigInfo;
+    //定位信息
+    private LocationBean locationBean;
 
     /**
      * 收益进度值
@@ -186,6 +189,16 @@ public class FxApplication extends BtApplication
     public void setIncomeProgress(int incomeProgress)
     {
         this.incomeProgress = incomeProgress;
+    }
+
+    public LocationBean getLocationBean()
+    {
+        return locationBean;
+    }
+
+    public void setLocationBean(double latitude, double longitude, String addr, String country, String province, String city, String district, String street)
+    {
+        this.locationBean = new LocationBean(latitude, longitude, addr, country, province, city, district, street);
     }
 
     /**

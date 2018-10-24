@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="可用金额(STE)"
+            android:text="可用金额(￥)"
             android:textColor="@android:color/white"
             android:textSize="12sp"/>
 
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="持仓市值(STE)"
+            android:text="持仓市值(￥)"
             android:textColor="@android:color/white"
             android:textSize="12sp"/>
 
@@ -105,7 +105,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="现价/成本(STE)"
+            android:text="现价/成本(￥)"
             android:textColor="#a1a0a0"
             android:textSize="14sp"/>
 
@@ -114,7 +114,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="right|center_vertical"
-            android:text="盈亏(STE)"
+            android:text="盈亏(￥)"
             android:textColor="#a1a0a0"
             android:textSize="14sp"/>
     </LinearLayout>

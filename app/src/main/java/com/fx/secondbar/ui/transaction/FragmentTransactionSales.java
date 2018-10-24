@@ -198,7 +198,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
                 String secondStr = getTextView(ed_seconds);
                 float inputPrice = Float.parseFloat(priceStr);
                 int inputSecond = Integer.parseInt(secondStr);
-                VerificationUtil.setViewValue(tv_price, Arithmetic.mul(inputPrice, inputSecond) + "STE");
+                VerificationUtil.setViewValue(tv_price, "￥" + Arithmetic.mul(inputPrice, inputSecond));
             } catch (NumberFormatException e)
             {
                 e.printStackTrace();

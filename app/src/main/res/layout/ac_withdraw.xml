@@ -134,7 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dip"
-        android:text="1STE=1人民币 手续费：0（转账费率0.05%）"
+        android:text="手续费：0（转账费率0.05%）"
         android:textColor="#787878"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/tv_recharge_tips"

@@ -19,7 +19,7 @@
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0.06STE/秒"
+        android:text="￥0.06/秒"
         android:textColor="#3f3f3f"
         android:textSize="14sp"/>
 

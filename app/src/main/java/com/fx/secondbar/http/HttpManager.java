@@ -3,12 +3,12 @@ package com.fx.secondbar.http;
 import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.http.HttpGetData;
 import com.fx.secondbar.application.FxApplication;
-import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.BankBean;
 import com.fx.secondbar.bean.CommissionBean;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.ConsumerBean;
 import com.fx.secondbar.bean.CustomerBean;
+import com.fx.secondbar.bean.DateBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.InfomationBean;
@@ -34,7 +34,6 @@ import com.fx.secondbar.bean.TradingBuyedBean;
 import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
-import com.fx.secondbar.bean.WBBean;
 import com.fx.secondbar.bean.WBData;
 import com.fx.secondbar.bean.WithdrawIntroBean;
 import com.fx.secondbar.http.exception.ApiException;
@@ -289,9 +288,9 @@ public class HttpManager
      * @param type
      * @param subscriber
      */
-    public static void finishActive(String type, Subscriber<ResponseBean> subscriber)
+    public static void finishActive(String type, Subscriber<Double> subscriber)
     {
-        Observable<ResponseBean> observable = getInstance().mService.finishActive(type).map(new HttpNoDataResultFun<>());
+        Observable<Double> observable = getInstance().mService.finishActive(type).map(new HttpResultFun<Double>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
@@ -785,6 +784,43 @@ public class HttpManager
     public static void getSystemIntro(String type, int page, int pageSize, Subscriber<List<SystemIntroBean>> subscriber)
     {
         Observable<List<SystemIntroBean>> observable = getInstance().mService.getSystemIntro(type, page, pageSize).map(new HttpResultFun<List<SystemIntroBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取约TA列表
+     *
+     * @param page
+     * @param pageSize
+     * @param subscriber
+     */
+    public static void getDateList(int page, int pageSize, Subscriber<List<DateBean>> subscriber)
+    {
+        Observable<List<DateBean>> observable = getInstance().mService.getDateList(page, pageSize).map(new HttpResultFun<List<DateBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取约TA详情
+     *
+     * @param strokeId   约TA id
+     * @param subscriber
+     */
+    public static void getDateDetail(String strokeId, Subscriber<DateBean> subscriber)
+    {
+        Observable<DateBean> observable = getInstance().mService.getDateDetail(strokeId).map(new HttpResultFun<DateBean>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 约TA购买
+     *
+     * @param strokeId   约TA id
+     * @param subscriber
+     */
+    public static void buyDate(String strokeId, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.buyDate(strokeId).map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

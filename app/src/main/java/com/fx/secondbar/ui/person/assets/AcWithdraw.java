@@ -244,7 +244,8 @@ public class AcWithdraw extends ActivitySupport
      */
     private void setWithdrawFeesTips(double ratio, double fees, double minFees, double feesRatio)
     {
-        String tips = String.format(getString(R.string.withdraw_fees_tips), Arithmetic.doubleToStr(ratio), Arithmetic.doubleToStr(Math.max(fees, minFees)), Arithmetic.doubleToStr(feesRatio));
+//        Arithmetic.doubleToStr(ratio),
+        String tips = String.format(getString(R.string.withdraw_fees_tips), Arithmetic.doubleToStr(Math.max(fees, minFees)), Arithmetic.doubleToStr(feesRatio));
         VerificationUtil.setViewValue(tv_conversion_tips, tips);
     }
 

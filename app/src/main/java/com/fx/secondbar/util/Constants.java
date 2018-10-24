@@ -308,6 +308,18 @@ public class Constants
      * 帮助、充值说明和交易规则说明接口
      */
     public static final String API_SYSTEM_INTRO = "system/configure";
+    /**
+     * 约TA列表
+     */
+    public static final String API_DATE_LIST = "stroke/list";
+    /**
+     * 约TA详情
+     */
+    public static final String API_DATE_DETAIL = "stroke/info";
+    /**
+     * 约TA购买
+     */
+    public static final String API_DATE_BUY = "stroke/buy";
 
     /**
      * Html字符串拼接成完整的Html文本

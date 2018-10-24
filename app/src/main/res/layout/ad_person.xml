@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:singleLine="true"
-        android:text="充值STE返Q"
+        android:text="充值返Q"
         android:textColor="#3d3d3d"
         android:textSize="14sp"/>
 
@@ -28,7 +28,7 @@
         android:ellipsize="marquee"
         android:focusable="true"
         android:singleLine="true"
-        android:text="每充值100STE返100Q"
+        android:text="每充值100返100Q"
         android:textColor="#787878"
         android:textSize="10sp"/>
 

@@ -99,13 +99,26 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_name"/>
 
             <TextView
+                android:id="@+id/tv_person_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人数："
+                android:textColor="#2c2c2c"
+                android:textSize="15sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_date_title"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
                 android:id="@+id/tv_date_title"
-                android:layout_width="match_parent"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dip"
+                android:layout_marginRight="6dip"
                 android:singleLine="true"
                 android:textColor="#2c2c2c"
                 android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_person_count"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_avatar"/>
 
             <TextView

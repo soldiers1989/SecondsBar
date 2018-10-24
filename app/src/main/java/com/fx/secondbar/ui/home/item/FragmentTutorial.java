@@ -11,14 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.btten.bttenlibrary.util.DisplayUtil;
+import com.btten.bttenlibrary.util.ShowToast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.DateBean;
+import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.AcWebBrowse;
 import com.fx.secondbar.ui.date.AcDateDetail;
 import com.fx.secondbar.ui.home.item.adapter.AdDateTa;
 import com.fx.secondbar.view.ViewPagerLayoutManager;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * function:教程
@@ -38,7 +44,7 @@ public class FragmentTutorial extends FragmentViewPagerBase
     {
         if (currPage == -1)
         {
-            if (adapter == null)
+            if (adapter == null && getActivity() != null)
             {
                 initView();
                 initListener();
@@ -84,16 +90,7 @@ public class FragmentTutorial extends FragmentViewPagerBase
         recyclerView.getLayoutParams().height = height;
         ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(), OrientationHelper.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-//        recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(getResources().getDimensionPixelSize(R.dimen.home_tutorial_item_space), false, true, true));
         adapter.bindToRecyclerView(recyclerView);
-        ArrayList<String> list = new ArrayList<>();
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
-        adapter.setNewData(list);
 
         layoutManager.setOnViewPagerListener(new ViewPagerLayoutManager.OnViewPagerListener()
         {
@@ -133,8 +130,10 @@ public class FragmentTutorial extends FragmentViewPagerBase
                 {
                     return;
                 }
+                jump(AcDateDetail.class, FragmentTutorial.this.adapter.getItem(position).getStroke_ID());
             }
         });
+        getData(PAGE_START);
     }
 
     /**
@@ -144,48 +143,48 @@ public class FragmentTutorial extends FragmentViewPagerBase
      */
     private void getData(final int page)
     {
-//        HttpManager.getTurials(page, PAGE_NUM, new Subscriber<List<TurialBean>>()
-//        {
-//            @Override
-//            public void onCompleted()
-//            {
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable e)
-//            {
-//                if (isNetworkCanReturn())
-//                {
-//                    return;
-//                }
-//                ShowToast.showToast(HttpManager.checkLoadError(e));
-//            }
-//
-//            @Override
-//            public void onNext(List<TurialBean> turialBeans)
-//            {
-//                if (isNetworkCanReturn())
-//                {
-//                    return;
-//                }
-//                currPage = page;
-//                if (PAGE_START == page)
-//                {
-//                    adapter.setNewData(turialBeans);
-//                } else
-//                {
-//                    adapter.addData(turialBeans);
-//                }
-//                if (turialBeans.size() >= PAGE_NUM)
-//                {
-//                    adapter.loadMoreComplete();
-//                } else
-//                {
-//                    adapter.loadMoreEnd();
-//                }
-//            }
-//        });
+        HttpManager.getDateList(page, PAGE_NUM, new Subscriber<List<DateBean>>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(List<DateBean> turialBeans)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                currPage = page;
+                if (PAGE_START == page)
+                {
+                    adapter.setNewData(turialBeans);
+                } else
+                {
+                    adapter.addData(turialBeans);
+                }
+                if (turialBeans.size() >= PAGE_NUM)
+                {
+                    adapter.loadMoreComplete();
+                } else
+                {
+                    adapter.loadMoreEnd();
+                }
+            }
+        });
     }
 
     @Override
@@ -198,7 +197,10 @@ public class FragmentTutorial extends FragmentViewPagerBase
         switch (v.getId())
         {
             case R.id.ib_send:
-                jump(AcDateDetail.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(KEY_STR, "发布说明");
+                bundle.putString(KEY, "http://www.feixingtech.com:8080/static/mb-front/getText.html?type=20");
+                jump(AcWebBrowse.class, bundle, false);
                 break;
         }
     }

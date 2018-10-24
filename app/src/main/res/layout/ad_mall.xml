@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:singleLine="true"
-        android:text="360.00STE"
+        android:text="￥360.00"
         android:textColor="@color/home_tabs_mark_color"
         android:textSize="@dimen/mall_item_price"
         app:autoSizeMaxTextSize="@dimen/mall_item_price"

@@ -69,7 +69,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="STE"
+            android:text="余额"
             android:textColor="@android:color/white"
             android:textSize="16sp"/>
 
@@ -174,7 +174,7 @@
             android:drawableLeft="@mipmap/ic_conversion"
             android:drawablePadding="12dip"
             android:gravity="center_vertical"
-            android:text="Q兑换STE"
+            android:text="Q兑换人民币"
             android:textColor="#414141"
             android:textSize="15sp"/>
 

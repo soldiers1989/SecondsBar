@@ -12,6 +12,7 @@
     <string name="should_permission_default_tips">我们需要一些权限，以便应用程序能够正常工作，可在设置界面授予权限...</string>
     <string name="permission_write_external_storage_tips">应用需要SD卡的写入与读取权限，以便能保存和读取一些数据...</string>
     <string name="permission_read_phone_state_tips">应用需要手机状态读取权限，以便能读取一些数据&#8230;</string>
+    <string name="permission_fine_location_tips">应用需要手机GPS访问权限，以便能确定您的位置&#8230;</string>
 
 
     <!-- xlistview提示 start -->

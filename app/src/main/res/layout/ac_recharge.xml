@@ -24,7 +24,7 @@
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/mall_tool_pl"
-                android:text="STE充值"
+                android:text="充值"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/toolbar_title_font"/>
 
@@ -198,6 +198,7 @@
         android:text="1STE=1人民币"
         android:textColor="#787878"
         android:textSize="12sp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/tv_recharge_tips"
         app:layout_constraintTop_toBottomOf="@+id/v_input"/>
 

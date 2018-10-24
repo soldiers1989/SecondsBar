@@ -2,13 +2,12 @@ package com.fx.secondbar.http.service;
 
 
 import com.btten.bttenlibrary.base.bean.ResponseBean;
-import com.btten.bttenlibrary.view.photoview.Info;
-import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.BankBean;
 import com.fx.secondbar.bean.CommissionBean;
 import com.fx.secondbar.bean.CommodityBean;
 import com.fx.secondbar.bean.ConsumerBean;
 import com.fx.secondbar.bean.CustomerBean;
+import com.fx.secondbar.bean.DateBean;
 import com.fx.secondbar.bean.IndexInformationBean;
 import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.InfomationBean;
@@ -34,7 +33,6 @@ import com.fx.secondbar.bean.TradingBuyedBean;
 import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
-import com.fx.secondbar.bean.WBBean;
 import com.fx.secondbar.bean.WBData;
 import com.fx.secondbar.bean.WithdrawIntroBean;
 import com.fx.secondbar.util.Constants;
@@ -152,6 +150,7 @@ public interface IService
 
     /**
      * 购买商品Q支付接口
+     *
      * @param id
      * @return
      */
@@ -205,7 +204,7 @@ public interface IService
      * @return
      */
     @GET(Constants.API_FINISH_ACTIVITY)
-    Observable<ResponseBean> finishActive(@Query("type") String type);
+    Observable<ResponseBean<Double>> finishActive(@Query("type") String type);
 
     /**
      * 添加自选
@@ -587,4 +586,31 @@ public interface IService
     @GET(Constants.API_SYSTEM_INTRO)
     Observable<ResponseBean<List<SystemIntroBean>>> getSystemIntro(@Query("type") String type, @Query("page") int page, @Query("count") int pageSize);
 
+    /**
+     * 获取约TA列表
+     *
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @GET(Constants.API_DATE_LIST)
+    Observable<ResponseBean<List<DateBean>>> getDateList(@Query("page") int page, @Query("count") int pageSize);
+
+    /**
+     * 获取约TA详情
+     *
+     * @param id 约TA id
+     * @return
+     */
+    @GET(Constants.API_DATE_DETAIL)
+    Observable<ResponseBean<DateBean>> getDateDetail(@Query("strokeid") String id);
+
+    /**
+     * 约TA购买
+     *
+     * @param id 约TA id
+     * @return
+     */
+    @GET(Constants.API_DATE_BUY)
+    Observable<ResponseBean> buyDate(@Query("strokeid") String id);
 }

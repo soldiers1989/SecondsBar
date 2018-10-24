@@ -44,12 +44,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/home_time_purchase_name_mt"
         android:singleLine="true"
-        android:text="0.60STE/秒"
+        android:text="￥0.60/秒"
         android:textColor="@color/home_tabs_mark_color"
         android:textSize="@dimen/home_time_purchase_name_text"
         app:layout_constraintBottom_toBottomOf="@id/img"
         app:layout_constraintStart_toStartOf="@id/tv_name"
-        tools:text="0.60STE/秒"/>
+        tools:text="￥0.60/秒"/>
 
     <TextView
         android:id="@+id/tv_content"
