@@ -11,4 +11,8 @@ public class RequestCode
      * 商城详情
      */
     public static final int REQUEST_CODE_TO_MALL_DETAIL = 10;
+    /**
+     * 约吧详情
+     */
+    public static final int REQUEST_CODE_TO_DATE_DETAIL = 14;
 }

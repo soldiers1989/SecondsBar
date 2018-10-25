@@ -5,6 +5,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.btten.bttenlibrary.application.BtApplication;
 import com.btten.bttenlibrary.util.LogUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
@@ -70,6 +71,7 @@ public class FxApplication extends BtApplication
         //初始化微博sdk
         WbSdk.install(this, new AuthInfo(this, ShareUtils.SINA_APPKEY, ShareUtils.REDIRECT_URL, ShareUtils.SCOPE));
         JPushInterface.init(this);
+        SDKInitializer.initialize(this);
     }
 
     @Override

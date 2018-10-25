@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
+import com.btten.bttenlibrary.util.Arithmetic;
 import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -88,10 +89,10 @@ public class AdDateTa extends BaseQuickAdapter<DateBean, BaseViewHolder>
         double distance = DistanceUtil.getDistance(l1, l2);
         if (distance < 1000)
         {
-            return distance + "m";
+            return Arithmetic.doubleToStr(distance, 2) + "m";
         } else
         {
-            return distance / 1000 + "km";
+            return Arithmetic.doubleToStr(distance / 1000) + "km";
         }
     }
 

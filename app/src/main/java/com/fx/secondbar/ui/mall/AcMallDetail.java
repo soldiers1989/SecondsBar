@@ -111,6 +111,8 @@ public class AcMallDetail extends ActivitySupport
 
         dialog = ProgressDialogUtil.getProgressDialog(this, getString(R.string.progress_tips), true);
 
+        btn_buy.setVisibility(getIntent().getBooleanExtra(KEY, false) ? View.GONE : View.VISIBLE);
+
         getData(getIntent().getStringExtra(KEY_STR));
     }
 
@@ -171,10 +173,10 @@ public class AcMallDetail extends ActivitySupport
             {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
                 {
-                    tv_intro.setText(Html.fromHtml(bean.getContent(), Html.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH | Html.FROM_HTML_SEPARATOR_LINE_BREAK_HEADING | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST_ITEM | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST | Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV | Html.FROM_HTML_SEPARATOR_LINE_BREAK_BLOCKQUOTE | Html.FROM_HTML_OPTION_USE_CSS_COLORS, new CustomImageGetter(tv_intro), null));
+                    tv_intro.setText(Html.fromHtml(VerificationUtil.verifyDefault(bean.getContent(), ""), Html.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH | Html.FROM_HTML_SEPARATOR_LINE_BREAK_HEADING | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST_ITEM | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST | Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV | Html.FROM_HTML_SEPARATOR_LINE_BREAK_BLOCKQUOTE | Html.FROM_HTML_OPTION_USE_CSS_COLORS, new CustomImageGetter(tv_intro), null));
                 } else
                 {
-                    tv_intro.setText(Html.fromHtml(bean.getContent(), new CustomImageGetter(tv_intro), null));
+                    tv_intro.setText(Html.fromHtml(VerificationUtil.verifyDefault(bean.getContent(), ""), new CustomImageGetter(tv_intro), null));
                 }
             }
             dialogBuy = new DialogBuy(this, bean);
@@ -285,7 +287,7 @@ public class AcMallDetail extends ActivitySupport
                 ShowToast.showToast("购买成功");
                 //通知更新用户余额信息
                 FxApplication.refreshUserInfoBroadCast();
-                jump(AcOrderManage.class);
+                jump(AcOrderManage.class,true);
             }
         };
         if (isSTEPay)

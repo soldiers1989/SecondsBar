@@ -320,6 +320,10 @@ public class Constants
      * 约TA购买
      */
     public static final String API_DATE_BUY = "stroke/buy";
+    /**
+     * 约TA购买，Q支付
+     */
+    public static final String API_DATE_BUY_Q = "stroke/qbuy";
 
     /**
      * Html字符串拼接成完整的Html文本

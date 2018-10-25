@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,6 +26,7 @@ import com.fx.secondbar.ui.mall.DialogBuy;
 import com.fx.secondbar.ui.order.AcOrderManage;
 import com.fx.secondbar.ui.person.assets.AcRecharge;
 import com.fx.secondbar.util.GlideLoad;
+import com.fx.secondbar.util.ProgressDialogUtil;
 
 import rx.Subscriber;
 
@@ -85,6 +87,8 @@ public class AcDateDetail extends ActivitySupport
     @Override
     protected void initData()
     {
+        dialog = ProgressDialogUtil.getProgressDialog(this, getString(R.string.progress_tips), true);
+        btn_buy.setVisibility(getIntent().getBooleanExtra(KEY, false) ? View.GONE : View.VISIBLE);
         getData(getIntent().getStringExtra(KEY_STR));
     }
 
@@ -161,7 +165,13 @@ public class AcDateDetail extends ActivitySupport
 
             if (tv_notice != null)
             {
-                tv_notice.setText(Html.fromHtml(VerificationUtil.verifyDefault(dateBean.getDescription(), "")));
+                if (TextUtils.isEmpty(dateBean.getDescription()))
+                {
+                    tv_notice.setText(getString(R.string.date_buy_notify));
+                } else
+                {
+                    tv_notice.setText(Html.fromHtml(VerificationUtil.verifyDefault(dateBean.getDescription(), "")));
+                }
             }
             String personCount = String.format(getString(R.string.date_detail_person_count), VerificationUtil.verifyDefault(dateBean.getQuantity(), "0"));
             if (tv_person_count != null)
@@ -242,7 +252,7 @@ public class AcDateDetail extends ActivitySupport
                 ShowToast.showToast("购买成功");
                 //通知更新用户余额信息
                 FxApplication.refreshUserInfoBroadCast();
-                jump(AcOrderManage.class);
+                jump(AcOrderManage.class, true);
             }
         };
         if (isSTEPay)
@@ -250,7 +260,7 @@ public class AcDateDetail extends ActivitySupport
             HttpManager.buyDate(id, subscriber);
         } else
         {
-            HttpManager.buyQCommodity(id, subscriber);
+            HttpManager.buyQDate(id, subscriber);
         }
     }
 

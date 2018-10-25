@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.home.item;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -18,8 +20,10 @@ import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.DateBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.AcWebBrowse;
+import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.date.AcDateDetail;
 import com.fx.secondbar.ui.home.item.adapter.AdDateTa;
+import com.fx.secondbar.util.RequestCode;
 import com.fx.secondbar.view.ViewPagerLayoutManager;
 
 import java.util.List;
@@ -130,10 +134,35 @@ public class FragmentTutorial extends FragmentViewPagerBase
                 {
                     return;
                 }
-                jump(AcDateDetail.class, FragmentTutorial.this.adapter.getItem(position).getStroke_ID());
+                Bundle bundle = new Bundle();
+                bundle.putString(KEY_STR, FragmentTutorial.this.adapter.getItem(position).getStroke_ID());
+                jump(AcDateDetail.class, bundle, RequestCode.REQUEST_CODE_TO_DATE_DETAIL);
             }
         });
         getData(PAGE_START);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden)
+    {
+        super.onHiddenChanged(hidden);
+        if (!isHidden())
+        {
+            if (adapter != null)
+            {
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if (adapter != null)
+        {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -202,6 +231,16 @@ public class FragmentTutorial extends FragmentViewPagerBase
                 bundle.putString(KEY, "http://www.feixingtech.com:8080/static/mb-front/getText.html?type=20");
                 jump(AcWebBrowse.class, bundle, false);
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (RequestCode.REQUEST_CODE_TO_DATE_DETAIL == requestCode && ActivitySupport.RESULT_OK == resultCode)
+        {
+            ((MainActivity) getActivity()).jumpToPersonal();
         }
     }
 }

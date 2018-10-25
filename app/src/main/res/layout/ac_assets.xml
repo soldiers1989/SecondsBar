@@ -35,11 +35,13 @@
 
             <TextView
                 android:id="@+id/tv_detail"
-                android:layout_width="@dimen/toolbar_height"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/toolbar_height"
                 android:layout_alignParentRight="true"
                 android:gravity="center"
-                android:text="明细"
+                android:paddingLeft="6dip"
+                android:paddingRight="6dip"
+                android:text="￥明细"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"/>
 

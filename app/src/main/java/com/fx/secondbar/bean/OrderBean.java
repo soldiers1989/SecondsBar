@@ -28,6 +28,8 @@ public class OrderBean implements Parcelable
     private String merchandiseid;// 商品id
     private String qcoin;//Q金额
     private Integer type;//支付类型 2：Q支付，1：STE支付
+    private Integer ordertype;  //订单类型  1：商品订单，2约她订单
+    private String strokeid;    //约吧行程id
 
     public String getMemberid()
     {
@@ -199,6 +201,25 @@ public class OrderBean implements Parcelable
         this.type = type;
     }
 
+    public Integer getOrdertype()
+    {
+        return ordertype == null ? 1 : ordertype;
+    }
+
+    public void setOrdertype(Integer ordertype)
+    {
+        this.ordertype = ordertype;
+    }
+
+    public String getStrokeid()
+    {
+        return strokeid;
+    }
+
+    public void setStrokeid(String strokeid)
+    {
+        this.strokeid = strokeid;
+    }
 
     @Override
     public int describeContents()
@@ -226,6 +247,8 @@ public class OrderBean implements Parcelable
         dest.writeString(this.merchandiseid);
         dest.writeString(this.qcoin);
         dest.writeValue(this.type);
+        dest.writeValue(this.ordertype);
+        dest.writeString(this.strokeid);
     }
 
     public OrderBean()
@@ -251,6 +274,8 @@ public class OrderBean implements Parcelable
         this.merchandiseid = in.readString();
         this.qcoin = in.readString();
         this.type = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.ordertype = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.strokeid = in.readString();
     }
 
     public static final Parcelable.Creator<OrderBean> CREATOR = new Parcelable.Creator<OrderBean>()

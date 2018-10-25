@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -25,6 +26,7 @@ import com.bigkoo.convenientbanner.holder.Holder;
 import com.btten.bttenlibrary.base.FragmentSupport;
 import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.DisplayUtil;
+import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -33,6 +35,7 @@ import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.ActiveBean;
 import com.fx.secondbar.bean.BannerBean;
 import com.fx.secondbar.bean.MineData;
+import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.AcWebBrowse;
 import com.fx.secondbar.ui.DialogSign;
@@ -61,7 +64,7 @@ import rx.Subscriber;
  * author: frj
  * modify date: 2018/9/6
  */
-public class FragmentPerson extends FragmentSupport
+public class FragmentPerson extends FragmentSupport implements SwipeRefreshLayout.OnRefreshListener
 {
 
     /**
@@ -69,6 +72,7 @@ public class FragmentPerson extends FragmentSupport
      */
     private static final int REQUEST_CODE_BIND_PHONE = 12;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
     private SelectableRoundedImageView img_avatar;
     private TextView tv_name;
     private TextView tv_account;
@@ -98,6 +102,7 @@ public class FragmentPerson extends FragmentSupport
     @Override
     protected void initView()
     {
+        swipeRefreshLayout = findView(R.id.swipeRefreshLayout);
         img_avatar = findView(R.id.img_avatar);
         tv_name = findView(R.id.tv_name);
         tv_account = findView(R.id.tv_account);
@@ -209,7 +214,7 @@ public class FragmentPerson extends FragmentSupport
 
         IntentFilter filter = new IntentFilter(Constants.ACTION_REFRESH_PERSON_SHOW);
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, filter);
-
+        swipeRefreshLayout.setOnRefreshListener(this);
     }
 
     /**
@@ -401,6 +406,49 @@ public class FragmentPerson extends FragmentSupport
         }
     }
 
+    /**
+     * 登录
+     */
+    private void login()
+    {
+        HttpManager.login(new Subscriber<UserInfoBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                e.printStackTrace();
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(UserInfoBean userInfoBean)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                FxApplication.getInstance().setUserInfoBean(userInfoBean);
+                FxApplication.refreshPersonShowBroadCast();
+            }
+        });
+    }
 
     @Override
     public void onClick(View v)
@@ -457,5 +505,11 @@ public class FragmentPerson extends FragmentSupport
                 tv_account.setOnClickListener(null);
             }
         }
+    }
+
+    @Override
+    public void onRefresh()
+    {
+        login();
     }
 }

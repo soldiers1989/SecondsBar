@@ -538,6 +538,7 @@ public class MainActivity extends ActivitySupport
             String district = bdLocation.getDistrict();    //获取区县
             String street = bdLocation.getStreet();    //获取街道信息
 
+            LogUtil.e("location", "address:" + addr);
             FxApplication.getInstance().setLocationBean(latitude, longitude, addr, country, province, city, district, street);
         }
     }

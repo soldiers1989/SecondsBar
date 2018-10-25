@@ -613,4 +613,13 @@ public interface IService
      */
     @GET(Constants.API_DATE_BUY)
     Observable<ResponseBean> buyDate(@Query("strokeid") String id);
+
+    /**
+     * 约TA购买
+     *
+     * @param id 约TA id
+     * @return
+     */
+    @GET(Constants.API_DATE_BUY_Q)
+    Observable<ResponseBean> buyQDate(@Query("strokeid") String id);
 }

@@ -16,7 +16,7 @@
         <item>价值媒体</item>
         <item>时间广场</item>
         <item>互动平台</item>
-        <item>约TA</item>
+        <item>约吧</item>
     </string-array>
     <!--<string-array name="home_infoation_types">-->
     <!--<item>头条</item>-->
@@ -134,4 +134,10 @@
 
     <string name="date_detail_buy_tips">￥%s 购买</string>
     <string name="date_detail_person_count">人数：%s人</string>
+    <string name="date_buy_notify">
+        1.行程一经购买，如无特殊情况，暂不支持退款。
+        \n2.行程预约成功后，可以私聊和名人沟通具体的见面日期地点。
+        \n3.名人形成有变，会电话通知您，24小时内可随时取消并退款。
+        \n4.如遇其他问题可直接联系客服。
+    </string>
 </resources>

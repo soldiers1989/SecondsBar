@@ -24,7 +24,7 @@
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/mall_tool_pl"
-                android:text="明细"
+                android:text="￥明细"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/toolbar_title_font"/>
 

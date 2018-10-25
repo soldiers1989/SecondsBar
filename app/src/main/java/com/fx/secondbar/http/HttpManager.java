@@ -825,6 +825,18 @@ public class HttpManager
     }
 
     /**
+     * 约TA购买
+     *
+     * @param strokeId   约TA id
+     * @param subscriber
+     */
+    public static void buyQDate(String strokeId, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.buyQDate(strokeId).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
      * 绑定订购者
      *
      * @param observable 可被观察者

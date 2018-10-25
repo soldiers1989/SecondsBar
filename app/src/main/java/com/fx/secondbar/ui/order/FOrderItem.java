@@ -22,7 +22,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
 import com.fx.secondbar.bean.OrderBean;
 import com.fx.secondbar.http.HttpManager;
+import com.fx.secondbar.ui.date.AcDateDetail;
 import com.fx.secondbar.ui.home.item.FragmentViewPagerBase;
+import com.fx.secondbar.ui.mall.AcMallDetail;
 import com.fx.secondbar.util.ProgressDialogUtil;
 
 import java.util.List;
@@ -127,6 +129,21 @@ public class FOrderItem extends FragmentViewPagerBase implements SwipeRefreshLay
 //                Bundle bundle = new Bundle();
 //                bundle.putParcelable(KEY, FOrderItem.this.adapter.getItem(position));
 //                jump(AcPurchaseOrderDetail.class, bundle, false);
+                OrderBean orderBean = FOrderItem.this.adapter.getItem(position);
+                //商品订单
+                Bundle bundle = new Bundle();
+                //表示已购买
+                bundle.putBoolean(KEY, true);
+                if (1 == orderBean.getOrdertype())
+                {
+                    bundle.putString(KEY_STR, orderBean.getMerchandiseid());
+                    jump(AcMallDetail.class, bundle, false);
+                } else
+                {
+                    bundle.putString(KEY_STR, orderBean.getStrokeid());
+                    jump(AcDateDetail.class, bundle, false);
+                }
+
             }
         });
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener()

@@ -53,6 +53,7 @@ public class AcInviteFriends extends ActivitySupport
         setSupportActionBar(toolbar);
 
         findView(R.id.tv_generate).setOnClickListener(this);
+        findView(R.id.img_top).setOnClickListener(this);
         findView(R.id.tv_copy).setOnClickListener(this);
         tv_generate_url_tips = findView(R.id.tv_generate_url_tips);
         tv_total_get = findView(R.id.tv_total_get);
@@ -147,6 +148,7 @@ public class AcInviteFriends extends ActivitySupport
                 finish();
                 break;
             case R.id.tv_generate:
+            case R.id.img_top:
                 Bundle bundle = new Bundle();
                 bundle.putInt(AcShareDialog.KEY_TYPE, AcShareDialog.TYPE_POSTER_INVITE);
                 jump(AcShareDialog.class, bundle, false);
