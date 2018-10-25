@@ -128,7 +128,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="18dip"
         android:paddingRight="14dip"
-        android:text="秒吧用户使用协议"
+        android:text="秒吧服务协议"
         android:textColor="#2e2e2e"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/v_protocol_line"
