@@ -520,7 +520,7 @@ public interface IService
      * @param orderId 订单id
      * @return
      */
-    @GET(Constants.API_ORDER_APPEAL)
+    @GET(Constants.API_ORDER_PERFORMANCE)
     Observable<ResponseBean> orderPerformance(@Query("orderid") String orderId);
 
     /**
