@@ -20,6 +20,7 @@ public class CommodityBean
     private String timelength;//时长
     private String image;//图片地址
     private String merchandise_ID;//商品id
+    private String datetime;    //开始日期
 
     public String getName()
     {
@@ -149,5 +150,15 @@ public class CommodityBean
     public void setQcoin(String qcoin)
     {
         this.qcoin = qcoin;
+    }
+
+    public String getDatetime()
+    {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime)
+    {
+        this.datetime = datetime;
     }
 }

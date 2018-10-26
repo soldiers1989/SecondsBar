@@ -1,5 +1,7 @@
 package com.fx.secondbar.ui.order;
 
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.util.VerificationUtil;
@@ -32,6 +34,9 @@ public class AdOrder extends BaseQuickAdapter<OrderBean, BaseViewHolder>
         TextView tv_price = helper.getView(R.id.tv_price);
         TextView tv_place = helper.getView(R.id.tv_place);
         TextView tv_option = helper.getView(R.id.tv_option);
+        View v_line = helper.getView(R.id.v_line);
+        LinearLayout ll_option = helper.getView(R.id.ll_option);
+        TextView tv_option_refund = helper.getView(R.id.tv_option_refund);
 
         GlideLoad.load(img, item.getImg(), true);
         VerificationUtil.setViewValue(tv_status, item.getStatusname());
@@ -42,23 +47,33 @@ public class AdOrder extends BaseQuickAdapter<OrderBean, BaseViewHolder>
         setCommodityPlace(tv_place, item.getAddress());
         setCommodityTime(tv_time, item.getTimelength());
 
-        if (FOrderItem.TYPE_PERFORMANCE == item.getStatus())
-        {
-//            tv_option.setText("取消订单，并退款");
-            tv_option.setText("申诉");
-        } else if (FOrderItem.TYPE_PERFORMANCING == item.getStatus())
-        {
-//            tv_option.setText("查看商品");
-            tv_option.setText("申诉");
-        } else if (FOrderItem.TYPE_REFUND == item.getStatus())
-        {
-//            tv_option.setText("取消退款");
-            tv_option.setText("申诉");
+//        if (FOrderItem.TYPE_PERFORMANCING == item.getStatus())
+//        {   //履约中
+//            v_line.setVisibility(View.VISIBLE);
+//            ll_option.setVisibility(View.VISIBLE);
+//        } else if (FOrderItem.TYPE_PERFORMANCING == item.getStatus())
+//        {
+////            tv_option.setText("查看商品");
+//            tv_option.setText("申诉");
+//        } else if (FOrderItem.TYPE_REFUND == item.getStatus())
+//        {
+////            tv_option.setText("取消退款");
+//            tv_option.setText("申诉");
+//        } else
+//        {
+//            tv_option.setText("申诉");
+//        }
+        if (FOrderItem.TYPE_PERFORMANCING == item.getStatus())
+        {   //履约中
+            v_line.setVisibility(View.VISIBLE);
+            ll_option.setVisibility(View.VISIBLE);
         } else
         {
-            tv_option.setText("申诉");
+            v_line.setVisibility(View.GONE);
+            ll_option.setVisibility(View.GONE);
         }
         helper.addOnClickListener(R.id.tv_option);
+        helper.addOnClickListener(R.id.tv_option_refund);
     }
 
     /**

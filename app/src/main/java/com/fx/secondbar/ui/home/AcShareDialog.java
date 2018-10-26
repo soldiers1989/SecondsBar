@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.constraint.ConstraintLayout;
@@ -174,9 +176,25 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
                 if (TYPE_POSTER_INVITE == type)
                 {
                     bitmap = cl_poster_share.getDrawingCache();
+                    if (bitmap == null)
+                    {
+                        bitmap = Bitmap.createBitmap(cl_poster_share.getWidth(), cl_poster_share.getHeight(), Bitmap.Config.RGB_565);
+                        Canvas c = new Canvas(bitmap);
+                        c.drawColor(Color.WHITE);
+//                        cl_poster_share.layout(0, 0, cl_poster_share.getWidth(), cl_poster_share.getHeight());
+                        cl_poster_share.draw(c);
+                    }
                 } else
                 {
                     bitmap = ll_content.getDrawingCache();
+                    if (bitmap == null)
+                    {
+                        bitmap = Bitmap.createBitmap(ll_content.getWidth(), ll_content.getHeight(), Bitmap.Config.RGB_565);
+                        Canvas c = new Canvas(bitmap);
+                        c.drawColor(Color.WHITE);
+//                        ll_content.layout(0, 0, ll_content.getWidth(), ll_content.getHeight());
+                        ll_content.draw(c);
+                    }
                 }
                 String path = saveBitmapToFile(bitmap);
                 if (R.id.img_qq == v.getId())
@@ -382,6 +400,10 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
     private String saveBitmapToFile(Bitmap bitmap)
     {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        if (bitmap == null)
+        {
+            return "";
+        }
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 如果签名是png的话，则不管quality是多少，都不会进行质量的压缩
         String path = "";
         try

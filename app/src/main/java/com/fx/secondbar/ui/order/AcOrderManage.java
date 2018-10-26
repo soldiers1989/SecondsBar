@@ -52,10 +52,11 @@ public class AcOrderManage extends ActivitySupport
     {
         final List<FragmentViewPagerBase> list = new ArrayList<>();
         list.add(FOrderItem.newInstance(FOrderItem.TYPE_ALL));
-//        list.add(FOrderItem.newInstance(FOrderItem.TYPE_WAIT_PAY));
         list.add(FOrderItem.newInstance(FOrderItem.TYPE_PERFORMANCE));
         list.add(FOrderItem.newInstance(FOrderItem.TYPE_PERFORMANCING));
+        list.add(FOrderItem.newInstance(FOrderItem.TYPE_PERFORMANCED));
         list.add(FOrderItem.newInstance(FOrderItem.TYPE_REFUND));
+        list.add(FOrderItem.newInstance(FOrderItem.TYPE_REFUNDED));
         adapter = new AdHomeItem(getSupportFragmentManager(), list, getResources().getStringArray(R.array.order_manage_tabs));
         viewPager.setAdapter(adapter);
         tabs.setViewPager(viewPager);

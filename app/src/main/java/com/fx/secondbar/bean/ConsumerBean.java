@@ -7,12 +7,15 @@ package com.fx.secondbar.bean;
  */
 public class ConsumerBean
 {
+    //类型 1	充值；2	提现；3	购买名人商品；4	购买名人时间；5	卖出名人时间；6	购买名人申购
     private String type;//类型
     private String createtime;//创建时间
     private String memberid;//会员id
     private String amount;//数量
     private String description;//说明
     private String expensesrecord_ID;//消费id
+    private String qcoin;       //Q金额
+    private Integer paytype;    //支付类型，1：人民币支付；2：Q支付
 
     public String getType()
     {
@@ -72,5 +75,25 @@ public class ConsumerBean
     public void setExpensesrecord_ID(String expensesrecord_ID)
     {
         this.expensesrecord_ID = expensesrecord_ID;
+    }
+
+    public String getQcoin()
+    {
+        return qcoin;
+    }
+
+    public void setQcoin(String qcoin)
+    {
+        this.qcoin = qcoin;
+    }
+
+    public Integer getPaytype()
+    {
+        return paytype == null ? 1 : paytype;
+    }
+
+    public void setPaytype(Integer paytype)
+    {
+        this.paytype = paytype;
     }
 }

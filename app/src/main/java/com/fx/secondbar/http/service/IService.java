@@ -515,6 +515,15 @@ public interface IService
     Observable<ResponseBean> orderAppeal(@Query("orderid") String orderId);
 
     /**
+     * 订单履约
+     *
+     * @param orderId 订单id
+     * @return
+     */
+    @GET(Constants.API_ORDER_APPEAL)
+    Observable<ResponseBean> orderPerformance(@Query("orderid") String orderId);
+
+    /**
      * 获取客服信息
      *
      * @return

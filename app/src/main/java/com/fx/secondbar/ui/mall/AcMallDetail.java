@@ -60,6 +60,7 @@ public class AcMallDetail extends ActivitySupport
     private TextView tv_title;
     private TextView tv_time;
     private TextView tv_place;
+    private TextView tv_start_time;
     private TextView tv_price;
     private TextView tv_intro;
 
@@ -86,6 +87,7 @@ public class AcMallDetail extends ActivitySupport
         tv_title = findView(R.id.tv_title);
         tv_time = findView(R.id.tv_time);
         tv_place = findView(R.id.tv_place);
+        tv_start_time = findView(R.id.tv_start_time);
         tv_price = findView(R.id.tv_price);
         tv_intro = findView(R.id.tv_intro);
     }
@@ -169,6 +171,7 @@ public class AcMallDetail extends ActivitySupport
             VerificationUtil.setViewValue(tv_time, String.format(getString(R.string.mall_detail_info_time), VerificationUtil.verifyDefault(bean.getTimelength(), "0")));
             VerificationUtil.setViewValue(tv_place, String.format(getString(R.string.mall_detail_info_place), VerificationUtil.verifyDefault(bean.getAddress(), "等待客服通知")));
             VerificationUtil.setViewValue(tv_price, String.format(getString(R.string.mall_detail_info_price), VerificationUtil.verifyDefault(bean.getPrice(), "0")));
+            VerificationUtil.setViewValue(tv_start_time, String.format(getString(R.string.mall_detail_info_start_time), VerificationUtil.verifyDefault(bean.getDatetime(), "")));
             if (tv_intro != null)
             {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
@@ -287,7 +290,7 @@ public class AcMallDetail extends ActivitySupport
                 ShowToast.showToast("购买成功");
                 //通知更新用户余额信息
                 FxApplication.refreshUserInfoBroadCast();
-                jump(AcOrderManage.class,true);
+                jump(AcOrderManage.class, true);
             }
         };
         if (isSTEPay)

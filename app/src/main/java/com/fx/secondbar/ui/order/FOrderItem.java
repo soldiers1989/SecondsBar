@@ -43,10 +43,6 @@ public class FOrderItem extends FragmentViewPagerBase implements SwipeRefreshLay
      */
     public static final int TYPE_ALL = 0;
     /**
-     * 待付款
-     */
-    public static final int TYPE_WAIT_PAY = 1;
-    /**
      * 待履约
      */
     public static final int TYPE_PERFORMANCE = 2;
@@ -55,9 +51,17 @@ public class FOrderItem extends FragmentViewPagerBase implements SwipeRefreshLay
      */
     public static final int TYPE_PERFORMANCING = 3;
     /**
-     * 退款
+     * 已履约
      */
-    public static final int TYPE_REFUND = 4;
+    public static final int TYPE_PERFORMANCED = 4;
+    /**
+     * 退款中
+     */
+    public static final int TYPE_REFUND = 5;
+    /**
+     * 已退款
+     */
+    public static final int TYPE_REFUNDED = 6;
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
@@ -155,19 +159,45 @@ public class FOrderItem extends FragmentViewPagerBase implements SwipeRefreshLay
                 {
                     return;
                 }
+                OrderBean orderBean = ((AdOrder) adapter).getItem(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage("您确定要发起申诉吗？");
-                builder.setCancelable(false);
-                builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
+                if (R.id.tv_option_refund == view.getId())
+                {   //申诉退款
+                    //判断是否是人民币支付
+                    if (1 == orderBean.getType())
                     {
-                        orderAppeal(FOrderItem.this.adapter.getItem(position).getOrder_ID());
+                        builder.setMessage("您确定要发起申诉退款吗？");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                orderAppeal(FOrderItem.this.adapter.getItem(position).getOrder_ID());
+                            }
+                        });
+                        builder.setNegativeButton("取消", null);
+                    } else
+                    {
+                        builder.setMessage("对不起，您使用Q支付的订单，平台暂不支持退还Q！");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("确定", null);
                     }
-                });
-                builder.setNegativeButton("取消", null);
+                } else if (R.id.tv_option == view.getId())
+                {   //确认履约
+                    builder.setMessage("您确认完成当次履约吗？一旦确认，将不可修改");
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            orderPerformance(FOrderItem.this.adapter.getItem(position).getOrder_ID());
+                        }
+                    });
+                    builder.setNegativeButton("取消", null);
+                }
                 builder.show();
+
             }
         });
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
@@ -231,10 +261,61 @@ public class FOrderItem extends FragmentViewPagerBase implements SwipeRefreshLay
                     dialog.dismiss();
                 }
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage("您的申诉已提交，客服将会在一个工作日内通过您绑定的手机号与您联系，请您耐心等候~");
+                builder.setMessage("已经收到您的申诉，客服会判定是否给您退款，请耐心等待！");
                 builder.setCancelable(false);
                 builder.setPositiveButton("确定", null);
                 builder.show();
+                swipeRefreshLayout.setRefreshing(true);
+                onRefresh();
+            }
+        });
+    }
+
+    /**
+     * 订单履约
+     *
+     * @param orderId
+     */
+    private void orderPerformance(String orderId)
+    {
+        if (dialog != null)
+        {
+            dialog.show();
+        }
+        HttpManager.orderPerformance(orderId, new Subscriber<ResponseBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                e.printStackTrace();
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(ResponseBean responseBean)
+            {
+                if (isNetworkCanReturn())
+                {
+                    return;
+                }
+                if (dialog != null)
+                {
+                    dialog.dismiss();
+                }
                 swipeRefreshLayout.setRefreshing(true);
                 onRefresh();
             }

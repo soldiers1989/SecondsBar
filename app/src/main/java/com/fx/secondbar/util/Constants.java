@@ -277,6 +277,11 @@ public class Constants
     public static final String API_ORDER_APPEAL = "order/appeal";
 
     /**
+     * 订单履约
+     */
+    public static final String API_ORDER_PERFORMANCE = "order/performance";
+
+    /**
      * 获取客服信息
      */
     public static final String API_GET_CUSTOMER = "index/customerserver";

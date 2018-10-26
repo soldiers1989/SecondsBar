@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
-import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.util.Arithmetic;
 import com.btten.bttenlibrary.util.LogUtil;
 import com.fx.secondbar.R;
@@ -85,16 +84,16 @@ public class AcInformationDetail extends ActivitySupport
                     //完成一次收益
                     finishIncomeTask();
 //                    ll_income.setAnimation(mShowAction);
-                    ll_income.setVisibility(View.VISIBLE);
-                    ll_income.postDelayed(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-//                            ll_income.setAnimation(mHiddenAction);
-                            ll_income.setVisibility(View.GONE);
-                        }
-                    }, 2000);
+//                    ll_income.setVisibility(View.VISIBLE);
+//                    ll_income.postDelayed(new Runnable()
+//                    {
+//                        @Override
+//                        public void run()
+//                        {
+////                            ll_income.setAnimation(mHiddenAction);
+//                            ll_income.setVisibility(View.GONE);
+//                        }
+//                    }, 2000);
                 }
                 if (Math.abs(progress - startPercent) < Threshold)
                 {

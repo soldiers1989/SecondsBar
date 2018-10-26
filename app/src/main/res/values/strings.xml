@@ -63,6 +63,7 @@
     <string name="mall_detail_buy_text">立即购买</string>
     <string name="mall_detail_info_time">时长：%s</string>
     <string name="mall_detail_info_place">地点：%s</string>
+    <string name="mall_detail_info_start_time">开始时间：%s</string>
     <string name="mall_detail_info_price">￥%s</string>
     <string name="mall_detail_info_q_price">%sQ</string>
     <string name="mall_detail_info_position">职位：%s</string>
@@ -103,10 +104,11 @@
 
     <string-array name="order_manage_tabs">
         <item>全部</item>
-        <!--<item>待支付</item>-->
         <item>待履约</item>
         <item>履约中</item>
+        <item>已履约</item>
         <item>退款中</item>
+        <item>已退款</item>
     </string-array>
     <string name="code_countdown_hint">秒后重新获取</string>
     <string name="sign_cotinuous_day">连续签到%s天！</string>

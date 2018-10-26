@@ -694,6 +694,18 @@ public class HttpManager
     }
 
     /**
+     * 订单履约
+     *
+     * @param orderId    订单id
+     * @param subscriber
+     */
+    public static void orderPerformance(String orderId, Subscriber<ResponseBean> subscriber)
+    {
+        Observable<ResponseBean> observable = getInstance().mService.orderPerformance(orderId).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
      * 获取客服信息
      *
      * @param subscriber

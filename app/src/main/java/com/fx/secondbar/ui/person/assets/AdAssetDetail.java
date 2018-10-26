@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.person.assets;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
 
@@ -31,7 +32,28 @@ public class AdAssetDetail extends BaseQuickAdapter<ConsumerBean, BaseViewHolder
 
         VerificationUtil.setViewValue(tv_content, item.getDescription());
         VerificationUtil.setViewValue(tv_time, item.getCreatetime());
-        VerificationUtil.setViewValue(tv_money, item.getAmount());
+        String str = "";
+        if (item.getPaytype() == 1)
+        {
+            str = VerificationUtil.verifyDefault(item.getAmount(), "0");
+            //是否是充值
+            if ("1".equals(item.getType()))
+            {
+                tv_money.setTextColor(Color.parseColor("#03c086"));
+                str = "+" + str;
+            } else
+            {
+                tv_money.setTextColor(Color.parseColor("#E76E43"));
+                str = "-" + str;
+            }
+
+        } else
+        {
+            tv_money.setTextColor(Color.parseColor("#E76E43"));
+            str = VerificationUtil.verifyDefault(item.getQcoin(), "0");
+            str = "-" + str;
+        }
+        VerificationUtil.setViewValue(tv_money, str, "");
 
     }
 }
