@@ -69,7 +69,7 @@ public class IncomeProgressView extends View
     //动画相关,该值表示百分比
     private int mPercent = 0;
     //步长
-    private int step = maxProgress / 100;
+    private int step = maxProgress / 300;
 
     //是否销毁
     private boolean isDestroy = false;

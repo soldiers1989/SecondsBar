@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.util.DisplayUtil;
@@ -91,7 +92,13 @@ public class FragmentTutorial extends FragmentViewPagerBase
             height -= DisplayUtil.getStatusBarHeight(FxApplication.getInstance());
         }
         adapter = new AdDateTa(height);
-        recyclerView.getLayoutParams().height = height;
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) recyclerView.getLayoutParams();
+        if (params == null)
+        {
+            params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        }
+        params.height = height;
+        recyclerView.setLayoutParams(params);
         ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(), OrientationHelper.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         adapter.bindToRecyclerView(recyclerView);

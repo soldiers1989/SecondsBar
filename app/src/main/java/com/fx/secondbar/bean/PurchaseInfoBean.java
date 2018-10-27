@@ -10,20 +10,19 @@ import android.os.Parcelable;
  */
 public class PurchaseInfoBean implements Parcelable
 {
+    private Integer limitseconds;   //个人限购数量
     private String purchase_ID;//申购Id
-    private Integer limitseconds;//限制购买秒数
-    private String remainnum;//剩余数量
+    private Integer remainnum;//最小申购数量
     private String peoplename;//用户名称
     private String peopleimg;//用户头像
     private String recommend;//是否推荐
-    private String soldnum;//卖出数量
     private String type;//
     private String price;//申购单价
     private String zjm;//助记码
     private String amount;//总量
     private String peopleid;//名人id
-    private String starttime;//开始时间
-    private String endtime;//结束时间
+//    private String starttime;//开始时间
+//    private String endtime;//结束时间
 
 
     public String getPurchase_ID()
@@ -46,12 +45,12 @@ public class PurchaseInfoBean implements Parcelable
         this.limitseconds = limitseconds;
     }
 
-    public String getRemainnum()
+    public Integer getRemainnum()
     {
-        return remainnum;
+        return remainnum == null ? 0 : remainnum;
     }
 
-    public void setRemainnum(String remainnum)
+    public void setRemainnum(Integer remainnum)
     {
         this.remainnum = remainnum;
     }
@@ -84,16 +83,6 @@ public class PurchaseInfoBean implements Parcelable
     public void setRecommend(String recommend)
     {
         this.recommend = recommend;
-    }
-
-    public String getSoldnum()
-    {
-        return soldnum;
-    }
-
-    public void setSoldnum(String soldnum)
-    {
-        this.soldnum = soldnum;
     }
 
     public String getType()
@@ -146,25 +135,6 @@ public class PurchaseInfoBean implements Parcelable
         this.peopleid = peopleid;
     }
 
-    public String getStarttime()
-    {
-        return starttime;
-    }
-
-    public void setStarttime(String starttime)
-    {
-        this.starttime = starttime;
-    }
-
-    public String getEndtime()
-    {
-        return endtime;
-    }
-
-    public void setEndtime(String endtime)
-    {
-        this.endtime = endtime;
-    }
 
     @Override
     public int describeContents()
@@ -175,20 +145,17 @@ public class PurchaseInfoBean implements Parcelable
     @Override
     public void writeToParcel(Parcel dest, int flags)
     {
-        dest.writeString(this.purchase_ID);
         dest.writeValue(this.limitseconds);
-        dest.writeString(this.remainnum);
+        dest.writeString(this.purchase_ID);
+        dest.writeValue(this.remainnum);
         dest.writeString(this.peoplename);
         dest.writeString(this.peopleimg);
         dest.writeString(this.recommend);
-        dest.writeString(this.soldnum);
         dest.writeString(this.type);
         dest.writeString(this.price);
         dest.writeString(this.zjm);
         dest.writeString(this.amount);
         dest.writeString(this.peopleid);
-        dest.writeString(this.starttime);
-        dest.writeString(this.endtime);
     }
 
     public PurchaseInfoBean()
@@ -197,20 +164,17 @@ public class PurchaseInfoBean implements Parcelable
 
     protected PurchaseInfoBean(Parcel in)
     {
-        this.purchase_ID = in.readString();
         this.limitseconds = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.remainnum = in.readString();
+        this.purchase_ID = in.readString();
+        this.remainnum = (Integer) in.readValue(Integer.class.getClassLoader());
         this.peoplename = in.readString();
         this.peopleimg = in.readString();
         this.recommend = in.readString();
-        this.soldnum = in.readString();
         this.type = in.readString();
         this.price = in.readString();
         this.zjm = in.readString();
         this.amount = in.readString();
         this.peopleid = in.readString();
-        this.starttime = in.readString();
-        this.endtime = in.readString();
     }
 
     public static final Parcelable.Creator<PurchaseInfoBean> CREATOR = new Parcelable.Creator<PurchaseInfoBean>()

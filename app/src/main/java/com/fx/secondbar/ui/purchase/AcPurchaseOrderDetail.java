@@ -1,5 +1,6 @@
 package com.fx.secondbar.ui.purchase;
 
+import android.graphics.Color;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -27,6 +28,7 @@ public class AcPurchaseOrderDetail extends ActivitySupport
     private TextView tv_pay_price;
     private TextView tv_order_num;
     private TextView tv_order_time;
+    private TextView tv_success_seconds;    //申购成功秒数
 
     @Override
     protected int getLayoutResId()
@@ -45,6 +47,7 @@ public class AcPurchaseOrderDetail extends ActivitySupport
         tv_pay_price = findView(R.id.tv_pay_price);
         tv_order_num = findView(R.id.tv_order_num);
         tv_order_time = findView(R.id.tv_order_time);
+        tv_success_seconds = findView(R.id.tv_success_seconds);
         findView(R.id.ib_back).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -77,10 +80,23 @@ public class AcPurchaseOrderDetail extends ActivitySupport
             {
                 name += "(" + myPurchaseBean.getZjm() + ")";
             }
+            //1申购中，2申购成功
+            if (1 == myPurchaseBean.getStatus())
+            {
+                VerificationUtil.setViewValue(tv_status, "申购中");
+                tv_success_seconds.setVisibility(View.GONE);
+                VerificationUtil.setViewValue(tv_pay_price, String.format(getString(R.string.order_detail_order_pay_price), VerificationUtil.verifyDefault(myPurchaseBean.getTotalmoney(), "0")));
+            } else
+            {
+                VerificationUtil.setViewValue(tv_status, "申购成功");
+                tv_success_seconds.setVisibility(View.VISIBLE);
+                VerificationUtil.setViewValue(tv_pay_price, String.format(getString(R.string.order_detail_order_pay_price), VerificationUtil.verifyDefault(myPurchaseBean.getSuccessmoney(), "0")));
+            }
             VerificationUtil.setViewValue(tv_person_name, String.format(getString(R.string.order_detail_person_name), name));
             VerificationUtil.setViewValue(tv_mondy, String.format(getString(R.string.order_detail_order_money), VerificationUtil.verifyDefault(price, "0")));
             VerificationUtil.setViewValue(tv_seconds, String.format(getString(R.string.order_detail_order_seconds), VerificationUtil.verifyDefault(myPurchaseBean.getAmount(), "0")));
-            VerificationUtil.setViewValue(tv_pay_price, String.format(getString(R.string.order_detail_order_pay_price), VerificationUtil.verifyDefault(myPurchaseBean.getTotalmoney(), "0")));
+            VerificationUtil.setViewValue(tv_success_seconds, String.format(getString(R.string.order_detail_order_success_seconds), VerificationUtil.verifyDefault(myPurchaseBean.getSuccessnum(), "0")));
+//            VerificationUtil.setViewValue(tv_pay_price, String.format(getString(R.string.order_detail_order_pay_price), VerificationUtil.verifyDefault(myPurchaseBean.getTotalmoney(), "0")));
             VerificationUtil.setViewValue(tv_order_time, String.format(getString(R.string.order_detail_order_time), VerificationUtil.verifyDefault(myPurchaseBean.getCreatetime(), "0")));
 
         }

@@ -213,6 +213,10 @@ public class FragmentInformationItem extends FragmentViewPagerBase implements Sw
     {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_time_head, recyclerView, false);
         RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
+        if (params == null)
+        {
+            params = new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
+        }
         //宽高比为25:12
         params.height = DisplayUtil.getScreenSize(getContext()).widthPixels * 12 / 25;
         view.setLayoutParams(params);

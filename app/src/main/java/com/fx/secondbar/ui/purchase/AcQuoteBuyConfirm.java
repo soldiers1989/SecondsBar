@@ -48,6 +48,8 @@ public class AcQuoteBuyConfirm extends ActivitySupport
     private String purchaseId;
 
     private ProgressDialog dialog;
+    //最小购买数量
+    private int minCount = 0;
 
     @Override
     protected int getLayoutResId()
@@ -93,6 +95,12 @@ public class AcQuoteBuyConfirm extends ActivitySupport
                 try
                 {
                     int seconds = Integer.parseInt(s.toString());
+                    if (seconds < minCount)
+                    {
+                        s.clear();
+                        s.append(String.valueOf(minCount));
+                        ShowToast.showToast("最小申购" + minCount + "秒");
+                    }
                     double pay = price * seconds;
                     VerificationUtil.setViewValue(tv_pay, String.format(getString(R.string.mall_detail_info_price), String.valueOf(pay)));
                 } catch (NumberFormatException e)
@@ -125,6 +133,7 @@ public class AcQuoteBuyConfirm extends ActivitySupport
             VerificationUtil.setViewValue(tv_available_tips, String.format(getString(R.string.purchase_confirm_buy_available_tips), String.valueOf(bean.getLimitseconds())));
             ed_input.setText(String.valueOf(bean.getLimitseconds()));
             purchaseId = bean.getPurchase_ID();
+            minCount = bean.getRemainnum();
             try
             {
                 price = Double.parseDouble(bean.getPrice());

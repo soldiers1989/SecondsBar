@@ -17,6 +17,7 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.DateBean;
 import com.fx.secondbar.util.GlideLoad;
+import com.fx.secondbar.util.PhoneShowUtil;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -58,7 +59,7 @@ public class AdDateTa extends BaseQuickAdapter<DateBean, BaseViewHolder>
         content.setLayoutParams(params);
 
         VerificationUtil.setViewValue(tv_name, item.getNickname());
-        VerificationUtil.setViewValue(tv_account, "秒吧号：" + VerificationUtil.verifyDefault(item.getAccount(), ""));
+        VerificationUtil.setViewValue(tv_account, "秒吧号：" + VerificationUtil.verifyDefault(PhoneShowUtil.handlerPhoneStr(item.getAccount()), ""));
         VerificationUtil.setViewValue(tv_des, item.getName());
         VerificationUtil.setViewValue(tv_price, "￥" + VerificationUtil.verifyDefault(item.getPrice(), "0"));
         GlideLoad.loadCicle(img_avatar, item.getImg(), R.mipmap.default_avatar, R.mipmap.default_avatar);

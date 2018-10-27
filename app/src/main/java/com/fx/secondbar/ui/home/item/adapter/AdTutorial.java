@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.btten.bttenlibrary.application.BtApplication;
-import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -47,6 +46,10 @@ public class AdTutorial extends BaseQuickAdapter<TurialBean, BaseViewHolder>
         int width = DisplayUtil.getScreenSize(BtApplication.getApplication()).widthPixels;
         width -= (BtApplication.getApplication().getResources().getDimensionPixelSize(R.dimen.home_tutorial_plr) * 2);
         RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) img.getLayoutParams();
+        if (params == null)
+        {
+            params = new RecyclerView.LayoutParams(RecyclerView.LayoutParams.WRAP_CONTENT, RecyclerView.LayoutParams.WRAP_CONTENT);
+        }
         if (params.width != width)
         {
             params.width = width;

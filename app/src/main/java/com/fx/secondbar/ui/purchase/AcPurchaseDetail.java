@@ -42,6 +42,8 @@ public class AcPurchaseDetail extends ActivitySupport
     //名人图片
     private String personPicture;
 
+    private PurchaseInfoBean purchaseInfoBean;
+
     @Override
     protected int getLayoutResId()
     {
@@ -105,7 +107,7 @@ public class AcPurchaseDetail extends ActivitySupport
                 break;
             case R.id.btn_buy:
                 Bundle bundle = new Bundle();
-                bundle.putParcelable(KEY, getIntent().getParcelableExtra(KEY));
+                bundle.putParcelable(KEY, purchaseInfoBean);
                 jump(AcQuoteBuyConfirm.class, bundle, false);
                 break;
         }
@@ -171,6 +173,7 @@ public class AcPurchaseDetail extends ActivitySupport
                 {
                     VerificationUtil.setViewValue(tv_person_name, purchaseInfoBean.getPeoplename() + "(" + purchaseInfoBean.getZjm() + ")");
                 }
+                this.purchaseInfoBean = purchaseInfoBean;
             }
 
             PersonBean personBean = bean.getPeopleVO();

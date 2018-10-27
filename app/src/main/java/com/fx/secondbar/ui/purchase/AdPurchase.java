@@ -33,21 +33,27 @@ public class AdPurchase extends BaseQuickAdapter<MyPurchaseBean, BaseViewHolder>
         TextView tv_seconds = helper.getView(R.id.tv_seconds);
         TextView tv_status = helper.getView(R.id.tv_status);
         calItemSize(tv_name, tv_price, tv_seconds, tv_status);
-        if (helper.getLayoutPosition() % 2 == 0)
-        {
-            tv_status.setTextColor(Color.parseColor("#03c086"));
-        } else
-        {
-            tv_status.setTextColor(Color.parseColor("#e76e43"));
-        }
+
         String name = item.getPeoplename();
         if (!TextUtils.isEmpty(item.getZjm()))
         {
             name += "(" + item.getZjm() + ")";
         }
         VerificationUtil.setViewValue(tv_name, name);
-        VerificationUtil.setViewValue(tv_seconds, item.getAmount());
-//        VerificationUtil.setViewValue(tv_status, item.getStatusname());
+
+        //1申购中，2申购成功
+        if (1 == item.getStatus())
+        {
+            VerificationUtil.setViewValue(tv_status, "申购中");
+            tv_status.setTextColor(Color.parseColor("#03c086"));
+            VerificationUtil.setViewValue(tv_seconds, item.getAmount());
+        } else
+        {
+            VerificationUtil.setViewValue(tv_status, "申购成功");
+            tv_status.setTextColor(Color.parseColor("#e76e43"));
+            //申购成功秒数
+            VerificationUtil.setViewValue(tv_seconds, item.getSuccessnum());
+        }
         setCommodityMoney(tv_price, item.getPrice());
     }
 

@@ -55,6 +55,7 @@ import com.fx.secondbar.ui.purchase.AcMyPurchase;
 import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideLoad;
 import com.fx.secondbar.util.LevelUtils;
+import com.fx.secondbar.util.PhoneShowUtil;
 import com.joooonho.SelectableRoundedImageView;
 
 import rx.Subscriber;
@@ -246,7 +247,7 @@ public class FragmentPerson extends FragmentSupport implements SwipeRefreshLayou
         {
             if (tv_account != null)
             {
-                tv_account.setText(FxApplication.getInstance().getUserInfoBean().getAccount());
+                tv_account.setText(PhoneShowUtil.handlerPhoneStr(FxApplication.getInstance().getUserInfoBean().getAccount()));
                 tv_account.setTextColor(Color.WHITE);
             }
         }

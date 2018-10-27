@@ -19,6 +19,9 @@ public class MyPurchaseBean implements Parcelable
     private String totalmoney;//总金额
     private String peopleimg;//头像地址
     private String peoplename;//名人姓名
+    private Integer status; //1申购中，2申购成功
+    private String successnum;  //申购成功秒数
+    private String successmoney; //申购成功总金额
 
     public String getCreatetime()
     {
@@ -110,6 +113,35 @@ public class MyPurchaseBean implements Parcelable
         this.peoplename = peoplename;
     }
 
+    public Integer getStatus()
+    {
+        return status == null ? 1 : status;
+    }
+
+    public void setStatus(Integer status)
+    {
+        this.status = status;
+    }
+
+    public String getSuccessnum()
+    {
+        return successnum;
+    }
+
+    public void setSuccessnum(String successnum)
+    {
+        this.successnum = successnum;
+    }
+
+    public String getSuccessmoney()
+    {
+        return successmoney;
+    }
+
+    public void setSuccessmoney(String successmoney)
+    {
+        this.successmoney = successmoney;
+    }
 
     @Override
     public int describeContents()
@@ -129,6 +161,9 @@ public class MyPurchaseBean implements Parcelable
         dest.writeString(this.totalmoney);
         dest.writeString(this.peopleimg);
         dest.writeString(this.peoplename);
+        dest.writeValue(this.status);
+        dest.writeString(this.successnum);
+        dest.writeString(this.successmoney);
     }
 
     public MyPurchaseBean()
@@ -146,9 +181,12 @@ public class MyPurchaseBean implements Parcelable
         this.totalmoney = in.readString();
         this.peopleimg = in.readString();
         this.peoplename = in.readString();
+        this.status = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.successnum = in.readString();
+        this.successmoney = in.readString();
     }
 
-    public static final Creator<MyPurchaseBean> CREATOR = new Creator<MyPurchaseBean>()
+    public static final Parcelable.Creator<MyPurchaseBean> CREATOR = new Parcelable.Creator<MyPurchaseBean>()
     {
         @Override
         public MyPurchaseBean createFromParcel(Parcel source)
