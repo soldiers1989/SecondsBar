@@ -39,6 +39,7 @@ public class AcQuoteBuyConfirm extends ActivitySupport
     private TextView tv_available_tips;
     private EditText ed_input;
     private TextView tv_pay;
+    private TextView tv_total;
 
     //单价
     private double price;
@@ -66,6 +67,7 @@ public class AcQuoteBuyConfirm extends ActivitySupport
         tv_available_tips = findView(R.id.tv_available_tips);
         ed_input = findView(R.id.ed_input);
         tv_pay = findView(R.id.tv_pay);
+        tv_total = findView(R.id.tv_total);
         findView(R.id.ib_back).setOnClickListener(this);
         findView(R.id.btn_buy).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
@@ -95,15 +97,21 @@ public class AcQuoteBuyConfirm extends ActivitySupport
                 try
                 {
                     int seconds = Integer.parseInt(s.toString());
-                    if (seconds < minCount)
+                    if (seconds * 1000 < minCount)
                     {
                         s.clear();
-                        s.append(String.valueOf(minCount));
+                        s.append(String.valueOf(minCount / 1000));
                         ShowToast.showToast("最小申购" + minCount + "秒");
                     }
-                    double pay = price * seconds;
+                    if (seconds * 1000 > limitSeconds)
+                    {
+                        s.clear();
+                        s.append(String.valueOf(limitSeconds / 1000));
+                        ShowToast.showToast("当前最多可申购" + limitSeconds + "秒");
+                    }
+                    double pay = price * seconds * 1000;
                     VerificationUtil.setViewValue(tv_pay, String.format(getString(R.string.mall_detail_info_price), String.valueOf(pay)));
-                } catch (NumberFormatException e)
+                } catch (Exception e)
                 {
                     e.printStackTrace();
                 }
@@ -131,15 +139,16 @@ public class AcQuoteBuyConfirm extends ActivitySupport
             VerificationUtil.setViewValue(tv_name, bean.getPeoplename());
             VerificationUtil.setViewValue(tv_price, String.format(getString(R.string.purchase_money_text), VerificationUtil.verifyDefault(bean.getPrice(), "0")));
             VerificationUtil.setViewValue(tv_available_tips, String.format(getString(R.string.purchase_confirm_buy_available_tips), String.valueOf(bean.getLimitseconds())));
-            ed_input.setText(String.valueOf(bean.getLimitseconds()));
+            VerificationUtil.setViewValue(tv_total, VerificationUtil.verifyDefault(bean.getAmount(), "0") + "秒");
+//            ed_input.setText(String.valueOf(bean.getLimitseconds()));
             purchaseId = bean.getPurchase_ID();
             minCount = bean.getRemainnum();
             try
             {
                 price = Double.parseDouble(bean.getPrice());
                 limitSeconds = bean.getLimitseconds();
-                double pay = price * limitSeconds;
-                VerificationUtil.setViewValue(tv_pay, String.format(getString(R.string.mall_detail_info_price), String.valueOf(pay)));
+//                double pay = price * limitSeconds;
+//                VerificationUtil.setViewValue(tv_pay, String.format(getString(R.string.mall_detail_info_price), String.valueOf(pay)));
             } catch (NumberFormatException e)
             {
                 e.printStackTrace();

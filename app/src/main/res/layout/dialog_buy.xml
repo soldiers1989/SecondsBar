@@ -143,11 +143,12 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/v_time">
 
+        <!--@drawable/dialog_mall_buy_protocol-->
         <TextView
             android:id="@+id/tv_protocol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/dialog_mall_buy_protocol"
+            android:drawableLeft="@drawable/recharge_pay_method_mark"
             android:drawablePadding="@dimen/dialog_mall_buy_protocol_dp"
             android:gravity="center_vertical"
             android:text="@string/dialog_mall_buy_protocol_tips"
