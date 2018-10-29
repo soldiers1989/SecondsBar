@@ -61,7 +61,13 @@ public class AdDateTa extends BaseQuickAdapter<DateBean, BaseViewHolder>
         VerificationUtil.setViewValue(tv_name, item.getNickname());
         VerificationUtil.setViewValue(tv_account, "秒吧号：" + VerificationUtil.verifyDefault(PhoneShowUtil.handlerPhoneStr(item.getAccount()), ""));
         VerificationUtil.setViewValue(tv_des, item.getName());
-        VerificationUtil.setViewValue(tv_price, "￥" + VerificationUtil.verifyDefault(item.getPrice(), "0"));
+        if (0 == item.getPaytype())
+        {
+            VerificationUtil.setViewValue(tv_price, "￥" + VerificationUtil.verifyDefault(item.getPrice(), "0"));
+        } else
+        {
+            VerificationUtil.setViewValue(tv_price, VerificationUtil.verifyDefault(item.getQcoin(), "0") + "Q");
+        }
         GlideLoad.loadCicle(img_avatar, item.getImg(), R.mipmap.default_avatar, R.mipmap.default_avatar);
         GlideLoad.loadRound(img, item.getImage(), R.drawable.ic_default_adimage, R.drawable.ic_default_adimage, DensityUtil.dip2px(img.getContext(), 5));
         if (tv_location != null)

@@ -143,8 +143,8 @@
             android:layout_marginBottom="12dip"
             android:gravity="bottom"
             android:orientation="horizontal"
-            android:paddingLeft="5dip"
-            android:paddingRight="3dip"
+            android:paddingLeft="3dip"
+            android:paddingRight="1dip"
             app:layout_constraintBottom_toBottomOf="@+id/v_assets"
             app:layout_constraintEnd_toStartOf="@+id/ll_q"
             app:layout_constraintStart_toStartOf="@+id/v_assets">
@@ -156,14 +156,18 @@
                 android:textColor="@android:color/white"
                 android:textSize="12sp"/>
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_ste_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:singleLine="true"
                 android:text="0.00"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                app:autoSizeMaxTextSize="16sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeTextType="uniform"/>
         </LinearLayout>
 
         <LinearLayout
@@ -173,8 +177,8 @@
             android:layout_marginBottom="12dip"
             android:gravity="bottom|right"
             android:orientation="horizontal"
-            android:paddingLeft="3dip"
-            android:paddingRight="5dip"
+            android:paddingLeft="1dip"
+            android:paddingRight="3dip"
             app:layout_constraintBottom_toBottomOf="@+id/v_assets"
             app:layout_constraintEnd_toEndOf="@+id/v_assets"
             app:layout_constraintStart_toEndOf="@+id/ll_assets">
@@ -182,18 +186,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Q："
+                android:text="Q:"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"/>
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_q_value"
-                android:layout_width="wrap_content"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:maxLines="1"
                 android:text="0.00"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                app:autoSizeMaxTextSize="16sp"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"/>
         </LinearLayout>
 
         <TextView

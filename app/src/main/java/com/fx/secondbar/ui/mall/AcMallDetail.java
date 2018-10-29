@@ -186,7 +186,13 @@ public class AcMallDetail extends ActivitySupport
             VerificationUtil.setViewValue(tv_title, bean.getName());
             VerificationUtil.setViewValue(tv_time, String.format(getString(R.string.mall_detail_info_time), VerificationUtil.verifyDefault(bean.getTimelength(), "0")));
             VerificationUtil.setViewValue(tv_place, String.format(getString(R.string.mall_detail_info_place), VerificationUtil.verifyDefault(bean.getAddress(), "等待客服通知")));
-            VerificationUtil.setViewValue(tv_price, String.format(getString(R.string.mall_detail_info_price), VerificationUtil.verifyDefault(bean.getPrice(), "0")));
+            if (0 == bean.getPaytype())
+            {
+                VerificationUtil.setViewValue(tv_price, String.format(getString(R.string.mall_detail_info_price), VerificationUtil.verifyDefault(bean.getPrice(), "0")));
+            } else
+            {
+                VerificationUtil.setViewValue(tv_price, String.format(getString(R.string.mall_detail_info_q_price), VerificationUtil.verifyDefault(bean.getQcoin(), "0")));
+            }
             VerificationUtil.setViewValue(tv_start_time, String.format(getString(R.string.mall_detail_info_start_time), VerificationUtil.verifyDefault(bean.getDatetime(), "")));
             if (tv_intro != null)
             {

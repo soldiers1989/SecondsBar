@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -24,6 +25,7 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.btten.bttenlibrary.base.FragmentSupport;
+import com.btten.bttenlibrary.util.Arithmetic;
 import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.ShowToast;
@@ -77,8 +79,8 @@ public class FragmentPerson extends FragmentSupport implements SwipeRefreshLayou
     private SelectableRoundedImageView img_avatar;
     private TextView tv_name;
     private TextView tv_account;
-    private TextView tv_ste_value;
-    private TextView tv_q_value;
+    private AppCompatTextView tv_ste_value;
+    private AppCompatTextView tv_q_value;
     private TextView tv_today_q_value;
     private TextView tv_level;
 
@@ -252,7 +254,7 @@ public class FragmentPerson extends FragmentSupport implements SwipeRefreshLayou
             }
         }
         VerificationUtil.setViewValue(tv_ste_value, FxApplication.getInstance().getUserInfoBean().getBalance().toString());
-        VerificationUtil.setViewValue(tv_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
+        VerificationUtil.setViewValue(tv_q_value, Arithmetic.doubleToStr(FxApplication.getInstance().getUserInfoBean().getQcoin()));
         VerificationUtil.setViewValue(tv_today_q_value, FxApplication.getInstance().getUserInfoBean().getTodayqcoin().toString());
         VerificationUtil.setViewValue(tv_level, "LV" + FxApplication.getInstance().getUserInfoBean().getLevel() + " " + FxApplication.getInstance().getUserInfoBean().getLevelname());
         tv_level.setBackgroundResource(LevelUtils.getLevelIcons(FxApplication.getInstance().getUserInfoBean().getLevel()));

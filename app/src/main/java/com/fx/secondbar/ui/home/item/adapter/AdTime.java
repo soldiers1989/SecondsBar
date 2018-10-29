@@ -218,14 +218,20 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
 //            GlideApp.with(img).asBitmap().load(item.commodityBean.getImg()).centerCrop().into(img);
             GlideLoad.load(img, item.commodityBean.getImage(), true);
             VerificationUtil.setViewValue(tv_title, item.commodityBean.getName());
-            setCommodityMoney(tv_price, item.commodityBean.getPrice());
+            if (0 == item.getCommodityBean().getPaytype())
+            {
+                setCommodityMoney(tv_price, item.commodityBean.getPrice(), false);
+            } else
+            {
+                setCommodityMoney(tv_price, item.commodityBean.getQcoin(), true);
+            }
             setCommodityPlace(tv_place, item.commodityBean.getAddress());
             setCommodityTime(tv_time, item.commodityBean.getTimelength());
         } else
         {
             GlideApp.with(img).asBitmap().load(0).centerCrop().into(img);
             VerificationUtil.setViewValue(tv_title, "");
-            setCommodityMoney(tv_price, "");
+            setCommodityMoney(tv_price, "", false);
             setCommodityPlace(tv_place, "");
             setCommodityTime(tv_time, "");
         }
@@ -237,11 +243,18 @@ public class AdTime extends BaseMultiItemQuickAdapter<AdTime.TimeEntity, BaseVie
      * @param tv
      * @param price
      */
-    private void setCommodityMoney(TextView tv, String price)
+    private void setCommodityMoney(TextView tv, String price, boolean isQ)
     {
         if (tv != null)
         {
-            String money = tv.getContext().getString(R.string.mall_detail_info_price);
+            String money = null;
+            if (isQ)
+            {
+                money = tv.getContext().getString(R.string.mall_detail_info_q_price);
+            } else
+            {
+                money = tv.getContext().getString(R.string.mall_detail_info_price);
+            }
             tv.setText(String.format(money, VerificationUtil.verifyDefault(price, "0")));
         }
     }

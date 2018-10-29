@@ -3,7 +3,6 @@ package com.fx.secondbar.ui.mall;
 import android.support.v7.widget.AppCompatTextView;
 import android.widget.TextView;
 
-import com.btten.bttenlibrary.glide.GlideApp;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -33,7 +32,16 @@ public class AdMall extends BaseQuickAdapter<CommodityBean, BaseViewHolder>
         TextView tv_title = helper.getView(R.id.tv_title);
 
         GlideLoad.load(img, item.getImage(), true);
-        VerificationUtil.setViewValue(tv_price, String.format(tv_price.getContext().getString(R.string.mall_detail_info_price), item.getPrice()));
+        String money = null;
+        //表示人民币
+        if (0 == item.getPaytype())
+        {
+            money = String.format(tv_price.getContext().getString(R.string.mall_detail_info_price), item.getPrice());
+        } else
+        {
+            money = String.format(tv_price.getContext().getString(R.string.mall_detail_info_q_price), item.getQcoin());
+        }
+        VerificationUtil.setViewValue(tv_price, money);
         VerificationUtil.setViewValue(tv_title, item.getName());
 
     }

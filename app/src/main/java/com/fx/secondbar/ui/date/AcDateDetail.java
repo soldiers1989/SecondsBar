@@ -2,7 +2,6 @@ package com.fx.secondbar.ui.date;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -146,7 +145,15 @@ public class AcDateDetail extends ActivitySupport
             VerificationUtil.setViewValue(tv_time, dateBean.getDatetime());
             VerificationUtil.setViewValue(tv_timelength, "时长" + dateBean.getTimelength());
             GlideLoad.loadCicle(img_avatar, dateBean.getImg(), R.mipmap.default_avatar, R.mipmap.default_avatar);
-            String buyBtn = String.format(getString(R.string.date_detail_buy_tips), VerificationUtil.verifyDefault(dateBean.getPrice(), "0"));
+
+            String buyBtn = null;
+            if (0 == dateBean.getPaytype())
+            {
+                buyBtn = String.format(getString(R.string.date_detail_buy_tips), VerificationUtil.verifyDefault(dateBean.getPrice(), "0"));
+            } else
+            {
+                buyBtn = String.format(getString(R.string.date_detail_q_buy_tips), VerificationUtil.verifyDefault(dateBean.getQcoin(), "0"));
+            }
             if (btn_buy != null)
             {
                 btn_buy.setText(buyBtn);
@@ -154,13 +161,17 @@ public class AcDateDetail extends ActivitySupport
 
             if (tv_content != null)
             {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                {
-                    tv_content.setText(Html.fromHtml(VerificationUtil.verifyDefault(dateBean.getContent(), ""), Html.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH | Html.FROM_HTML_SEPARATOR_LINE_BREAK_HEADING | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST_ITEM | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST | Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV | Html.FROM_HTML_SEPARATOR_LINE_BREAK_BLOCKQUOTE | Html.FROM_HTML_OPTION_USE_CSS_COLORS, new AcMallDetail.CustomImageGetter(tv_content), null));
-                } else
-                {
-                    tv_content.setText(Html.fromHtml(VerificationUtil.verifyDefault(dateBean.getContent(), ""), new AcMallDetail.CustomImageGetter(tv_content), null));
-                }
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+//                {
+//                    tv_content.setText(Html.fromHtml(VerificationUtil.verifyDefault(dateBean.getContent(), ""), Html.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH | Html.FROM_HTML_SEPARATOR_LINE_BREAK_HEADING | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST_ITEM | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST | Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV | Html.FROM_HTML_SEPARATOR_LINE_BREAK_BLOCKQUOTE | Html.FROM_HTML_OPTION_USE_CSS_COLORS, new AcMallDetail.CustomImageGetter(tv_content), null));
+//                } else
+//                {
+//                    tv_content.setText(Html.fromHtml(VerificationUtil.verifyDefault(dateBean.getContent(), ""), new AcMallDetail.CustomImageGetter(tv_content), null));
+//                }
+                String text = VerificationUtil.verifyDefault(dateBean.getContent(), "");
+                text = text.replaceAll("<span", "<_span");
+                text = text.replaceAll("</span", "</_span");
+                tv_content.setText(Html.fromHtml(VerificationUtil.verifyDefault(dateBean.getContent(), ""), new AcMallDetail.CustomImageGetter(tv_content), new AcMallDetail.CustomerTagHandler()));
             }
 
             if (tv_notice != null)

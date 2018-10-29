@@ -136,6 +136,7 @@
     <string name="today_income_intro">1.阅读新闻每60秒，可获得1Q的奖励。\n2.看新闻赚Q有严格的防作弊机制，发现异常操作，系统将自动封停帐号！</string>
 
     <string name="date_detail_buy_tips">￥%s 购买</string>
+    <string name="date_detail_q_buy_tips">%sQ 购买</string>
     <string name="date_detail_person_count">人数：%s人</string>
     <string name="date_buy_notify">
         1.行程一经购买，如无特殊情况，暂不支持退款。

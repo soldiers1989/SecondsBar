@@ -21,6 +21,7 @@ public class CommodityBean
     private String image;//图片地址
     private String merchandise_ID;//商品id
     private String datetime;    //开始日期
+    private Integer paytype;    //支付类型，1：Q支付，0：人民币支付
 
     public String getName()
     {
@@ -160,5 +161,15 @@ public class CommodityBean
     public void setDatetime(String datetime)
     {
         this.datetime = datetime;
+    }
+
+    public Integer getPaytype()
+    {
+        return paytype == null ? 0 : paytype;
+    }
+
+    public void setPaytype(Integer paytype)
+    {
+        this.paytype = paytype;
     }
 }

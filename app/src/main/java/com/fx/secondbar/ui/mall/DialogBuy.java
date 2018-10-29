@@ -93,12 +93,32 @@ public class DialogBuy
             VerificationUtil.setViewValue(tv_name, commodityBean.getName());
             VerificationUtil.setViewValue(tv_time, commodityBean.getTimelength() + "分钟");
             VerificationUtil.setViewValue(tv_q_price, String.format(context.getString(R.string.mall_detail_info_q_price), VerificationUtil.verifyDefault(commodityBean.getQcoin(), "0")));
+            //人民币支付
+            if (0 == commodityBean.getPaytype())
+            {
+                tv_price.setVisibility(View.VISIBLE);
+                tv_q_price.setVisibility(View.GONE);
+            } else
+            {
+                tv_price.setVisibility(View.GONE);
+                tv_q_price.setVisibility(View.VISIBLE);
+            }
         } else if (dateBean != null)
         {
             VerificationUtil.setViewValue(tv_price, String.format(context.getString(R.string.mall_detail_info_price), dateBean.getPrice()));
             VerificationUtil.setViewValue(tv_name, dateBean.getName());
             VerificationUtil.setViewValue(tv_time, dateBean.getTimelength() + "分钟");
             VerificationUtil.setViewValue(tv_q_price, String.format(context.getString(R.string.mall_detail_info_q_price), VerificationUtil.verifyDefault(dateBean.getQcoin(), "0")));
+            //人民币支付
+            if (0 == dateBean.getPaytype())
+            {
+                tv_price.setVisibility(View.VISIBLE);
+                tv_q_price.setVisibility(View.GONE);
+            } else
+            {
+                tv_price.setVisibility(View.GONE);
+                tv_q_price.setVisibility(View.VISIBLE);
+            }
         }
 
         tv_price.setSelected(true);
