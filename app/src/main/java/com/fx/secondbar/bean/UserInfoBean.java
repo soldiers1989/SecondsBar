@@ -24,6 +24,7 @@ public class UserInfoBean implements Serializable, Cloneable
     private Double freeze;// 0.0,  //冻结金额
     private String inviter; //邀请人
     private Double todayqcoin;  //今日获得的Q
+    private Double todayqcoin_NEWS; //今日阅读收益Q
     private Integer isCheckin;  //是否签到 1表示已签到
     private Integer checkinDays;    //签到天数
     private List<QCoinBean> listQcoin; //今日收益记录
@@ -207,6 +208,16 @@ public class UserInfoBean implements Serializable, Cloneable
     public void setMemberid(String memberid)
     {
         this.memberid = memberid;
+    }
+
+    public Double getTodayqcoin_NEWS()
+    {
+        return todayqcoin_NEWS == null ? 0 : todayqcoin_NEWS;
+    }
+
+    public void setTodayqcoin_NEWS(Double todayqcoin_NEWS)
+    {
+        this.todayqcoin_NEWS = todayqcoin_NEWS;
     }
 
     @Override

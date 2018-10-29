@@ -173,4 +173,44 @@ public class GlideLoad
         }
         glideRequest.transform(new RoundedCorners(radius)).into(img);
     }
+
+    /**
+     * 加载图片 Fitcenter模式
+     *
+     * @param img
+     * @param url
+     * @param placeholder
+     * @param error
+     */
+    public static void loadFitCenter(ImageView img, String url, @DrawableRes int placeholder, @DrawableRes int error)
+    {
+        GlideRequests requests = GlideApp.with(img);
+        String loadUrl = null;
+        if (!TextUtils.isEmpty(url))
+        {
+            if (url.startsWith("http://") || url.startsWith("https://"))
+            {
+                loadUrl = url;
+            } else if (url.startsWith("//"))
+            {
+                loadUrl = "http:" + url;
+            } else
+            {
+                loadUrl = Constants.ROOT_URL + url;
+            }
+        }
+
+        GlideRequest<Drawable> glideRequest = requests.load(loadUrl);
+        if (placeholder != 0)
+        {
+            glideRequest.placeholder(placeholder);
+        }
+        if (error != 0)
+        {
+            glideRequest.error(placeholder);
+        }
+        glideRequest.fitCenter().into(img);
+    }
 }
+
+

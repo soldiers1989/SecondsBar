@@ -83,7 +83,6 @@ public class AcTransilate extends ActivitySupport
             tv_jump.setVisibility(View.VISIBLE);
         }
         tv_jump.setText(duration + "s | 跳过");
-        Bugly.init(getApplicationContext(), "642e9767d3", FxApplication.getInstance().isDebug());
         new DeviceUuidFactory(FxApplication.getInstance());
         openAppActive();
         getConfigInfo();

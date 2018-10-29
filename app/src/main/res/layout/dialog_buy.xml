@@ -147,7 +147,7 @@
         <TextView
             android:id="@+id/tv_protocol"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="24dip"
             android:drawableLeft="@drawable/recharge_pay_method_mark"
             android:drawablePadding="@dimen/dialog_mall_buy_protocol_dp"
             android:gravity="center_vertical"
@@ -158,8 +158,20 @@
         <TextView
             android:id="@+id/tv_pay_intro"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="24dip"
+            android:gravity="center_vertical"
             android:text="@string/dialog_mall_buy_protocol_content"
+            android:textColor="@color/home_tabs_mark_color"
+            android:textSize="@dimen/dialog_mall_buy_protocol"/>
+
+        <TextView
+            android:id="@+id/tv_date_rule"
+            android:layout_width="wrap_content"
+            android:layout_height="24dip"
+            android:layout_gravity="right"
+            android:layout_marginLeft="6dip"
+            android:gravity="center_vertical"
+            android:text="《约见规则》"
             android:textColor="@color/home_tabs_mark_color"
             android:textSize="@dimen/dialog_mall_buy_protocol"/>
     </LinearLayout>

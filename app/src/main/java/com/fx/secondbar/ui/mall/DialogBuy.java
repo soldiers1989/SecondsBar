@@ -77,6 +77,7 @@ public class DialogBuy
         TextView tv_name = view.findViewById(R.id.tv_name);
         TextView tv_time = view.findViewById(R.id.tv_time);
         final TextView tv_protocol = view.findViewById(R.id.tv_protocol);
+        TextView tv_date_rule = view.findViewById(R.id.tv_date_rule);
         TextView tv_pay_intro = view.findViewById(R.id.tv_pay_intro);
         Button btn_buy = view.findViewById(R.id.btn_buy);
 
@@ -119,6 +120,17 @@ public class DialogBuy
                 Intent intent = new Intent(context, AcWebBrowse.class);
                 intent.putExtra("activity_str", "秒吧支付说明协议");
                 intent.putExtra("activity_num", "http://www.feixingtech.com:8080/static/mb-front/getText.html?type=13");
+                context.startActivity(intent);
+            }
+        });
+        tv_date_rule.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(context, AcWebBrowse.class);
+                intent.putExtra("activity_str", "约见规则");
+                intent.putExtra("activity_num", "http://www.feixingtech.com:8080/static/mb-front/getText.html?type=21");
                 context.startActivity(intent);
             }
         });

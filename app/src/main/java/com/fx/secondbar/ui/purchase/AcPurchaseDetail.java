@@ -179,7 +179,7 @@ public class AcPurchaseDetail extends ActivitySupport
             PersonBean personBean = bean.getPeopleVO();
             if (personBean != null)
             {
-                GlideLoad.load(img_top, personBean.getPicture());
+                GlideLoad.loadFitCenter(img_top, personBean.getPicture(), R.drawable.ic_default_adimage, R.drawable.ic_default_adimage);
                 VerificationUtil.setViewValue(tv_person_position, String.format(getString(R.string.mall_detail_info_position), VerificationUtil.verifyDefault(personBean.getJob(), "")));
                 VerificationUtil.setViewValue(tv_person_school, String.format(getString(R.string.mall_detail_info_school), VerificationUtil.verifyDefault(personBean.getSchool(), "")));
                 VerificationUtil.setViewValue(tv_experience, personBean.getExperience());

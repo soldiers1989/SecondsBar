@@ -17,12 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!--此处图片的宽高比是30：17-->
+
             <ImageView
                 android:id="@+id/img"
                 android:layout_width="match_parent"
-                android:layout_height="100dip"
-                android:scaleType="centerCrop"/>
+                android:layout_height="wrap_content"
+                android:scaleType="center"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -104,6 +104,7 @@
                 android:paddingRight="@dimen/mall_detail_info_plr"
                 android:textColor="#2c2c2c"
                 android:textSize="13sp"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

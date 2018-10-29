@@ -107,7 +107,7 @@ public class AcQuoteBuyConfirm extends ActivitySupport
                     {
                         s.clear();
                         s.append(String.valueOf(limitSeconds / 1000));
-                        ShowToast.showToast("当前最多可申购" + limitSeconds + "秒");
+                        ShowToast.showToast(FxApplication.getInstance(), "超过限额。最大购买秒数为=（持仓市值+1万元）/上新价格,当前最多可申购" + limitSeconds + "秒", true);
                     }
                     double pay = price * seconds * 1000;
                     VerificationUtil.setViewValue(tv_pay, String.format(getString(R.string.mall_detail_info_price), String.valueOf(pay)));

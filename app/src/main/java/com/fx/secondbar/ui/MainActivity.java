@@ -31,6 +31,7 @@ import com.fx.secondbar.ui.home.FragmentPerson;
 import com.fx.secondbar.ui.home.FragmentQuotes;
 import com.fx.secondbar.ui.home.FragmentTransaction;
 import com.fx.secondbar.util.Constants;
+import com.tencent.bugly.Bugly;
 
 import rx.Subscriber;
 
@@ -138,6 +139,8 @@ public class MainActivity extends ActivitySupport
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
 
         initLocation();
+
+        Bugly.init(getApplicationContext(), "642e9767d3", FxApplication.getInstance().isDebug());
     }
 
     /**

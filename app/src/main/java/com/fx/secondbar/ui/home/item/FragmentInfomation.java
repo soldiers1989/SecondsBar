@@ -153,7 +153,7 @@ public class FragmentInfomation extends FragmentViewPagerBase
     {
         if (tv_today_q != null)
         {
-            tv_today_q.setText(VerificationUtil.verifyDefault(Arithmetic.doubleToStr(FxApplication.getInstance().getUserInfoBean().getTodayqcoin()), "0"));
+            tv_today_q.setText(VerificationUtil.verifyDefault(Arithmetic.doubleToStr(FxApplication.getInstance().getUserInfoBean().getTodayqcoin_NEWS()), "0"));
         }
     }
 

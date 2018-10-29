@@ -4,17 +4,23 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LevelListDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.BulletSpan;
+import android.text.style.TextAppearanceSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,6 +31,7 @@ import android.widget.TextView;
 import com.btten.bttenlibrary.base.ActivitySupport;
 import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.glide.GlideApp;
+import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
@@ -41,6 +48,13 @@ import com.fx.secondbar.ui.person.assets.AcRecharge;
 import com.fx.secondbar.util.Constants;
 import com.fx.secondbar.util.GlideLoad;
 import com.fx.secondbar.util.ProgressDialogUtil;
+import com.fx.secondbar.util.ScaleTransform;
+
+import org.xml.sax.XMLReader;
+
+import java.lang.reflect.Field;
+import java.util.LinkedList;
+import java.util.List;
 
 import rx.Subscriber;
 
@@ -107,8 +121,10 @@ public class AcMallDetail extends ActivitySupport
         toolbar.setBackgroundColor(Color.TRANSPARENT);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) img.getLayoutParams();
         params.width = DisplayUtil.getScreenSize(this).widthPixels;
-        //宽高比为30:17
-        params.height = params.width * 17 / 30;
+//        //宽高比为30:17
+//        params.height = params.width * 17 / 30;
+        //宽高比为1:1
+//        params.height = params.width;
         img.setLayoutParams(params);
 
         dialog = ProgressDialogUtil.getProgressDialog(this, getString(R.string.progress_tips), true);
@@ -166,7 +182,7 @@ public class AcMallDetail extends ActivitySupport
         if (bean != null)
         {
             goodsPicture = bean.getImage();
-            GlideLoad.load(img, bean.getImage());
+            GlideLoad.loadFitCenter(img, bean.getImage(), R.drawable.ic_default_adimage, R.drawable.ic_default_adimage);
             VerificationUtil.setViewValue(tv_title, bean.getName());
             VerificationUtil.setViewValue(tv_time, String.format(getString(R.string.mall_detail_info_time), VerificationUtil.verifyDefault(bean.getTimelength(), "0")));
             VerificationUtil.setViewValue(tv_place, String.format(getString(R.string.mall_detail_info_place), VerificationUtil.verifyDefault(bean.getAddress(), "等待客服通知")));
@@ -174,13 +190,18 @@ public class AcMallDetail extends ActivitySupport
             VerificationUtil.setViewValue(tv_start_time, String.format(getString(R.string.mall_detail_info_start_time), VerificationUtil.verifyDefault(bean.getDatetime(), "")));
             if (tv_intro != null)
             {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                {
-                    tv_intro.setText(Html.fromHtml(VerificationUtil.verifyDefault(bean.getContent(), ""), Html.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH | Html.FROM_HTML_SEPARATOR_LINE_BREAK_HEADING | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST_ITEM | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST | Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV | Html.FROM_HTML_SEPARATOR_LINE_BREAK_BLOCKQUOTE | Html.FROM_HTML_OPTION_USE_CSS_COLORS, new CustomImageGetter(tv_intro), null));
-                } else
-                {
-                    tv_intro.setText(Html.fromHtml(VerificationUtil.verifyDefault(bean.getContent(), ""), new CustomImageGetter(tv_intro), null));
-                }
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+//                {
+//                    tv_intro.setText(Html.fromHtml(VerificationUtil.verifyDefault(bean.getContent(), ""), Html.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH | Html.FROM_HTML_SEPARATOR_LINE_BREAK_HEADING | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST_ITEM | Html.FROM_HTML_SEPARATOR_LINE_BREAK_LIST | Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV | Html.FROM_HTML_SEPARATOR_LINE_BREAK_BLOCKQUOTE | Html.FROM_HTML_OPTION_USE_CSS_COLORS, new CustomImageGetter(tv_intro), null));
+//                } else
+//                {
+//                    tv_intro.setText(Html.fromHtml(VerificationUtil.verifyDefault(bean.getContent(), ""), new CustomImageGetter(tv_intro), null));
+//                }
+                String text = VerificationUtil.verifyDefault(bean.getContent(), "");
+                text = text.replaceAll("<span", "<_span");
+                text = text.replaceAll("</span", "</_span");
+                tv_intro.setText(Html.fromHtml(text, new CustomImageGetter(tv_intro), new CustomerTagHandler()));
+//                loadHtml(tv_intro, VerificationUtil.verifyDefault(bean.getContent(), ""));
             }
             dialogBuy = new DialogBuy(this, bean);
             dialogBuy.setOnBuyListener(new DialogBuy.OnBuyListener()
@@ -192,6 +213,105 @@ public class AcMallDetail extends ActivitySupport
                 }
             });
         }
+    }
+
+
+    /**
+     * TextView加载html文本
+     *
+     * @param tv
+     * @param html
+     */
+    private void loadHtml(TextView tv, String html)
+    {
+        if (tv == null)
+        {
+            return;
+        }
+        String text = html; // HTML text to convert
+        // Preprocessing phase to set up for HTML.fromHtml(...)
+        text = text.replaceAll("<span style=\"(?:color: (#[a-fA-F\\d]{6})?; )?(?:font-family: (.*?); )?(?:font-size: (.*?);)? ?\">(.*?)</span>",
+                "<font color=\"$1\" face=\"$2\" size=\"$3\">$4</font>");
+        text = text.replaceAll("(?<=<font color=\"#[a-fA-F0-9]{6}\" )face=\"'(.*?)', .*?\"", "face=\"$1\"");
+        text = text.replaceAll("(?<=<font color=\"#[a-fA-F0-9]{6}\" )(face=\".*?\" )size=\"xx-small\"", "$1size=\"1\"");
+        text = text.replaceAll("(?<=<font color=\"#[a-fA-F0-9]{6}\" )(face=\".*?\" )size=\"x-small\"", "$1size=\"2\"");
+        text = text.replaceAll("(?<=<font color=\"#[a-fA-F0-9]{6}\" )(face=\".*?\" )size=\"small\"", "$1size=\"3\"");
+        text = text.replaceAll("(?<=<font color=\"#[a-fA-F0-9]{6}\" )(face=\".*?\" )size=\"medium\"", "$1size=\"4\"");
+        text = text.replaceAll("(?<=<font color=\"#[a-fA-F0-9]{6}\" )(face=\".*?\" )size=\"large\"", "$1size=\"5\"");
+        text = text.replaceAll("(?<=<font color=\"#[a-fA-F0-9]{6}\" )(face=\".*?\" )size=\"x-large\"", "$1size=\"6\"");
+        text = text.replaceAll("(?<=<font color=\"#[a-fA-F0-9]{6}\" )(face=\".*?\" )size=\"xx-large\"", "$1size=\"7\"");
+        text = text.replaceAll("<strong>(.*?)</strong>", "<_em>$1</_em>");  // we use strong for bold-face
+        text = text.replaceAll("<em>(.*?)</em>", "<strong>$1</strong>");    // and em for italics
+        text = text.replaceAll("<_em>(.*?)</_em>", "<em>$1</em>");          // but Android uses em for bold-face
+        text = text.replaceAll("<span style=\"background-color: #([a-fA-F0-9]{6}).*?>(.*?)</span>", "<_$1>$2</_$1>");
+        text = text.replaceAll("null", "");
+        tv.setText(Html.fromHtml(text, new CustomImageGetter(tv), new Html.TagHandler()
+        {
+            private List<Object> _format_stack = new LinkedList<Object>();
+
+            @Override
+            public void handleTag(boolean open_tag, String tag, Editable output, XMLReader xmlReader)
+            {
+                if (tag.startsWith("ul"))
+                    processBullet(open_tag, output);
+                else if (tag.matches(".[a-fA-F0-9]{6}"))
+                    processBackgroundColor(open_tag, output, tag.substring(1));
+            }
+
+            private void processBullet(boolean open_tag, Editable output)
+            {
+                final int length = output.length();
+                if (open_tag)
+                {
+                    final Object format = new BulletSpan(BulletSpan.STANDARD_GAP_WIDTH);
+                    _format_stack.add(format);
+                    output.setSpan(format, length, length, Spanned.SPAN_MARK_MARK);
+                } else
+                {
+                    applySpan(output, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
+
+            private void processBackgroundColor(boolean open_tag, Editable output, String color)
+            {
+                final int length = output.length();
+                if (open_tag)
+                {
+                    final Object format = new BackgroundColorSpan(Color.parseColor('#' + color));
+                    _format_stack.add(format);
+                    output.setSpan(format, length, length, Spanned.SPAN_MARK_MARK);
+                } else
+                {
+                    applySpan(output, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
+
+            private Object getLast(Editable text, Class kind)
+            {
+                @SuppressWarnings("unchecked") final Object[] spans = text.getSpans(0, text.length(), kind);
+
+                if (spans.length != 0)
+                    for (int i = spans.length; i > 0; i--)
+                        if (text.getSpanFlags(spans[i - 1]) == Spannable.SPAN_MARK_MARK)
+                            return spans[i - 1];
+
+                return null;
+            }
+
+            private void applySpan(Editable output, int length, int flags)
+            {
+                if (_format_stack.isEmpty()) return;
+
+                final Object format = _format_stack.remove(0);
+                final Object span = getLast(output, format.getClass());
+                final int where = output.getSpanStart(span);
+
+                output.removeSpan(span);
+
+                if (where != length)
+                    output.setSpan(format, where, length, flags);
+            }
+        }));
     }
 
     /**
@@ -355,10 +475,12 @@ public class AcMallDetail extends ActivitySupport
     {
 
         private TextView textView;
+        private int width;
 
         public CustomImageGetter(TextView textView)
         {
             this.textView = textView;
+            this.width = DisplayUtil.getScreenSize(FxApplication.getInstance()).widthPixels - DensityUtil.dip2px(FxApplication.getInstance(), 15) * 2;
         }
 
         @Override
@@ -379,7 +501,7 @@ public class AcMallDetail extends ActivitySupport
                 }
                 //级别列表Drawable
                 final LevelListDrawable drawable = new LevelListDrawable();
-                GlideApp.with(textView.getContext()).asBitmap().load(url).into(new SimpleTarget<Bitmap>()
+                GlideApp.with(textView.getContext()).asBitmap().load(url).transform(new ScaleTransform(width)).into(new SimpleTarget<Bitmap>()
                 {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition)
@@ -407,6 +529,101 @@ public class AcMallDetail extends ActivitySupport
                 });
 
                 return drawable;
+            }
+            return null;
+        }
+    }
+
+    public static class CustomerTagHandler implements Html.TagHandler
+    {
+        int startTag;
+        int endTag;
+        int fontSize;
+
+        @Override
+        public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader)
+        {
+            try
+            {
+                if (tag.equalsIgnoreCase("_span"))
+                {
+                    if (opening)
+                    {
+                        fontSize = 13;
+                        startTag = output.length();
+                        String style = getProperty(xmlReader, "font-size");
+                        if (!TextUtils.isEmpty(style))
+                        {
+                            style = style.replace("font-size", "");
+                            style = style.replace(" ", "");
+                            style = style.replace(":", "");
+                            style = style.replace(";", "");
+                            style = style.replace("px", "");
+                            try
+                            {
+                                fontSize = Integer.parseInt(style);
+                            } catch (NumberFormatException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    } else
+                    {
+                        endTag = output.length();
+                        output.setSpan(new TextAppearanceSpan(null, Typeface.NORMAL, DensityUtil.sp2px(FxApplication.getInstance(), fontSize), null, null), startTag, endTag, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    }
+                }
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        /**
+         * 利用反射获取html标签的属性值
+         *
+         * @param xmlReader
+         * @param property
+         * @return
+         */
+        private String getProperty(XMLReader xmlReader, String property)
+        {
+            try
+            {
+                Field elementField = xmlReader.getClass().getDeclaredField("theNewElement");
+                elementField.setAccessible(true);
+                Object element = elementField.get(xmlReader);
+                Field attsField = element.getClass().getDeclaredField("theAtts");
+                attsField.setAccessible(true);
+                Object atts = attsField.get(element);
+                Field dataField = atts.getClass().getDeclaredField("data");
+                dataField.setAccessible(true);
+                String[] data = (String[]) dataField.get(atts);
+                Field lengthField = atts.getClass().getDeclaredField("length");
+                lengthField.setAccessible(true);
+                int len = (Integer) lengthField.get(atts);
+
+//                for (int i = 0; i < len; i++)
+//                {
+//                    // 这边的property换成你自己的属性名就可以了
+//                    if (property.equals(data[i * 5 + 1]))
+//                    {
+//                        return data[i * 5 + 4];
+//                    }
+//                }
+                if (data != null)
+                {
+                    for (String item : data)
+                    {
+                        if (item != null && item.contains(property))
+                        {
+                            return item;
+                        }
+                    }
+                }
+            } catch (Exception e)
+            {
+                e.printStackTrace();
             }
             return null;
         }
