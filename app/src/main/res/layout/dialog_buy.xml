@@ -26,13 +26,13 @@
         android:layout_marginLeft="@dimen/dialog_mall_buy_des_item_mlr"
         android:layout_marginTop="40dip"
         android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
-        android:drawableRight="@drawable/recharge_pay_method_mark"
         android:text=""
         android:textColor="@color/home_tabs_mark_color"
         android:textSize="@dimen/dialog_mall_buy_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_tips"/>
+    <!--android:drawableRight="@drawable/recharge_pay_method_mark"-->
 
     <TextView
         android:id="@+id/tv_q_price"
@@ -41,13 +41,14 @@
         android:layout_marginLeft="@dimen/dialog_mall_buy_des_item_mlr"
         android:layout_marginTop="24dip"
         android:layout_marginRight="@dimen/dialog_mall_buy_des_item_mlr"
-        android:drawableRight="@drawable/recharge_pay_method_mark"
         android:text=""
         android:textColor="@color/home_tabs_mark_color"
         android:textSize="@dimen/dialog_mall_buy_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_price"/>
+
+    <!--android:drawableRight="@drawable/recharge_pay_method_mark"-->
 
     <RelativeLayout
         android:id="@+id/rl_name"

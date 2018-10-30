@@ -98,10 +98,14 @@ public class DialogBuy
             {
                 tv_price.setVisibility(View.VISIBLE);
                 tv_q_price.setVisibility(View.GONE);
+                tv_price.setSelected(true);
+                tv_q_price.setSelected(false);
             } else
             {
                 tv_price.setVisibility(View.GONE);
                 tv_q_price.setVisibility(View.VISIBLE);
+                tv_price.setSelected(false);
+                tv_q_price.setSelected(true);
             }
         } else if (dateBean != null)
         {
@@ -114,14 +118,18 @@ public class DialogBuy
             {
                 tv_price.setVisibility(View.VISIBLE);
                 tv_q_price.setVisibility(View.GONE);
+                tv_price.setSelected(true);
+                tv_q_price.setSelected(false);
             } else
             {
                 tv_price.setVisibility(View.GONE);
                 tv_q_price.setVisibility(View.VISIBLE);
+                tv_price.setSelected(false);
+                tv_q_price.setSelected(true);
             }
         }
 
-        tv_price.setSelected(true);
+//        tv_price.setSelected(true);
 
         tv_protocol.setOnClickListener(new View.OnClickListener()
         {
@@ -154,24 +162,24 @@ public class DialogBuy
                 context.startActivity(intent);
             }
         });
-        tv_price.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                tv_q_price.setSelected(false);
-                tv_price.setSelected(true);
-            }
-        });
-        tv_q_price.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                tv_q_price.setSelected(true);
-                tv_price.setSelected(false);
-            }
-        });
+//        tv_price.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                tv_q_price.setSelected(false);
+//                tv_price.setSelected(true);
+//            }
+//        });
+//        tv_q_price.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                tv_q_price.setSelected(true);
+//                tv_price.setSelected(false);
+//            }
+//        });
         btn_buy.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -186,10 +194,12 @@ public class DialogBuy
                 {
                     if (commodityBean != null)
                     {
-                        onBuyListener.onBuy(commodityBean.getMerchandise_ID(), tv_price.isSelected());
+//                        onBuyListener.onBuy(commodityBean.getMerchandise_ID(), tv_price.isSelected());
+                        onBuyListener.onBuy(commodityBean.getMerchandise_ID(), 0 == commodityBean.getPaytype());
                     } else if (dateBean != null)
                     {
-                        onBuyListener.onBuy(dateBean.getStroke_ID(), tv_price.isSelected());
+//                        onBuyListener.onBuy(dateBean.getStroke_ID(), tv_price.isSelected());
+                        onBuyListener.onBuy(dateBean.getStroke_ID(), 0 == dateBean.getPaytype());
                     }
                 }
             }
