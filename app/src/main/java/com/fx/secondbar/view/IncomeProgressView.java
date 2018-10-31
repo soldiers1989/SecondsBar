@@ -14,6 +14,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 
 import com.btten.bttenlibrary.util.DensityUtil;
+import com.btten.bttenlibrary.util.LogUtil;
 import com.fx.secondbar.application.FxApplication;
 
 import java.util.concurrent.ExecutorService;
@@ -67,9 +68,9 @@ public class IncomeProgressView extends View
     private int textPosX = 0;
 
     //动画相关,该值表示百分比
-    private int mPercent = 0;
+    private volatile int mPercent = 0;
     //步长
-    private int step = maxProgress / 300;
+    private int step = maxProgress / 98;
 
     //是否销毁
     private boolean isDestroy = false;
@@ -148,6 +149,7 @@ public class IncomeProgressView extends View
                             mPercent = 0;
                         }
                         mPercent++;
+                        LogUtil.e("percent", "Percent=" + mPercent);
                         postInvalidate();
                         try
                         {
