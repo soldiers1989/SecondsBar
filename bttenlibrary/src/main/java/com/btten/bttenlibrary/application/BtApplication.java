@@ -2,10 +2,15 @@ package com.btten.bttenlibrary.application;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Environment;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.btten.bttenlibrary.base.config.ABaseConfig;
@@ -92,6 +97,34 @@ public abstract class BtApplication extends Application
      * 标识是正式版还是测试版
      */
     protected abstract void setDebug();
+
+    /**
+     * 重写Resource,配置字体不跟随系统变化
+     *
+     * @return
+     */
+    @Override
+    public Resources getResources()
+    {
+        Resources resources = super.getResources();
+        Configuration newConfig = resources.getConfiguration();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+
+        if (resources != null && newConfig.fontScale != 1)
+        {
+            newConfig.fontScale = 1;
+            if (Build.VERSION.SDK_INT >= 17)
+            {
+                Context configurationContext = createConfigurationContext(newConfig);
+                resources = configurationContext.getResources();
+                displayMetrics.scaledDensity = displayMetrics.density * newConfig.fontScale;
+            } else
+            {
+                resources.updateConfiguration(newConfig, displayMetrics);
+            }
+        }
+        return resources;
+    }
 
     /**
      * 添加Activity

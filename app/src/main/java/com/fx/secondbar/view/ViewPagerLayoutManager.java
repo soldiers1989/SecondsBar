@@ -76,12 +76,12 @@ public class ViewPagerLayoutManager extends LinearLayoutManager
                 }
                 break;
             case RecyclerView.SCROLL_STATE_DRAGGING:
-                View viewDrag = mPagerSnapHelper.findSnapView(this);
-                int positionDrag = getPosition(viewDrag);
+//                View viewDrag = mPagerSnapHelper.findSnapView(this);
+//                int positionDrag = getPosition(viewDrag);
                 break;
             case RecyclerView.SCROLL_STATE_SETTLING:
-                View viewSettling = mPagerSnapHelper.findSnapView(this);
-                int positionSettling = getPosition(viewSettling);
+//                View viewSettling = mPagerSnapHelper.findSnapView(this);
+//                int positionSettling = getPosition(viewSettling);
                 break;
 
         }

@@ -1,8 +1,8 @@
 package com.fx.secondbar.ui.home.item.adapter;
 
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,9 +54,12 @@ public class AdDateTa extends BaseQuickAdapter<DateBean, BaseViewHolder>
         TextView tv_location = helper.getView(R.id.tv_location);
         TagCloudView tag_cloud_view = helper.getView(R.id.tag_cloud_view);
 
-        ViewGroup.LayoutParams params = content.getLayoutParams();
-        params.height = height;
-        content.setLayoutParams(params);
+        RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) content.getLayoutParams();
+        if (params != null && params.height != height)
+        {
+            params.height = height;
+            content.setLayoutParams(params);
+        }
 
         VerificationUtil.setViewValue(tv_name, item.getNickname());
         VerificationUtil.setViewValue(tv_account, "秒吧号：" + VerificationUtil.verifyDefault(PhoneShowUtil.handlerPhoneStr(item.getAccount()), ""));

@@ -6,13 +6,13 @@
                                              android:layout_height="60dip"
                                              android:background="@drawable/leader_board_item_higher"
                                              android:minHeight="60dip"
-                                             android:paddingLeft="20dip"
                                              android:paddingRight="20dip">
 
     <ImageView
         android:id="@+id/img_rank"
-        android:layout_width="20dip"
+        android:layout_width="50dip"
         android:layout_height="wrap_content"
+        android:scaleType="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/tv_rank"
-        android:layout_width="20dip"
+        android:layout_width="50dip"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@android:color/white"
@@ -33,11 +33,10 @@
         android:id="@+id/img_avatar"
         android:layout_width="40dip"
         android:layout_height="40dip"
-        android:layout_marginLeft="10dip"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/img_rank"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/tv_income"

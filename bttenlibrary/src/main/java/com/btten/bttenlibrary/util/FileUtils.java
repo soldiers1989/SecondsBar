@@ -106,7 +106,7 @@ public class FileUtils {
 		Uri uri;
 		if (Build.VERSION.SDK_INT >= 24)
 		{
-			uri = FileProvider.getUriForFile(context.getApplicationContext(), context.getPackageName() + ".FileProvider", file);
+			uri = FileProvider.getUriForFile(context.getApplicationContext(), context.getPackageName() + ".fileProvider", file);
 		} else
 		{
 			uri = Uri.fromFile(file);

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -96,18 +97,25 @@ public class AcQuoteBuyConfirm extends ActivitySupport
             {
                 try
                 {
-                    int seconds = Integer.parseInt(s.toString());
-                    if (seconds * 1000 < minCount)
+                    int seconds = 0;
+                    if (TextUtils.isEmpty(s))
                     {
-                        s.clear();
-                        s.append(String.valueOf(minCount / 1000));
-                        ShowToast.showToast("最小申购" + minCount + "秒");
-                    }
-                    if (seconds * 1000 > limitSeconds)
+                        seconds = 0;
+                    } else
                     {
-                        s.clear();
-                        s.append(String.valueOf(limitSeconds / 1000));
-                        ShowToast.showToast(FxApplication.getInstance(), "超过限额。最大购买秒数为=（持仓市值+1万元）/上新价格,当前最多可申购" + limitSeconds + "秒", true);
+                        seconds = Integer.parseInt(s.toString());
+                        if (seconds * 1000 < minCount)
+                        {
+                            s.clear();
+                            s.append(String.valueOf(minCount / 1000));
+                            ShowToast.showToast("最小申购" + minCount + "秒");
+                        }
+                        if (seconds * 1000 > limitSeconds)
+                        {
+                            s.clear();
+                            s.append(String.valueOf(limitSeconds / 1000));
+                            ShowToast.showToast(FxApplication.getInstance(), "超过限额。最大购买秒数为=（持仓市值+1万元）/上新价格,当前最多可申购" + limitSeconds + "秒", true);
+                        }
                     }
                     double pay = price * seconds * 1000;
                     VerificationUtil.setViewValue(tv_pay, String.format(getString(R.string.mall_detail_info_price), String.valueOf(pay)));
