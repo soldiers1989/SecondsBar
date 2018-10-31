@@ -15,8 +15,10 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.util.DensityUtil;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.ShowToast;
+import com.btten.bttenlibrary.util.SpaceDecorationUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
@@ -101,6 +103,7 @@ public class FragmentWb extends FragmentViewPagerBase implements SwipeRefreshLay
     protected void initData()
     {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(SpaceDecorationUtil.getDecoration(DensityUtil.dip2px(getContext(), 1), false, false, false));
         adapter = new AdWb((ActivitySupport) getActivity());
         adapter.bindToRecyclerView(recyclerView);
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()

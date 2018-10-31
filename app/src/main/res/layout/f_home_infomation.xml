@@ -65,9 +65,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="今日Q"
+                android:text="今日阅读Q"
                 android:textColor="@android:color/white"
-                android:textSize="10sp"/>
+                android:textSize="8sp"/>
         </LinearLayout>
     </FrameLayout>
 

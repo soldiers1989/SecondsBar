@@ -73,10 +73,17 @@ public class MultiImagePreviewActivity extends ActivitySupport implements OnPage
     protected void initData()
     {
         imgPaths = getIntent().getStringArrayListExtra(ConstantValue.EXTRA_DEFAULT_SELECTED_LIST);
+        int index = getIntent().getIntExtra(KEY, 0);
         viewPager.setAdapter(mPagerAdapter);
         if (imgPaths != null && imgPaths.size() > 0)
         {
-            viewPager.setCurrentItem(0);
+            if (index < 0 || index >= imgPaths.size())
+            {
+                viewPager.setCurrentItem(0);
+            } else
+            {
+                viewPager.setCurrentItem(index);
+            }
             tv_mark.setText((0 + 1) + "/" + imgPaths.size());
         }
     }

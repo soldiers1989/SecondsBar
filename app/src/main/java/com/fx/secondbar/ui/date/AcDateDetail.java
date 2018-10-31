@@ -2,6 +2,7 @@ package com.fx.secondbar.ui.date;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -20,11 +21,13 @@ import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.DateBean;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.http.exception.ApiException;
+import com.fx.secondbar.ui.home.AcShareDialog;
 import com.fx.secondbar.ui.mall.AcMallDetail;
 import com.fx.secondbar.ui.mall.DialogBuy;
 import com.fx.secondbar.ui.order.AcOrderManage;
 import com.fx.secondbar.ui.person.assets.AcRecharge;
 import com.fx.secondbar.util.GlideLoad;
+import com.fx.secondbar.util.PhoneShowUtil;
 import com.fx.secondbar.util.ProgressDialogUtil;
 
 import rx.Subscriber;
@@ -52,6 +55,9 @@ public class AcDateDetail extends ActivitySupport
     private DialogBuy dialogBuy;
     private ProgressDialog dialog;
 
+    //用户头像（分享用）
+    private String imgAvatar;
+
     @Override
     protected int getLayoutResId()
     {
@@ -73,6 +79,7 @@ public class AcDateDetail extends ActivitySupport
         btn_buy = findView(R.id.btn_buy);
         tv_person_count = findView(R.id.tv_person_count);
         findView(R.id.ib_back).setOnClickListener(this);
+        findView(R.id.ib_forward).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -139,11 +146,12 @@ public class AcDateDetail extends ActivitySupport
         if (dateBean != null)
         {
             VerificationUtil.setViewValue(tv_name, dateBean.getNickname());
-            VerificationUtil.setViewValue(tv_account, "秒吧号：" + VerificationUtil.verifyDefault(dateBean.getAccount(), ""));
+            VerificationUtil.setViewValue(tv_account, "秒吧号：" + PhoneShowUtil.handlerPhoneStr(dateBean.getAccount()));
             VerificationUtil.setViewValue(tv_date_title, dateBean.getName());
             VerificationUtil.setViewValue(tv_location, dateBean.getAddress());
             VerificationUtil.setViewValue(tv_time, dateBean.getDatetime());
             VerificationUtil.setViewValue(tv_timelength, "时长" + dateBean.getTimelength());
+            imgAvatar = dateBean.getImg();
             GlideLoad.loadCicle(img_avatar, dateBean.getImg(), R.mipmap.default_avatar, R.mipmap.default_avatar);
 
             String buyBtn = null;
@@ -329,6 +337,25 @@ public class AcDateDetail extends ActivitySupport
         {
             case R.id.ib_back:
                 finish();
+                break;
+            case R.id.ib_forward:
+                Bundle bundle = new Bundle();
+                bundle.putInt(AcShareDialog.KEY_TYPE, AcShareDialog.TYPE_POSTER_DATE);
+                StringBuilder sb = new StringBuilder();
+                sb.append(getTextView(tv_name));
+                sb.append("==");
+                sb.append(getTextView(tv_account));
+                sb.append("==");
+                sb.append(getTextView(tv_date_title));
+                sb.append("==");
+                sb.append(getTextView(btn_buy).replace("购买", ""));
+                sb.append("==");
+                sb.append(getTextView(tv_location));
+                sb.append("==");
+                sb.append(getTextView(tv_time));
+                bundle.putString(AcShareDialog.KEY_CONTENT, sb.toString());
+                bundle.putString(AcShareDialog.KEY_IMG, imgAvatar);
+                jump(AcShareDialog.class, bundle, false);
                 break;
             case R.id.btn_buy:
                 if (dialogBuy != null)

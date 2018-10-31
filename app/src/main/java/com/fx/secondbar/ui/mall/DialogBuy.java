@@ -146,7 +146,7 @@ public class DialogBuy
             public void onClick(View v)
             {
                 Intent intent = new Intent(context, AcWebBrowse.class);
-                intent.putExtra("activity_str", "秒吧支付说明协议");
+                intent.putExtra("activity_str", "支付说明");
                 intent.putExtra("activity_num", "http://www.feixingtech.com:8080/static/mb-front/getText.html?type=13");
                 context.startActivity(intent);
             }

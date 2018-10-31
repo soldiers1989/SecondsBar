@@ -74,7 +74,7 @@
     <string name="dialog_mall_buy_item_name">商品名称</string>
     <string name="dialog_mall_buy_item_time">商品时间</string>
     <string name="dialog_mall_buy_protocol_tips">本人已同意</string>
-    <string name="dialog_mall_buy_protocol_content">《秒吧支付说明协议》</string>
+    <string name="dialog_mall_buy_protocol_content">《支付说明》</string>
 
     <string name="quote_item_title_name">名人</string>
     <string name="quote_item_title_curr_price">现价</string>

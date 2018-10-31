@@ -1,6 +1,7 @@
 package com.fx.secondbar.ui.home.item.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -10,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.btten.bttenlibrary.base.ActivitySupport;
+import com.btten.bttenlibrary.ui.img.ConstantValue;
+import com.btten.bttenlibrary.ui.img.MultiImagePreviewActivity;
 import com.btten.bttenlibrary.util.DisplayUtil;
 import com.btten.bttenlibrary.util.SpaceDecorationUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
@@ -64,6 +67,20 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
         }
         img_recycler.setVisibility(size == 0 ? View.GONE : View.VISIBLE);
 
+        adapter.setOnItemClickListener(new OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position)
+            {
+                Intent intent = new Intent(activity, MultiImagePreviewActivity.class);
+                ArrayList<String> list = new ArrayList<>(adapter.getItemCount());
+                list.addAll(((AdWbImg) adapter).getData());
+                intent.putExtra(ConstantValue.EXTRA_DEFAULT_SELECTED_LIST, list);
+                intent.putExtra("activity_num", position);
+                activity.startActivity(intent);
+            }
+        });
+
         GlideLoad.load(img, item.getAvatar(), true);
         VerificationUtil.setViewValue(tv_name, item.getUsername());
         VerificationUtil.setViewValue(tv_content, item.getContent());
@@ -112,6 +129,17 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
                     return Collections.emptyList();
                 } else
                 {
+                    //判断是否只有一张图片，同时判断该张图是否为缩略图，如果是，那么取大图返回
+                    if (picture.length == 1 && picture[0].contains("thumbnail"))
+                    {
+                        if (TextUtils.isEmpty(bean.getPicture()))
+                        {
+                            return Collections.emptyList();
+                        }
+                        List<String> list = new ArrayList<>(1);
+                        list.add(bean.getPicture());
+                        return list;
+                    }
                     return Arrays.asList(picture);
                 }
             } else
@@ -120,7 +148,7 @@ public class AdWb extends BaseQuickAdapter<WBBean, BaseViewHolder>
                 {
                     return Collections.emptyList();
                 }
-                List<String> list = new ArrayList<>();
+                List<String> list = new ArrayList<>(1);
                 list.add(bean.getPicture());
                 return list;
             }

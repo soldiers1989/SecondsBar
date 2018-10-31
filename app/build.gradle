@@ -6,8 +6,8 @@ android {
         applicationId "com.fx.secondbar"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 13
-        versionName "1.2.2"
+        versionCode 14
+        versionName "1.2.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             //设置支持的SO库架构
@@ -73,5 +73,8 @@ dependencies {
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
     //标签云
     implementation 'com.github.kingideayou:tagcloudview:1.0.2'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
 }

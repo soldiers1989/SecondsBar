@@ -9,6 +9,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.btten.bttenlibrary.application.BtApplication;
 import com.btten.bttenlibrary.util.LogUtil;
 import com.btten.bttenlibrary.util.VerificationUtil;
+import com.bumptech.glide.Glide;
 import com.fx.secondbar.BuildConfig;
 import com.fx.secondbar.bean.LocationBean;
 import com.fx.secondbar.bean.ResConfigInfo;
@@ -19,6 +20,7 @@ import com.fx.secondbar.util.DataCacheUtils;
 import com.fx.secondbar.util.ShareUtils;
 import com.sina.weibo.sdk.WbSdk;
 import com.sina.weibo.sdk.auth.AuthInfo;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.smtt.sdk.QbSdk;
 
 import java.util.ArrayList;
@@ -51,6 +53,12 @@ public class FxApplication extends BtApplication
     {
         mApplication = this;
         super.onCreate();
+
+        if (LeakCanary.isInAnalyzerProcess(this))
+        {//1
+            return;
+        }
+        LeakCanary.install(this);
 
         QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback()
         {
@@ -237,5 +245,35 @@ public class FxApplication extends BtApplication
     {
         boolean isSendSuccess = LocalBroadcastManager.getInstance(getInstance()).sendBroadcast(new Intent(Constants.ACTION_REFRESH_NOTIFY_TIPS));
         LogUtil.e("refreshPersonShowBroadCast", isSendSuccess ? "发送成功" : "发送失败");
+    }
+
+    @Override
+    public void onTrimMemory(int level)
+    {
+        super.onTrimMemory(level);
+        try
+        {
+            if (TRIM_MEMORY_UI_HIDDEN == level)
+            {
+                Glide.get(this).clearMemory();
+            }
+            Glide.get(this).trimMemory(level);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onLowMemory()
+    {
+        super.onLowMemory();
+        try
+        {
+            Glide.get(this).clearMemory();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

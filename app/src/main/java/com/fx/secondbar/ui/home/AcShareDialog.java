@@ -76,9 +76,14 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
      */
     public static final int TYPE_POSTER_INVITE = 4;
     /**
+     * 当前分享类型-图片海报，约吧
+     */
+    public static final int TYPE_POSTER_DATE = 5;
+    /**
      * 当前分享类型-文本
      */
-    public static final int TYPE_TEXT = 5;
+    public static final int TYPE_TEXT = 10;
+
 
     /**
      * 类型的key值
@@ -126,8 +131,21 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
     private TextView tv_person_name;        //名人姓名
     private TextView tv_person_price;       //名人价格
 
+    private ConstraintLayout cl_date;   //约吧
+    private ImageView img_date_avatar;  //用户头像
+    private TextView tv_date_name;      //用户昵称
+    private TextView tv_date_account;   //用户帐号
+    private TextView tv_date_title; //约吧主题
+    private TextView tv_date_price;  //价格
+    private TextView tv_date_location;  //约吧位置
+    private TextView tv_date_time;  //约吧时间
+
     private ConstraintLayout cl_poster_share;
     private ImageView img_poster_share_code;    //二维码
+
+
+    //分享平台
+    private int platform = 0;
 
 
     @Override
@@ -159,6 +177,15 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
         img_avatar = findView(R.id.img_avatar);
         tv_person_name = findView(R.id.tv_person_name);
         tv_person_price = findView(R.id.tv_person_price);
+
+        cl_date = findView(R.id.cl_date);
+        img_date_avatar = findView(R.id.img_date_avatar);
+        tv_date_name = findView(R.id.tv_date_name);
+        tv_date_account = findView(R.id.tv_date_account);
+        tv_date_price = findView(R.id.tv_date_price);
+        tv_date_title = findView(R.id.tv_date_title);
+        tv_date_location = findView(R.id.tv_date_location);
+        tv_date_time = findView(R.id.tv_date_time);
 
         cl_poster_share = findView(R.id.cl_poster_share);
         img_poster_share_code = findView(R.id.img_poster_share_code);
@@ -278,6 +305,21 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
                     VerificationUtil.setViewValue(tv_person_price, values[1]);
                 }
                 GlideLoad.load(img_avatar, getIntent().getStringExtra(KEY_IMG), true);
+            } else if (TYPE_POSTER_DATE == type)
+            {
+                cl_date.setVisibility(View.VISIBLE);
+                String[] values = content.split("==");
+                //索引顺序分别为：名字、帐号、主题、价格、位置和时间
+                if (values != null && values.length == 6)
+                {
+                    VerificationUtil.setViewValue(tv_date_name, values[0]);
+                    VerificationUtil.setViewValue(tv_date_account, values[1]);
+                    VerificationUtil.setViewValue(tv_date_title, values[2]);
+                    VerificationUtil.setViewValue(tv_date_price, "价格：" + values[3]);
+                    VerificationUtil.setViewValue(tv_date_location, values[4]);
+                    VerificationUtil.setViewValue(tv_date_time, values[5]);
+                }
+                GlideLoad.loadCicle(img_date_avatar, getIntent().getStringExtra(KEY_IMG), R.mipmap.default_avatar, R.mipmap.default_avatar);
             }
         } else
         {
@@ -318,6 +360,7 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
                 {
                     shareContent = ShareUtils.buildQQShareContent("", "", "");
                 }
+                platform = PLATFORM_QQ;
                 mTencent.shareToQQ(activity, shareContent, new QQShareListener());
             } else
             {
@@ -342,6 +385,7 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
                 {
                     msg = ShareUtils.buildWeiboShareContent("", "", "");
                 }
+                platform = PLATFORM_WEIBO;
                 wbShareHandler.shareMessage(msg, false);
             } else
             {
@@ -362,6 +406,8 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
             SendMessageToWX.Req req = new SendMessageToWX.Req();
             req.transaction = String.valueOf(System.currentTimeMillis());
             req.message = msg;
+
+            platform = PLATFORM_WECHAT;
             //表示分享至微信好友
             req.scene = SendMessageToWX.Req.WXSceneSession;
             mApi.sendReq(req);
@@ -383,6 +429,8 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
             SendMessageToWX.Req req = new SendMessageToWX.Req();
             req.transaction = String.valueOf(System.currentTimeMillis());
             req.message = msg;
+
+            platform = PLATFORM_TIMELINE;
             //表示分享至朋友圈
             req.scene = SendMessageToWX.Req.WXSceneTimeline;
             mApi.sendReq(req);
@@ -435,10 +483,16 @@ public class AcShareDialog extends ActivitySupport implements WbShareCallback
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        Tencent.onActivityResultData(requestCode, resultCode, data, new QQShareListener());
-        if (wbShareHandler != null)
+        if (PLATFORM_QQ == platform)
         {
-            wbShareHandler.doResultIntent(data, this);
+            Tencent.onActivityResultData(requestCode, resultCode, data, new QQShareListener());
+        }
+        if (PLATFORM_WEIBO == platform)
+        {
+            if (wbShareHandler != null)
+            {
+                wbShareHandler.doResultIntent(data, this);
+            }
         }
     }
 

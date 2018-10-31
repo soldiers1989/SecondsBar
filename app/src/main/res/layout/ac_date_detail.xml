@@ -37,6 +37,14 @@
                 android:scaleType="centerInside"
                 android:src="@mipmap/ic_back"/>
 
+            <ImageButton
+                android:id="@+id/ib_forward"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentRight="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_toolbar_share"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 

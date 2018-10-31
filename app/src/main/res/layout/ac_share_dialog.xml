@@ -243,6 +243,101 @@
                 </android.support.constraint.ConstraintLayout>
 
                 <android.support.constraint.ConstraintLayout
+                    android:id="@+id/cl_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dip"
+                    android:paddingRight="15dip"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/img_date_avatar"
+                        android:layout_width="45dip"
+                        android:layout_height="45dip"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_date_name"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginTop="5dip"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:textColor="#2c2c2c"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_date_avatar"
+                        app:layout_constraintTop_toTopOf="@+id/img_date_avatar"/>
+
+                    <TextView
+                        android:id="@+id/tv_date_account"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dip"
+                        android:singleLine="true"
+                        android:textColor="#9f9f9f"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_date_name"
+                        app:layout_constraintStart_toStartOf="@+id/tv_date_name"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_date_name"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_date_title"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dip"
+                        android:layout_marginRight="6dip"
+                        android:singleLine="true"
+                        android:textColor="#2c2c2c"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/img_date_avatar"/>
+
+                    <TextView
+                        android:id="@+id/tv_date_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dip"
+                        android:drawablePadding="10dip"
+                        android:text="价格："
+                        android:textColor="@color/font_yellow_color"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_date_title"/>
+
+                    <TextView
+                        android:id="@+id/tv_date_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dip"
+                        android:drawableLeft="@mipmap/ic_location"
+                        android:drawablePadding="10dip"
+                        android:textColor="#7f7f7f"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_date_price"/>
+
+                    <TextView
+                        android:id="@+id/tv_date_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dip"
+                        android:drawableLeft="@mipmap/ic_time"
+                        android:drawablePadding="10dip"
+                        android:textColor="#7f7f7f"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_date_location"/>
+                </android.support.constraint.ConstraintLayout>
+
+
+                <android.support.constraint.ConstraintLayout
                     android:id="@+id/cl_purchase"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -259,32 +354,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:sriv_oval="true"/>
 
-                    <TextView
-                        android:id="@+id/tv_person_name"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dip"
-                        android:layout_marginTop="10dip"
-                        android:layout_marginRight="20dip"
-                        android:singleLine="true"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/img_avatar"
-                        app:layout_constraintTop_toTopOf="@+id/img_avatar"/>
 
-                    <TextView
-                        android:id="@+id/tv_person_price"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dip"
-                        android:layout_marginRight="20dip"
-                        android:layout_marginBottom="10dip"
-                        android:textColor="@color/font_yellow_color"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_avatar"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/img_avatar"/>
                 </android.support.constraint.ConstraintLayout>
 
                 <android.support.constraint.ConstraintLayout
