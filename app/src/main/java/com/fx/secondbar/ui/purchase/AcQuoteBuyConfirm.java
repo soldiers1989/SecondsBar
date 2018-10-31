@@ -108,12 +108,14 @@ public class AcQuoteBuyConfirm extends ActivitySupport
                         {
                             s.clear();
                             s.append(String.valueOf(minCount / 1000));
+                            seconds = minCount / 1000;
                             ShowToast.showToast("最小申购" + minCount + "秒");
                         }
                         if (seconds * 1000 > limitSeconds)
                         {
                             s.clear();
                             s.append(String.valueOf(limitSeconds / 1000));
+                            seconds = limitSeconds / 1000;
                             ShowToast.showToast(FxApplication.getInstance(), "超过限额。最大购买秒数为=（持仓市值+1万元）/上新价格,当前最多可申购" + limitSeconds + "秒", true);
                         }
                     }
@@ -266,7 +268,8 @@ public class AcQuoteBuyConfirm extends ActivitySupport
             case R.id.btn_buy:
                 if (VerificationUtil.validator(this, ed_input, "请输入申购秒数"))
                 {
-                    purchaseBuy(purchaseId, getTextView(ed_input));
+                    int seconds = Integer.parseInt(getTextView(ed_input));
+                    purchaseBuy(purchaseId, String.valueOf(seconds * 1000));
                 }
                 break;
         }
