@@ -35,9 +35,9 @@ public class AdAssetDetail extends BaseQuickAdapter<ConsumerBean, BaseViewHolder
         String str = "";
         if (item.getPaytype() == 1)
         {
-            str = VerificationUtil.verifyDefault(item.getAmount(), "0");
-            //是否是充值
-            if ("1".equals(item.getType()))
+            str = "￥" + VerificationUtil.verifyDefault(item.getAmount(), "0");
+            //1表示充值，5表示卖出时间，这里走收益流程,8约吧收益；9退款
+            if ("1".equals(item.getType()) || "5".equals(item.getType()) || "8".equals(item.getType()) || "9".equals(item.getType()))
             {
                 tv_money.setTextColor(Color.parseColor("#03c086"));
                 str = "+" + str;
@@ -50,7 +50,7 @@ public class AdAssetDetail extends BaseQuickAdapter<ConsumerBean, BaseViewHolder
         } else
         {
             tv_money.setTextColor(Color.parseColor("#E76E43"));
-            str = VerificationUtil.verifyDefault(item.getQcoin(), "0");
+            str = VerificationUtil.verifyDefault(item.getQcoin(), "0") + "Q";
             str = "-" + str;
         }
         VerificationUtil.setViewValue(tv_money, str, "");

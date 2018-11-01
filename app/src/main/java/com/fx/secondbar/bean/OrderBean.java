@@ -103,7 +103,7 @@ public class OrderBean implements Parcelable
 
     public Integer getStatus()
     {
-        return status;
+        return status == null ? -1 : status;
     }
 
     public void setStatus(Integer status)

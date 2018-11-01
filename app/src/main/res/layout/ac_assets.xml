@@ -41,7 +41,7 @@
                 android:gravity="center"
                 android:paddingLeft="6dip"
                 android:paddingRight="6dip"
-                android:text="￥明细"
+                android:text="资产明细"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"/>
 

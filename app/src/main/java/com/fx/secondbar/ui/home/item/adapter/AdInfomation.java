@@ -167,13 +167,13 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
         TextView tv_count = helper.getView(R.id.tv_count);
         if (item.getInfomationBean() != null)
         {
-            GlideLoad.load(img, item.getInfomationBean().getPicture(), true);
+            GlideLoad.load(img, item.getInfomationBean().getPicture(), true,R.mipmap.ic_info_default,R.mipmap.ic_info_default);
             VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getShare_COPY());
             VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getTitle());
             VerificationUtil.setViewValue(tv_count, String.format(FxApplication.getStr(R.string.read_person_count), item.getInfomationBean().getScan_NUM()));
         } else
         {
-            GlideLoad.load(img, "", true);
+            GlideLoad.load(img, "", true,R.mipmap.ic_info_default,R.mipmap.ic_info_default);
             VerificationUtil.setViewValue(tv_from, "");
             VerificationUtil.setViewValue(tv_title, "");
             VerificationUtil.setViewValue(tv_count, "");
@@ -204,41 +204,41 @@ public class AdInfomation extends BaseMultiItemQuickAdapter<AdInfomation.Infomat
                 {
                     if (picture.length > 0)
                     {
-                        GlideLoad.load(img1, picture[0], true);
+                        GlideLoad.load(img1, picture[0], true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
                         if (picture.length > 1)
                         {
-                            GlideLoad.load(img2, picture[1], true);
+                            GlideLoad.load(img2, picture[1], true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
                         }
                         if (picture.length > 2)
                         {
-                            GlideLoad.load(img3, picture[2], true);
+                            GlideLoad.load(img3, picture[2], true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
                         }
                     } else
                     {
-                        GlideLoad.load(img1, "", true);
-                        GlideLoad.load(img2, "", true);
-                        GlideLoad.load(img3, "", true);
+                        GlideLoad.load(img1, "", true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
+                        GlideLoad.load(img2, "", true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
+                        GlideLoad.load(img3, "", true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
                     }
                 } else
                 {
-                    GlideLoad.load(img1, "", true);
-                    GlideLoad.load(img2, "", true);
-                    GlideLoad.load(img3, "", true);
+                    GlideLoad.load(img1, "", true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
+                    GlideLoad.load(img2, "", true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
+                    GlideLoad.load(img3, "", true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
                 }
             } else
             {
-                GlideLoad.load(img1, "", true);
-                GlideLoad.load(img2, "", true);
-                GlideLoad.load(img3, "", true);
+                GlideLoad.load(img1, "", true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
+                GlideLoad.load(img2, "", true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
+                GlideLoad.load(img3, "", true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
             }
             VerificationUtil.setViewValue(tv_from, item.getInfomationBean().getShare_COPY());
             VerificationUtil.setViewValue(tv_title, item.getInfomationBean().getTitle());
             VerificationUtil.setViewValue(tv_count, String.format(FxApplication.getStr(R.string.read_person_count), item.getInfomationBean().getScan_NUM()));
         } else
         {
-            GlideLoad.load(img1, "", true);
-            GlideLoad.load(img2, "", true);
-            GlideLoad.load(img3, "", true);
+            GlideLoad.load(img1, "", true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
+            GlideLoad.load(img2, "", true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
+            GlideLoad.load(img3, "", true, R.mipmap.ic_info_default, R.mipmap.ic_info_default);
             VerificationUtil.setViewValue(tv_from, "");
             VerificationUtil.setViewValue(tv_title, "");
             VerificationUtil.setViewValue(tv_count, "");

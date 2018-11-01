@@ -19,7 +19,7 @@ public class MyPurchaseBean implements Parcelable
     private String totalmoney;//总金额
     private String peopleimg;//头像地址
     private String peoplename;//名人姓名
-    private Integer status; //1申购中，2申购成功
+    private Integer status; //0申购失败，1申购中，2申购成功
     private String successnum;  //申购成功秒数
     private String successmoney; //申购成功总金额
 

@@ -62,7 +62,7 @@ public class AcAddBankCard extends ActivitySupport
     protected void initListener()
     {
         btn_submit.setOnClickListener(this);
-        ed_bank_name.setOnClickListener(this);
+//        ed_bank_name.setOnClickListener(this);
 
         ed_name.addTextChangedListener(watcher);
         ed_bank.addTextChangedListener(watcher);

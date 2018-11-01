@@ -41,11 +41,17 @@ public class AdPurchase extends BaseQuickAdapter<MyPurchaseBean, BaseViewHolder>
         }
         VerificationUtil.setViewValue(tv_name, name);
 
-        //1申购中，2申购成功
+        //0申购失败，1申购中，2申购成功
         if (1 == item.getStatus())
         {
             VerificationUtil.setViewValue(tv_status, "申购中");
             tv_status.setTextColor(Color.parseColor("#03c086"));
+            VerificationUtil.setViewValue(tv_seconds, item.getAmount());
+        } else if (0 == item.getStatus())
+        {
+            VerificationUtil.setViewValue(tv_status, "申购失败");
+            tv_status.setTextColor(Color.parseColor("#e76e43"));
+            //申购失败秒数
             VerificationUtil.setViewValue(tv_seconds, item.getAmount());
         } else
         {

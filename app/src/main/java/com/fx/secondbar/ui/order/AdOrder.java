@@ -47,23 +47,7 @@ public class AdOrder extends BaseQuickAdapter<OrderBean, BaseViewHolder>
         setCommodityPlace(tv_place, item.getAddress());
         setCommodityTime(tv_time, item.getTimelength());
 
-//        if (FOrderItem.TYPE_PERFORMANCING == item.getStatus())
-//        {   //履约中
-//            v_line.setVisibility(View.VISIBLE);
-//            ll_option.setVisibility(View.VISIBLE);
-//        } else if (FOrderItem.TYPE_PERFORMANCING == item.getStatus())
-//        {
-////            tv_option.setText("查看商品");
-//            tv_option.setText("申诉");
-//        } else if (FOrderItem.TYPE_REFUND == item.getStatus())
-//        {
-////            tv_option.setText("取消退款");
-//            tv_option.setText("申诉");
-//        } else
-//        {
-//            tv_option.setText("申诉");
-//        }
-        if (FOrderItem.TYPE_PERFORMANCING == item.getStatus())
+        if (FOrderItem.TYPE_PERFORMANCING == item.getStatus().intValue())
         {   //履约中
             v_line.setVisibility(View.VISIBLE);
             ll_option.setVisibility(View.VISIBLE);

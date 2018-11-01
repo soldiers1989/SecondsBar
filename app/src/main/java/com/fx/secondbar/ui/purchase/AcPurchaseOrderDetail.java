@@ -1,6 +1,5 @@
 package com.fx.secondbar.ui.purchase;
 
-import android.graphics.Color;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -80,12 +79,17 @@ public class AcPurchaseOrderDetail extends ActivitySupport
             {
                 name += "(" + myPurchaseBean.getZjm() + ")";
             }
-            //1申购中，2申购成功
+            //0申购失败，1申购中，2申购成功
             if (1 == myPurchaseBean.getStatus())
             {
                 VerificationUtil.setViewValue(tv_status, "申购中");
                 tv_success_seconds.setVisibility(View.GONE);
                 VerificationUtil.setViewValue(tv_pay_price, String.format(getString(R.string.order_detail_order_pay_price), VerificationUtil.verifyDefault(myPurchaseBean.getTotalmoney(), "0")));
+            } else if (0 == myPurchaseBean.getStatus())
+            {
+                VerificationUtil.setViewValue(tv_status, "申购失败");
+                VerificationUtil.setViewValue(tv_pay_price, String.format(getString(R.string.order_detail_order_pay_price), VerificationUtil.verifyDefault(myPurchaseBean.getTotalmoney(), "0")));
+                tv_success_seconds.setVisibility(View.GONE);
             } else
             {
                 VerificationUtil.setViewValue(tv_status, "申购成功");
