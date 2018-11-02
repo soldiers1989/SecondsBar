@@ -50,7 +50,7 @@ public class FragmentTransactionBuyed extends FragmentTransactionItem implements
     @Override
     public void onStarShow()
     {
-        if(swipeRefreshLayout!=null)
+        if (swipeRefreshLayout != null)
         {
             swipeRefreshLayout.setRefreshing(true);
             onRefresh();
@@ -132,6 +132,14 @@ public class FragmentTransactionBuyed extends FragmentTransactionItem implements
         View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_transaction_buyed_head, null);
         tv_money = view.findViewById(R.id.tv_money);
         tv_price = view.findViewById(R.id.tv_price);
+        view.findViewById(R.id.v_price).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                jump(AcMarketValue.class);
+            }
+        });
         return view;
     }
 
@@ -185,7 +193,7 @@ public class FragmentTransactionBuyed extends FragmentTransactionItem implements
                 {
                     adapter.addData(tradingBuyedBean.getListTransactionInfo());
                 }
-                if (VerificationUtil.getSize(tradingBuyedBean.getListTransactionInfo()) > PAGE_NUM)
+                if (VerificationUtil.getSize(tradingBuyedBean.getListTransactionInfo()) >= PAGE_NUM)
                 {
                     adapter.loadMoreComplete();
                 } else

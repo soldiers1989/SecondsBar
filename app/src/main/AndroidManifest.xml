@@ -17,7 +17,7 @@
     <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
     <!-- 访问网络，网络定位需要上网-->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- SD卡读取权限，用户写入离线定位数据-->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
 
@@ -174,6 +174,9 @@
         <activity
             android:name=".ui.home.AcIncomeDialog"
             android:theme="@style/myTransparent"/>
+        <activity
+            android:name=".ui.transaction.AcMarketValue"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
@@ -236,10 +239,13 @@
             android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
 
-        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"> </service>
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="vmilIxZha7xkPup1xDKZG4pp0R7eabaO" >
+            android:value="vmilIxZha7xkPup1xDKZG4pp0R7eabaO">
         </meta-data>
     </application>
 

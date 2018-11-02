@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.SpannableString;
@@ -40,9 +41,9 @@ import rx.Subscriber;
  * author: frj
  * modify date: 2018/9/20
  */
-public class FragmentTransactionSales extends FragmentTransactionItem
+public class FragmentTransactionSales extends FragmentTransactionItem implements SwipeRefreshLayout.OnRefreshListener
 {
-
+    private SwipeRefreshLayout swipeRefreshLayout;
     private CopyListView list_top;
     private CopyListView list_bottom;
     private TextView tv_price_down;     //跌停价格
@@ -100,6 +101,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
     @Override
     protected void initView()
     {
+        swipeRefreshLayout = findView(R.id.swipeRefreshLayout);
         list_top = findView(R.id.list_top);
         list_bottom = findView(R.id.list_bottom);
         tv_price_down = findView(R.id.tv_price_down);
@@ -123,6 +125,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
         addFilter(ed_input, new CashierInputFilter());
         ed_input.addTextChangedListener(watcher);
         ed_seconds.addTextChangedListener(watcher);
+        swipeRefreshLayout.setOnRefreshListener(this);
     }
 
     @Override
@@ -259,6 +262,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem
             VerificationUtil.setViewValue(tv_can_num, Arithmetic.doubleToStr(bean.getHaveseconds()));
             VerificationUtil.setViewValue(tv_price_ste, String.valueOf(bean.getBalanceamt()));
             VerificationUtil.setViewValue(tv_time, String.valueOf(bean.getHaveseconds()));
+            VerificationUtil.setViewValue(tv_price_token, String.valueOf(bean.getHaveseconds()));
 
             priceDown = bean.getPrice_DT();
             priceUp = bean.getPrice_ZT();
@@ -449,5 +453,17 @@ public class FragmentTransactionSales extends FragmentTransactionItem
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onRefresh()
+    {
+        if (TextUtils.isEmpty(peopleId))
+        {
+            ShowToast.showToast("请先选择名人");
+            swipeRefreshLayout.setRefreshing(false);
+            return;
+        }
+        refreshData(peopleId, false);
     }
 }

@@ -13,6 +13,7 @@ import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.bean.InviteInfoBean;
 import com.fx.secondbar.bean.LevelBean;
+import com.fx.secondbar.bean.MarketValueBean;
 import com.fx.secondbar.bean.MessageBean;
 import com.fx.secondbar.bean.MineData;
 import com.fx.secondbar.bean.MyPurchaseBean;
@@ -631,4 +632,14 @@ public interface IService
      */
     @GET(Constants.API_DATE_BUY_Q)
     Observable<ResponseBean> buyQDate(@Query("strokeid") String id);
+
+    /**
+     * 获取市值明细记录
+     *
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @GET(Constants.API_MARKET_VALUE)
+    Observable<ResponseBean<List<MarketValueBean>>> getMarketDetail(@Query("page") int page, @Query("count") int pageSize);
 }

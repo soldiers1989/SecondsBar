@@ -14,6 +14,7 @@ import com.fx.secondbar.bean.IndexTimeBean;
 import com.fx.secondbar.bean.InfomationBean;
 import com.fx.secondbar.bean.InviteInfoBean;
 import com.fx.secondbar.bean.LevelBean;
+import com.fx.secondbar.bean.MarketValueBean;
 import com.fx.secondbar.bean.MessageBean;
 import com.fx.secondbar.bean.MineData;
 import com.fx.secondbar.bean.MyPurchaseBean;
@@ -845,6 +846,19 @@ public class HttpManager
     public static void buyQDate(String strokeId, Subscriber<ResponseBean> subscriber)
     {
         Observable<ResponseBean> observable = getInstance().mService.buyQDate(strokeId).map(new HttpNoDataResultFun<>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取市值详情
+     *
+     * @param page
+     * @param pageSize
+     * @param subscriber
+     */
+    public static void getMarketDetail(int page, int pageSize, Subscriber<List<MarketValueBean>> subscriber)
+    {
+        Observable<List<MarketValueBean>> observable = getInstance().mService.getMarketDetail(page, pageSize).map(new HttpResultFun<List<MarketValueBean>>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 
