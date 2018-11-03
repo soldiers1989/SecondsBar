@@ -315,6 +315,12 @@ public class FragmentTransactionBuy extends FragmentTransactionItem implements S
             {
                 list.add(new CommissionBean());
             }
+        } else
+        {
+            for (int i = 0; i < size; i++)
+            {
+                list.add(i, sourceList.get(i));
+            }
         }
         adapter.addList(list, false);
         copyListView.setAdapter(adapter);
@@ -349,6 +355,10 @@ public class FragmentTransactionBuy extends FragmentTransactionItem implements S
                 {
                     dialog.dismiss();
                 }
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
                 ShowToast.showToast(HttpManager.checkLoadError(e));
             }
 
@@ -362,6 +372,10 @@ public class FragmentTransactionBuy extends FragmentTransactionItem implements S
                 if (dialog != null)
                 {
                     dialog.dismiss();
+                }
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
                 }
                 bindData(transactionBean);
             }

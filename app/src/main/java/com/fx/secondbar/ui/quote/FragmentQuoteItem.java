@@ -220,6 +220,12 @@ public class FragmentQuoteItem extends FragmentViewPagerBase implements SwipeRef
                 }
                 String name = data.getStringExtra(KEY_STR);
                 String peopleId = data.getStringExtra(KEY);
+                boolean needRefresh = data.getBooleanExtra("needRefresh", false);
+                if (needRefresh)
+                {
+                    swipeRefreshLayout.setRefreshing(true);
+                    onRefresh();
+                }
                 ((MainActivity) getActivity()).jumpToTransaction(peopleId, name);
             }
         }

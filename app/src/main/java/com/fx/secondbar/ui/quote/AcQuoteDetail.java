@@ -316,6 +316,10 @@ public class AcQuoteDetail extends ActivitySupport
                 Intent intent = new Intent();
                 intent.putExtra(KEY, peopleId);
                 intent.putExtra(KEY_STR, getTextView(tv_title));
+                if (isNeedRefresh)
+                {
+                    intent.putExtra("needRefresh", true);
+                }
                 setResult(RESULT_CODE_TRANSACTION, intent);
                 finish();
                 break;
