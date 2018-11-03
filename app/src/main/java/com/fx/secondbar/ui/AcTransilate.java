@@ -18,7 +18,6 @@ import com.fx.secondbar.bean.ResConfigInfo;
 import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.home.AcIncomeDialog;
 import com.fx.secondbar.util.DeviceUuidFactory;
-import com.tencent.bugly.Bugly;
 
 import cn.jpush.android.api.JPushInterface;
 import rx.Subscriber;
@@ -61,20 +60,6 @@ public class AcTransilate extends ActivitySupport
     @Override
     protected void initData()
     {
-//        GlideApp.with(img).load(R.mipmap.startup).centerCrop().load(img);
-//        img.postDelayed(new Runnable()
-//        {
-//            @Override
-//            public void run()
-//            {
-//                //计数+1，表示一个任务完成
-//                count++;
-//                if (count >= 2)
-//                {
-//                    jump(MainActivity.class, true);
-//                }
-//            }
-//        }, 5 * 1000);
         if (SharePreferenceUtils.getValueByBoolean("isFirst", true))
         {
             tv_jump.setVisibility(View.GONE);
@@ -106,7 +91,7 @@ public class AcTransilate extends ActivitySupport
             {
                 //倒计时
                 case 1:
-                    if (duration == 0)
+                    if (duration == 1)
                     {
                         //计数+1，表示一个任务完成
                         count++;

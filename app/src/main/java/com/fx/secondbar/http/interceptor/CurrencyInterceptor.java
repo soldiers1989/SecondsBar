@@ -52,6 +52,7 @@ public class CurrencyInterceptor implements Interceptor
     /**
      * 手机IMEI值
      */
+//    public static String imei = "be16ecde-8f79-3a50-a5ad-21d55cea500f";
     public static String imei = "";
 
     private Context context;

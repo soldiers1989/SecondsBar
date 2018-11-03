@@ -56,6 +56,9 @@ public class AcWithdraw extends ActivitySupport
     //最少手续费
     private double minFees;
 
+    //手续费提示
+    private String feeTips;
+
     @Override
     protected int getLayoutResId()
     {
@@ -73,6 +76,7 @@ public class AcWithdraw extends ActivitySupport
         ed_input = findView(R.id.ed_input);
 
         findView(R.id.ib_back).setOnClickListener(this);
+        findView(R.id.tv_withdraw_record).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -112,6 +116,12 @@ public class AcWithdraw extends ActivitySupport
                             return;
                         }
                         setWithdrawFeesTips(ratio, calFees(ste), minFees, feesRatio);
+                    } else
+                    {
+                        if (!TextUtils.isEmpty(feeTips))
+                        {
+                            VerificationUtil.setViewValue(tv_conversion_tips, feeTips);
+                        }
                     }
                 } catch (NumberFormatException e)
                 {
@@ -200,6 +210,7 @@ public class AcWithdraw extends ActivitySupport
                     return;
                 }
                 VerificationUtil.setViewValue(tv_conversion_tips, withdrawIntroBean.getExplaination());
+                feeTips = withdrawIntroBean.getExplaination();
                 if (ed_input != null)
                 {
                     ed_input.setHint("可提现" + Arithmetic.doubleToStr(withdrawIntroBean.getAmount()));
@@ -355,6 +366,9 @@ public class AcWithdraw extends ActivitySupport
                 break;
             case R.id.ll_bank:
                 jump(AcMyBankCard.class, REQUEST_SELECT_CARD);
+                break;
+            case R.id.tv_withdraw_record:
+                jump(AcWithdrawRecord.class);
                 break;
         }
     }

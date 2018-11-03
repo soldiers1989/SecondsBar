@@ -118,8 +118,6 @@ public class JPushReceive extends BroadcastReceiver
         LogUtil.i(TAG, "openNotification,extra:" + extras);
         if (!TextUtils.isEmpty(extras))
         {
-
-
             Intent intent;
 
             intent = new Intent(context, AcNotifyManager.class);
@@ -150,7 +148,11 @@ public class JPushReceive extends BroadcastReceiver
             {
                 SharePreferenceUtils.setAnnoMsg(true);
             }
-            FxApplication.refreshNotifyTipsBroadCast();
+            if (FxApplication.getInstance() != null)
+            {
+                FxApplication.refreshNotifyTipsBroadCast();
+                FxApplication.getInstance().refreshUserInfoBroadCast();
+            }
         }
     }
 

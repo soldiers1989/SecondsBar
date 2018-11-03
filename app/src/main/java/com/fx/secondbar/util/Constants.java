@@ -336,6 +336,11 @@ public class Constants
     public static final String API_MARKET_VALUE = "member/market/total";
 
     /**
+     * 提现记录
+     */
+    public static final String API_WITHDRAW_RECORD = "member/withdraw/list";
+
+    /**
      * Html字符串拼接成完整的Html文本
      */
     public static final String START_TAGS = "<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\"><meta http-equlv=\"Content-Type\" content=\"text/html;charset=utf-8\"></head><body>";

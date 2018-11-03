@@ -37,6 +37,7 @@ import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBData;
 import com.fx.secondbar.bean.WithdrawIntroBean;
+import com.fx.secondbar.bean.WithdrawRecordBean;
 import com.fx.secondbar.http.exception.ApiException;
 import com.fx.secondbar.http.service.IService;
 import com.google.gson.JsonSyntaxException;
@@ -859,6 +860,19 @@ public class HttpManager
     public static void getMarketDetail(int page, int pageSize, Subscriber<List<MarketValueBean>> subscriber)
     {
         Observable<List<MarketValueBean>> observable = getInstance().mService.getMarketDetail(page, pageSize).map(new HttpResultFun<List<MarketValueBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 获取提现记录
+     *
+     * @param page
+     * @param pageSize
+     * @param subscriber
+     */
+    public static void getWithdrawRecord(int page, int pageSize, Subscriber<List<WithdrawRecordBean>> subscriber)
+    {
+        Observable<List<WithdrawRecordBean>> observable = getInstance().mService.getWithdrawRecord(page, pageSize, "0").map(new HttpResultFun<List<WithdrawRecordBean>>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

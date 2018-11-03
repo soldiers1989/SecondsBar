@@ -177,6 +177,9 @@
         <activity
             android:name=".ui.transaction.AcMarketValue"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.person.assets.AcWithdrawRecord"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name="com.tencent.connect.common.AssistActivity"

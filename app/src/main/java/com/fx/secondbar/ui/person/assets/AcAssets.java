@@ -16,8 +16,12 @@ import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
+import com.fx.secondbar.bean.UserInfoBean;
+import com.fx.secondbar.http.HttpManager;
 import com.fx.secondbar.ui.AcWebBrowse;
 import com.fx.secondbar.util.Constants;
+
+import rx.Subscriber;
 
 /**
  * function:我的资产
@@ -65,6 +69,7 @@ public class AcAssets extends ActivitySupport
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
         setPersonInfo();
         tv_q_intro.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        login();
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver()
@@ -89,6 +94,41 @@ public class AcAssets extends ActivitySupport
     {
         VerificationUtil.setViewValue(tv_balance, FxApplication.getInstance().getUserInfoBean().getBalance().toString());
         VerificationUtil.setViewValue(tv_q_value, FxApplication.getInstance().getUserInfoBean().getQcoin().toString());
+    }
+
+    /**
+     * 更新用户信息
+     */
+    private void login()
+    {
+        HttpManager.login(new Subscriber<UserInfoBean>()
+        {
+            @Override
+            public void onCompleted()
+            {
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                ShowToast.showToast(HttpManager.checkLoadError(e));
+            }
+
+            @Override
+            public void onNext(UserInfoBean userInfoBean)
+            {
+                if (isDestroy())
+                {
+                    return;
+                }
+                FxApplication.getInstance().setUserInfoBean(userInfoBean);
+                FxApplication.refreshPersonShowBroadCast();
+            }
+        });
     }
 
     @Override

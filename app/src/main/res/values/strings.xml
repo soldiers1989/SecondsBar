@@ -144,4 +144,8 @@
         \n3.名人形成有变，会电话通知您，24小时内可随时取消并退款。
         \n4.如遇其他问题可直接联系客服。
     </string>
+    <string name="withdraw_record_content_text">发起提现￥%s，支付手续费￥%s</string>
+    <string name="withdraw_record_reason_text">原因：%s</string>
+    <string name="withdraw_record_name_text">姓名：%s</string>
+    <string name="withdraw_record_bankcard_text">银行卡：%s</string>
 </resources>

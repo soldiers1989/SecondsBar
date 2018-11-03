@@ -105,6 +105,7 @@ public class AcVerified extends ActivitySupport
                     dialog.dismiss();
                 }
                 FxApplication.getInstance().getUserInfoBean().setActualname(name);
+                FxApplication.getInstance().refreshUserInfoBroadCast();
                 ShowToast.showToast("认证成功");
                 setResult(RESULT_OK);
                 finish();

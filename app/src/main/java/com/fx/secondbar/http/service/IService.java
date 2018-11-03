@@ -36,6 +36,7 @@ import com.fx.secondbar.bean.TurialBean;
 import com.fx.secondbar.bean.UserInfoBean;
 import com.fx.secondbar.bean.WBData;
 import com.fx.secondbar.bean.WithdrawIntroBean;
+import com.fx.secondbar.bean.WithdrawRecordBean;
 import com.fx.secondbar.util.Constants;
 
 import java.util.List;
@@ -642,4 +643,19 @@ public interface IService
      */
     @GET(Constants.API_MARKET_VALUE)
     Observable<ResponseBean<List<MarketValueBean>>> getMarketDetail(@Query("page") int page, @Query("count") int pageSize);
+
+    /**
+     * 获取提现记录列表
+     *
+     * @param page     页码
+     * @param pageSize 页大小
+     * @param status   //1	待审核
+     *                 //2	汇款中
+     *                 //3	提现成功
+     *                 //4	被驳回
+     *                 //0	全部
+     * @return
+     */
+    @GET(Constants.API_WITHDRAW_RECORD)
+    Observable<ResponseBean<List<WithdrawRecordBean>>> getWithdrawRecord(@Query("page") int page, @Query("count") int pageSize, @Query("status") String status);
 }

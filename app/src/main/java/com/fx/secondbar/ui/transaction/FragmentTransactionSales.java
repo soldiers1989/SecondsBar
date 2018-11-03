@@ -87,7 +87,12 @@ public class FragmentTransactionSales extends FragmentTransactionItem implements
     {
         if (!TextUtils.isEmpty(peopleId))
         {
-            refreshData(peopleId, false);
+//            refreshData(peopleId, false);
+            if (swipeRefreshLayout != null)
+            {
+                swipeRefreshLayout.setRefreshing(true);
+            }
+            onRefresh();
         }
     }
 
@@ -154,12 +159,17 @@ public class FragmentTransactionSales extends FragmentTransactionItem implements
     public void onResume()
     {
         super.onResume();
-        //是否将要刷新数据
-        if (isPrepareRefresh)
+//        //是否将要刷新数据
+//        if (isPrepareRefresh)
+//        {
+//            refreshData(peopleId, true);
+//            isPrepareRefresh = false;
+//        }
+        if (swipeRefreshLayout != null)
         {
-            refreshData(peopleId, true);
-            isPrepareRefresh = false;
+            swipeRefreshLayout.setRefreshing(true);
         }
+        onRefresh();
     }
 
     @Override
@@ -168,12 +178,17 @@ public class FragmentTransactionSales extends FragmentTransactionItem implements
         super.onHiddenChanged(hidden);
         if (!isHidden())
         {
-            //是否将要刷新数据
-            if (isPrepareRefresh)
+//            //是否将要刷新数据
+//            if (isPrepareRefresh)
+//            {
+//                refreshData(peopleId, true);
+//                isPrepareRefresh = false;
+//            }
+            if (swipeRefreshLayout != null)
             {
-                refreshData(peopleId, true);
-                isPrepareRefresh = false;
+                swipeRefreshLayout.setRefreshing(true);
             }
+            onRefresh();
         }
     }
 

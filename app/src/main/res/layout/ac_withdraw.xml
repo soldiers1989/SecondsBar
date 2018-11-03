@@ -37,6 +37,17 @@
                 android:scaleType="centerInside"
                 android:src="@mipmap/ic_back"/>
 
+            <TextView
+                android:id="@+id/tv_withdraw_record"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="6dip"
+                android:gravity="center"
+                android:text="提现记录"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"/>
+
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 

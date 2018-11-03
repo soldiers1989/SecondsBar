@@ -11,32 +11,31 @@ import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
-import com.fx.secondbar.application.FxApplication;
-import com.fx.secondbar.bean.QCoinBean;
-import com.fx.secondbar.bean.UserInfoBean;
+import com.fx.secondbar.bean.WithdrawRecordBean;
 import com.fx.secondbar.http.HttpManager;
-import com.fx.secondbar.ui.person.AcQIntro;
 
 import java.util.List;
 
 import rx.Subscriber;
 
 /**
- * function:收益记录
+ * function:提现记录
  * author: frj
- * modify date: 2018/9/21
+ * modify date: 2018/11/3
  */
-public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayout.OnRefreshListener
+public class AcWithdrawRecord extends ActivitySupport implements SwipeRefreshLayout.OnRefreshListener
 {
+
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private AdIncomeRecord adapter;
+    private AdWithdrawRecord adapter;
+
     private int currPage = -1;
 
     @Override
     protected int getLayoutResId()
     {
-        return R.layout.ac_income_record;
+        return R.layout.ac_withdraw_record;
     }
 
     @Override
@@ -45,7 +44,6 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
         swipeRefreshLayout = findView(R.id.swipeRefreshLayout);
         recyclerView = findView(R.id.recyclerView);
         findView(R.id.ib_back).setOnClickListener(this);
-        findView(R.id.tv_q_intro).setOnClickListener(this);
         Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -60,86 +58,33 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
     protected void initData()
     {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AdIncomeRecord();
+        adapter = new AdWithdrawRecord();
         adapter.bindToRecyclerView(recyclerView);
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener()
         {
             @Override
             public void onLoadMoreRequested()
             {
-                getRecords(currPage + 1);
+                getData(currPage + 1);
             }
         }, recyclerView);
         swipeRefreshLayout.setRefreshing(true);
         onRefresh();
-        login();
     }
 
     /**
-     * 更新用户信息
-     */
-    private void login()
-    {
-        HttpManager.login(new Subscriber<UserInfoBean>()
-        {
-            @Override
-            public void onCompleted()
-            {
-            }
-
-            @Override
-            public void onError(Throwable e)
-            {
-                if (isDestroy())
-                {
-                    return;
-                }
-                ShowToast.showToast(HttpManager.checkLoadError(e));
-            }
-
-            @Override
-            public void onNext(UserInfoBean userInfoBean)
-            {
-                if (isDestroy())
-                {
-                    return;
-                }
-                FxApplication.getInstance().setUserInfoBean(userInfoBean);
-                FxApplication.refreshPersonShowBroadCast();
-            }
-        });
-    }
-
-    @Override
-    public void onClick(View v)
-    {
-        if (isFastDoubleClick(v))
-        {
-            return;
-        }
-        switch (v.getId())
-        {
-            case R.id.ib_back:
-                finish();
-                break;
-            case R.id.tv_q_intro:
-                jump(AcQIntro.class);
-                break;
-        }
-    }
-
-    /**
-     * 获取收益记录
+     * 获取数据
      *
      * @param page 页码
      */
-    private void getRecords(final int page)
+    private void getData(final int page)
     {
-        HttpManager.getQRecords(page, PAGE_NUM, new Subscriber<List<QCoinBean>>()
+        HttpManager.getWithdrawRecord(page, PAGE_NUM, new Subscriber<List<WithdrawRecordBean>>()
         {
             @Override
             public void onCompleted()
             {
+
             }
 
             @Override
@@ -149,16 +94,16 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
                 {
                     return;
                 }
-                e.printStackTrace();
                 if (swipeRefreshLayout.isRefreshing())
                 {
                     swipeRefreshLayout.setRefreshing(false);
                 }
+                e.printStackTrace();
                 ShowToast.showToast(HttpManager.checkLoadError(e));
             }
 
             @Override
-            public void onNext(List<QCoinBean> list)
+            public void onNext(List<WithdrawRecordBean> withdrawRecordBeans)
             {
                 if (isDestroy())
                 {
@@ -169,14 +114,18 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
                     swipeRefreshLayout.setRefreshing(false);
                 }
                 currPage = page;
+                if (swipeRefreshLayout.isRefreshing())
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
                 if (PAGE_START == page)
                 {
-                    adapter.setNewData(list);
+                    adapter.setNewData(withdrawRecordBeans);
                 } else
                 {
-                    adapter.addData(list);
+                    adapter.addData(withdrawRecordBeans);
                 }
-                if (VerificationUtil.getSize(list) >= PAGE_NUM)
+                if (VerificationUtil.getSize(withdrawRecordBeans) >= PAGE_NUM)
                 {
                     adapter.loadMoreComplete();
                 } else
@@ -202,6 +151,19 @@ public class AcIncomeRecord extends ActivitySupport implements SwipeRefreshLayou
     @Override
     public void onRefresh()
     {
-        getRecords(PAGE_START);
+        getData(PAGE_START);
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        if (isFastDoubleClick(v))
+        {
+            return;
+        }
+        if (R.id.ib_back == v.getId())
+        {
+            finish();
+        }
     }
 }

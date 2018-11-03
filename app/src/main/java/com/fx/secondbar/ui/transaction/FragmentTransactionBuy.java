@@ -89,7 +89,12 @@ public class FragmentTransactionBuy extends FragmentTransactionItem implements S
         LogUtil.e("onStarShow");
         if (!TextUtils.isEmpty(peopleId))
         {
-            refreshData(peopleId, false);
+//            refreshData(peopleId, false);
+            if (swipeRefreshLayout != null)
+            {
+                swipeRefreshLayout.setRefreshing(true);
+            }
+            onRefresh();
         }
     }
 
@@ -161,11 +166,16 @@ public class FragmentTransactionBuy extends FragmentTransactionItem implements S
         super.onResume();
         LogUtil.e("onResume,isPrepareRefresh:" + isPrepareRefresh);
         //是否将要刷新数据
-        if (isPrepareRefresh)
+//        if (isPrepareRefresh)
+//        {
+//            refreshData(peopleId, true);
+//            isPrepareRefresh = false;
+//        }
+        if (swipeRefreshLayout != null)
         {
-            refreshData(peopleId, true);
-            isPrepareRefresh = false;
+            swipeRefreshLayout.setRefreshing(true);
         }
+        onRefresh();
     }
 
     @Override
@@ -176,11 +186,16 @@ public class FragmentTransactionBuy extends FragmentTransactionItem implements S
         if (!isHidden())
         {
             //是否将要刷新数据
-            if (isPrepareRefresh)
+//            if (isPrepareRefresh)
+//            {
+//                refreshData(peopleId, true);
+//                isPrepareRefresh = false;
+//            }
+            if (swipeRefreshLayout != null)
             {
-                refreshData(peopleId, true);
-                isPrepareRefresh = false;
+                swipeRefreshLayout.setRefreshing(true);
             }
+            onRefresh();
         }
     }
 
