@@ -86,6 +86,7 @@ public class FragmentTransactionBuy extends FragmentTransactionItem implements S
     @Override
     public void onStarShow()
     {
+        LogUtil.e("onStarShow");
         if (!TextUtils.isEmpty(peopleId))
         {
             refreshData(peopleId, false);
@@ -355,7 +356,7 @@ public class FragmentTransactionBuy extends FragmentTransactionItem implements S
                 {
                     dialog.dismiss();
                 }
-                if (swipeRefreshLayout.isRefreshing())
+                if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing())
                 {
                     swipeRefreshLayout.setRefreshing(false);
                 }
@@ -373,7 +374,7 @@ public class FragmentTransactionBuy extends FragmentTransactionItem implements S
                 {
                     dialog.dismiss();
                 }
-                if (swipeRefreshLayout.isRefreshing())
+                if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing())
                 {
                     swipeRefreshLayout.setRefreshing(false);
                 }

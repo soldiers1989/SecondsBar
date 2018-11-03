@@ -13,7 +13,7 @@ public class QuoteBean
     private Double todayprice;   //今日开盘价
     private Double lowest;     //最低价
     private Double decline;     //涨跌值
-    private Double gain;        //涨跌幅百分百
+    private Double gain;        //涨跌幅百分比
     private String name;   //名人名称
     private String zjm;       //名人助记码
     private String img;//头像

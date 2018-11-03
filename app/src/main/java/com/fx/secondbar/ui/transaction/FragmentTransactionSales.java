@@ -341,7 +341,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem implements
                 {
                     dialog.dismiss();
                 }
-                if (swipeRefreshLayout.isRefreshing())
+                if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing())
                 {
                     swipeRefreshLayout.setRefreshing(false);
                 }
@@ -359,7 +359,7 @@ public class FragmentTransactionSales extends FragmentTransactionItem implements
                 {
                     dialog.dismiss();
                 }
-                if (swipeRefreshLayout.isRefreshing())
+                if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing())
                 {
                     swipeRefreshLayout.setRefreshing(false);
                 }
