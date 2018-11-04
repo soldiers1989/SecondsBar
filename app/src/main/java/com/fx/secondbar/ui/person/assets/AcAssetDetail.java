@@ -11,6 +11,7 @@ import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.ConsumerBean;
 import com.fx.secondbar.http.HttpManager;
 
@@ -117,6 +118,7 @@ public class AcAssetDetail extends ActivitySupport implements SwipeRefreshLayout
                 if (PAGE_START == page)
                 {
                     adapter.setNewData(list);
+                    FxApplication.refreshUserInfoBroadCast();
                 } else
                 {
                     adapter.addData(list);

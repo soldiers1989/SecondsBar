@@ -23,6 +23,7 @@ import com.btten.bttenlibrary.util.Arithmetic;
 import com.btten.bttenlibrary.util.ShowToast;
 import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.R;
+import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.CommissionBean;
 import com.fx.secondbar.bean.TransactionBean;
 import com.fx.secondbar.http.HttpManager;
@@ -438,6 +439,8 @@ public class FragmentTransactionSales extends FragmentTransactionItem implements
                 }
                 ShowToast.showToast("卖出成功");
                 refreshData(peopleId, false);
+                //通知更新用户余额信息
+                FxApplication.refreshUserInfoBroadCast();
                 clearInputValue();
             }
         });

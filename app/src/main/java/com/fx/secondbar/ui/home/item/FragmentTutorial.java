@@ -236,6 +236,7 @@ public class FragmentTutorial extends FragmentViewPagerBase
                 Bundle bundle = new Bundle();
                 bundle.putString(KEY_STR, "发布说明");
                 bundle.putString(KEY, "http://www.feixingtech.com:8080/static/mb-front/getText.html?type=20");
+//                bundle.putString(KEY, "http://www.feixingtech.com:8080/static/invite/index.html?deviceid=" + new DeviceUuidFactory(getContext()).getDeviceUuid().toString());
                 jump(AcWebBrowse.class, bundle, false);
                 break;
         }
