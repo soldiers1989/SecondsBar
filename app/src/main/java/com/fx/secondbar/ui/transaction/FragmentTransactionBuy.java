@@ -172,18 +172,33 @@ public class FragmentTransactionBuy extends FragmentTransactionItem implements S
 //            refreshData(peopleId, true);
 //            isPrepareRefresh = false;
 //        }
-        if (swipeRefreshLayout != null)
+        if (isVisible())
         {
-            swipeRefreshLayout.setRefreshing(true);
+            if (getParentFragment() != null)
+            {
+                if (getParentFragment().isVisible())
+                {
+                    if (swipeRefreshLayout != null)
+                    {
+                        swipeRefreshLayout.setRefreshing(true);
+                    }
+                    onRefresh();
+                }
+            } else
+            {
+                if (swipeRefreshLayout != null)
+                {
+                    swipeRefreshLayout.setRefreshing(true);
+                }
+                onRefresh();
+            }
         }
-        onRefresh();
     }
 
     @Override
     public void onHiddenChanged(boolean hidden)
     {
         super.onHiddenChanged(hidden);
-        LogUtil.e("onHiddenChanged");
         if (!isHidden())
         {
             //是否将要刷新数据
@@ -192,11 +207,27 @@ public class FragmentTransactionBuy extends FragmentTransactionItem implements S
 //                refreshData(peopleId, true);
 //                isPrepareRefresh = false;
 //            }
-            if (swipeRefreshLayout != null)
+            if (isVisible())
             {
-                swipeRefreshLayout.setRefreshing(true);
+                if (getParentFragment() != null)
+                {
+                    if (getParentFragment().isVisible())
+                    {
+                        if (swipeRefreshLayout != null)
+                        {
+                            swipeRefreshLayout.setRefreshing(true);
+                        }
+                        onRefresh();
+                    }
+                } else
+                {
+                    if (swipeRefreshLayout != null)
+                    {
+                        swipeRefreshLayout.setRefreshing(true);
+                    }
+                    onRefresh();
+                }
             }
-            onRefresh();
         }
     }
 

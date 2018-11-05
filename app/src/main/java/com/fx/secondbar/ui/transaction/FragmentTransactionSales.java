@@ -160,17 +160,27 @@ public class FragmentTransactionSales extends FragmentTransactionItem implements
     public void onResume()
     {
         super.onResume();
-//        //是否将要刷新数据
-//        if (isPrepareRefresh)
-//        {
-//            refreshData(peopleId, true);
-//            isPrepareRefresh = false;
-//        }
-        if (swipeRefreshLayout != null)
+        if (isVisible())
         {
-            swipeRefreshLayout.setRefreshing(true);
+            if (getParentFragment() != null)
+            {
+                if (getParentFragment().isVisible())
+                {
+                    if (swipeRefreshLayout != null)
+                    {
+                        swipeRefreshLayout.setRefreshing(true);
+                    }
+                    onRefresh();
+                }
+            } else
+            {
+                if (swipeRefreshLayout != null)
+                {
+                    swipeRefreshLayout.setRefreshing(true);
+                }
+                onRefresh();
+            }
         }
-        onRefresh();
     }
 
     @Override
@@ -179,17 +189,27 @@ public class FragmentTransactionSales extends FragmentTransactionItem implements
         super.onHiddenChanged(hidden);
         if (!isHidden())
         {
-//            //是否将要刷新数据
-//            if (isPrepareRefresh)
-//            {
-//                refreshData(peopleId, true);
-//                isPrepareRefresh = false;
-//            }
-            if (swipeRefreshLayout != null)
+            if (isVisible())
             {
-                swipeRefreshLayout.setRefreshing(true);
+                if (getParentFragment() != null)
+                {
+                    if (getParentFragment().isVisible())
+                    {
+                        if (swipeRefreshLayout != null)
+                        {
+                            swipeRefreshLayout.setRefreshing(true);
+                        }
+                        onRefresh();
+                    }
+                } else
+                {
+                    if (swipeRefreshLayout != null)
+                    {
+                        swipeRefreshLayout.setRefreshing(true);
+                    }
+                    onRefresh();
+                }
             }
-            onRefresh();
         }
     }
 

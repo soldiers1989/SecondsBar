@@ -157,6 +157,11 @@ public class AcQuoteBuyConfirm extends ActivitySupport
             {
                 price = Double.parseDouble(bean.getPrice());
                 limitSeconds = bean.getLimitseconds();
+                //minCount不能大于限制购买量
+                if (minCount >= limitSeconds)
+                {
+                    minCount = limitSeconds;
+                }
 //                double pay = price * limitSeconds;
 //                VerificationUtil.setViewValue(tv_pay, String.format(getString(R.string.mall_detail_info_price), String.valueOf(pay)));
             } catch (NumberFormatException e)
