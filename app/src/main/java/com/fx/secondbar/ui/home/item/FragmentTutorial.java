@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import com.fx.secondbar.ui.AcWebBrowse;
 import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.date.AcDateDetail;
 import com.fx.secondbar.ui.home.item.adapter.AdDateTa;
+import com.fx.secondbar.util.DeviceUuidFactory;
 import com.fx.secondbar.util.RequestCode;
 import com.fx.secondbar.view.ViewPagerLayoutManager;
 
@@ -36,9 +38,9 @@ import rx.Subscriber;
  * author: frj
  * modify date: 2018/9/7
  */
-public class FragmentTutorial extends FragmentViewPagerBase
+public class FragmentTutorial extends FragmentViewPagerBase implements SwipeRefreshLayout.OnRefreshListener
 {
-
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private AdDateTa adapter;
     //当前页码
@@ -69,6 +71,7 @@ public class FragmentTutorial extends FragmentViewPagerBase
     @Override
     protected void initView()
     {
+        swipeRefreshLayout = findView(R.id.swipeRefreshLayout);
         recyclerView = findView(R.id.recyclerView);
         findView(R.id.ib_send).setOnClickListener(this);
     }
@@ -76,7 +79,7 @@ public class FragmentTutorial extends FragmentViewPagerBase
     @Override
     protected void initListener()
     {
-
+        swipeRefreshLayout.setOnRefreshListener(this);
     }
 
     @Override
@@ -92,7 +95,7 @@ public class FragmentTutorial extends FragmentViewPagerBase
             height -= DisplayUtil.getStatusBarHeight(FxApplication.getInstance());
         }
         adapter = new AdDateTa(height);
-        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) recyclerView.getLayoutParams();
+        SwipeRefreshLayout.LayoutParams params = recyclerView.getLayoutParams();
         if (params == null)
         {
             params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
@@ -194,6 +197,10 @@ public class FragmentTutorial extends FragmentViewPagerBase
                 {
                     return;
                 }
+                if (swipeRefreshLayout != null)
+                {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
                 ShowToast.showToast(HttpManager.checkLoadError(e));
             }
 
@@ -203,6 +210,10 @@ public class FragmentTutorial extends FragmentViewPagerBase
                 if (isNetworkCanReturn())
                 {
                     return;
+                }
+                if (swipeRefreshLayout != null)
+                {
+                    swipeRefreshLayout.setRefreshing(false);
                 }
                 currPage = page;
                 if (PAGE_START == page)
@@ -234,9 +245,9 @@ public class FragmentTutorial extends FragmentViewPagerBase
         {
             case R.id.ib_send:
                 Bundle bundle = new Bundle();
-                bundle.putString(KEY_STR, "发布说明");
-                bundle.putString(KEY, "http://www.feixingtech.com:8080/static/mb-front/getText.html?type=20");
-//                bundle.putString(KEY, "http://www.feixingtech.com:8080/static/invite/index.html?deviceid=" + new DeviceUuidFactory(getContext()).getDeviceUuid().toString());
+                bundle.putString(KEY_STR, "发布约吧");
+//                bundle.putString(KEY, "http://www.feixingtech.com:8080/static/mb-front/getText.html?type=20");
+                bundle.putString(KEY, "http://www.feixingtech.com:8080/static/invite/index.html?deviceid=" + new DeviceUuidFactory(getContext()).getDeviceUuid().toString() + "&random=" + String.valueOf(Math.random()));
                 jump(AcWebBrowse.class, bundle, false);
                 break;
         }
@@ -250,5 +261,11 @@ public class FragmentTutorial extends FragmentViewPagerBase
         {
             ((MainActivity) getActivity()).jumpToPersonal();
         }
+    }
+
+    @Override
+    public void onRefresh()
+    {
+        getData(PAGE_START);
     }
 }

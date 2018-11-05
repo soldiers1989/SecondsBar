@@ -461,11 +461,11 @@ public class FragmentTransactionSales extends FragmentTransactionItem implements
                     if (VerificationUtil.requiredFieldValidator(getActivity(), new View[]{ed_input, ed_seconds}, new String[]{"请输入购买价格", "请输入购买的秒数"}))
                     {
                         int seconds = Integer.parseInt(getTextView(ed_seconds));
-                        if (seconds > canSaleSeconds)
-                        {
-                            ShowToast.showToast("您卖出的秒数不能大于您可卖出的秒数");
-                            return;
-                        }
+//                        if (seconds > canSaleSeconds)
+//                        {
+//                            ShowToast.showToast("您卖出的秒数不能大于您可卖出的秒数");
+//                            return;
+//                        }
                         double price = Double.parseDouble(getTextView(ed_input));
                         if (price > priceUp)
                         {
