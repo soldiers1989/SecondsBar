@@ -2,6 +2,7 @@ package com.fx.secondbar.http;
 
 import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.http.HttpGetData;
+import com.btten.bttenlibrary.util.VerificationUtil;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.BankBean;
 import com.fx.secondbar.bean.CommissionBean;
@@ -873,6 +874,49 @@ public class HttpManager
     public static void getWithdrawRecord(int page, int pageSize, Subscriber<List<WithdrawRecordBean>> subscriber)
     {
         Observable<List<WithdrawRecordBean>> observable = getInstance().mService.getWithdrawRecord(page, pageSize, "0").map(new HttpResultFun<List<WithdrawRecordBean>>());
+        getInstance().bindSubscriber(observable, subscriber);
+    }
+
+    /**
+     * 发布约吧
+     *
+     * @param files      文件集
+     * @param name       约吧主题
+     * @param dateTime   约吧时间
+     * @param address    约吧地址
+     * @param lon        地点经度
+     * @param lat        地点纬度
+     * @param tag        标签集合
+     * @param content    描述
+     * @param quantity   人数
+     * @param timelength 时长
+     * @param price      价格
+     * @param subscriber
+     */
+    public static void publishDate(List<File> files, String name, String dateTime, String address, String lon, String lat, String tag, String content, String quantity, String timelength, String price, Subscriber<ResponseBean> subscriber)
+    {
+
+        MultipartBody.Builder build = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        if (VerificationUtil.getSize(files) > 0)
+        {
+            for (File file : files)
+            {
+                build.addFormDataPart("files", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+            }
+        }
+        build.addFormDataPart("name", name);
+        build.addFormDataPart("datetime", dateTime);
+        build.addFormDataPart("address", address);
+        build.addFormDataPart("lon", lon);
+        build.addFormDataPart("lat", lat);
+        build.addFormDataPart("tag", tag);
+        build.addFormDataPart("content", content);
+        build.addFormDataPart("quantity", quantity);
+        build.addFormDataPart("timelength", timelength);
+        build.addFormDataPart("price", price);
+        build.addFormDataPart("paytype", "1");
+        RequestBody requestBody = build.build();
+        Observable<ResponseBean> observable = getInstance().mService.publishDate(requestBody).map(new HttpNoDataResultFun<>());
         getInstance().bindSubscriber(observable, subscriber);
     }
 

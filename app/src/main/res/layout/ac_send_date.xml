@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/mall_tool_pl"
+                android:text="发布秒吧"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_font"/>
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_alignParentLeft="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"/>
+
+            <TextView
+                android:id="@+id/tv_publish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="12dip"
+                android:text="发布"
+                android:textColor="@color/font_yellow_color"
+                android:textSize="15sp"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dip">
+
+            <EditText
+                android:id="@+id/ed_title"
+                android:layout_width="0dip"
+                android:layout_height="48dip"
+                android:layout_marginRight="15dip"
+                android:background="@null"
+                android:gravity="center_vertical|right"
+                android:hint="请一句话描述主题"
+                android:singleLine="true"
+                android:textColor="#666666"
+                android:textColorHint="#999999"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_title_tips"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_title_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:text="邀约主题"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ed_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ed_title"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:background="@color/light_grey"
+                app:layout_constraintTop_toBottomOf="@+id/ed_title"/>
+
+            <EditText
+                android:id="@+id/ed_input"
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="15dip"
+                android:layout_marginRight="15dip"
+                android:background="@drawable/multiple_input_bg"
+                android:gravity="top|left"
+                android:hint="请简单介绍本次邀约内容以及费用包含等"
+                android:maxLength="500"
+                android:paddingLeft="15dip"
+                android:paddingTop="12dip"
+                android:paddingRight="15dip"
+                android:paddingBottom="12dip"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@+id/ed_title"/>
+
+            <TextView
+                android:id="@+id/tv_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dip"
+                android:layout_marginBottom="12dip"
+                android:text="@string/send_dynamic_limit"
+                android:textColor="#999999"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ed_input"
+                app:layout_constraintEnd_toEndOf="@+id/ed_input"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dip"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/ed_input"
+                app:layout_constraintStart_toStartOf="@+id/ed_input"
+                app:layout_constraintTop_toBottomOf="@+id/ed_input">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:layout_marginTop="10dip"
+                android:drawableLeft="@mipmap/ic_location"
+                android:drawableRight="@mipmap/ic_arrow_right_gray"
+                android:drawablePadding="12dip"
+                android:gravity="center_vertical|right"
+                android:hint="请输入约见位置"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:background="@color/light_grey"
+                app:layout_constraintTop_toBottomOf="@+id/tv_location"/>
+
+            <TextView
+                android:id="@+id/tv_cost_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dip"
+                android:text="元"
+                android:textColor="#666666"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ed_cost"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ed_cost"/>
+
+            <EditText
+                android:id="@+id/ed_cost"
+                android:layout_width="0dip"
+                android:layout_height="40dip"
+                android:layout_marginTop="10dip"
+                android:background="@null"
+                android:gravity="center_vertical|right"
+                android:hint="请输入约见费用"
+                android:inputType="numberDecimal"
+                android:paddingRight="12dip"
+                android:textColor="#666666"
+                android:textColorHint="#999999"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_cost_unit"
+                app:layout_constraintStart_toEndOf="@+id/tv_cost_tips"
+                app:layout_constraintTop_toBottomOf="@+id/tv_location"/>
+
+            <TextView
+                android:id="@+id/tv_cost_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:text="费用"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ed_cost"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ed_cost"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:background="@color/light_grey"
+                app:layout_constraintTop_toBottomOf="@+id/ed_cost"/>
+
+            <TextView
+                android:id="@+id/tv_people_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dip"
+                android:text="人"
+                android:textColor="#666666"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ed_people_count"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ed_people_count"/>
+
+            <EditText
+                android:id="@+id/ed_people_count"
+                android:layout_width="0dip"
+                android:layout_height="40dip"
+                android:layout_marginTop="10dip"
+                android:background="@null"
+                android:gravity="center_vertical|right"
+                android:hint="请输入约见人数"
+                android:inputType="number"
+                android:paddingRight="12dip"
+                android:textColor="#666666"
+                android:textColorHint="#999999"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_cost_unit"
+                app:layout_constraintStart_toEndOf="@+id/tv_people_tips"
+                app:layout_constraintTop_toBottomOf="@+id/ed_cost"/>
+
+            <TextView
+                android:id="@+id/tv_people_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:text="人数"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ed_people_count"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ed_people_count"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:background="@color/light_grey"
+                app:layout_constraintTop_toBottomOf="@+id/ed_people_count"/>
+
+            <TextView
+                android:id="@+id/tv_timelength_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dip"
+                android:text="分钟"
+                android:textColor="#666666"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ed_timelength"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ed_timelength"/>
+
+            <EditText
+                android:id="@+id/ed_timelength"
+                android:layout_width="0dip"
+                android:layout_height="40dip"
+                android:layout_marginTop="10dip"
+                android:background="@null"
+                android:gravity="center_vertical|right"
+                android:hint="请输入约见时长"
+                android:inputType="number"
+                android:paddingRight="12dip"
+                android:textColor="#666666"
+                android:textColorHint="#999999"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_timelength_unit"
+                app:layout_constraintStart_toEndOf="@+id/tv_timelength_tips"
+                app:layout_constraintTop_toBottomOf="@+id/ed_people_count"/>
+
+            <TextView
+                android:id="@+id/tv_timelength_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:text="时长"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ed_timelength"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ed_timelength"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:background="@color/light_grey"
+                app:layout_constraintTop_toBottomOf="@+id/ed_timelength"/>
+
+
+            <EditText
+                android:id="@+id/ed_date"
+                android:layout_width="0dip"
+                android:layout_height="40dip"
+                android:layout_marginTop="10dip"
+                android:background="@null"
+                android:drawableRight="@mipmap/ic_arrow_right_gray"
+                android:drawablePadding="12dip"
+                android:focusable="false"
+                android:gravity="center_vertical|right"
+                android:hint="请选择时间"
+                android:inputType="number"
+                android:paddingRight="15dip"
+                android:textColor="#666666"
+                android:textColorHint="#999999"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_title_tips"
+                app:layout_constraintTop_toBottomOf="@+id/ed_timelength"/>
+
+            <TextView
+                android:id="@+id/tv_date_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:text="时间"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ed_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ed_date"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:background="@color/light_grey"
+                app:layout_constraintTop_toBottomOf="@+id/ed_date"/>
+
+            <TextView
+                android:id="@+id/tv_add_topic"
+                android:layout_width="wrap_content"
+                android:layout_height="30dip"
+                android:layout_marginTop="18dip"
+                android:background="@drawable/date_ta_tag_bg"
+                android:gravity="center"
+                android:paddingLeft="12dip"
+                android:paddingRight="12dip"
+                android:text="#添加标签"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/ed_input"
+                app:layout_constraintTop_toBottomOf="@+id/ed_date"/>
+
+
+            <me.next.tagview.TagCloudView
+                android:id="@+id/tag_cloud_view"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="10dip"
+                android:layout_marginRight="5dip"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_topic"
+                app:tcvBackground="@drawable/send_dynamic_topic_bg"
+                app:tcvBorder="10dip"
+                app:tcvCanTagClick="false"
+                app:tcvItemBorderHorizontal="0dip"
+                app:tcvItemBorderVertical="10dip"
+                app:tcvTagResId="@layout/date_ta_tag"
+                app:tcvTextColor="@color/font_yellow_color"
+                app:tcvTextSize="12px"
+                />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.constraint.ConstraintLayout>

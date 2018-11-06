@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="280dip"
+    android:layout_height="120dip"
+    android:background="@drawable/add_topic_bg"
+    android:minWidth="280dip"
+    android:minHeight="120dip"
+    android:padding="15dip">
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="40dip"
+        android:layout_height="20dip"
+        android:background="@drawable/send_dynamic_publish"
+        android:text="确定"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="输入标签"
+        android:textColor="#333333"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_confirm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_confirm"/>
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginBottom="9dip"
+        android:background="@color/gray_line"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ed_input"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <EditText
+        android:id="@+id/ed_input"
+        android:layout_width="0dip"
+        android:layout_height="24dip"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:singleLine="true"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/v_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_tips"/>
+</android.support.constraint.ConstraintLayout>

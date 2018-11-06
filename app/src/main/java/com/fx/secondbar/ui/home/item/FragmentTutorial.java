@@ -21,11 +21,10 @@ import com.fx.secondbar.R;
 import com.fx.secondbar.application.FxApplication;
 import com.fx.secondbar.bean.DateBean;
 import com.fx.secondbar.http.HttpManager;
-import com.fx.secondbar.ui.AcWebBrowse;
 import com.fx.secondbar.ui.MainActivity;
 import com.fx.secondbar.ui.date.AcDateDetail;
+import com.fx.secondbar.ui.date.AcSendDate;
 import com.fx.secondbar.ui.home.item.adapter.AdDateTa;
-import com.fx.secondbar.util.DeviceUuidFactory;
 import com.fx.secondbar.util.RequestCode;
 import com.fx.secondbar.view.ViewPagerLayoutManager;
 
@@ -244,11 +243,12 @@ public class FragmentTutorial extends FragmentViewPagerBase implements SwipeRefr
         switch (v.getId())
         {
             case R.id.ib_send:
-                Bundle bundle = new Bundle();
-                bundle.putString(KEY_STR, "发布约吧");
-//                bundle.putString(KEY, "http://www.feixingtech.com:8080/static/mb-front/getText.html?type=20");
-                bundle.putString(KEY, "http://www.feixingtech.com:8080/static/invite/index.html?deviceid=" + new DeviceUuidFactory(getContext()).getDeviceUuid().toString() + "&random=" + String.valueOf(Math.random()));
-                jump(AcWebBrowse.class, bundle, false);
+//                Bundle bundle = new Bundle();
+//                bundle.putString(KEY_STR, "发布约吧");
+////                bundle.putString(KEY, "http://www.feixingtech.com:8080/static/mb-front/getText.html?type=20");
+//                bundle.putString(KEY, "http://www.feixingtech.com:8080/static/invite/index.html?deviceid=" + new DeviceUuidFactory(getContext()).getDeviceUuid().toString() + "&random=" + String.valueOf(Math.random()));
+//                jump(AcWebBrowse.class, bundle, false);
+                jump(AcSendDate.class);
                 break;
         }
     }

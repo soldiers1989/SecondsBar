@@ -38,6 +38,7 @@ import com.fx.secondbar.bean.WBData;
 import com.fx.secondbar.bean.WithdrawIntroBean;
 import com.fx.secondbar.bean.WithdrawRecordBean;
 import com.fx.secondbar.util.Constants;
+import com.fx.secondbar.util.RequestCode;
 
 import java.util.List;
 
@@ -658,4 +659,13 @@ public interface IService
      */
     @GET(Constants.API_WITHDRAW_RECORD)
     Observable<ResponseBean<List<WithdrawRecordBean>>> getWithdrawRecord(@Query("page") int page, @Query("count") int pageSize, @Query("status") String status);
+
+    /**
+     * 约吧发布
+     *
+     * @param body
+     * @return
+     */
+    @POST(Constants.API_PUBLISH_DATE)
+    Observable<ResponseBean> publishDate(@Body RequestBody body);
 }

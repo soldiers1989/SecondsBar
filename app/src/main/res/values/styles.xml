@@ -79,4 +79,13 @@
         <item name="android:textColor">@color/black_text</item>
         <item name="android:background">@drawable/selector_item_pressed</item>
     </style>
+    <!--正常对话框-->
+    <style name="Dialog.Normal" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>
