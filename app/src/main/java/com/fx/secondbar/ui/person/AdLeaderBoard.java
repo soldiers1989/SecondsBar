@@ -37,7 +37,7 @@ public class AdLeaderBoard extends BaseQuickAdapter<RangeBean, BaseViewHolder>
 
         GlideLoad.load(img_avatar, item.getImg(), true, R.mipmap.default_avatar, R.mipmap.default_avatar);
         VerificationUtil.setViewValue(tv_income, item.getAmt() + "Q");
-        VerificationUtil.setViewValue(tv_nickname, item.getNickname());
+        VerificationUtil.setViewValue(tv_nickname, item.getNickname(),"匿名用户");
 
         if (item.getLevel() <= 3)
         {
