@@ -48,7 +48,7 @@ public class IncomeProgressView extends View
     //圆尺寸
     private int size;
     //进度条宽度
-    private int progressWidth = DensityUtil.dip2px(FxApplication.getInstance(), 3);
+    private int progressWidth = DensityUtil.dip2px(FxApplication.getInstance(), 4.5f);
     //内圆与外圆之间的间隙
     private int outsideInnerSpace = DensityUtil.dip2px(FxApplication.getInstance(), 8);
 
