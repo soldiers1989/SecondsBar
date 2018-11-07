@@ -1,5 +1,7 @@
 package com.fx.secondbar.http;
 
+import android.text.TextUtils;
+
 import com.btten.bttenlibrary.base.bean.ResponseBean;
 import com.btten.bttenlibrary.http.HttpGetData;
 import com.btten.bttenlibrary.util.VerificationUtil;
@@ -904,16 +906,16 @@ public class HttpManager
                 build.addFormDataPart("files", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
             }
         }
-        build.addFormDataPart("name", name);
-        build.addFormDataPart("datetime", dateTime);
-        build.addFormDataPart("address", address);
-        build.addFormDataPart("lon", lon);
-        build.addFormDataPart("lat", lat);
-        build.addFormDataPart("tag", tag);
-        build.addFormDataPart("content", content);
-        build.addFormDataPart("quantity", quantity);
-        build.addFormDataPart("timelength", timelength);
-        build.addFormDataPart("price", price);
+        build.addFormDataPart("name", TextUtils.isEmpty(name) ? "" : name);
+        build.addFormDataPart("datetime", TextUtils.isEmpty(dateTime) ? "" : dateTime);
+        build.addFormDataPart("address", TextUtils.isEmpty(address) ? "" : address);
+        build.addFormDataPart("lon", TextUtils.isEmpty(lon) ? "" : lon);
+        build.addFormDataPart("lat", TextUtils.isEmpty(lat) ? "" : lat);
+        build.addFormDataPart("tag", TextUtils.isEmpty(tag) ? "" : tag);
+        build.addFormDataPart("content", TextUtils.isEmpty(content) ? "" : content);
+        build.addFormDataPart("quantity", TextUtils.isEmpty(quantity) ? "" : quantity);
+        build.addFormDataPart("timelength", TextUtils.isEmpty(timelength) ? "" : timelength);
+        build.addFormDataPart("price", TextUtils.isEmpty(price) ? "" : price);
         build.addFormDataPart("paytype", "1");
         RequestBody requestBody = build.build();
         Observable<ResponseBean> observable = getInstance().mService.publishDate(requestBody).map(new HttpNoDataResultFun<>());

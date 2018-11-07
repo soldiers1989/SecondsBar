@@ -208,6 +208,7 @@ public class AcSendDate extends ActivitySupport implements FragmentAddTopicDialo
                 tv_limit.setText(String.format(getString(R.string.send_dynamic_limit), s.length()));
             }
         });
+        tv_limit.setText(String.format(getString(R.string.send_dynamic_limit), 0));
     }
 
     /**
@@ -277,16 +278,10 @@ public class AcSendDate extends ActivitySupport implements FragmentAddTopicDialo
      */
     private void publish()
     {
-        if (VerificationUtil.requiredFieldValidator(this, new View[]{ed_title, ed_input, ed_cost, ed_people_count, ed_date, ed_timelength}, new String[]{"请输入邀约主题", "请输入邀约内容", "请输入约见费用", "请输入约见人数", "请选择约见日期", "请输入约见时长"}))
+        if (VerificationUtil.requiredFieldValidator(this, new View[]{ed_title, ed_input, ed_cost, ed_people_count, ed_date, ed_timelength, tv_location}, new String[]{"请输入邀约主题", "请输入邀约内容", "请输入约见费用", "请输入约见人数", "请选择约见日期", "请输入约见时长", "请选择约见位置"}))
         {
-            if (!getTextView(tv_location).equals("请选择约见位置"))
-            {
-                //压缩图片
-                compressFile(selectImgs);
-            } else
-            {
-                ShowToast.showToast("请选择约见位置");
-            }
+            //压缩图片
+            compressFile(selectImgs);
         }
     }
 
